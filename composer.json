@@ -1,0 +1,24 @@
+{
+    "name":        "tactician/tactician",
+    "description": "A command bus, handy for building out service layers",
+    "keywords":    ["command", "command bus", "service layer"],
+    "license":     "MIT",
+    "authors": [
+        {
+            "name": "Ross Tuck",
+            "homepage": "http://rosstuck.com"
+        }
+    ],
+    "require": {
+        "php":  ">=5.5"
+    },
+    "require-dev": {
+        "mockery/mockery": "~0.9",
+        "phpunit/phpunit": "~4.3"
+    },
+    "autoload": {
+        "psr-0": {
+            "Tactician": "src"
+        }
+    }
+}
