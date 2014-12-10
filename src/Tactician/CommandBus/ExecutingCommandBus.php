@@ -2,7 +2,8 @@
 
 namespace Tactician\CommandBus;
 
-use Tactician\Handler\InvokingStrategy\InvokingStrategy;
+use Tactician\Exception\CanNotInvokeHandlerException;
+use Tactician\Handler\MethodNameInflector\MethodNameInflector;
 use Tactician\Handler\Locator\HandlerLocator;
 
 /**
@@ -13,21 +14,21 @@ class ExecutingCommandBus implements CommandBus
     /**
      * @var HandlerLocator
      */
-    private $handlerLoader;
+    private $handlerLocator;
 
     /**
      * @var InvokingStrategy
      */
-    private $invokingStrategy;
+    private $methodNameInflector;
 
     /**
      * @param HandlerLocator $handlerLoader
-     * @param InvokingStrategy $invokingStrategy
+     * @param MethodNameInflector $methodNameInflector
      */
-    public function __construct(HandlerLocator $handlerLoader, InvokingStrategy $invokingStrategy)
+    public function __construct(HandlerLocator $handlerLoader, MethodNameInflector $methodNameInflector)
     {
-        $this->handlerLoader = $handlerLoader;
-        $this->invokingStrategy = $invokingStrategy;
+        $this->handlerLocator = $handlerLoader;
+        $this->methodNameInflector = $methodNameInflector;
     }
 
     /**
@@ -38,9 +39,9 @@ class ExecutingCommandBus implements CommandBus
      */
     public function execute($command)
     {
-        return $this->invokingStrategy->execute(
-            $command,
-            $this->handlerLoader->getHandlerForCommand($command)
-        );
+        $handler = $this->handlerLocator->getHandlerForCommand($command);
+        $methodName = $this->methodNameInflector->inflect($command, $handler);
+
+        return $handler->{$methodName}($command);
     }
 }

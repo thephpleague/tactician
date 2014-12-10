@@ -3,7 +3,7 @@
 namespace Tactician\Tests\CommandBus;
 
 use Tactician\CommandBus\ExecutingCommandBus;
-use Tactician\Handler\InvokingStrategy\InvokingStrategy;
+use Tactician\Handler\MethodNameInflector\MethodNameInflector;
 use Tactician\Handler\Locator\HandlerLocator;
 use Tactician\Tests\Fixtures\Command\TaskCompletedCommand;
 use Tactician\Tests\Fixtures\Handler\TaskCompletedHandler;
@@ -24,34 +24,40 @@ class ExecutingCommandBusTest extends \PHPUnit_Framework_TestCase
     /**
      * @var InvokingStrategy|Mockery\MockInterface
      */
-    private $invokingStrategy;
+    private $methodNameInflector;
 
     protected function setUp()
     {
         $this->handlerLocator = Mockery::mock(HandlerLocator::class);
-        $this->invokingStrategy = Mockery::mock(InvokingStrategy::class);
+        $this->methodNameInflector = Mockery::mock(MethodNameInflector::class);
 
         $this->commandBus = new ExecutingCommandBus(
             $this->handlerLocator,
-            $this->invokingStrategy
+            $this->methodNameInflector
         );
     }
 
     public function testHandlerIsExecuted()
     {
         $command = new TaskCompletedCommand();
-        $handler = new TaskCompletedHandler();
+
+        $handler = Mockery::mock(TaskCompletedHandler::class);
+        $handler
+            ->shouldReceive('handleTaskCompletedCommand')
+            ->with($command)
+            ->once()
+            ->andReturn('a-return-value');
+
+        $this->methodNameInflector
+            ->shouldReceive('inflect')
+            ->withArgs([$command, $handler])
+            ->andReturn('handleTaskCompletedCommand');
 
         $this->handlerLocator
             ->shouldReceive('getHandlerForCommand')
             ->with($command)
             ->andReturn($handler);
 
-        $this->invokingStrategy
-            ->shouldReceive('execute')
-            ->withArgs([$command, $handler])
-            ->andReturn('foobar');
-
-        $this->assertEquals('foobar', $this->commandBus->execute($command));
+        $this->assertEquals('a-return-value', $this->commandBus->execute($command));
     }
 }
