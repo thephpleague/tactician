@@ -5,8 +5,8 @@ namespace Tactician\Tests\CommandBus;
 use Mockery;
 use Tactician\CommandBus\CommandBus;
 use Tactician\CommandBus\QueueingCommandBus;
-use Tactician\Tests\Fixtures\Command\TaskAddedCommand;
-use Tactician\Tests\Fixtures\Command\TaskCompletedCommand;
+use Tactician\Tests\Fixtures\Command\AddTaskCommand;
+use Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 
 class QueueingCommandBusTest extends \PHPUnit_Framework_TestCase
 {
@@ -31,7 +31,7 @@ class QueueingCommandBusTest extends \PHPUnit_Framework_TestCase
 
     public function testInnerCommandBusReceivesCommand()
     {
-        $command = new TaskAddedCommand();
+        $command = new AddTaskCommand();
 
         $this->innerCommandBus
             ->shouldReceive('execute')
@@ -47,8 +47,8 @@ class QueueingCommandBusTest extends \PHPUnit_Framework_TestCase
 
     public function testCommandsAreQueuedIfAnotherCommandIsBeingExecuted()
     {
-        $firstCommand = new TaskAddedCommand();
-        $secondCommand = new TaskCompletedCommand();
+        $firstCommand = new AddTaskCommand();
+        $secondCommand = new CompleteTaskCommand();
         $secondCommandDispatched = false;
 
         $this->innerCommandBus

@@ -3,9 +3,10 @@
 namespace Tactician\Tests\Fixtures\Handler;
 
 /**
- *  
+ * Sample handler that has all commands specified as individual methods, rather
+ * than using magic methods like __call or __invoke.
  */
-class TaskCompletedHandler
+class ConcreteMethodsHandler
 {
     public function handleTaskCompletedCommand($command)
     {

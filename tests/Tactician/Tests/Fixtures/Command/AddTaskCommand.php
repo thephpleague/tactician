@@ -2,6 +2,6 @@
 
 namespace Tactician\Tests\Fixtures\Command;
 
-class TaskAddedCommand
+class AddTaskCommand
 {
 }

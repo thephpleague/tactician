@@ -2,8 +2,8 @@
 namespace Tactician\Tests\Handler\MethodNameInflector;
 
 use Tactician\Handler\MethodNameInflector\HandleClassNameInflector;
-use Tactician\Tests\Fixtures\Command\TaskCompletedCommand;
-use Tactician\Tests\Fixtures\Handler\TaskCompletedHandler;
+use Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
+use Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use stdClass;
 
 class HandleClassNameInflectorTest extends \PHPUnit_Framework_TestCase
@@ -21,7 +21,7 @@ class HandleClassNameInflectorTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->inflector = new HandleClassNameInflector();
-        $this->handler = new TaskCompletedHandler();
+        $this->handler = new ConcreteMethodsHandler();
     }
 
     public function testHandlesClassesWithoutNamespace()
@@ -36,10 +36,10 @@ class HandleClassNameInflectorTest extends \PHPUnit_Framework_TestCase
 
     public function testHandlesNamespacedClasses()
     {
-        $command = new TaskCompletedCommand();
+        $command = new CompleteTaskCommand();
 
         $this->assertEquals(
-            'handleTaskCompletedCommand',
+            'handleCompleteTaskCommand',
             $this->inflector->inflect($command, $this->mockHandler)
         );
     }

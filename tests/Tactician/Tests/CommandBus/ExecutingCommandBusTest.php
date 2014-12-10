@@ -5,9 +5,9 @@ namespace Tactician\Tests\CommandBus;
 use Tactician\CommandBus\ExecutingCommandBus;
 use Tactician\Handler\MethodNameInflector\MethodNameInflector;
 use Tactician\Handler\Locator\HandlerLocator;
-use Tactician\Tests\Fixtures\Command\TaskCompletedCommand;
+use Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use Tactician\Tests\Fixtures\Handler\DynamicMethodsHandler;
-use Tactician\Tests\Fixtures\Handler\TaskCompletedHandler;
+use Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use stdClass;
 use Mockery;
 
@@ -41,11 +41,11 @@ class ExecutingCommandBusTest extends \PHPUnit_Framework_TestCase
 
     public function testHandlerIsExecuted()
     {
-        $command = new TaskCompletedCommand();
+        $command = new CompleteTaskCommand();
 
-        $handler = Mockery::mock(TaskCompletedHandler::class);
+        $handler = Mockery::mock(ConcreteMethodsHandler::class);
         $handler
-            ->shouldReceive('handleTaskCompletedCommand')
+            ->shouldReceive('handleCompleteTaskCommand')
             ->with($command)
             ->once()
             ->andReturn('a-return-value');
@@ -53,7 +53,7 @@ class ExecutingCommandBusTest extends \PHPUnit_Framework_TestCase
         $this->methodNameInflector
             ->shouldReceive('inflect')
             ->withArgs([$command, $handler])
-            ->andReturn('handleTaskCompletedCommand');
+            ->andReturn('handleCompleteTaskCommand');
 
         $this->handlerLocator
             ->shouldReceive('getHandlerForCommand')
@@ -68,7 +68,7 @@ class ExecutingCommandBusTest extends \PHPUnit_Framework_TestCase
      */
     public function testMissingMethodOnHandlerObjectIsDetected()
     {
-        $command = new TaskCompletedCommand();
+        $command = new CompleteTaskCommand();
 
         $this->methodNameInflector
             ->shouldReceive('inflect')
@@ -83,7 +83,7 @@ class ExecutingCommandBusTest extends \PHPUnit_Framework_TestCase
 
     public function testDynamicMethodNamesAreSupported()
     {
-        $command = new TaskCompletedCommand();
+        $command = new CompleteTaskCommand();
         $handler = new DynamicMethodsHandler();
 
         $this->methodNameInflector
@@ -104,7 +104,7 @@ class ExecutingCommandBusTest extends \PHPUnit_Framework_TestCase
 
     public function testClosuresCanBeInvoked()
     {
-        $command = new TaskCompletedCommand();
+        $command = new CompleteTaskCommand();
         $closureWasExecuted = false;
         $handler = function () use (&$closureWasExecuted) {
             $closureWasExecuted = true;

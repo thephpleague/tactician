@@ -3,7 +3,7 @@
 namespace Tactician\Tests\Handler\Locator;
 
 use Tactician\Handler\Locator\InMemoryLocator;
-use Tactician\Tests\Fixtures\Command\TaskCompletedCommand;
+use Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 
 class InMemoryLocatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -21,11 +21,11 @@ class InMemoryLocatorTest extends \PHPUnit_Framework_TestCase
     {
         $handler = new \stdClass();
 
-        $this->inMemoryLocator->addHandler($handler, TaskCompletedCommand::class);
+        $this->inMemoryLocator->addHandler($handler, CompleteTaskCommand::class);
 
         $this->assertSame(
             $handler,
-            $this->inMemoryLocator->getHandlerForCommand(new TaskCompletedCommand())
+            $this->inMemoryLocator->getHandlerForCommand(new CompleteTaskCommand())
         );
     }
 
@@ -34,6 +34,6 @@ class InMemoryLocatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testHandlerMissing()
     {
-        $this->inMemoryLocator->getHandlerForCommand(new TaskCompletedCommand());
+        $this->inMemoryLocator->getHandlerForCommand(new CompleteTaskCommand());
     }
 }

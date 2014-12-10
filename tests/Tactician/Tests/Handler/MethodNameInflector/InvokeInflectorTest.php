@@ -2,8 +2,8 @@
 namespace Tactician\Tests\Handler\MethodNameInflector;
 
 use Tactician\Handler\MethodNameInflector\InvokeInflector;
-use Tactician\Tests\Fixtures\Command\TaskCompletedCommand;
-use Tactician\Tests\Fixtures\Handler\TaskCompletedHandler;
+use Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
+use Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 
 /**
  * Best. Test. Ever.
@@ -16,7 +16,7 @@ class InvokeInflectorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             '__invoke',
-            $inflector->inflect(new TaskCompletedCommand(), new TaskCompletedHandler())
+            $inflector->inflect(new CompleteTaskCommand(), new ConcreteMethodsHandler())
         );
     }
 }
