@@ -55,7 +55,7 @@ class QueueingCommandBusTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('execute')
             ->with($firstCommand)
             ->andReturnUsing(
-                function() use ($secondCommand, &$secondCommandDispatched) {
+                function () use ($secondCommand, &$secondCommandDispatched) {
                     $this->queueingCommandBus->execute($secondCommand);
                     $secondCommandDispatched = true;
                     return 'first-payload';

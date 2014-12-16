@@ -30,4 +30,3 @@ class DynamicMethodsHandler
         $this->methods[] = $methodName;
     }
 }
- 
