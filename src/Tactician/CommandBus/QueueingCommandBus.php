@@ -46,6 +46,7 @@ class QueueingCommandBus implements CommandBus
 
         $this->isExecuting = true;
 
+        $returnValues = [];
         while($command = array_shift($this->queue)) {
             $returnValues[] = $this->innerCommandBus->execute($command);
         }
