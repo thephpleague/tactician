@@ -17,7 +17,7 @@ class ExecutingCommandBus implements CommandBus
     private $handlerLocator;
 
     /**
-     * @var InvokingStrategy
+     * @var MethodNameInflector
      */
     private $methodNameInflector;
 
@@ -34,6 +34,7 @@ class ExecutingCommandBus implements CommandBus
     /**
      * Executes a command and optionally returns a value
      *
+     * @throws CanNotInvokeHandlerException
      * @param object $command
      * @return mixed
      */
