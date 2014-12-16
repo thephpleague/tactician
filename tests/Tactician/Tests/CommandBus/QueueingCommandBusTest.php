@@ -51,29 +51,27 @@ class QueueingCommandBusTest extends \PHPUnit_Framework_TestCase
         $secondCommand = new CompleteTaskCommand();
         $secondCommandDispatched = false;
 
+        $firstExecution = function () use ($secondCommand, &$secondCommandDispatched) {
+            $this->queueingCommandBus->execute($secondCommand);
+            $secondCommandDispatched = true;
+            return 'first-payload';
+        };
         $this->innerCommandBus
             ->shouldReceive('execute')
             ->with($firstCommand)
-            ->andReturnUsing(
-                function () use ($secondCommand, &$secondCommandDispatched) {
-                    $this->queueingCommandBus->execute($secondCommand);
-                    $secondCommandDispatched = true;
-                    return 'first-payload';
-                }
-            )
+            ->andReturnUsing($firstExecution)
             ->once();
 
+        $secondExecution = function () use (&$secondCommandDispatched) {
+            if (!$secondCommandDispatched) {
+                throw new \Exception('Second command was executed before the first completed!');
+            }
+            return 'second-payload';
+        };
         $this->innerCommandBus
             ->shouldReceive('execute')
             ->with($secondCommand)
-            ->andReturnUsing(
-                function () use (&$secondCommandDispatched) {
-                    if (!$secondCommandDispatched) {
-                        throw new \Exception('Second command was executed before the first completed!');
-                    }
-                    return 'second-payload';
-                }
-            )
+            ->andReturnUsing($secondExecution)
             ->once();
 
         // Only the return value of the first command should be returned
