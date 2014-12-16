@@ -23,4 +23,3 @@ class CanNotInvokeHandlerException extends \Exception
         );
     }
 }
- 
