@@ -8,3 +8,4 @@
 
 A small, pluggable command bus. Still in active development.
 
+See the examples directory to get started.
