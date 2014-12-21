@@ -1,2 +1,0 @@
-filter:
-    excluded_paths: [examples/*]
