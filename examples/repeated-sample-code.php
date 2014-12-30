@@ -24,7 +24,7 @@ class RegisterUserHandler
 $locator = new InMemoryLocator();
 $locator->addHandler(new RegisterUserHandler(), RegisterUserCommand::class);
 
-$commandBus = new Tactician\CommandBus\HandlerExecutingCommandBus(
+$commandBus = new Tactician\CommandBus\HandlerExecutionCommandBus(
     $locator,
     new HandleClassNameInflector()
 );

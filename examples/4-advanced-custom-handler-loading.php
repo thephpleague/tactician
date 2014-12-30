@@ -35,10 +35,10 @@ $fakeContainer
     ->andReturn(new RegisterUserHandler());
 
 // Now, we create our command bus using our container based loader instead
-use Tactician\CommandBus\HandlerExecutingCommandBus;
+use Tactician\CommandBus\HandlerExecutionCommandBus;
 use Tactician\CommandBus\Handler\MethodNameInflector\HandleClassNameInflector;
 
-$commandBus = new HandlerExecutingCommandBus(
+$commandBus = new HandlerExecutionCommandBus(
     new ContainerBasedHandlerLocator($fakeContainer),
     new HandleClassNameInflector()
 );

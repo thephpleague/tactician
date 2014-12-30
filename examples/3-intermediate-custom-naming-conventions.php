@@ -36,9 +36,9 @@ class NewRegisterUserHandler
 
 // Now  let's create our command bus again, but this time using our custom
 // method naming strategy
-use Tactician\CommandBus\HandlerExecutingCommandBus;
+use Tactician\CommandBus\HandlerExecutionCommandBus;
 $locator->addHandler(new NewRegisterUserHandler(), RegisterUserCommand::class);
-$commandBus = new HandlerExecutingCommandBus($locator, new MyCustomInflector());
+$commandBus = new HandlerExecutionCommandBus($locator, new MyCustomInflector());
 
 // Controller Code time!
 $command = new RegisterUserCommand();
