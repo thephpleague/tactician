@@ -1,9 +1,9 @@
 <?php
-namespace Tactician\Tests\Handler\MethodNameInflector;
+namespace Tactician\CommandBus\Tests\Handler\MethodNameInflector;
 
-use Tactician\Handler\MethodNameInflector\HandleClassNameInflector;
-use Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
-use Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
+use Tactician\CommandBus\Handler\MethodNameInflector\HandleClassNameInflector;
+use Tactician\CommandBus\Tests\Fixtures\Command\CompleteTaskCommand;
+use Tactician\CommandBus\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use stdClass;
 
 class HandleClassNameInflectorTest extends \PHPUnit_Framework_TestCase

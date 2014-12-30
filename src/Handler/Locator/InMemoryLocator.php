@@ -1,8 +1,8 @@
 <?php
 
-namespace Tactician\Handler\Locator;
+namespace Tactician\CommandBus\Handler\Locator;
 
-use Tactician\Exception\MissingHandlerException;
+use Tactician\CommandBus\Exception\MissingHandlerException;
 
 /**
  * Fetch handler instances from an in-memory collection.

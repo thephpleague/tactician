@@ -1,5 +1,5 @@
 <?php
-namespace Tactician\Handler\MethodNameInflector;
+namespace Tactician\CommandBus\Handler\MethodNameInflector;
 
 /**
  * Assumes the method is handle + the last portion of the class name.

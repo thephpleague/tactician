@@ -13,7 +13,7 @@ require __DIR__ . '/repeated-sample-code.php';
  * We can write a custom MethodNameInflector for that:
  */
 
-use Tactician\Handler\MethodNameInflector\MethodNameInflector;
+use Tactician\CommandBus\Handler\MethodNameInflector\MethodNameInflector;
 
 class MyCustomInflector implements MethodNameInflector
 {
@@ -36,9 +36,9 @@ class NewRegisterUserHandler
 
 // Now  let's create our command bus again, but this time using our custom
 // method naming strategy
-use Tactician\CommandBus\ExecutingCommandBus;
+use Tactician\CommandBus\ExecutesHandlerCommandBus;
 $locator->addHandler(new NewRegisterUserHandler(), RegisterUserCommand::class);
-$commandBus = new ExecutingCommandBus($locator, new MyCustomInflector());
+$commandBus = new ExecutesHandlerCommandBus($locator, new MyCustomInflector());
 
 // Controller Code time!
 $command = new RegisterUserCommand();

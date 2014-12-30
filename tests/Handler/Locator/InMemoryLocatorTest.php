@@ -1,9 +1,9 @@
 <?php
 
-namespace Tactician\Tests\Handler\Locator;
+namespace Tactician\CommandBus\Tests\Handler\Locator;
 
-use Tactician\Handler\Locator\InMemoryLocator;
-use Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
+use Tactician\CommandBus\Handler\Locator\InMemoryLocator;
+use Tactician\CommandBus\Tests\Fixtures\Command\CompleteTaskCommand;
 
 class InMemoryLocatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -30,7 +30,7 @@ class InMemoryLocatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Tactician\Exception\MissingHandlerException
+     * @expectedException \Tactician\CommandBus\Exception\MissingHandlerException
      */
     public function testHandlerMissing()
     {

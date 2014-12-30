@@ -1,6 +1,6 @@
 <?php
 
-namespace Tactician\Exception;
+namespace Tactician\CommandBus\Exception;
 
 /**
  * No handler could be found for the given command.

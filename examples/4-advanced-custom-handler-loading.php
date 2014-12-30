@@ -9,7 +9,7 @@ require __DIR__ . '/repeated-sample-code.php';
  *
  * We can create a custom HandlerLocator for that.
  */
-use Tactician\Handler\Locator\HandlerLocator;
+use Tactician\CommandBus\Handler\Locator\HandlerLocator;
 class ContainerBasedHandlerLocator implements HandlerLocator
 {
     protected $container;
@@ -35,10 +35,10 @@ $fakeContainer
     ->andReturn(new RegisterUserHandler());
 
 // Now, we create our command bus using our container based loader instead
-use Tactician\CommandBus\ExecutingCommandBus;
-use Tactician\Handler\MethodNameInflector\HandleClassNameInflector;
+use Tactician\CommandBus\ExecutesHandlerCommandBus;
+use Tactician\CommandBus\Handler\MethodNameInflector\HandleClassNameInflector;
 
-$commandBus = new ExecutingCommandBus(
+$commandBus = new ExecutesHandlerCommandBus(
     new ContainerBasedHandlerLocator($fakeContainer),
     new HandleClassNameInflector()
 );

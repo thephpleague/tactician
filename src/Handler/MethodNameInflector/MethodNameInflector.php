@@ -1,5 +1,5 @@
 <?php
-namespace Tactician\Handler\MethodNameInflector;
+namespace Tactician\CommandBus\Handler\MethodNameInflector;
 
 /**
  * Deduce the method name to call on the command handler based on the command

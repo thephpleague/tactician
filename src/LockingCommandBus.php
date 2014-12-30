@@ -3,10 +3,10 @@
 namespace Tactician\CommandBus;
 
 /**
- * If another command is being executed, queues incoming commands until the
- * first has completed.
+ * If another command is already being executed, locks the command bus and
+ * queues the new incoming commands until the first has completed.
  */
-class QueueingCommandBus implements CommandBus
+class LockingCommandBus implements CommandBus
 {
     /**
      * @var CommandBus

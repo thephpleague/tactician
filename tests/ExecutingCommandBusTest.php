@@ -1,20 +1,20 @@
 <?php
 
-namespace Tactician\Tests\CommandBus;
+namespace Tactician\CommandBus\Tests;
 
-use Tactician\CommandBus\ExecutingCommandBus;
-use Tactician\Handler\MethodNameInflector\MethodNameInflector;
-use Tactician\Handler\Locator\HandlerLocator;
-use Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
-use Tactician\Tests\Fixtures\Handler\DynamicMethodsHandler;
-use Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
+use Tactician\CommandBus\ExecutesHandlerCommandBus;
+use Tactician\CommandBus\Handler\MethodNameInflector\MethodNameInflector;
+use Tactician\CommandBus\Handler\Locator\HandlerLocator;
+use Tactician\CommandBus\Tests\Fixtures\Command\CompleteTaskCommand;
+use Tactician\CommandBus\Tests\Fixtures\Handler\DynamicMethodsHandler;
+use Tactician\CommandBus\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use stdClass;
 use Mockery;
 
 class ExecutingCommandBusTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var ExecutingCommandBus
+     * @var ExecutesHandlerCommandBus
      */
     private $commandBus;
 
@@ -33,7 +33,7 @@ class ExecutingCommandBusTest extends \PHPUnit_Framework_TestCase
         $this->handlerLocator = Mockery::mock(HandlerLocator::class);
         $this->methodNameInflector = Mockery::mock(MethodNameInflector::class);
 
-        $this->commandBus = new ExecutingCommandBus(
+        $this->commandBus = new ExecutesHandlerCommandBus(
             $this->handlerLocator,
             $this->methodNameInflector
         );
@@ -64,7 +64,7 @@ class ExecutingCommandBusTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Tactician\Exception\CanNotInvokeHandlerException
+     * @expectedException \Tactician\CommandBus\Exception\CanNotInvokeHandlerException
      */
     public function testMissingMethodOnHandlerObjectIsDetected()
     {
