@@ -1,5 +1,5 @@
 {
-    "name":        "tactician/tactician",
+    "name":        "tactician/command-bus",
     "description": "A command bus, handy for building out service layers",
     "keywords":    ["command", "command bus", "service layer"],
     "license":     "MIT",
