@@ -8,7 +8,7 @@ use Tactician\CommandBus\LockingCommandBus;
 use Tactician\CommandBus\Tests\Fixtures\Command\AddTaskCommand;
 use Tactician\CommandBus\Tests\Fixtures\Command\CompleteTaskCommand;
 
-class QueueingCommandBusTest extends \PHPUnit_Framework_TestCase
+class LockingCommandBusTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var CommandBus|Mockery\MockInterface

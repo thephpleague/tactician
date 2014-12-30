@@ -9,7 +9,7 @@ use Tactician\CommandBus\Handler\Locator\HandlerLocator;
 /**
  * The "core" CommandBus. Locates the appropriate handler and executes command.
  */
-class ExecutesHandlerCommandBus implements CommandBus
+class HandlerExecutingCommandBus implements CommandBus
 {
     /**
      * @var HandlerLocator

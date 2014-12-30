@@ -2,7 +2,7 @@
 
 namespace Tactician\CommandBus\Tests;
 
-use Tactician\CommandBus\ExecutesHandlerCommandBus;
+use Tactician\CommandBus\HandlerExecutingCommandBus;
 use Tactician\CommandBus\Handler\MethodNameInflector\MethodNameInflector;
 use Tactician\CommandBus\Handler\Locator\HandlerLocator;
 use Tactician\CommandBus\Tests\Fixtures\Command\CompleteTaskCommand;
@@ -11,10 +11,10 @@ use Tactician\CommandBus\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use stdClass;
 use Mockery;
 
-class ExecutingCommandBusTest extends \PHPUnit_Framework_TestCase
+class HandlerExecutingCommandBusTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var ExecutesHandlerCommandBus
+     * @var HandlerExecutingCommandBus
      */
     private $commandBus;
 
@@ -33,7 +33,7 @@ class ExecutingCommandBusTest extends \PHPUnit_Framework_TestCase
         $this->handlerLocator = Mockery::mock(HandlerLocator::class);
         $this->methodNameInflector = Mockery::mock(MethodNameInflector::class);
 
-        $this->commandBus = new ExecutesHandlerCommandBus(
+        $this->commandBus = new HandlerExecutingCommandBus(
             $this->handlerLocator,
             $this->methodNameInflector
         );
