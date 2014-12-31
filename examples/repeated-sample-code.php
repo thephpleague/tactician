@@ -3,8 +3,8 @@ require __DIR__ . '/../vendor/autoload.php';
 
 // The basic code from example 1 that we reuse in future examples.
 
-use Tactician\Handler\MethodNameInflector\HandleClassNameInflector;
-use Tactician\Handler\Locator\InMemoryLocator;
+use Tactician\CommandBus\Handler\MethodNameInflector\HandleClassNameInflector;
+use Tactician\CommandBus\Handler\Locator\InMemoryLocator;
 
 class RegisterUserCommand
 {
@@ -24,7 +24,7 @@ class RegisterUserHandler
 $locator = new InMemoryLocator();
 $locator->addHandler(new RegisterUserHandler(), RegisterUserCommand::class);
 
-$commandBus = new Tactician\CommandBus\ExecutingCommandBus(
+$commandBus = new Tactician\CommandBus\HandlerExecutionCommandBus(
     $locator,
     new HandleClassNameInflector()
 );

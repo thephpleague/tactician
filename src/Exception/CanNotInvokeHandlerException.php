@@ -1,6 +1,6 @@
 <?php
 
-namespace Tactician\Exception;
+namespace Tactician\CommandBus\Exception;
 
 /**
  * Thrown when a specific handler object can not used on a command object.

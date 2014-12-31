@@ -1,14 +1,14 @@
 <?php
 
-namespace Tactician\Tests\CommandBus;
+namespace Tactician\CommandBus\Tests;
 
 use Mockery;
 use Tactician\CommandBus\CommandBus;
-use Tactician\CommandBus\QueueingCommandBus;
-use Tactician\Tests\Fixtures\Command\AddTaskCommand;
-use Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
+use Tactician\CommandBus\LockingCommandBus;
+use Tactician\CommandBus\Tests\Fixtures\Command\AddTaskCommand;
+use Tactician\CommandBus\Tests\Fixtures\Command\CompleteTaskCommand;
 
-class QueueingCommandBusTest extends \PHPUnit_Framework_TestCase
+class LockingCommandBusTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var CommandBus|Mockery\MockInterface
@@ -16,7 +16,7 @@ class QueueingCommandBusTest extends \PHPUnit_Framework_TestCase
     private $innerCommandBus;
 
     /**
-     * @var QueueingCommandBus|Mockery\MockInterface
+     * @var LockingCommandBus|Mockery\MockInterface
      */
     private $queueingCommandBus;
 
@@ -24,7 +24,7 @@ class QueueingCommandBusTest extends \PHPUnit_Framework_TestCase
     {
         $this->innerCommandBus = Mockery::mock(CommandBus::class);
 
-        $this->queueingCommandBus = new QueueingCommandBus(
+        $this->queueingCommandBus = new LockingCommandBus(
             $this->innerCommandBus
         );
     }

@@ -1,5 +1,5 @@
 {
-    "name":        "tactician/tactician",
+    "name":        "tactician/command-bus",
     "description": "A command bus, handy for building out service layers",
     "keywords":    ["command", "command bus", "service layer"],
     "license":     "MIT",
@@ -18,8 +18,8 @@
         "squizlabs/php_codesniffer": "~2.0"
     },
     "autoload": {
-        "psr-0": {
-            "Tactician": "src"
+        "psr-4": {
+            "Tactician\\CommandBus\\": "src"
         }
     }
 }

@@ -2,14 +2,14 @@
 
 namespace Tactician\CommandBus;
 
-use Tactician\Exception\CanNotInvokeHandlerException;
-use Tactician\Handler\MethodNameInflector\MethodNameInflector;
-use Tactician\Handler\Locator\HandlerLocator;
+use Tactician\CommandBus\Exception\CanNotInvokeHandlerException;
+use Tactician\CommandBus\Handler\MethodNameInflector\MethodNameInflector;
+use Tactician\CommandBus\Handler\Locator\HandlerLocator;
 
 /**
  * The "core" CommandBus. Locates the appropriate handler and executes command.
  */
-class ExecutingCommandBus implements CommandBus
+class HandlerExecutionCommandBus implements CommandBus
 {
     /**
      * @var HandlerLocator

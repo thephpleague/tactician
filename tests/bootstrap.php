@@ -1,4 +1,4 @@
 <?php
-/** @var \Composer\Autoload\ClassLocator $loader */
+/** @var \Composer\Autoload\ClassLoader $loader */
 $loader = require __DIR__.'/../vendor/autoload.php';
-$loader->add('Tactician\Tests', __DIR__);
+$loader->addPsr4('Tactician\\CommandBus\\Tests\\', __DIR__);

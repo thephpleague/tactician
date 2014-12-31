@@ -1,6 +1,6 @@
 <?php
 
-namespace Tactician\Handler\Locator;
+namespace Tactician\CommandBus\Handler\Locator;
 
 /**
  * Service locator for handler objects

@@ -1,5 +1,5 @@
 <?php
-namespace Tactician\Handler\MethodNameInflector;
+namespace Tactician\CommandBus\Handler\MethodNameInflector;
 
 /**
  * Handle command by calling the __invoke magic method. Handy for single
