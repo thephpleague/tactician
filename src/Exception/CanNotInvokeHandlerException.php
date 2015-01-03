@@ -2,6 +2,8 @@
 
 namespace Tactician\CommandBus\Exception;
 
+use Tactician\CommandBus\Command;
+
 /**
  * Thrown when a specific handler object can not used on a command object.
  *
@@ -11,11 +13,11 @@ namespace Tactician\CommandBus\Exception;
 class CanNotInvokeHandlerException extends \Exception
 {
     /**
-     * @param object $command
+     * @param Command $command
      * @param string $reason
      * @return static
      */
-    public static function onObject($command, $reason)
+    public static function onObject(Command $command, $reason)
     {
         return new static(
             'Could not invoke handler for command ' . get_class($command) .
