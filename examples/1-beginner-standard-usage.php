@@ -3,9 +3,10 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use Tactician\CommandBus\Handler\MethodNameInflector\HandleClassNameInflector;
 use Tactician\CommandBus\Handler\Locator\InMemoryLocator;
+use Tactician\CommandBus\Command;
 
 // Our example Command and Handler. ///////////////////////////////////////////
-class RegisterUserCommand
+class RegisterUserCommand implements Command
 {
     public $emailAddress;
     public $password;

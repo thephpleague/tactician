@@ -1,6 +1,8 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
 
+use Tactician\CommandBus\Command;
+
 /**
  * If you're working with a very constrained domain where there's not so many
  * dependencies, you could skip handlers altogether and implement a more
@@ -8,7 +10,7 @@ require __DIR__ . '/../vendor/autoload.php';
  *
  * Here's a Tactician version of the wikipedia Light Switch example.
  */
-interface SelfExecutingCommand {
+interface SelfExecutingCommand extends Command {
     public function execute(Light $light);
 }
 
@@ -48,7 +50,7 @@ class SelfExecutingCommandBus implements CommandBus
         $this->light = $light;
     }
 
-    public function execute($command)
+    public function execute(Command $command)
     {
         if (!$command instanceof SelfExecutingCommand) {
             throw new InvalidArgumentException("Can not execute command");

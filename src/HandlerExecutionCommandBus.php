@@ -35,10 +35,10 @@ class HandlerExecutionCommandBus implements CommandBus
      * Executes a command and optionally returns a value
      *
      * @throws CanNotInvokeHandlerException
-     * @param object $command
+     * @param Command $command
      * @return mixed
      */
-    public function execute($command)
+    public function execute(Command $command)
     {
         $handler = $this->handlerLocator->getHandlerForCommand($command);
         $methodName = $this->methodNameInflector->inflect($command, $handler);

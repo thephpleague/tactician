@@ -34,10 +34,10 @@ class LockingCommandBus implements CommandBus
     /**
      * Queues incoming commands until the first has completed
      *
-     * @param object $command
+     * @param Command $command
      * @return mixed
      */
-    public function execute($command)
+    public function execute(Command $command)
     {
         $this->queue[] = $command;
         if ($this->isExecuting) {
