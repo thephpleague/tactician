@@ -10,7 +10,7 @@ use Tactician\CommandBus\Command;
  * The most common reason is the receiving method is missing or incorrectly
  * named.
  */
-class CanNotInvokeHandlerException extends \Exception
+class CanNotInvokeHandlerException extends \BadMethodCallException implements Exception
 {
     /**
      * @var Command

@@ -7,7 +7,7 @@ use Tactician\CommandBus\Command;
 /**
  * No handler could be found for the given command.
  */
-class MissingHandlerException extends \Exception
+class MissingHandlerException extends \OutOfBoundsException implements Exception
 {
     /**
      * @var Command

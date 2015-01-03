@@ -2,6 +2,7 @@
 namespace Tactician\CommandBus\Tests\Exception;
 
 use Tactician\CommandBus\Exception\CanNotInvokeHandlerException;
+use Tactician\CommandBus\Exception\Exception;
 use Tactician\CommandBus\Tests\Fixtures\Command\CompleteTaskCommand;
 
 class CanNotInvokeHandlerExceptionTest extends \PHPUnit_Framework_TestCase
@@ -15,5 +16,6 @@ class CanNotInvokeHandlerExceptionTest extends \PHPUnit_Framework_TestCase
         $this->assertContains(CompleteTaskCommand::class, $exception->getMessage());
         $this->assertContains('Because stuff', $exception->getMessage());
         $this->assertSame($command, $exception->getCommand());
+        $this->assertInstanceOf(Exception::class, $exception);
     }
 }
