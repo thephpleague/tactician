@@ -51,7 +51,7 @@ class SelfExecutingCommandBus implements CommandBus
     public function execute($command)
     {
         if (!$command instanceof SelfExecutingCommand) {
-            throw InvalidArgumentException("Can not execute command");
+            throw new InvalidArgumentException("Can not execute command");
         }
 
         return $command->execute($this->light);
