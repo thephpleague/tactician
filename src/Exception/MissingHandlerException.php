@@ -10,11 +10,27 @@ use Tactician\CommandBus\Command;
 class MissingHandlerException extends \Exception
 {
     /**
+     * @var Command
+     */
+    private $command;
+
+    /**
      * @param Command $command
      * @return static
      */
     public static function forCommand(Command $command)
     {
-        return new static("Missing handler for command: ".get_class($command));
+        $exception = new static("Missing handler for command: " . get_class($command));
+        $exception->command = $command;
+
+        return $exception;
+    }
+
+    /**
+     * @return Command
+     */
+    public function getCommand()
+    {
+        return $this->command;
     }
 }

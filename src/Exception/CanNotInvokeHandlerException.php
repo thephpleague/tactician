@@ -13,15 +13,33 @@ use Tactician\CommandBus\Command;
 class CanNotInvokeHandlerException extends \Exception
 {
     /**
+     * @var Command
+     */
+    private $command;
+
+    /**
      * @param Command $command
      * @param string $reason
      * @return static
      */
     public static function onObject(Command $command, $reason)
     {
-        return new static(
+        $exception = new static(
             'Could not invoke handler for command ' . get_class($command) .
-            'for reason: '. $reason
+            'for reason: ' . $reason
         );
+        $exception->command = $command;
+
+        return $exception;
+    }
+
+    /**
+     * Returns the command that could not be invoked
+     *
+     * @return Command
+     */
+    public function getCommand()
+    {
+        return $this->command;
     }
 }
