@@ -10,8 +10,8 @@ interface CommandBus
     /**
      * Executes the given command and optionally returns a value
      *
-     * @param object $command
+     * @param Command $command
      * @return mixed
      */
-    public function execute($command);
+    public function execute(Command $command);
 }

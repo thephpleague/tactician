@@ -3,6 +3,7 @@ require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/repeated-sample-code.php';
 
 use Tactician\CommandBus\CommandBus;
+use Tactician\CommandBus\Command;
 
 /**
  * Let's say we want something happen every time we execute a command.
@@ -32,7 +33,7 @@ class LoggingCommandBus implements CommandBus
         $this->logger = $logger;
     }
 
-    public function execute($command)
+    public function execute(Command $command)
     {
         $commandClass = get_class($command);
 

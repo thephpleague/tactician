@@ -2,6 +2,8 @@
 
 namespace Tactician\CommandBus\Tests\Fixtures\Command;
 
-class CompleteTaskCommand
+use Tactician\CommandBus\Command;
+
+class CompleteTaskCommand implements Command
 {
 }
