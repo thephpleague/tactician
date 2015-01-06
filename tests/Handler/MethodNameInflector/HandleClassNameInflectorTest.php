@@ -4,7 +4,7 @@ namespace Tactician\CommandBus\Tests\Handler\MethodNameInflector;
 use Tactician\CommandBus\Handler\MethodNameInflector\HandleClassNameInflector;
 use Tactician\CommandBus\Tests\Fixtures\Command\CompleteTaskCommand;
 use Tactician\CommandBus\Tests\Fixtures\Handler\ConcreteMethodsHandler;
-use stdClass;
+use CommandWithoutNamespace;
 
 class HandleClassNameInflectorTest extends \PHPUnit_Framework_TestCase
 {
@@ -26,11 +26,11 @@ class HandleClassNameInflectorTest extends \PHPUnit_Framework_TestCase
 
     public function testHandlesClassesWithoutNamespace()
     {
-        $stdClass = new stdClass();
+        $command = new CommandWithoutNamespace();
 
         $this->assertEquals(
-            'handlestdClass',
-            $this->inflector->inflect($stdClass, $this->mockHandler)
+            'handleCommandWithoutNamespace',
+            $this->inflector->inflect($command, $this->mockHandler)
         );
     }
 

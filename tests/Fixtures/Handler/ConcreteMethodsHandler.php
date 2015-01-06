@@ -11,8 +11,4 @@ class ConcreteMethodsHandler
     public function handleTaskCompletedCommand($command)
     {
     }
-
-    public function handlestdClass($command)
-    {
-    }
 }

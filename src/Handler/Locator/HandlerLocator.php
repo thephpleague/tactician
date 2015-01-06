@@ -2,6 +2,8 @@
 
 namespace Tactician\CommandBus\Handler\Locator;
 
+use Tactician\CommandBus\Command;
+
 /**
  * Service locator for handler objects
  *
@@ -13,8 +15,8 @@ interface HandlerLocator
     /**
      * Retrieves the handler for a specified command
      *
-     * @param object $command
+     * @param Command $command
      * @return mixed
      */
-    public function getHandlerForCommand($command);
+    public function getHandlerForCommand(Command $command);
 }

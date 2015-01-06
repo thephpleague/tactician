@@ -10,6 +10,8 @@ require __DIR__ . '/repeated-sample-code.php';
  * We can create a custom HandlerLocator for that.
  */
 use Tactician\CommandBus\Handler\Locator\HandlerLocator;
+use Tactician\CommandBus\Command;
+
 class ContainerBasedHandlerLocator implements HandlerLocator
 {
     protected $container;
@@ -19,7 +21,7 @@ class ContainerBasedHandlerLocator implements HandlerLocator
         $this->container = $container;
     }
 
-    public function getHandlerForCommand($command)
+    public function getHandlerForCommand(Command $command)
     {
         // This is a cheesy naming strategy but it's just an example
         $handlerId = 'app.handler.' . get_class($command);

@@ -1,6 +1,8 @@
 <?php
 namespace Tactician\CommandBus\Handler\MethodNameInflector;
 
+use Tactician\CommandBus\Command;
+
 /**
  * Assumes the method is handle + the last portion of the class name.
  *
@@ -13,7 +15,7 @@ class HandleClassNameInflector implements MethodNameInflector
     /**
      * {@inheritdoc}
      */
-    public function inflect($command, $commandHandler)
+    public function inflect(Command $command, $commandHandler)
     {
         $commandName = get_class($command);
 

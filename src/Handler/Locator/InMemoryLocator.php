@@ -2,6 +2,7 @@
 
 namespace Tactician\CommandBus\Handler\Locator;
 
+use Tactician\CommandBus\Command;
 use Tactician\CommandBus\Exception\MissingHandlerException;
 
 /**
@@ -38,11 +39,11 @@ class InMemoryLocator implements HandlerLocator
     /**
      * Retrieve handler for the given command
      *
-     * @param object $command
+     * @param Command $command
      * @return object
      * @throws MissingHandlerException
      */
-    public function getHandlerForCommand($command)
+    public function getHandlerForCommand(Command $command)
     {
         $className = get_class($command);
 
