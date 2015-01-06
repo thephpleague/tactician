@@ -1,4 +1,7 @@
 <?php
+// @codingStandardsIgnoreStart
+// We must exclude the coding standards from this file, otherwise it will fail
+// due to the lack of a namespace.
 
 use Tactician\CommandBus\Command;
 
@@ -9,3 +12,4 @@ use Tactician\CommandBus\Command;
 class CommandWithoutNamespace implements Command
 {
 }
+// @codingStandardsIgnoreEnd
