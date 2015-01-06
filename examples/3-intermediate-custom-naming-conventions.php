@@ -13,13 +13,14 @@ require __DIR__ . '/repeated-sample-code.php';
  * We can write a custom MethodNameInflector for that:
  */
 
+use Tactician\CommandBus\Command;
 use Tactician\CommandBus\Handler\MethodNameInflector\MethodNameInflector;
 
 class MyCustomInflector implements MethodNameInflector
 {
     // You can use the command and commandHandler to generate any name you
     // prefer but here, we'll always return the same one.
-    public function inflect($command, $commandHandler)
+    public function inflect(Command $command, $commandHandler)
     {
         return 'handle';
     }
