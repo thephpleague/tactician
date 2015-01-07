@@ -1,12 +1,12 @@
 {
-    "name":        "tactician/command-bus",
-    "description": "A command bus, handy for building out service layers",
+    "name":        "league/tactician",
+    "description": "A small, flexible command bus. Handy for building out service layers.",
     "keywords":    ["command", "command bus", "service layer"],
     "license":     "MIT",
     "authors": [
         {
             "name": "Ross Tuck",
-            "homepage": "http://rosstuck.com"
+            "homepage": "http://tactician.thephpleague.com"
         }
     ],
     "require": {
