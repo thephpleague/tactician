@@ -1,6 +1,6 @@
 {
     "name":        "league/tactician",
-    "description": "A small, flexible command bus. Handy for building out service layers.",
+    "description": "A small, flexible command bus. Handy for building service layers.",
     "keywords":    ["command", "command bus", "service layer"],
     "license":     "MIT",
     "authors": [
