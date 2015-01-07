@@ -71,7 +71,7 @@ If any of that sounds familiar and helpful, Tactician might be right for you! :)
 ## When should I not use it?
 If you've got a very small app that doesn't need a service layer, then Tactician won't offer much to you.
 
-If you're already using a tool that provides a command handler (like [Broadway](https://github.com/qandidate-labs/broadway)), you're probably okay there too.
+If you're already using a tool that provides a command bus (like [Broadway](https://github.com/qandidate-labs/broadway)), you're probably okay there too.
 
 ## Questions?
 Tactician was created by Ross Tuck. Find him on Twitter at [@rosstuck](https://twitter.com/rosstuck).
