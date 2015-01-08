@@ -3,7 +3,7 @@
 namespace Tactician\CommandBus;
 
 /**
- * Represents an command to be executed.
+ * Represents a command to be executed.
  */
 interface Command
 {
