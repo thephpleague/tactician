@@ -15,6 +15,6 @@ class MissingHandlerException extends \Exception
      */
     public static function forCommand(Command $command)
     {
-        return new static("Missing handler for command: ".get_class($command));
+        return new static("Missing handler for command: " . get_class($command));
     }
 }
