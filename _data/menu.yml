@@ -1,2 +1,6 @@
 Getting Started:
     Introduction: '/'
+    Installation: '/installation/'
+    Tweaking Tactician: '/tweaking-tactician/'
+Plugins:
+    LockingCommandBus: '/plugins/locking-command-bus/'
