@@ -1,10 +1,10 @@
 <?php
 
-namespace Tactician\CommandBus;
+namespace League\Tactician\CommandBus;
 
-use Tactician\CommandBus\Exception\CanNotInvokeHandlerException;
-use Tactician\CommandBus\Handler\MethodNameInflector\MethodNameInflector;
-use Tactician\CommandBus\Handler\Locator\HandlerLocator;
+use League\Tactician\CommandBus\Exception\CanNotInvokeHandlerException;
+use League\Tactician\CommandBus\Handler\MethodNameInflector\MethodNameInflector;
+use League\Tactician\CommandBus\Handler\Locator\HandlerLocator;
 
 /**
  * The "core" CommandBus. Locates the appropriate handler and executes command.

@@ -1,9 +1,9 @@
 <?php
 
-namespace Tactician\CommandBus\Handler\Locator;
+namespace League\Tactician\CommandBus\Handler\Locator;
 
-use Tactician\CommandBus\Command;
-use Tactician\CommandBus\Exception\MissingHandlerException;
+use League\Tactician\CommandBus\Command;
+use League\Tactician\CommandBus\Exception\MissingHandlerException;
 
 /**
  * Fetch handler instances from an in-memory collection.

@@ -1,9 +1,9 @@
 <?php
-namespace Tactician\CommandBus\Tests\Handler\MethodNameInflector;
+namespace League\Tactician\CommandBus\Tests\Handler\MethodNameInflector;
 
-use Tactician\CommandBus\Handler\MethodNameInflector\InvokeInflector;
-use Tactician\CommandBus\Tests\Fixtures\Command\CompleteTaskCommand;
-use Tactician\CommandBus\Tests\Fixtures\Handler\ConcreteMethodsHandler;
+use League\Tactician\CommandBus\Handler\MethodNameInflector\InvokeInflector;
+use League\Tactician\CommandBus\Tests\Fixtures\Command\CompleteTaskCommand;
+use League\Tactician\CommandBus\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 
 /**
  * Best. Test. Ever.

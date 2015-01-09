@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
 
-use Tactician\CommandBus\Command;
+use League\Tactician\CommandBus\Command;
 
 /**
  * If you're working with a very constrained domain where there's not so many
@@ -40,7 +40,7 @@ class SwitchOn implements SelfExecutingCommand
     }
 }
 
-use Tactician\CommandBus\CommandBus;
+use League\Tactician\CommandBus\CommandBus;
 class SelfExecutingCommandBus implements CommandBus
 {
     protected $light;
