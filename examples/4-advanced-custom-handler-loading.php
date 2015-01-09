@@ -9,8 +9,8 @@ require __DIR__ . '/repeated-sample-code.php';
  *
  * We can create a custom HandlerLocator for that.
  */
-use Tactician\CommandBus\Handler\Locator\HandlerLocator;
-use Tactician\CommandBus\Command;
+use League\Tactician\CommandBus\Handler\Locator\HandlerLocator;
+use League\Tactician\CommandBus\Command;
 
 class ContainerBasedHandlerLocator implements HandlerLocator
 {
@@ -37,8 +37,8 @@ $fakeContainer
     ->andReturn(new RegisterUserHandler());
 
 // Now, we create our command bus using our container based loader instead
-use Tactician\CommandBus\HandlerExecutionCommandBus;
-use Tactician\CommandBus\Handler\MethodNameInflector\HandleClassNameInflector;
+use League\Tactician\CommandBus\HandlerExecutionCommandBus;
+use League\Tactician\CommandBus\Handler\MethodNameInflector\HandleClassNameInflector;
 
 $commandBus = new HandlerExecutionCommandBus(
     new ContainerBasedHandlerLocator($fakeContainer),

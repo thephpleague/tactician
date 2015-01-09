@@ -1,12 +1,12 @@
 <?php
 
-namespace Tactician\CommandBus\Tests;
+namespace League\Tactician\CommandBus\Tests;
 
 use Mockery;
-use Tactician\CommandBus\CommandBus;
-use Tactician\CommandBus\LockingCommandBus;
-use Tactician\CommandBus\Tests\Fixtures\Command\AddTaskCommand;
-use Tactician\CommandBus\Tests\Fixtures\Command\CompleteTaskCommand;
+use League\Tactician\CommandBus\CommandBus;
+use League\Tactician\CommandBus\LockingCommandBus;
+use League\Tactician\CommandBus\Tests\Fixtures\Command\AddTaskCommand;
+use League\Tactician\CommandBus\Tests\Fixtures\Command\CompleteTaskCommand;
 
 class LockingCommandBusTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Tactician\CommandBus\Exception;
+namespace League\Tactician\CommandBus\Exception;
 
-use Tactician\CommandBus\Command;
+use League\Tactician\CommandBus\Command;
 
 /**
  * No handler could be found for the given command.

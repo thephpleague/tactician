@@ -1,6 +1,6 @@
 <?php
 
-namespace Tactician\CommandBus;
+namespace League\Tactician\CommandBus;
 
 /**
  * Represents a command to be executed.

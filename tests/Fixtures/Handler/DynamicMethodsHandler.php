@@ -1,5 +1,5 @@
 <?php
-namespace Tactician\CommandBus\Tests\Fixtures\Handler;
+namespace League\Tactician\CommandBus\Tests\Fixtures\Handler;
 
 /**
  * Some folks prefer to rely on __call to proxy the incoming commands to

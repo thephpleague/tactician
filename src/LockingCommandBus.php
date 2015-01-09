@@ -1,6 +1,6 @@
 <?php
 
-namespace Tactician\CommandBus;
+namespace League\Tactician\CommandBus;
 
 /**
  * If another command is already being executed, locks the command bus and

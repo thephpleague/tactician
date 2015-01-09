@@ -1,8 +1,8 @@
 <?php
 
-namespace Tactician\CommandBus\Handler\Locator;
+namespace League\Tactician\CommandBus\Handler\Locator;
 
-use Tactician\CommandBus\Command;
+use League\Tactician\CommandBus\Command;
 
 /**
  * Service locator for handler objects

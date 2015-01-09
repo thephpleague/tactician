@@ -1,13 +1,13 @@
 <?php
 
-namespace Tactician\CommandBus\Tests;
+namespace League\Tactician\CommandBus\Tests;
 
-use Tactician\CommandBus\HandlerExecutionCommandBus;
-use Tactician\CommandBus\Handler\MethodNameInflector\MethodNameInflector;
-use Tactician\CommandBus\Handler\Locator\HandlerLocator;
-use Tactician\CommandBus\Tests\Fixtures\Command\CompleteTaskCommand;
-use Tactician\CommandBus\Tests\Fixtures\Handler\DynamicMethodsHandler;
-use Tactician\CommandBus\Tests\Fixtures\Handler\ConcreteMethodsHandler;
+use League\Tactician\CommandBus\HandlerExecutionCommandBus;
+use League\Tactician\CommandBus\Handler\MethodNameInflector\MethodNameInflector;
+use League\Tactician\CommandBus\Handler\Locator\HandlerLocator;
+use League\Tactician\CommandBus\Tests\Fixtures\Command\CompleteTaskCommand;
+use League\Tactician\CommandBus\Tests\Fixtures\Handler\DynamicMethodsHandler;
+use League\Tactician\CommandBus\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use stdClass;
 use Mockery;
 
@@ -64,7 +64,7 @@ class HandlerExecutionCommandBusTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Tactician\CommandBus\Exception\CanNotInvokeHandlerException
+     * @expectedException \League\Tactician\CommandBus\Exception\CanNotInvokeHandlerException
      */
     public function testMissingMethodOnHandlerObjectIsDetected()
     {

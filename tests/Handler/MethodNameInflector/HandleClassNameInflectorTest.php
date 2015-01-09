@@ -1,9 +1,9 @@
 <?php
-namespace Tactician\CommandBus\Tests\Handler\MethodNameInflector;
+namespace League\Tactician\CommandBus\Tests\Handler\MethodNameInflector;
 
-use Tactician\CommandBus\Handler\MethodNameInflector\HandleClassNameInflector;
-use Tactician\CommandBus\Tests\Fixtures\Command\CompleteTaskCommand;
-use Tactician\CommandBus\Tests\Fixtures\Handler\ConcreteMethodsHandler;
+use League\Tactician\CommandBus\Handler\MethodNameInflector\HandleClassNameInflector;
+use League\Tactician\CommandBus\Tests\Fixtures\Command\CompleteTaskCommand;
+use League\Tactician\CommandBus\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use CommandWithoutNamespace;
 
 class HandleClassNameInflectorTest extends \PHPUnit_Framework_TestCase

@@ -1,8 +1,8 @@
 <?php
 
-namespace Tactician\CommandBus\Tests\Fixtures\Command;
+namespace League\Tactician\CommandBus\Tests\Fixtures\Command;
 
-use Tactician\CommandBus\Command;
+use League\Tactician\CommandBus\Command;
 
 class AddTaskCommand implements Command
 {
