@@ -46,7 +46,10 @@ class HandlerExecutionCommandBus implements CommandBus
         // is_callable is used here instead of method_exists, as method_exists
         // will fail when given a handler that relies on __call.
         if (!is_callable([$handler, $methodName])) {
-            throw CanNotInvokeHandlerException::onObject($command, "Method '{$methodName}' does not exist on handler");
+            throw CanNotInvokeHandlerException::forCommand(
+                $command,
+                "Method '{$methodName}' does not exist on handler"
+            );
         }
 
         return $handler->{$methodName}($command);
