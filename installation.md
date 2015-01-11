@@ -18,7 +18,7 @@ Just leave the version blank and Composer will automatically find the latest ver
 
 Now we need to configure Tactician for your project.
 
-## Framework
+## Setup
 There are a few different ways to configure Tactician, depending on your Framework.
 
 - [None](#no-framework)
@@ -28,15 +28,15 @@ There are a few different ways to configure Tactician, depending on your Framewo
 
 ## No Framework
 
-Tactician is really customizable, so there's lots of things you can tweak. If you don't care and just want to get started, you can use our DefaultSetup factory that gets you running with a minimum of fuss.
+If you just want to get started and don't care about tweaking anything, you can use our DefaultSetup factory to get running with a minimum of fuss.
 
 ~~~ php
 
 // TODO: DefaultSetup factory
 
 ~~~
-  
-If you'd like to change the method name called or any other options, take a look at the [Tweaking Tactician](/tweaking-tactician) page for more details. It's really easy. 
+
+That said, Tactician is really customizable, so there's lots of things you can tweak. If you'd like to change the method name called or any other options, take a look at the [Tweaking Tactician](/tweaking-tactician) page for more details. It's really easy.
 
 ## Symfony2
 Sorry, a bundle is on our roadmap but we're short-handed. If you'd like to help out, [please get in touch](https://github.com/thephpleague/tactician/issues)!

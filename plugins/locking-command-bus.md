@@ -7,7 +7,7 @@ title: Locking Command Bus
 # Locking Command Bus
 This plugin actually ships in the core Tactician "CommandBus" package, so it's available without installing any separate composer packages.
 
-The Locking Bus prevents any Commands from starting execution until the current Command has completed. It doesn't throw exceptions, it just queues them in-memory.
+The Locking Bus blocks any Commands from running inside Commands. If a Command is already being executed and another Command comes in, this decorator will queue it in-memory until the first Command completes.
 
 It's very simple to setup:
 
