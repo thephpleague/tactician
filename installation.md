@@ -36,7 +36,7 @@ If you just want to get started and don't care about tweaking anything, you can 
 
 ~~~
 
-That said, Tactician is really customizable, so there's lots of things you can tweak. If you'd like to change the method name called or any other options, take a look at the [Tweaking Tactician](/tweaking-tactician) page for more details. It's really easy.
+That said, if you'd like to change the handler method called or any other options, take a look at the [Tweaking Tactician](/tweaking-tactician) page for more details. It's really easy. Promise.
 
 ## Symfony2
 Sorry, a bundle is on our roadmap but we're short-handed. If you'd like to help out, [please get in touch](https://github.com/thephpleague/tactician/issues)!
