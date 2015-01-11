@@ -26,7 +26,7 @@ In practice, it looks like this:
 
 ~~~ php
 // You build a simple message object like this:
-use Tactician\CommandBus\Command;
+use League\Tactician\CommandBus\Command;
 class PurchaseProductCommand implements Command
 {
     protected $productId;
