@@ -12,7 +12,7 @@ The Locking Bus blocks any Commands from running inside Commands. If a Command i
 It's very simple to setup:
 
 ~~~ php
-use League\Tactician\CommandBus\LockingCommandBus;
+use League\Tactician\LockingCommandBus;
 
 // Just wrap the existing bus
 $commandBus = new LockingCommandBus($commandBus);

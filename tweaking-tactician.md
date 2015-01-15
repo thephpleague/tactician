@@ -38,7 +38,7 @@ Configuring the Locator will vary depending on which Locator you use. Some will 
 Custom Locators only need to implement the [HandlerLocator interface](https://github.com/thephpleague/tactician/blob/master/src/Handler/Locator/HandlerLocator.php). This is just a single method that receives the Command and returns the Handler.
 
 ## 3. Creating the Command Bus
-Now that you've chosen a Locator and MethodNameInflector, you need to pass them to the Command Bus for execution. In Tactician, there's one "core" command bus that always loads and executes the Handlers: the [HandlerExecutionCommandBus](https://github.com/thephpleague/tactician/blob/master/src/HandlerExecutionCommandBus.php).
+Now that you've chosen a Locator and MethodNameInflector, you need to pass them to the Command Bus for execution. In Tactician, there's one "core" command bus that always loads and executes the Handlers: the [HandlerCommandBus](https://github.com/thephpleague/tactician/blob/master/src/HandlerCommandBus.php).
 
 Pass the Locator and MethodNameInflector to that, and you've got a Command Bus to use in your app.
 
@@ -51,7 +51,7 @@ $locator = new InMemoryLocator();
 $locator->addHandler(new RentMovieHandler(), RentMovieCommand::class);
 
 // Create the command bus
-$commandBus = new HandlerExecutionCommandBus($locator, $inflector);
+$commandBus = new HandlerCommandBus($locator, $inflector);
 ~~~
 
 ## 4. Decorators
