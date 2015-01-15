@@ -26,6 +26,14 @@ class InMemoryLocator implements HandlerLocator
     protected $handlers = [];
 
     /**
+     * @param array $commandClassToHandlerMap
+     */
+    public function __construct(array $commandClassToHandlerMap = [])
+    {
+        $this->addHandlers($commandClassToHandlerMap);
+    }
+
+    /**
      * Bind a handler instance to receive all commands with a certain class
      *
      * @param object $handler Handler to receive class
@@ -34,6 +42,24 @@ class InMemoryLocator implements HandlerLocator
     public function addHandler($handler, $commandClassName)
     {
         $this->handlers[$commandClassName] = $handler;
+    }
+
+    /**
+     * Allows you to add multiple handlers at once.
+     *
+     * The map should be an array in the format of:
+     *  [
+     *      AddTaskCommand::class      => $someHandlerInstance,
+     *      CompleteTaskCommand::class => $someHandlerInstance,
+     *  ]
+     *
+     * @param array $commandClassToHandlerMap
+     */
+    protected function addHandlers(array $commandClassToHandlerMap)
+    {
+        foreach ($commandClassToHandlerMap as $commandClass => $handler) {
+            $this->addHandler($handler, $commandClass);
+        }
     }
 
     /**
