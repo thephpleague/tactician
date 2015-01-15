@@ -22,7 +22,7 @@ use League\Tactician\LockingCommandBus;
 class QuickStart
 {
     /**
-     * Creates a default recommend
+     * Creates a default CommandBus that you can get started with.
      *
      * @param array $commandToHandlerMap
      * @return CommandBus
