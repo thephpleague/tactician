@@ -47,7 +47,7 @@ class PurchaseProductHandler
 
 // And then in your controllers, you can fill in the command using your favorite
 // form or serializer library, then drop it in the CommandBus and you're done!
-$command = new PurchaseProductId(42, 29);
+$command = new PurchaseProductCommand(42, 29);
 $commandBus->execute($command);
 ~~~
 
