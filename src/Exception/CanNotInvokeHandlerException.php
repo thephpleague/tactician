@@ -17,7 +17,7 @@ class CanNotInvokeHandlerException extends \Exception
      * @param string $reason
      * @return static
      */
-    public static function onObject(Command $command, $reason)
+    public static function forCommand(Command $command, $reason)
     {
         return new static(
             "Could not invoke handler for command " . get_class($command) .
