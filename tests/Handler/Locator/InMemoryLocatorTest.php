@@ -3,7 +3,9 @@
 namespace League\Tactician\Tests\Handler\Locator;
 
 use League\Tactician\Handler\Locator\InMemoryLocator;
+use League\Tactician\Tests\Fixtures\Command\AddTaskCommand;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
+use stdClass;
 
 class InMemoryLocatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -19,13 +21,33 @@ class InMemoryLocatorTest extends \PHPUnit_Framework_TestCase
 
     public function testHandlerIsReturnedForSpecificClass()
     {
-        $handler = new \stdClass();
+        $handler = new stdClass();
 
         $this->inMemoryLocator->addHandler($handler, CompleteTaskCommand::class);
 
         $this->assertSame(
             $handler,
             $this->inMemoryLocator->getHandlerForCommand(new CompleteTaskCommand())
+        );
+    }
+
+    public function testConstructorAcceptsMapOfCommandClassesToHandlers()
+    {
+        $commandToHandlerMap = [
+            AddTaskCommand::class => new stdClass(),
+            CompleteTaskCommand::class => new stdClass()
+        ];
+
+        $locator = new InMemoryLocator($commandToHandlerMap);
+
+        $this->assertSame(
+            $commandToHandlerMap[AddTaskCommand::class],
+            $locator->getHandlerForCommand(new AddTaskCommand())
+        );
+
+        $this->assertSame(
+            $commandToHandlerMap[CompleteTaskCommand::class],
+            $locator->getHandlerForCommand(new CompleteTaskCommand())
         );
     }
 
