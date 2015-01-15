@@ -11,7 +11,7 @@ use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use stdClass;
 use Mockery;
 
-class HandlerExecutionCommandBusTest extends \PHPUnit_Framework_TestCase
+class HandlerCommandBusTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var HandlerCommandBus
