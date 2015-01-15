@@ -1,8 +1,8 @@
 <?php
 
-namespace League\Tactician\CommandBus\Exception;
+namespace League\Tactician\Exception;
 
-use League\Tactician\CommandBus\Command;
+use League\Tactician\Command;
 
 /**
  * Thrown when a specific handler object can not used on a command object.

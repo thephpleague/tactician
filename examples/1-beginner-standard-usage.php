@@ -1,9 +1,9 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
 
-use League\Tactician\CommandBus\Handler\MethodNameInflector\HandleClassNameInflector;
-use League\Tactician\CommandBus\Handler\Locator\InMemoryLocator;
-use League\Tactician\CommandBus\Command;
+use League\Tactician\Handler\MethodNameInflector\HandleClassNameInflector;
+use League\Tactician\Handler\Locator\InMemoryLocator;
+use League\Tactician\Command;
 
 // Our example Command and Handler. ///////////////////////////////////////////
 class RegisterUserCommand implements Command
@@ -25,7 +25,7 @@ class RegisterUserHandler
 $locator = new InMemoryLocator();
 $locator->addHandler(new RegisterUserHandler(), RegisterUserCommand::class);
 
-$commandBus = new League\Tactician\CommandBus\HandlerExecutionCommandBus(
+$commandBus = new League\Tactician\HandlerCommandBus(
     $locator,
     new HandleClassNameInflector()
 );
