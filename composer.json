@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "League\\Tactician": "src"
+            "League\\Tactician\\": "src"
         }
     }
 }
