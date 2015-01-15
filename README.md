@@ -8,4 +8,4 @@
 
 A small, pluggable command bus. Still in active development.
 
-See the examples directory to get started.
+See the [full docs](http://tactician.thephpleague.com) or the examples directory to get started.
