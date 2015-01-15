@@ -1,7 +1,7 @@
 <?php
-namespace League\Tactician\CommandBus\Handler\MethodNameInflector;
+namespace League\Tactician\Handler\MethodNameInflector;
 
-use League\Tactician\CommandBus\Command;
+use League\Tactician\Command;
 
 /**
  * Deduce the method name to call on the command handler based on the command

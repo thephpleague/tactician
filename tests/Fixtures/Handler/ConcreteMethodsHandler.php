@@ -1,6 +1,6 @@
 <?php
 
-namespace League\Tactician\CommandBus\Tests\Fixtures\Handler;
+namespace League\Tactician\Tests\Fixtures\Handler;
 
 /**
  * Sample handler that has all commands specified as individual methods, rather

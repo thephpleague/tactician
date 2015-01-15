@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "League\\Tactician\\CommandBus\\": "src"
+            "League\\Tactician\\": "src"
         }
     }
 }

@@ -1,7 +1,7 @@
 <?php
-namespace League\Tactician\CommandBus\Handler\MethodNameInflector;
+namespace League\Tactician\Handler\MethodNameInflector;
 
-use League\Tactician\CommandBus\Command;
+use League\Tactician\Command;
 
 /**
  * Handle command by calling the __invoke magic method. Handy for single

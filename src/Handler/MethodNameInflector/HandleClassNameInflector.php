@@ -1,7 +1,7 @@
 <?php
-namespace League\Tactician\CommandBus\Handler\MethodNameInflector;
+namespace League\Tactician\Handler\MethodNameInflector;
 
-use League\Tactician\CommandBus\Command;
+use League\Tactician\Command;
 
 /**
  * Assumes the method is handle + the last portion of the class name.

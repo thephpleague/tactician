@@ -1,8 +1,8 @@
 <?php
 
-namespace League\Tactician\CommandBus\Tests\Fixtures\Command;
+namespace League\Tactician\Tests\Fixtures\Command;
 
-use League\Tactician\CommandBus\Command;
+use League\Tactician\Command;
 
 class CompleteTaskCommand implements Command
 {

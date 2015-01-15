@@ -2,8 +2,8 @@
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/repeated-sample-code.php';
 
-use League\Tactician\CommandBus\CommandBus;
-use League\Tactician\CommandBus\Command;
+use League\Tactician\CommandBus;
+use League\Tactician\Command;
 
 /**
  * Let's say we want something happen every time we execute a command.

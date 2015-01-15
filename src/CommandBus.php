@@ -1,6 +1,6 @@
 <?php
 
-namespace League\Tactician\CommandBus;
+namespace League\Tactician;
 
 /**
  * Receives a command and modifies or dispatches it to a handler in some way
