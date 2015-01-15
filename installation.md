@@ -6,9 +6,7 @@ title: Installation
 
 # Installation
 
-Tactician is available on Packagist.
-
-**_Note: Currently, Tactician is pre-alpha state**
+Tactician is available on Packagist. **_Please note: Tactician is currently in beta._**
 
 To install, just run:
 
