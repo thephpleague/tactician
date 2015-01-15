@@ -33,7 +33,7 @@ class PurchaseProductCommand implements Command
 
     protected $userId;
     
-    // ...and constructor...
+    // ...and constructor to assign those properties...
 }
 
 // And a Handler class that expects it:
