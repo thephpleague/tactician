@@ -70,9 +70,3 @@ class LockingMiddlewareTest extends \PHPUnit_Framework_TestCase
         );
     }
 }
-
-class MockClosure {
-    public function __invoke()
-    {
-    }
-}
