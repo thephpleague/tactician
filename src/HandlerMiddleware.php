@@ -9,7 +9,7 @@ use League\Tactician\Handler\Locator\HandlerLocator;
 /**
  * The "core" CommandBus. Locates the appropriate handler and executes command.
  */
-class HandlerCommandBus implements CommandBus
+class HandlerMiddleware implements Middleware
 {
     /**
      * @var HandlerLocator
@@ -36,9 +36,10 @@ class HandlerCommandBus implements CommandBus
      *
      * @throws CanNotInvokeHandlerException
      * @param Command $command
+     * @param callable $next
      * @return mixed
      */
-    public function execute(Command $command)
+    public function execute(Command $command, callable $next)
     {
         $handler = $this->handlerLocator->getHandlerForCommand($command);
         $methodName = $this->methodNameInflector->inflect($command, $handler);

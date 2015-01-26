@@ -37,10 +37,10 @@ $fakeContainer
     ->andReturn(new RegisterUserHandler());
 
 // Now, we create our command bus using our container based loader instead
-use League\Tactician\HandlerCommandBus;
+use League\Tactician\HandlerMiddleware;
 use League\Tactician\Handler\MethodNameInflector\HandleClassNameInflector;
 
-$commandBus = new HandlerCommandBus(
+$commandBus = new HandlerMiddleware(
     new ContainerBasedHandlerLocator($fakeContainer),
     new HandleClassNameInflector()
 );

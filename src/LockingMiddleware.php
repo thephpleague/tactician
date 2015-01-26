@@ -6,40 +6,28 @@ namespace League\Tactician;
  * If another command is already being executed, locks the command bus and
  * queues the new incoming commands until the first has completed.
  */
-class LockingCommandBus implements CommandBus
+class LockingMiddleware implements Middleware
 {
-    /**
-     * @var CommandBus
-     */
-    private $innerCommandBus;
-
     /**
      * @var bool
      */
     private $isExecuting;
 
     /**
-     * @var object[]
+     * @var callable[]
      */
     private $queue = [];
-
-    /**
-     * @param CommandBus $innerCommandBus
-     */
-    public function __construct(CommandBus $innerCommandBus)
-    {
-        $this->innerCommandBus = $innerCommandBus;
-    }
 
     /**
      * Queues incoming commands until the first has completed
      *
      * @param Command $command
+     * @param callable $next
      * @return mixed
      */
-    public function execute(Command $command)
+    public function execute(Command $command, callable $next)
     {
-        $this->queue[] = $command;
+        $this->queue[] = $next;
         if ($this->isExecuting) {
             return;
         }
@@ -47,8 +35,8 @@ class LockingCommandBus implements CommandBus
         $this->isExecuting = true;
 
         $returnValues = [];
-        while ($command = array_shift($this->queue)) {
-            $returnValues[] = $this->innerCommandBus->execute($command);
+        while ($pendingNext = array_shift($this->queue)) {
+            $returnValues[] = $pendingNext();
         }
 
         $this->isExecuting = false;
