@@ -11,36 +11,26 @@ use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 class LockingMiddlewareTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var CommandBus|Mockery\MockInterface
-     */
-    private $nextClosure;
-
-    /**
-     * @var LockingMiddleware|Mockery\MockInterface
+     * @var LockingMiddleware
      */
     private $lockingMiddleware;
 
     public function setup()
     {
-        $this->nextClosure = Mockery::mock(MockClosure::class);
-
-        $this->lockingMiddleware = new LockingMiddleware(
-            $this->nextClosure
-        );
+        $this->lockingMiddleware = new LockingMiddleware();
     }
 
     public function testInnerCommandBusReceivesCommand()
     {
         $command = new AddTaskCommand();
 
-        $this->nextClosure
-            ->shouldReceive('__invoke')
-            ->andReturn('foobar')
-            ->once();
+        $nextClosure = function () {
+            return 'foobar';
+        };
 
         $this->assertEquals(
             'foobar',
-            $this->lockingMiddleware->execute($command, $this->nextClosure)
+            $this->lockingMiddleware->execute($command, $nextClosure)
         );
     }
 
