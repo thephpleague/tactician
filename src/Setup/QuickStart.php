@@ -36,6 +36,6 @@ class QuickStart
 
         $lockingMiddleware = new LockingMiddleware();
 
-        return new CommandBus([$handlerMiddleware, $lockingMiddleware]);
+        return new CommandBus([$lockingMiddleware, $handlerMiddleware]);
     }
 }
