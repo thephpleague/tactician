@@ -55,10 +55,7 @@ class CommandBusTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     * @expectedException \League\Tactician\Exception\CommandWasNotHandledException
-     */
-    public function testNoMiddlewareRaisesUnhandledException()
+    public function testNoMiddlewarePerformsASafeNoop()
     {
         (new CommandBus([]))->execute(new AddTaskCommand());
     }

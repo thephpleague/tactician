@@ -42,7 +42,7 @@ class CommandBus
     protected function createExecutionChain($middlewareList, Command $command)
     {
         $lastCallable = function () use ($command) {
-            throw CommandWasNotHandledException::create($command);
+            // the final callable is a no-op
         };
 
         while ($middleware = array_pop($middlewareList)) {
