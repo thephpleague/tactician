@@ -10,16 +10,16 @@ use League\Tactician\Exception\CommandWasNotHandledException;
 class CommandBus
 {
     /**
-     * @var Middleware[]
+     * @var Closure
      */
-    private $middleware;
+    private $middlewareChain;
 
     /**
      * @param Middleware[] $middleware
      */
     public function __construct(array $middleware)
     {
-        $this->middleware = $middleware;
+        $this->middlewareChain = $this->createExecutionChain($middleware);
     }
 
     /**
@@ -30,23 +30,22 @@ class CommandBus
      */
     public function execute(Command $command)
     {
-        $chain = $this->createExecutionChain($this->middleware, $command);
-        return $chain();
+        $middlewareChain = $this->middlewareChain;
+        return $middlewareChain($command);
     }
 
     /**
-     * @param $middlewareList
-     * @param Command $command
+     * @param Middleware[] $middlewareList
      * @return \Closure
      */
-    protected function createExecutionChain($middlewareList, Command $command)
+    protected function createExecutionChain($middlewareList)
     {
-        $lastCallable = function () use ($command) {
+        $lastCallable = function (Command $command) {
             // the final callable is a no-op
         };
 
         while ($middleware = array_pop($middlewareList)) {
-            $lastCallable = function () use ($middleware, $command, $lastCallable) {
+            $lastCallable = function (Command $command) use ($middleware, $lastCallable) {
                 return $middleware->execute($command, $lastCallable);
             };
         }

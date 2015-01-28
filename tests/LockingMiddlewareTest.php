@@ -2,6 +2,7 @@
 
 namespace League\Tactician\Tests;
 
+use League\Tactician\Command;
 use Mockery;
 use League\Tactician\CommandBus;
 use League\Tactician\LockingMiddleware;
@@ -24,7 +25,8 @@ class LockingMiddlewareTest extends \PHPUnit_Framework_TestCase
     {
         $command = new AddTaskCommand();
 
-        $nextClosure = function () {
+        $nextClosure = function ($command) {
+            $this->assertInstanceOf(Command::class, $command);
             return 'foobar';
         };
 
@@ -36,19 +38,19 @@ class LockingMiddlewareTest extends \PHPUnit_Framework_TestCase
 
     public function testCommandsAreQueuedIfAnotherCommandIsBeingExecuted()
     {
-        $firstCommand = new AddTaskCommand();
-        $secondCommand = new CompleteTaskCommand();
         $secondCommandDispatched = false;
 
-        $next2 = function () use (&$secondCommandDispatched) {
+        $next2 = function ($command) use (&$secondCommandDispatched) {
             if (!$secondCommandDispatched) {
                 throw new \Exception('Second command was executed before the first completed!');
             }
             return 'second-payload';
         };
 
-        $next1 = function () use ($secondCommand, &$secondCommandDispatched, $next2) {
-            $this->lockingMiddleware->execute($secondCommand, $next2);
+        $next1 = function ($command) use (&$secondCommandDispatched, $next2) {
+            // Technically, we'd pass the command back into the command bus, not the middleware
+            // again but this it would result in the same thing with an extra test dependency.
+            $this->lockingMiddleware->execute(new CompleteTaskCommand(), $next2);
             $secondCommandDispatched = true;
             return 'first-payload';
         };
@@ -56,7 +58,7 @@ class LockingMiddlewareTest extends \PHPUnit_Framework_TestCase
         // Only the return value of the first command should be returned
         $this->assertEquals(
             'first-payload',
-            $this->lockingMiddleware->execute($firstCommand, $next1)
+            $this->lockingMiddleware->execute(new AddTaskCommand(), $next1)
         );
     }
 }

@@ -36,7 +36,7 @@ class LockingMiddleware implements Middleware
 
         $returnValues = [];
         while ($pendingNext = array_shift($this->queue)) {
-            $returnValues[] = $pendingNext();
+            $returnValues[] = $pendingNext($command);
         }
 
         $this->isExecuting = false;
