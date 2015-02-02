@@ -1,8 +1,8 @@
 <?php
 
-namespace League\Tactician\Tests;
+namespace League\Tactician\Tests\Handler;
 
-use League\Tactician\HandlerMiddleware;
+use League\Tactician\Handler\HandlerMiddleware;
 use League\Tactician\Handler\MethodNameInflector\MethodNameInflector;
 use League\Tactician\Handler\Locator\HandlerLocator;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;

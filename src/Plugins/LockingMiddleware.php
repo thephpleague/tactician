@@ -1,6 +1,9 @@
 <?php
 
-namespace League\Tactician;
+namespace League\Tactician\Plugins;
+
+use League\Tactician\Command;
+use League\Tactician\Middleware;
 
 /**
  * If another command is already being executed, locks the command bus and

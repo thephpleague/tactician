@@ -4,8 +4,8 @@ namespace League\Tactician\Setup;
 use League\Tactician\CommandBus;
 use League\Tactician\Handler\Locator\InMemoryLocator;
 use League\Tactician\Handler\MethodNameInflector\HandleInflector;
-use League\Tactician\HandlerMiddleware;
-use League\Tactician\LockingMiddleware;
+use League\Tactician\Handler\HandlerMiddleware;
+use League\Tactician\Plugins\LockingMiddleware;
 
 /**
  * Builds a working command bus with minimum fuss.

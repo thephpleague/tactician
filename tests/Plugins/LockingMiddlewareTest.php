@@ -1,11 +1,10 @@
 <?php
 
-namespace League\Tactician\Tests;
+namespace League\Tactician\Tests\Plugins;
 
 use League\Tactician\Command;
 use Mockery;
-use League\Tactician\CommandBus;
-use League\Tactician\LockingMiddleware;
+use League\Tactician\Plugins\LockingMiddleware;
 use League\Tactician\Tests\Fixtures\Command\AddTaskCommand;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 

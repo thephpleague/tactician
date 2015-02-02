@@ -1,7 +1,9 @@
 <?php
 
-namespace League\Tactician;
+namespace League\Tactician\Handler;
 
+use League\Tactician\Middleware;
+use League\Tactician\Command;
 use League\Tactician\Exception\CanNotInvokeHandlerException;
 use League\Tactician\Handler\MethodNameInflector\MethodNameInflector;
 use League\Tactician\Handler\Locator\HandlerLocator;
