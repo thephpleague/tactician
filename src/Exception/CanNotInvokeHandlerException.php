@@ -10,8 +10,13 @@ use League\Tactician\Command;
  * The most common reason is the receiving method is missing or incorrectly
  * named.
  */
-class CanNotInvokeHandlerException extends \Exception
+class CanNotInvokeHandlerException extends \BadMethodCallException implements Exception
 {
+    /**
+     * @var Command
+     */
+    private $command;
+
     /**
      * @param Command $command
      * @param string $reason
@@ -19,9 +24,22 @@ class CanNotInvokeHandlerException extends \Exception
      */
     public static function forCommand(Command $command, $reason)
     {
-        return new static(
-            "Could not invoke handler for command " . get_class($command) .
-            " for reason: ". $reason
+        $exception = new static(
+            'Could not invoke handler for command ' . get_class($command) .
+            'for reason: ' . $reason
         );
+        $exception->command = $command;
+
+        return $exception;
+    }
+
+    /**
+     * Returns the command that could not be invoked
+     *
+     * @return Command
+     */
+    public function getCommand()
+    {
+        return $this->command;
     }
 }
