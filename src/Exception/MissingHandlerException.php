@@ -20,7 +20,7 @@ class MissingHandlerException extends \OutOfBoundsException implements Exception
      */
     public static function forCommand(Command $command)
     {
-        $exception = new static("Missing handler for command: " . get_class($command));
+        $exception = new static('Missing handler for command: ' . get_class($command));
         $exception->command = $command;
 
         return $exception;
