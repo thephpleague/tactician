@@ -1,13 +1,13 @@
 language: php
 
 php:
-  - 5.5
-  - 5.6
-  - hhvm
+    - 5.5
+    - 5.6
+    - hhvm
 
 before_script:
-  - travis_retry composer install --no-interaction
+    - travis_retry composer install --no-interaction
 
 script:
-  - vendor/bin/phpunit
-  - vendor/bin/phpcs --standard=PSR2 src tests
+    - vendor/bin/phpunit
+    - vendor/bin/phpcs --standard=PSR2 src tests
