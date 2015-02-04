@@ -2,7 +2,6 @@
 
 namespace League\Tactician;
 
-use League\Tactician\Exception\CommandWasNotHandledException;
 use Closure;
 
 /**
