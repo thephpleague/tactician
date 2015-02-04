@@ -53,7 +53,7 @@ $commandBus->execute($command);
 
 That's it. Tactician is the `$commandBus` part, doing all the plumbing of finding the handler and calling the right method. You know, the boring stuff.
  
-One of the cool things about Tactician (and command buses in general) is that they're really easy to extend by putting decorators on the command bus itself.
+One of the cool things about Tactician (and command buses in general) is that they're really easy to extend with new features by adding [middleware](/middleware).
 Tactician aims to provide plugin packages that cover common tasks, like logging and database transactions. That way you don't have to put it in every handler and it immediately applies to your entire application.
 
 ## When should I use it?

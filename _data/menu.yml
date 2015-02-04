@@ -2,5 +2,7 @@ Getting Started:
     Introduction: '/'
     Installation: '/installation/'
     Tweaking Tactician: '/tweaking-tactician/'
+    Middleware: '/middleware'
 Plugins:
-    LockingCommandBus: '/plugins/locking-command-bus/'
+    LockingMiddleware: '/plugins/locking-middleware/'
+#    Doctrine ORM: '/plugins/doctrine-orm/'

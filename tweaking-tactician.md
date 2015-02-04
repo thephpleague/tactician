@@ -38,9 +38,22 @@ Configuring the Locator will vary depending on which Locator you use. Some will 
 Custom Locators only need to implement the [HandlerLocator interface](https://github.com/thephpleague/tactician/blob/master/src/Handler/Locator/HandlerLocator.php). This is just a single method that receives the Command and returns the Handler.
 
 ## 3. Creating the Command Bus
-Now that you've chosen a Locator and MethodNameInflector, you need to pass them to the Command Bus for execution. In Tactician, there's one "core" command bus that always loads and executes the Handlers: the [HandlerCommandBus](https://github.com/thephpleague/tactician/blob/master/src/HandlerCommandBus.php).
+Now that you've chosen a Locator and MethodNameInflector, you need to pass them to the Command Bus for execution. In Tactician, there's one "core" command bus that you should always use: the StandardCommandBus.
 
-Pass the Locator and MethodNameInflector to that, and you've got a Command Bus to use in your app.
+On its own, the StandardCommandBus doesn't do much. It accepts a list of Middleware and passes the Command through each of them. Really, the StandardCommandBus is just a place to hang all of the Middleware plugins together in a consistent way.
+
+~~~ php
+use League\Tactician\StandardCommandBus;
+
+// This command bus receives an empty list of middleware and does nothing.
+$commandBus = new StandardCommandBus([]);
+~~~
+
+To actually process the commands, we need to add Middleware.
+
+The most important piece of Middleware is the [HandlerMiddleware](https://github.com/thephpleague/tactician/blob/master/src/Handler/HandlerMiddleware.php). This class uses the Handler and MethodNameInflector we created above to find the right Handler and execute it.
+
+Pass that configured Middleware to your StandardCommandBus and you're ready to rock.
 
 ~~~ php
 // Choose our method name
@@ -50,27 +63,35 @@ $inflector = new HandleClassNameInflector();
 $locator = new InMemoryLocator();
 $locator->addHandler(new RentMovieHandler(), RentMovieCommand::class);
 
-// Create the command bus
-$commandBus = new HandlerCommandBus($locator, $inflector);
+// Create the middleware that executes commands with Handlers
+$handlerMiddleware = new HandlerMiddleware($locator, $inflector);
+
+// Create the command bus, with a list of middleware
+$commandBus = new StandardCommandBus([$handlerMiddleware]);
 ~~~
 
-## 4. Decorators
-Now that you've got the core Command Bus working, you can customize it further by adding decorators that change the behavior when it's called.
+## 4. Other Middleware
+Now that you've got the core Command Bus functionality up and running, you can customize it further by adding other middleware that change the behavior.
 
 For example, we recommend using the LockingCommandBus, since that will prevent one command from being executed while another is already running.
 
 Building on our previous example:
 
 ~~~ php
-// We wrap our command bus in a new one that adds this locking behavior.
-$commandBus = new LockingCommandBus($commandBus); 
+
+$commandBus = new StandardCommandBus(
+    [
+        new LockingMiddleware(),
+        new HandlerMiddleware($locator, $inflector)
+    ]
+);
 ~~~
 
-You can create your own custom decorators by implementing the [CommandBus interface](https://github.com/thephpleague/tactician/blob/master/src/CommandBus.php).
+You can create your own custom Middleware by implementing the [Middleware interface](https://github.com/thephpleague/tactician/blob/master/src/Middleware.php).
 
 Tactician aims to ship with lots of useful decorators, you can find a complete list in the menu.
 
 ### And more
 If you've read this far down but you're still curious, take a look at the [examples directory on Github](https://github.com/thephpleague/tactician/tree/master/examples).
 
-Also, if you've implemented something custom on this page, from Inflectors to Decorators, please send us a pull request so we can share it with other Tactician users. We'd really appreciate it.
+Also, if you've implemented something custom for Tactician, from Inflectors to Middleware, please send us a pull request so we can share it with other Tactician users. We'd really appreciate it.
