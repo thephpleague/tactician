@@ -7,7 +7,7 @@ use Closure;
 /**
  * Receives a command and modifies or dispatches it to a handler in some way
  */
-class StandardCommandBus implements CommandBus
+class StandardCommandBus
 {
     /**
      * @var Closure

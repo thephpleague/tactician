@@ -1,7 +1,6 @@
 <?php
 namespace League\Tactician\Setup;
 
-use League\Tactician\CommandBus;
 use League\Tactician\StandardCommandBus;
 use League\Tactician\Handler\Locator\InMemoryLocator;
 use League\Tactician\Handler\MethodNameInflector\HandleInflector;
@@ -26,7 +25,7 @@ class QuickStart
      * Creates a default CommandBus that you can get started with.
      *
      * @param array $commandToHandlerMap
-     * @return CommandBus
+     * @return StandardCommandBus
      */
     public static function create($commandToHandlerMap)
     {

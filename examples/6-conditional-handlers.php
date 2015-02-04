@@ -13,7 +13,6 @@ require __DIR__ . '/repeated-sample-code.php';
  */
 
 use League\Tactician\Command;
-use League\Tactician\CommandBus;
 use League\Tactician\StandardCommandBus;
 use League\Tactician\Middleware;
 
@@ -28,7 +27,7 @@ final class ExternalCommandMiddleware implements Middleware
 {
     private $commandBus;
 
-    public function __construct(CommandBus $commandBus)
+    public function __construct(StandardCommandBus $commandBus)
     {
         $this->commandBus = $commandBus;
     }
