@@ -1,4 +1,5 @@
 <?php
+
 namespace League\Tactician\Tests\Handler\MethodNameInflector;
 
 use League\Tactician\Handler\MethodNameInflector\InvokeInflector;
