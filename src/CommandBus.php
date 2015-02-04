@@ -5,9 +5,9 @@ namespace League\Tactician;
 use Closure;
 
 /**
- * Receives a command and modifies or dispatches it to a handler in some way
+ * Receives a command and sends it through a chain of middleware for processing.
  */
-class StandardCommandBus
+/* final */class CommandBus
 {
     /**
      * @var Closure
@@ -38,7 +38,7 @@ class StandardCommandBus
      * @param Middleware[] $middlewareList
      * @return Closure
      */
-    protected function createExecutionChain($middlewareList)
+    private function createExecutionChain($middlewareList)
     {
         $lastCallable = function (Command $command) {
             // the final callable is a no-op

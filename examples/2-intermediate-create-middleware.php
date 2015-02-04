@@ -3,7 +3,7 @@ require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/repeated-sample-code.php';
 
 use League\Tactician\Middleware;
-use League\Tactician\StandardCommandBus;
+use League\Tactician\CommandBus;
 use League\Tactician\Command;
 
 /**
@@ -61,7 +61,7 @@ class LoggingMiddleware implements Middleware
 // Now that we have a working Middleware object, we give it to our CommandBus
 // as a list of middleware. We'll also pass in the HandlerMiddleware we demoed
 // in the previous example, otherwise our commands won't be executed!
-$commandBus = new StandardCommandBus(
+$commandBus = new CommandBus(
     [
         new LoggingMiddleware(new Logger()),
         $handlerMiddleware

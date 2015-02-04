@@ -1,12 +1,12 @@
 <?php
 namespace League\Tactician\Tests;
 
-use League\Tactician\StandardCommandBus;
+use League\Tactician\CommandBus;
 use League\Tactician\Middleware;
 use League\Tactician\Tests\Fixtures\Command\AddTaskCommand;
 use Mockery;
 
-class StandardCommandBusTest extends \PHPUnit_Framework_TestCase
+class CommandBusTest extends \PHPUnit_Framework_TestCase
 {
     public function testAllMiddlewareAreExecutedAndReturnValuesAreRespected()
     {
@@ -36,7 +36,7 @@ class StandardCommandBusTest extends \PHPUnit_Framework_TestCase
             }
         );
 
-        $commandBus = new StandardCommandBus([$middleware1, $middleware2, $middleware3]);
+        $commandBus = new CommandBus([$middleware1, $middleware2, $middleware3]);
 
         $this->assertEquals('foobar', $commandBus->execute(new AddTaskCommand()));
         $this->assertEquals([1, 2, 3], $executionOrder);
@@ -47,7 +47,7 @@ class StandardCommandBusTest extends \PHPUnit_Framework_TestCase
         $middleware = Mockery::mock(Middleware::class);
         $middleware->shouldReceive('execute')->once()->andReturn('foobar');
 
-        $commandBus = new StandardCommandBus([$middleware]);
+        $commandBus = new CommandBus([$middleware]);
 
         $this->assertEquals(
             'foobar',
@@ -57,6 +57,6 @@ class StandardCommandBusTest extends \PHPUnit_Framework_TestCase
 
     public function testNoMiddlewarePerformsASafeNoop()
     {
-        (new StandardCommandBus([]))->execute(new AddTaskCommand());
+        (new CommandBus([]))->execute(new AddTaskCommand());
     }
 }

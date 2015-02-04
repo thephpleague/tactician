@@ -13,7 +13,7 @@ require __DIR__ . '/repeated-sample-code.php';
  */
 
 use League\Tactician\Command;
-use League\Tactician\StandardCommandBus;
+use League\Tactician\CommandBus;
 use League\Tactician\Middleware;
 
 // External command
@@ -27,7 +27,7 @@ final class ExternalCommandMiddleware implements Middleware
 {
     private $commandBus;
 
-    public function __construct(StandardCommandBus $commandBus)
+    public function __construct(CommandBus $commandBus)
     {
         $this->commandBus = $commandBus;
     }
@@ -55,13 +55,13 @@ class MyExternalCommand implements ExternalCommand
 {
 }
 
-// Now  let's instantiate our ExternalCommandHandler, StandardCommandBus and ExternalCommandMiddleware
+// Now  let's instantiate our ExternalCommandHandler, CommandBus and ExternalCommandMiddleware
 $externalCommandHandler = new ExternalCommandHandler();
-$externalCommandBus = new StandardCommandBus([$externalCommandHandler]);
+$externalCommandBus = new CommandBus([$externalCommandHandler]);
 $externalMiddleware = new ExternalCommandMiddleware($externalCommandBus);
 
 // Time to create our main CommandBus
-$commandBus = new StandardCommandBus([$externalMiddleware, $handlerMiddleware]);
+$commandBus = new CommandBus([$externalMiddleware, $handlerMiddleware]);
 
 // Controller Code time!
 $externalCommand = new MyExternalCommand();

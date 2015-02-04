@@ -14,7 +14,7 @@ require __DIR__ . '/repeated-sample-code.php';
  */
 
 use League\Tactician\Command;
-use League\Tactician\StandardCommandBus;
+use League\Tactician\CommandBus;
 use League\Tactician\Handler\HandlerMiddleware;
 use League\Tactician\Handler\MethodNameInflector\MethodNameInflector;
 
@@ -42,7 +42,7 @@ class NewRegisterUserHandler
 $locator->addHandler(new NewRegisterUserHandler(), RegisterUserCommand::class);
 $handlerMiddleware = new HandlerMiddleware($locator, new MyCustomInflector());
 
-$commandBus = new StandardCommandBus([$handlerMiddleware]);
+$commandBus = new CommandBus([$handlerMiddleware]);
 
 // Controller Code time!
 $command = new RegisterUserCommand();
