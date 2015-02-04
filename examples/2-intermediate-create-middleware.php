@@ -49,7 +49,7 @@ class LoggingMiddleware implements Middleware
     }
 }
 // Some things to note:
-//     - we can execute logic before _or_ after a Command is executed by hyst
+//     - we can execute logic before _or_ after a Command is executed by
 //       changing where we call $next($command).
 //     - Tactician allows a Handler to return a value if we want, so we capture
 //       it here to return after we finish logging. This isn't required, but it
