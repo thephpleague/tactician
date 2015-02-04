@@ -25,7 +25,9 @@ class RegisterUserHandler
 $locator = new InMemoryLocator();
 $locator->addHandler(new RegisterUserHandler(), RegisterUserCommand::class);
 
-$commandBus = new League\Tactician\HandlerMiddleware(
+$handlerMiddleware = new League\Tactician\Handler\HandlerMiddleware(
     $locator,
     new HandleClassNameInflector()
 );
+
+$commandBus = new \League\Tactician\StandardCommandBus([$handlerMiddleware]);

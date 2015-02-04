@@ -9,8 +9,11 @@ require __DIR__ . '/repeated-sample-code.php';
  *
  * We can create a custom HandlerLocator for that.
  */
-use League\Tactician\Handler\Locator\HandlerLocator;
 use League\Tactician\Command;
+use League\Tactician\StandardCommandBus;
+use League\Tactician\Handler\HandlerMiddleware;
+use League\Tactician\Handler\Locator\HandlerLocator;
+use League\Tactician\Handler\MethodNameInflector\HandleClassNameInflector;
 
 class ContainerBasedHandlerLocator implements HandlerLocator
 {
@@ -37,13 +40,11 @@ $fakeContainer
     ->andReturn(new RegisterUserHandler());
 
 // Now, we create our command bus using our container based loader instead
-use League\Tactician\HandlerMiddleware;
-use League\Tactician\Handler\MethodNameInflector\HandleClassNameInflector;
-
-$commandBus = new HandlerMiddleware(
+$handlerMiddleware = new HandlerMiddleware(
     new ContainerBasedHandlerLocator($fakeContainer),
     new HandleClassNameInflector()
 );
+$commandBus = new StandardCommandBus([$handlerMiddleware]);
 
 // Controller Code: even though we've changed out the whole loading system we
 // will still see that user was registered.

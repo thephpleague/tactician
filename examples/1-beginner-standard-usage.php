@@ -25,10 +25,14 @@ class RegisterUserHandler
 $locator = new InMemoryLocator();
 $locator->addHandler(new RegisterUserHandler(), RegisterUserCommand::class);
 
-$commandBus = new League\Tactician\HandlerMiddleware(
+// Middleware is Tactician's plugin system. Even finding the handler and
+// executing it is a plugin that we're configuring here.
+$handlerMiddleware = new League\Tactician\Handler\HandlerMiddleware(
     $locator,
     new HandleClassNameInflector()
 );
+
+$commandBus = new \League\Tactician\StandardCommandBus([$handlerMiddleware]);
 
 // Controller Code ////////////////////////////////////////////////////////////
 $command = new RegisterUserCommand();

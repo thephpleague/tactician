@@ -2,6 +2,8 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 use League\Tactician\Command;
+use League\Tactician\Middleware;
+use League\Tactician\StandardCommandBus;
 
 /**
  * If you're working with a very constrained domain where there's not so many
@@ -10,7 +12,8 @@ use League\Tactician\Command;
  *
  * Here's a Tactician version of the wikipedia Light Switch example.
  */
-interface SelfExecutingCommand extends Command {
+interface SelfExecutingCommand extends Command
+{
     public function execute(Light $light);
 }
 
@@ -18,7 +21,8 @@ class Light
 {
     public $switchedOn = false;
 
-    public function __toString() {
+    public function __toString()
+    {
         $status = $this->switchedOn ? 'on' : 'off';
         return "Light is {$status}\n";
     }
@@ -40,8 +44,7 @@ class SwitchOn implements SelfExecutingCommand
     }
 }
 
-use League\Tactician\CommandBus;
-class SelfExecutingCommandBus implements CommandBus
+class SelfExecutionMiddleware implements Middleware
 {
     protected $light;
 
@@ -50,7 +53,7 @@ class SelfExecutingCommandBus implements CommandBus
         $this->light = $light;
     }
 
-    public function execute(Command $command)
+    public function execute(Command $command, callable $next)
     {
         if (!$command instanceof SelfExecutingCommand) {
             throw new InvalidArgumentException("Can not execute command");
@@ -60,8 +63,17 @@ class SelfExecutingCommandBus implements CommandBus
     }
 }
 
+// Why doesn't the SelfExecutionMiddleware call $next anywhere? Well, it could
+// but it's convention to not call $next any further once the command has been
+// executed, which stops the chain from going further. Otherwise, you might
+//have the same command get handled twice.
+
 $light = new Light();
-$commandBus = new SelfExecutingCommandBus($light);
+$commandBus = new StandardCommandBus(
+    [
+        new SelfExecutionMiddleware($light)
+    ]
+);
 echo $light;
 
 $commandBus->execute(new SwitchOn());
@@ -74,11 +86,12 @@ echo $light;
  * So, this highly contrived example might smack of the famous SimplePHPEasyPlus
  * but it can still be useful in larger apps or libraries.
  *
- * You might also notice that we've used nothing of Tactician here except an
- * interface: without Handlers, we don't need a MethodNameInflector or a
- * HandlerLocator at all.
+ * You might also notice that we've touched very little of Tactician: only the
+ * StandardCommandBus and two interfaces. Yet, we were able to completely
+ * change the way it dispatched commands.
  *
- * But using only the interface is still really helpful: decorators and plugins
- * designed to work with Tactician can still be dropped onto our custom command
- * without any changes at all.
+ * We could even go a step further and only implement the CommandBus interface
+ * with this SelfExecution logic. But implementing this as a middleware is
+ * still really helpful: most plugins for Tactician are written as middleware
+ * and this way, they can still be dropped in and used without any changes.
  */

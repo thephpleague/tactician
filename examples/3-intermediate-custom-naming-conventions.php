@@ -14,6 +14,8 @@ require __DIR__ . '/repeated-sample-code.php';
  */
 
 use League\Tactician\Command;
+use League\Tactician\StandardCommandBus;
+use League\Tactician\Handler\HandlerMiddleware;
 use League\Tactician\Handler\MethodNameInflector\MethodNameInflector;
 
 class MyCustomInflector implements MethodNameInflector
@@ -35,11 +37,12 @@ class NewRegisterUserHandler
     }
 }
 
-// Now  let's create our command bus again, but this time using our custom
-// method naming strategy
-use League\Tactician\HandlerMiddleware;
+// Now  let's recreate our HandlerMiddleware again but with the naming scheme
+// we prefer to use!
 $locator->addHandler(new NewRegisterUserHandler(), RegisterUserCommand::class);
-$commandBus = new HandlerMiddleware($locator, new MyCustomInflector());
+$handlerMiddleware = new HandlerMiddleware($locator, new MyCustomInflector());
+
+$commandBus = new StandardCommandBus([$handlerMiddleware]);
 
 // Controller Code time!
 $command = new RegisterUserCommand();
