@@ -37,9 +37,9 @@ class NewRegisterUserHandler
 
 // Now  let's create our command bus again, but this time using our custom
 // method naming strategy
-use League\Tactician\HandlerCommandBus;
+use League\Tactician\HandlerMiddleware;
 $locator->addHandler(new NewRegisterUserHandler(), RegisterUserCommand::class);
-$commandBus = new HandlerCommandBus($locator, new MyCustomInflector());
+$commandBus = new HandlerMiddleware($locator, new MyCustomInflector());
 
 // Controller Code time!
 $command = new RegisterUserCommand();

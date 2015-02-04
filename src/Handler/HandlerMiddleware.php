@@ -1,7 +1,9 @@
 <?php
 
-namespace League\Tactician;
+namespace League\Tactician\Handler;
 
+use League\Tactician\Middleware;
+use League\Tactician\Command;
 use League\Tactician\Exception\CanNotInvokeHandlerException;
 use League\Tactician\Handler\MethodNameInflector\MethodNameInflector;
 use League\Tactician\Handler\Locator\HandlerLocator;
@@ -9,7 +11,7 @@ use League\Tactician\Handler\Locator\HandlerLocator;
 /**
  * The "core" CommandBus. Locates the appropriate handler and executes command.
  */
-class HandlerCommandBus implements CommandBus
+class HandlerMiddleware implements Middleware
 {
     /**
      * @var HandlerLocator
@@ -36,9 +38,10 @@ class HandlerCommandBus implements CommandBus
      *
      * @throws CanNotInvokeHandlerException
      * @param Command $command
+     * @param callable $next
      * @return mixed
      */
-    public function execute(Command $command)
+    public function execute(Command $command, callable $next)
     {
         $handler = $this->handlerLocator->getHandlerForCommand($command);
         $methodName = $this->methodNameInflector->inflect($command, $handler);

@@ -2,10 +2,11 @@
 namespace League\Tactician\Setup;
 
 use League\Tactician\CommandBus;
+use League\Tactician\StandardCommandBus;
 use League\Tactician\Handler\Locator\InMemoryLocator;
 use League\Tactician\Handler\MethodNameInflector\HandleInflector;
-use League\Tactician\HandlerCommandBus;
-use League\Tactician\LockingCommandBus;
+use League\Tactician\Handler\HandlerMiddleware;
+use League\Tactician\Plugins\LockingMiddleware;
 
 /**
  * Builds a working command bus with minimum fuss.
@@ -29,11 +30,13 @@ class QuickStart
      */
     public static function create($commandToHandlerMap)
     {
-        $handlerCommandBus = new HandlerCommandBus(
+        $handlerMiddleware = new HandlerMiddleware(
             new InMemoryLocator($commandToHandlerMap),
             new HandleInflector()
         );
 
-        return new LockingCommandBus($handlerCommandBus);
+        $lockingMiddleware = new LockingMiddleware();
+
+        return new StandardCommandBus([$lockingMiddleware, $handlerMiddleware]);
     }
 }
