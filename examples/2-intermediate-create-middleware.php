@@ -59,7 +59,7 @@ class LoggingMiddleware implements Middleware
 //       incoming commands, you're free to do so. Just think carefully!
 
 // Now that we have a working Middleware object, we give it to our CommandBus
-// as a list of middleware. We'll also pass in the HandlerMiddleware we demoed
+// as a list of middleware. We'll also pass in the CommandHandlerMiddleware we demoed
 // in the previous example, otherwise our commands won't be executed!
 $commandBus = new StandardCommandBus(
     [

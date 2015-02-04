@@ -11,7 +11,7 @@ use League\Tactician\Handler\Locator\HandlerLocator;
 /**
  * The "core" CommandBus. Locates the appropriate handler and executes command.
  */
-class HandlerMiddleware implements Middleware
+class CommandHandlerMiddleware implements Middleware
 {
     /**
      * @var HandlerLocator

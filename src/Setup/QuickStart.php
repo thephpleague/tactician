@@ -5,7 +5,7 @@ use League\Tactician\CommandBus;
 use League\Tactician\StandardCommandBus;
 use League\Tactician\Handler\Locator\InMemoryLocator;
 use League\Tactician\Handler\MethodNameInflector\HandleInflector;
-use League\Tactician\Handler\HandlerMiddleware;
+use League\Tactician\Handler\CommandHandlerMiddleware;
 use League\Tactician\Plugins\LockingMiddleware;
 
 /**
@@ -30,7 +30,7 @@ class QuickStart
      */
     public static function create($commandToHandlerMap)
     {
-        $handlerMiddleware = new HandlerMiddleware(
+        $handlerMiddleware = new CommandHandlerMiddleware(
             new InMemoryLocator($commandToHandlerMap),
             new HandleInflector()
         );
