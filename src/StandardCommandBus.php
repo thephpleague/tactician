@@ -3,6 +3,7 @@
 namespace League\Tactician;
 
 use League\Tactician\Exception\CommandWasNotHandledException;
+use Closure;
 
 /**
  * Receives a command and modifies or dispatches it to a handler in some way
@@ -36,7 +37,7 @@ class StandardCommandBus implements CommandBus
 
     /**
      * @param Middleware[] $middlewareList
-     * @return \Closure
+     * @return Closure
      */
     protected function createExecutionChain($middlewareList)
     {
