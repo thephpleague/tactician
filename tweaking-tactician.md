@@ -5,7 +5,7 @@ title: Tweaking Tactician
 ---
 
 # Tweaking Tactician
-Tactician is really flexible, you can change almost anything about it. This page walks you through setting up a standard Command Bus that executes Commands by passing them to a matching Handler.
+Tactician is really flexible, you can change almost anything about it. This page walks you through setting up a Command Bus that executes Commands by passing them to a matching Handler.
 
 Along the way, we'll show you the important parts of Tactician so you can tweak them yourself.
 
@@ -38,22 +38,22 @@ Configuring the Locator will vary depending on which Locator you use. Some will 
 Custom Locators only need to implement the [HandlerLocator interface](https://github.com/thephpleague/tactician/blob/master/src/Handler/Locator/HandlerLocator.php). This is just a single method that receives the Command and returns the Handler.
 
 ## 3. Creating the Command Bus
-Now that you've chosen a Locator and MethodNameInflector, you need to pass them to the Command Bus for execution. In Tactician, there's one "core" command bus that you should always use: the StandardCommandBus.
+Now that you've chosen a Locator and MethodNameInflector, you need to pass them to the Command Bus for execution. In Tactician, there's one "core" command bus that you should always use: the CommandBus.
 
-On its own, the StandardCommandBus doesn't do much. It accepts a list of Middleware and passes the Command through each of them. Really, the StandardCommandBus is just a place to hang all of the Middleware plugins together in a consistent way.
+On its own, the CommandBus doesn't do much. It accepts a list of Middleware and passes the Command through each of them. Really, the CommandBus is just a place to hang all of the Middleware plugins together in a consistent way.
 
 ~~~ php
-use League\Tactician\StandardCommandBus;
+use League\Tactician\CommandBus;
 
 // This command bus receives an empty list of middleware and does nothing.
-$commandBus = new StandardCommandBus([]);
+$commandBus = new CommandBus([]);
 ~~~
 
 To actually process the commands, we need to add Middleware.
 
-The most important piece of Middleware is the [HandlerMiddleware](https://github.com/thephpleague/tactician/blob/master/src/Handler/HandlerMiddleware.php). This class uses the Handler and MethodNameInflector we created above to find the right Handler and execute it.
+The most important piece of Middleware is the [CommandHandlerMiddleware](https://github.com/thephpleague/tactician/blob/master/src/Handler/CommandHandlerMiddleware.php). This class uses the Handler and MethodNameInflector we created above to find the right Handler and execute it.
 
-Pass that configured Middleware to your StandardCommandBus and you're ready to rock.
+Pass that configured Middleware to your CommandBus and you're ready to rock.
 
 ~~~ php
 // Choose our method name
@@ -64,10 +64,10 @@ $locator = new InMemoryLocator();
 $locator->addHandler(new RentMovieHandler(), RentMovieCommand::class);
 
 // Create the middleware that executes commands with Handlers
-$handlerMiddleware = new HandlerMiddleware($locator, $inflector);
+$commandHandlerMiddleware = new CommandHandlerMiddleware($locator, $inflector);
 
 // Create the command bus, with a list of middleware
-$commandBus = new StandardCommandBus([$handlerMiddleware]);
+$commandBus = new CommandBus([$commandHandlerMiddleware]);
 ~~~
 
 ## 4. Other Middleware
@@ -79,10 +79,10 @@ Building on our previous example:
 
 ~~~ php
 
-$commandBus = new StandardCommandBus(
+$commandBus = new CommandBus(
     [
         new LockingMiddleware(),
-        new HandlerMiddleware($locator, $inflector)
+        new CommandHandlerMiddleware($locator, $inflector)
     ]
 );
 ~~~
