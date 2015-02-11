@@ -76,10 +76,10 @@ $commandBus = new CommandBus(
 );
 echo $light;
 
-$commandBus->execute(new SwitchOn());
+$commandBus->handle(new SwitchOn());
 echo $light;
 
-$commandBus->execute(new SwitchOff());
+$commandBus->handle(new SwitchOff());
 echo $light;
 
 /**

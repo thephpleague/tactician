@@ -35,7 +35,7 @@ final class ExternalCommandMiddleware implements Middleware
     public function execute(Command $command, callable $next)
     {
         if ($command instanceof ExternalCommand) {
-            return $this->commandBus->execute($command);
+            return $this->commandBus->handle($command);
         }
         return $next($command);
     }
@@ -66,10 +66,10 @@ $commandBus = new CommandBus([$externalMiddleware, $handlerMiddleware]);
 // Controller Code time!
 $externalCommand = new MyExternalCommand();
 
-$commandBus->execute($externalCommand);
+$commandBus->handle($externalCommand);
 
 $command = new RegisterUserCommand();
 $command->emailAddress = 'alice@example.com';
 $command->password = 'secret';
 
-$commandBus->execute($command);
+$commandBus->handle($command);

@@ -52,4 +52,4 @@ $command = new RegisterUserCommand();
 $command->emailAddress = 'alice@example.com';
 $command->password = 'secret';
 
-$commandBus->execute($command);
+$commandBus->handle($command);

@@ -27,6 +27,6 @@ class QuickStartTest extends \PHPUnit_Framework_TestCase
         $map[CompleteTaskCommand::class]->shouldReceive('handle')->never();
 
         $commandBus = QuickStart::create($map);
-        $commandBus->execute(new AddTaskCommand());
+        $commandBus->handle(new AddTaskCommand());
     }
 }

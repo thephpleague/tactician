@@ -73,7 +73,7 @@ $command = new RegisterUserCommand();
 $command->emailAddress = 'alice@example.com';
 $command->password = 'secret';
 
-$commandBus->execute($command);
+$commandBus->handle($command);
 
 /**
  * So, logging is very simple but this Middleware concept is useful for lots of

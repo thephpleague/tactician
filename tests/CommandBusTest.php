@@ -38,7 +38,7 @@ class CommandBusTest extends \PHPUnit_Framework_TestCase
 
         $commandBus = new CommandBus([$middleware1, $middleware2, $middleware3]);
 
-        $this->assertEquals('foobar', $commandBus->execute(new AddTaskCommand()));
+        $this->assertEquals('foobar', $commandBus->handle(new AddTaskCommand()));
         $this->assertEquals([1, 2, 3], $executionOrder);
     }
 
@@ -51,12 +51,12 @@ class CommandBusTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             'foobar',
-            $commandBus->execute(new AddTaskCommand())
+            $commandBus->handle(new AddTaskCommand())
         );
     }
 
     public function testNoMiddlewarePerformsASafeNoop()
     {
-        (new CommandBus([]))->execute(new AddTaskCommand());
+        (new CommandBus([]))->handle(new AddTaskCommand());
     }
 }

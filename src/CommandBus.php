@@ -28,7 +28,7 @@ use Closure;
      * @param Command $command
      * @return mixed
      */
-    public function execute(Command $command)
+    public function handle(Command $command)
     {
         $middlewareChain = $this->middlewareChain;
         return $middlewareChain($command);
