@@ -14,7 +14,6 @@ require __DIR__ . '/repeated-sample-code.php';
 
 use League\Tactician\Command;
 use League\Tactician\CommandBus;
-use League\Tactician\StandardCommandBus;
 use League\Tactician\Middleware;
 
 // External command
@@ -36,7 +35,7 @@ final class ExternalCommandMiddleware implements Middleware
     public function execute(Command $command, callable $next)
     {
         if ($command instanceof ExternalCommand) {
-            return $this->commandBus->execute($command);
+            return $this->commandBus->handle($command);
         }
         return $next($command);
     }
@@ -56,21 +55,21 @@ class MyExternalCommand implements ExternalCommand
 {
 }
 
-// Now  let's instantiate our ExternalCommandHandler, StandardCommandBus and ExternalCommandMiddleware
+// Now  let's instantiate our ExternalCommandHandler, CommandBus and ExternalCommandMiddleware
 $externalCommandHandler = new ExternalCommandHandler();
-$externalCommandBus = new StandardCommandBus([$externalCommandHandler]);
+$externalCommandBus = new CommandBus([$externalCommandHandler]);
 $externalMiddleware = new ExternalCommandMiddleware($externalCommandBus);
 
 // Time to create our main CommandBus
-$commandBus = new StandardCommandBus([$externalMiddleware, $handlerMiddleware]);
+$commandBus = new CommandBus([$externalMiddleware, $handlerMiddleware]);
 
 // Controller Code time!
 $externalCommand = new MyExternalCommand();
 
-$commandBus->execute($externalCommand);
+$commandBus->handle($externalCommand);
 
 $command = new RegisterUserCommand();
 $command->emailAddress = 'alice@example.com';
 $command->password = 'secret';
 
-$commandBus->execute($command);
+$commandBus->handle($command);
