@@ -30,4 +30,4 @@ $handlerMiddleware = new League\Tactician\Handler\CommandHandlerMiddleware(
     new HandleClassNameInflector()
 );
 
-$commandBus = new \League\Tactician\StandardCommandBus([$handlerMiddleware]);
+$commandBus = new \League\Tactician\CommandBus([$handlerMiddleware]);

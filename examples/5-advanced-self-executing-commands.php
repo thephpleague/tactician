@@ -3,7 +3,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use League\Tactician\Command;
 use League\Tactician\Middleware;
-use League\Tactician\StandardCommandBus;
+use League\Tactician\CommandBus;
 
 /**
  * If you're working with a very constrained domain where there's not so many
@@ -69,17 +69,17 @@ class SelfExecutionMiddleware implements Middleware
 //have the same command get handled twice.
 
 $light = new Light();
-$commandBus = new StandardCommandBus(
+$commandBus = new CommandBus(
     [
         new SelfExecutionMiddleware($light)
     ]
 );
 echo $light;
 
-$commandBus->execute(new SwitchOn());
+$commandBus->handle(new SwitchOn());
 echo $light;
 
-$commandBus->execute(new SwitchOff());
+$commandBus->handle(new SwitchOff());
 echo $light;
 
 /**
@@ -87,7 +87,7 @@ echo $light;
  * but it can still be useful in larger apps or libraries.
  *
  * You might also notice that we've touched very little of Tactician: only the
- * StandardCommandBus and two interfaces. Yet, we were able to completely
+ * CommandBus and two interfaces. Yet, we were able to completely
  * change the way it dispatched commands.
  *
  * We could even go a step further and only implement the CommandBus interface

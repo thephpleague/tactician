@@ -32,11 +32,11 @@ $handlerMiddleware = new League\Tactician\Handler\CommandHandlerMiddleware(
     new HandleClassNameInflector()
 );
 
-$commandBus = new \League\Tactician\StandardCommandBus([$handlerMiddleware]);
+$commandBus = new \League\Tactician\CommandBus([$handlerMiddleware]);
 
 // Controller Code ////////////////////////////////////////////////////////////
 $command = new RegisterUserCommand();
 $command->emailAddress = 'alice@example.com';
 $command->password = 'secret';
 
-$commandBus->execute($command);
+$commandBus->handle($command);

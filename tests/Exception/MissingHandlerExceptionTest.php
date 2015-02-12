@@ -1,4 +1,5 @@
 <?php
+
 namespace Tactician\CommandBus\Tests\Exception;
 
 use League\Tactician\Exception\MissingHandlerException;

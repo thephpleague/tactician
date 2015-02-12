@@ -10,7 +10,7 @@ require __DIR__ . '/repeated-sample-code.php';
  * We can create a custom HandlerLocator for that.
  */
 use League\Tactician\Command;
-use League\Tactician\StandardCommandBus;
+use League\Tactician\CommandBus;
 use League\Tactician\Handler\CommandHandlerMiddleware;
 use League\Tactician\Handler\Locator\HandlerLocator;
 use League\Tactician\Handler\MethodNameInflector\HandleClassNameInflector;
@@ -44,7 +44,7 @@ $handlerMiddleware = new CommandHandlerMiddleware(
     new ContainerBasedHandlerLocator($fakeContainer),
     new HandleClassNameInflector()
 );
-$commandBus = new StandardCommandBus([$handlerMiddleware]);
+$commandBus = new CommandBus([$handlerMiddleware]);
 
 // Controller Code: even though we've changed out the whole loading system we
 // will still see that user was registered.
@@ -52,4 +52,4 @@ $command = new RegisterUserCommand();
 $command->emailAddress = 'alice@example.com';
 $command->password = 'secret';
 
-$commandBus->execute($command);
+$commandBus->handle($command);
