@@ -26,9 +26,12 @@ use League\Tactician\CommandEvents\Event\CommandExecuted;
 $eventMiddleware = new EventMiddleware();
 
 // type-hint is optional
-$eventMiddleware->addListener('command.executed', function(CommandExecuted $event) {
-	// log the success
-});
+$eventMiddleware->addListener(
+	'command.executed',
+	function (CommandExecuted $event) {
+		// log the success
+	}
+);
 
 $commandBus = new CommandBus([$eventMiddleware]);
 $commandBus->execute($command);
@@ -52,10 +55,13 @@ You can also catch an error and prevent it from causing the application to fail:
 ~~~ php
 use League\Tactician\CommandEvents\Event\CommandFailed;
 
-$eventMiddleware->addListener('command.failed', function(CommandFailed $event) {
-	// log the failure
-	$event->catchException(); // without calling this the exception will be thrown
-});
+$eventMiddleware->addListener(
+	'command.failed',
+	function (CommandFailed $event) {
+		// log the failure
+		$event->catchException(); // without calling this the exception will be thrown
+	}
+);
 
 // something bad happens, exception thrown
 $commandBus->execute($command);
