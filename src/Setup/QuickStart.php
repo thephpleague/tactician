@@ -1,8 +1,8 @@
 <?php
+
 namespace League\Tactician\Setup;
 
 use League\Tactician\CommandBus;
-use League\Tactician\StandardCommandBus;
 use League\Tactician\Handler\Locator\InMemoryLocator;
 use League\Tactician\Handler\MethodNameInflector\HandleInflector;
 use League\Tactician\Handler\CommandHandlerMiddleware;
@@ -37,6 +37,6 @@ class QuickStart
 
         $lockingMiddleware = new LockingMiddleware();
 
-        return new StandardCommandBus([$lockingMiddleware, $handlerMiddleware]);
+        return new CommandBus([$lockingMiddleware, $handlerMiddleware]);
     }
 }

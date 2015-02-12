@@ -1,7 +1,8 @@
 <?php
+
 namespace League\Tactician\Tests\Setup;
 
-use League\Tactician\StandardCommandBus;
+use League\Tactician\CommandBus;
 use League\Tactician\Setup\QuickStart;
 use League\Tactician\Tests\Fixtures\Command\AddTaskCommand;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
@@ -12,7 +13,7 @@ class QuickStartTest extends \PHPUnit_Framework_TestCase
     public function testReturnsACommandBus()
     {
         $commandBus = QuickStart::create([]);
-        $this->assertInstanceOf(StandardCommandBus::class, $commandBus);
+        $this->assertInstanceOf(CommandBus::class, $commandBus);
     }
 
     public function testCommandToHandlerMapIsProperlyConfigured()
@@ -26,6 +27,6 @@ class QuickStartTest extends \PHPUnit_Framework_TestCase
         $map[CompleteTaskCommand::class]->shouldReceive('handle')->never();
 
         $commandBus = QuickStart::create($map);
-        $commandBus->execute(new AddTaskCommand());
+        $commandBus->handle(new AddTaskCommand());
     }
 }

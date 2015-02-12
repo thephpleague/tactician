@@ -12,9 +12,8 @@ require __DIR__ . '/repeated-sample-code.php';
  *
  * We can write a custom MethodNameInflector for that:
  */
-
 use League\Tactician\Command;
-use League\Tactician\StandardCommandBus;
+use League\Tactician\CommandBus;
 use League\Tactician\Handler\CommandHandlerMiddleware;
 use League\Tactician\Handler\MethodNameInflector\MethodNameInflector;
 
@@ -42,11 +41,11 @@ class NewRegisterUserHandler
 $locator->addHandler(new NewRegisterUserHandler(), RegisterUserCommand::class);
 $handlerMiddleware = new CommandHandlerMiddleware($locator, new MyCustomInflector());
 
-$commandBus = new StandardCommandBus([$handlerMiddleware]);
+$commandBus = new CommandBus([$handlerMiddleware]);
 
 // Controller Code time!
 $command = new RegisterUserCommand();
 $command->emailAddress = 'alice@example.com';
 $command->password = 'secret';
 
-$commandBus->execute($command);
+$commandBus->handle($command);

@@ -1,4 +1,5 @@
 <?php
+
 namespace League\Tactician\Handler\MethodNameInflector;
 
 use League\Tactician\Command;
