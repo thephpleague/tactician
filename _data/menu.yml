@@ -5,4 +5,5 @@ Getting Started:
     Middleware: '/middleware/'
 Plugins:
     LockingMiddleware: '/plugins/locking-middleware/'
+    EventMiddleware: '/plugins/event-middleware/'
 #    Doctrine ORM: '/plugins/doctrine-orm/'
