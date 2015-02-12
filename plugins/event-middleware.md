@@ -34,7 +34,7 @@ $eventMiddleware->addListener(
 );
 
 $commandBus = new CommandBus([$eventMiddleware]);
-$commandBus->execute($command);
+$commandBus->handle($command);
 ~~~
 
 Optionally you can inject an event emitter into the middleware:
@@ -64,5 +64,5 @@ $eventMiddleware->addListener(
 );
 
 // something bad happens, exception thrown
-$commandBus->execute($command);
+$commandBus->handle($command);
 ~~~
