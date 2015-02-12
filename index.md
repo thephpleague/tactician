@@ -48,7 +48,7 @@ class PurchaseProductHandler
 // And then in your controllers, you can fill in the command using your favorite
 // form or serializer library, then drop it in the CommandBus and you're done!
 $command = new PurchaseProductCommand(42, 29);
-$commandBus->execute($command);
+$commandBus->handle($command);
 ~~~
 
 That's it. Tactician is the `$commandBus` part, doing all the plumbing of finding the handler and calling the right method. You know, the boring stuff.

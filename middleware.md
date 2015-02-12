@@ -9,7 +9,7 @@ Middleware are Tactician's plugins. They're a way to add behavior, like writing 
 
 If you've never seen a middleware system, the concept is easy: when you execute a command, it's is passed through every Middleware. Each Middleware is a separate object and do anything it wants.
 
-Middleware are executed in sequence; the order is configured when you setup the StandardCommandBus and can't be changed later. However, each Middleware can control when the next link in the chain starts, by using a `$next` callable it receives as a parameter. This allows you to control if you're whether your custom behavior will come before or after command execution, or if you'll suppress the command from being executed at all.
+Middleware are executed in sequence; the order is configured when you setup the CommandBus and can't be changed later. However, each Middleware can control when the next link in the chain starts, by using a `$next` callable it receives as a parameter. This allows you to control if you're whether your custom behavior will come before or after command execution, or if you'll suppress the command from being executed at all.
 
 It's easiest to see with an example, so we'll create a custom middleware that logs each command it receives.
 
@@ -61,18 +61,18 @@ Some things to note:
 
 
 ## Adding it to the Command Bus
-Now that we have a working Middleware object, we give it to our CommandBus as a list of middleware. We'll also pass in the HandlerMiddleware which actually executes the commands in Handlers, otherwise our commands won't be executed.
+Now that we have a working Middleware object, we give it to our CommandBus as a list of middleware. We'll also pass in the CommandHandlerMiddleware which actually executes the commands in Handlers, otherwise our commands won't be executed.
 
 ~~~ php
-$commandBus = new StandardCommandBus(
+$commandBus = new CommandBus(
     [
         new LoggingMiddleware(new Logger()),
-        $handlerMiddleware
+        $commandHandlerMiddleware
     ]
 );
 ~~~
 
-Likewise, it's important to put them in a specific order. If you put the LoggingMiddleware after the HandlerMiddleware, the logging won't occur when you think it does. Also, the middlewares that actually execute Commands typically don't pass them onwards to `$next`, otherwise they run the risk of being executed twice (if there's another executing middleware further down the chain. 
+Likewise, it's important to put them in a specific order. If you put the LoggingMiddleware after the CommandHandlerMiddleware, the logging won't occur when you think it does. Also, the middlewares that actually execute Commands typically don't pass them onwards to `$next`, otherwise they run the risk of being executed twice (if there's another executing middleware further down the chain. 
 
 When you're setting up your command bus, always consider the order you place the middleware, otherwise you can get strange effects. However, this also gives you a lot of flexability. For an example of this, see the page about the [LockingMiddleware plugin](/locking-middleware).
 

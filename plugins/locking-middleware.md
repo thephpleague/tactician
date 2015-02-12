@@ -18,11 +18,11 @@ It's very simple to setup:
 
 ~~~ php
 use League\Tactician\Plugins\LockingMiddleware;
-use League\Tactician\StandardCommandBus;
+use League\Tactician\CommandBus;
 
 $lockingMiddleware = new LockingMiddleware();
 
-$commandBus = new StandardCommandBus(
+$commandBus = new CommandBus(
     [
         $lockingMiddleware,
         // ... your other middleware...
@@ -35,12 +35,12 @@ The LockingMiddleware is very useful for controlling your transactional boundari
 For example, imagine this setup:
 
 ~~~ php
-new StandardCommandBus(
+new CommandBus(
     [
         $loggingMiddleware,
         $lockingMiddleware,
         $databaseTransactionMiddleware,
-        $handlerMiddleware
+        $commandHandlerMiddleware
     ]
 );
 ~~~
