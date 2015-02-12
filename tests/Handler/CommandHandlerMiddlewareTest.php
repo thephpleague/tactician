@@ -2,7 +2,7 @@
 
 namespace League\Tactician\Tests\Handler;
 
-use League\Tactician\Handler\HandlerMiddleware;
+use League\Tactician\Handler\CommandHandlerMiddleware;
 use League\Tactician\Handler\MethodNameInflector\MethodNameInflector;
 use League\Tactician\Handler\Locator\HandlerLocator;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
@@ -11,10 +11,10 @@ use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use stdClass;
 use Mockery;
 
-class HandlerMiddlewareTest extends \PHPUnit_Framework_TestCase
+class CommandHandlerMiddlewareTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var HandlerMiddleware
+     * @var CommandHandlerMiddleware
      */
     private $middleware;
 
@@ -33,7 +33,7 @@ class HandlerMiddlewareTest extends \PHPUnit_Framework_TestCase
         $this->handlerLocator = Mockery::mock(HandlerLocator::class);
         $this->methodNameInflector = Mockery::mock(MethodNameInflector::class);
 
-        $this->middleware = new HandlerMiddleware(
+        $this->middleware = new CommandHandlerMiddleware(
             $this->handlerLocator,
             $this->methodNameInflector
         );

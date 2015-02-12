@@ -27,7 +27,7 @@ $locator->addHandler(new RegisterUserHandler(), RegisterUserCommand::class);
 
 // Middleware is Tactician's plugin system. Even finding the handler and
 // executing it is a plugin that we're configuring here.
-$handlerMiddleware = new League\Tactician\Handler\HandlerMiddleware(
+$handlerMiddleware = new League\Tactician\Handler\CommandHandlerMiddleware(
     $locator,
     new HandleClassNameInflector()
 );
