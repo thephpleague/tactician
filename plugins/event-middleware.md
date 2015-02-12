@@ -10,7 +10,7 @@ title: Event Middleware
 [![Source](http://img.shields.io/badge/source-league/tactician--command--events-blue.svg?style=flat-square)](https://github.com/thephpleague/tactician-command-events)
 [![Packagist](http://img.shields.io/packagist/v/league/tactician-command-events.svg?style=flat-square)](https://packagist.org/packages/league/tactician-command-events)
 
-This plugin lets you to listen to some events emitted during command execution:
+This plugin lets you listen to some events emitted during command execution:
 
 - `command.received`: Emitted when a command is received by the command bus
 - `command.executed`: Emitted when a command is executed without errors
@@ -23,7 +23,7 @@ use League\Tactician\CommandBus;
 use League\Tactician\CommandEvents\EventMiddleware;
 use League\Tactician\CommandEvents\Event\CommandExecuted;
 
-$eventMiddleware = new EventMiddleware;
+$eventMiddleware = new EventMiddleware();
 
 // type-hint is optional
 $eventMiddleware->addListener('command.executed', function(CommandExecuted $event) {
@@ -40,14 +40,14 @@ Optionally you can inject an event emitter into the middleware:
 use League\Event\Emitter;
 use League\Tactician\CommandEvents\EventMiddleware;
 
-$emitter = new Emitter;
+$emitter = new Emitter();
 $eventMiddleware = new EventMiddleware($emitter);
 
 // other possible solution
 // $eventMiddleware->setEmitter($emitter);
 ~~~
 
-You can also catch an error and prevent it from causing the application fail:
+You can also catch an error and prevent it from causing the application to fail:
 
 ~~~ php
 use League\Tactician\CommandEvents\Event\CommandFailed;
