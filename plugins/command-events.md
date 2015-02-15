@@ -1,10 +1,10 @@
 ---
 layout: default
-permalink: /plugins/event-middleware/
-title: Event Middleware
+permalink: /plugins/command-events/
+title: Command Events
 ---
 
-# Event Middleware
+# Command Events
 
 [![Author](http://img.shields.io/badge/author-@sagikazarmark-blue.svg?style=flat-square)](https://twitter.com/sagikazarmark)
 [![Source](http://img.shields.io/badge/source-league/tactician--command--events-blue.svg?style=flat-square)](https://github.com/thephpleague/tactician-command-events)
