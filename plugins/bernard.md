@@ -11,9 +11,7 @@ title: Bernard
 [![Packagist](http://img.shields.io/packagist/v/league/tactician-bernard.svg?style=flat-square)](https://packagist.org/packages/league/tactician-bernard)
 
 
-This plugin provides you tools for both sending commands to and consuming from a queue, so you should install it in both your application and (if you have any) dedicated worker package/instance.
-
-You can run your consumer from your application environment, however you should avoid it if possible. Bootstrapping your application consumes more resource than necessary. (That said, sometimes it is simply easier.) In this case you have to make sure that you provide your consumer instance with all the data it needs: database connection details, required dependencies, etc.
+This plugin provides you tools for both sending commands to and consuming from a queue.
 
 
 ### Remote execution
