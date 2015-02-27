@@ -1,6 +1,6 @@
 ---
 layout: default
-permalink: /plugins/doctrine-orm/
+permalink: /plugins/doctrine/
 title: Doctrine ORM
 ---
 
