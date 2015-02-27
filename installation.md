@@ -6,11 +6,11 @@ title: Installation
 
 # Installation
 
-Tactician is available on Packagist. **_Please note: Tactician is currently in beta._**
+Tactician is available on Packagist.
 
 To install, just run:
 
-    > composer require league/tactician:@dev
+    > composer require league/tactician
 
 Now we need to configure Tactician for your project.
 
