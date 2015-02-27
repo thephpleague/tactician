@@ -1,7 +1,7 @@
 ---
 layout: default
 permalink: /plugins/doctrine/
-title: Doctrine ORM
+title: Doctrine
 ---
 
 # Doctrine
@@ -10,9 +10,9 @@ title: Doctrine ORM
 [![Source](http://img.shields.io/badge/source-league/tactician--doctrine-blue.svg?style=flat-square)](https://github.com/thephpleague/tactician-doctrine)
 [![Packagist](http://img.shields.io/packagist/v/league/tactician--doctrine.svg?style=flat-square)](https://packagist.org/packages/league/tactician-doctrine)
 
-This package provides a TransactionMiddleware that wraps commands in a Doctrine ORM transaction.
+This package provides a `TransactionMiddleware` that wraps commands in a Doctrine ORM transaction.
 
-The TransactionMiddleware will start a transaction before each command begins. If the command is successful, it will flush and commit the entity manager. If an exception is raised, TransactionMiddleware rolls back the transaction and rethrows the exception.
+The `TransactionMiddleware` will start a transaction before each command begins. If the command is successful, it will flush and commit the EntityManager. If an exception is raised, `TransactionMiddleware` rolls back the transaction and rethrows the exception.
 
 Setup is simple:
 
@@ -32,6 +32,6 @@ Sometimes, you might have a Command that fires off more commands, usually via ev
 
 The recommended approach is having each command run in a separate transaction. This keeps transaction boundaries smaller and makes commands easy to reason about because they only rely on themselves.
 
-You can configure this by using the LockingMiddleware shipped in the core Tactician package. By placing the LockingMiddleware decorator above the TransactionMiddleware, you can ensure that each Command executes separately. For more details, see the [LockingMiddleware documentation](/plugins/locking-middleware/).
+You can configure this by using the LockingMiddleware shipped in the core Tactician package. By placing the `LockingMiddleware` above the `TransactionMiddleware`, you can ensure that each Command executes separately. For more details, see the [`LockingMiddleware` documentation](/plugins/locking-middleware/).
 
-Still, Tactician is flexible and you can choose to run all subcommands inside the same transaction if you want. Just place the TransactionMiddleware above the LockingMiddleware or leave the LockingMiddleware off entirely. Again, we don't recommend this but it is possible.
+Still, Tactician is flexible and you can choose to run all subcommands inside the same transaction if you want. Just place the `TransactionMiddleware` above the `LockingMiddleware` or leave the `LockingMiddleware` off entirely. Again, we don't recommend this but it is possible.
