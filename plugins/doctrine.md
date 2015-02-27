@@ -29,7 +29,7 @@ $commandBus = new CommandBus(
 ~~~
 
 ## Transactions and Subcommands
-Sometimes, you might have a Command that fires off more commands, usually via events. The question then becomes, should these sub-commands run inside the same transaction as the command that originally fired them off?
+Sometimes, you might have a Command that fires off more commands, usually via events. The question then becomes, should these subcommands run inside the same transaction as the command that originally fired them?
 
 The recommended approach is having each command run in a separate transaction. This keeps transaction boundaries smaller and makes commands easy to reason about because they only rely on themselves.
 
