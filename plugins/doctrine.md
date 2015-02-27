@@ -33,6 +33,6 @@ Sometimes, you might have a Command that fires off more commands, usually via ev
 
 The recommended approach is having each command run in a separate transaction. This keeps transaction boundaries smaller and makes commands easy to reason about because they only rely on themselves.
 
-You can configure this by using the LockingMiddleware shipped in the core Tactician package. By placing the `LockingMiddleware` above the `TransactionMiddleware`, you can ensure that each Command executes separately. For more details, see the [`LockingMiddleware` documentation](/plugins/locking-middleware/).
+You can configure this by using the `LockingMiddleware` shipped in the core Tactician package. By placing the `LockingMiddleware` above the `TransactionMiddleware`, you can ensure that each Command executes separately. For more details, see the [LockingMiddleware documentation](/plugins/locking-middleware/).
 
 Still, Tactician is flexible and you can choose to run all subcommands inside the same transaction if you want. Just place the `TransactionMiddleware` above the `LockingMiddleware` or leave the `LockingMiddleware` off entirely. Again, we don't recommend this but it is possible.
