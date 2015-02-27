@@ -6,9 +6,9 @@ title: Locking Middleware
 
 # Locking Middleware
 
-Composer | [league/tactician](https://packagist.org/packages/league/tactician)
-Github | [thephpleague/tactician](https://github.com/thephpleague/tactician)
-Authors | [Ross Tuck](http://twitter.com/rosstuck)
+[![Author](http://img.shields.io/badge/author-@rosstuck-blue.svg?style=flat-square)](https://twitter.com/rosstuck)
+[![Source](http://img.shields.io/badge/source-league/tactician-blue.svg?style=flat-square)](https://github.com/thephpleague/tactician)
+[![Packagist](http://img.shields.io/packagist/v/league/tactician.svg?style=flat-square)](https://packagist.org/packages/league/tactician)
 
 This plugin actually ships in the core Tactician "CommandBus" package, so it's available without installing any separate composer packages.
 
@@ -39,13 +39,13 @@ new CommandBus(
     [
         $loggingMiddleware,
         $lockingMiddleware,
-        $databaseTransactionMiddleware,
+        $transactionMiddleware,
         $commandHandlerMiddleware
     ]
 );
 ~~~
 
-By placing the DatabaseTransaction after the Locking, we've ensured that each Command executes in a completely separate database transaction. However, if we wanted all commands to execute inside one big transaction, we could just move the DatabaseTransaction above the Locking.
+By placing the TransactionMiddleware after the Locking, we've ensured that each Command executes in a completely separate database transaction. However, if we wanted all commands to execute inside one big transaction, we could just move the TransactionMiddleware above the Locking.
 
 Likewise, by putting the Logging _before_ the Locking, we get the log entry at the initial point where the command is first added. This might be better for our debugging purposes then logging it at execution when several other commands have already run and presumably written to the log.
 

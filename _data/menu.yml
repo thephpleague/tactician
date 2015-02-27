@@ -6,5 +6,5 @@ Getting Started:
 Plugins:
     LockingMiddleware: '/plugins/locking-middleware/'
     CommandEvents: '/plugins/command-events/'
+    Doctrine: '/plugins/doctrine/'
     Bernard: '/plugins/bernard/'
-#    Doctrine ORM: '/plugins/doctrine-orm/'
