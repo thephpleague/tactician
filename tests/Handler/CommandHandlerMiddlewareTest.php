@@ -128,7 +128,7 @@ class CommandHandlerMiddlewareTest extends \PHPUnit_Framework_TestCase
      */
     protected function mockNext()
     {
-        return function() {
+        return function () {
             throw new \LogicException('Middleware fell through to next callable, this should not happen in the test.');
         };
     }
