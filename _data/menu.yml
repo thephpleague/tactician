@@ -4,7 +4,8 @@ Getting Started:
     Tweaking Tactician: '/tweaking-tactician/'
     Middleware: '/middleware/'
 Plugins:
-    LockingMiddleware: '/plugins/locking-middleware/'
+    Locking: '/plugins/locking-middleware/'
     CommandEvents: '/plugins/command-events/'
     Doctrine: '/plugins/doctrine/'
     Bernard: '/plugins/bernard/'
+    Logger: '/plugins/logger/'
