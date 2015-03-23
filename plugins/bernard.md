@@ -16,7 +16,7 @@ This plugin provides you tools for both sending commands to and consuming from a
 
 ### Remote execution
 
-To send a command to a queue, simply pass the middleware to the Command Bus. You can implement `League\Tactician\Bernard\QueueableCommand` to mark a command as queueable. (Alternatively you can implement both `Bernard\Message` and `League\Tactician\Command`) Others will be passed to the next middleware in the chain.
+To setup queueing on the client side, simply pass the QueueMiddleware to the Command Bus. After that you queue commands by implementing the `League\Tactician\Bernard\QueueableCommand` interface. (Alternatively you can implement `Bernard\Message` AND `League\Tactician\Command`) Others will be passed to the next middleware in the chain.
 
 ~~~ php
 use Bernard\Producer;
