@@ -45,17 +45,16 @@ use League\Tactician\Bernard\Receiver\SingleBusReceiver;
 use League\Tactician\CommandBus;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-// inject some middlewares
-$commandBus = new CommandBus([]);
+// Create the command bus that receives the queued commands
+$commandBus = new CommandBus([/* middlewares go here */]);
 
+// Wire the command bus into Bernard's routing system
 $receiver = new SingleBusReceiver($commandBus);
-
 $router = new SimpleRouter();
-
 $router->add('League\Tactician\Command', $receiver);
 
+// Finally, create the Bernard consumer that runs through the pending queue
 $consumer = new Consumer($router, new EventDispatcher());
-
 $consumer->consume($queue);
 ~~~
 
@@ -63,7 +62,7 @@ The plugin tries to follow Bernard's logic as close as possible. To leard more a
 
 #### Receivers
 
-Receiver is a term used in both command pattern and the message terminology. In this case a recevier is a callable passed to the Router. The Router routes all messages to a receiver (or returns with error if no receiver is registered for a messsage). There are two receivers implemented by this plugin:
+Receiver is a term used in both command pattern and the message terminology. In this case a receiver is a callable passed to the Router. The Router routes all messages to a receiver (or returns with error if no receiver is registered for a messsage). There are two receivers implemented by this plugin:
 
 - `SingleBusReceiver`: This receiver should be used when the same command bus is used for the producer and the consumer side. It prevents a command from being requeued (causing an infinite loop).
 - `SeparateBusReceiver`: Use this receiver in any other cases.
