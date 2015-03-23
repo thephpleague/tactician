@@ -16,19 +16,22 @@ This plugin provides you tools for both sending commands to and consuming from a
 
 ### Remote execution
 
-To send a command to a queue, simply pass the middleware to the Command Bus. Currently only commands implementing `League\Tactician\Bernard\QueueableCommand` can be sent to the queue, others will be passed to the next middleware in the chain.
+To send a command to a queue, simply pass the middleware to the Command Bus. You can implement `League\Tactician\Bernard\QueueableCommand` to mark a command as queueable. (Alternatively you can implement both `Bernard\Message` and `League\Tactician\Command`) Others will be passed to the next middleware in the chain.
 
 ~~~ php
+use Bernard\Producer;
 use League\Tactician\Bernard\QueueMiddleware;
 use League\Tactician\CommandBus;
 
-$queueMiddleware = new QueueMiddleware($queue);
+// $producer = new Producer(/*...*/);
+
+$queueMiddleware = new QueueMiddleware($producer);
 
 $commandBus = new CommandBus([$queueMiddleware]);
 $commandBus->handle($command);
 ~~~
 
-The `$queue` variable in the example is a `Bernard\Queue` instance. See the [official documentation](http://bernardphp.com) for details.
+The `$producer` variable in the example is a `Bernard\Producer` instance. See the [official documentation](http://bernardphp.com) for details.
 
 
 ### Consuming commands
@@ -37,16 +40,30 @@ On the other side of the message queue you must set up a consumer:
 
 ~~~ php
 use Bernard\Consumer;
-use League\Tactician\Bernard\Router;
+use Bernard\Router\SimpleRouter;
+use League\Tactician\Bernard\Receiver\SingleBusReceiver;
 use League\Tactician\CommandBus;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 // inject some middlewares
 $commandBus = new CommandBus([]);
 
-$router = new Router($commandBus);
+$receiver = new SingleBusReceiver($commandBus);
+
+$router = new SimpleRouter();
+
+$router->add('League\Tactician\Command', $receiver);
 
 $consumer = new Consumer($router, new EventDispatcher());
 
 $consumer->consume($queue);
 ~~~
+
+The plugin tries to follow Bernard's logic as close as possible. To leard more about how consuming and routers work, check the [official documentation](http://bernardphp.com) for details.
+
+#### Receivers
+
+Receiver is a term used in both command pattern and the message terminology. In this case a recevier is a callable passed to the Router. The Router routes all messages to a receiver (or returns with error if no receiver is registered for a messsage). There are two receivers implemented by this plugin:
+
+- `SingleBusReceiver`: This receiver should be used when the same command bus is used for the producer and the consumer side. It prevents a command from being requeued (causing an infinite loop).
+- `SeparateBusReceiver`: Use this receiver in any other cases.
