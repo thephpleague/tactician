@@ -27,7 +27,7 @@ $commandBus = new League\Tactician\CommandBus(
 The LoggerMiddleware records three possible events:
 
 - Command received: the command has been received but not yet executed
-- Command completed: the command has been executed without any exceptions
+- Command handled: the command has been executed without any exceptions
 - Command failed: an exception was raised during execution
 
 ## Formatters
@@ -56,7 +56,7 @@ class CatFormatter implements Formatter
         return 'Meow, command received! =^._.^=';
     }
 
-    public function commandCompleted(Command $command)
+    public function commandHandled(Command $command)
     {
         return 'Meow, command done! (=^･^=)';
     }
@@ -70,7 +70,7 @@ class CatFormatter implements Formatter
 ~~~
 
 ## Change Logger Levels
-PSR-3 supports [log levels](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md#5-psrlogloglevel) which allow you to filter messages by their importance. By default, the `LoggerMiddleware` uses the Debug level for commands being received and completed but the Error level for commands failing due to exceptions.
+PSR-3 supports [log levels](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md#5-psrlogloglevel) which allow you to filter messages by their importance. By default, the `LoggerMiddleware` uses the Debug level for commands being received and handled but the Error level for commands failing due to exceptions.
 
 If you'd like to change these levels, you can override them in the `LoggerMiddleware` constructor:
 
