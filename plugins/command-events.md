@@ -13,7 +13,7 @@ title: Command Events
 This plugin lets you listen to some events emitted during command execution:
 
 - `command.received`: Emitted when a command is received by the command bus
-- `command.executed`: Emitted when a command is executed without errors
+- `command.handled`: Emitted when a command is handled without errors
 - `command.failed`: Emitted when an error occured during command execution
 
 Setup is simple:
@@ -21,14 +21,14 @@ Setup is simple:
 ~~~ php
 use League\Tactician\CommandBus;
 use League\Tactician\CommandEvents\EventMiddleware;
-use League\Tactician\CommandEvents\Event\CommandExecuted;
+use League\Tactician\CommandEvents\Event\CommandHandled;
 
 $eventMiddleware = new EventMiddleware();
 
 // type-hint is optional
 $eventMiddleware->addListener(
-	'command.executed',
-	function (CommandExecuted $event) {
+	'command.handled',
+	function (CommandHandled $event) {
 		// log the success
 	}
 );
