@@ -60,7 +60,7 @@ Gary Hockin ([@GeeH](https://twitter.com/GeeH)) is already working on it! If you
 Sorry, a provider is on our roadmap but we're short-handed. If you'd like to help out, [please get in touch](https://github.com/thephpleague/tactician/issues)!
 
 ## Third-Party Framework Adapters
-These adapters are maintained by other devs outside of Tactician. That's doesn't mean they're of lesser quality, only that they're maintained by other talented devs at this time.
+These adapters are maintained by other devs outside of Tactician. That doesn't mean they're of lesser quality, only that they're maintained by other talented devs at this time.
 
 ### Silex
 [Prasetyo Wicaksono](https://github.com/Atriedes) is actively maintaining a [Silex service provider for Tactician](https://github.com/Atriedes/tactician-service-provider).
