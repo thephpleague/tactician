@@ -11,6 +11,5 @@ Bug fixes:
 
 - None
 
-
 ## 0.3.0 (2015-02-15)
 First public release!
