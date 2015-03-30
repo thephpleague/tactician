@@ -9,3 +9,4 @@ Plugins:
     Doctrine: '/plugins/doctrine/'
     Bernard: '/plugins/bernard/'
     Logger: '/plugins/logger/'
+    League\Container: '/plugins/league-container/'
