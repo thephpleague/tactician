@@ -12,12 +12,11 @@ require __DIR__ . '/repeated-sample-code.php';
  * We can write a custom middleware for that.
  */
 
-use League\Tactician\Command;
 use League\Tactician\CommandBus;
 use League\Tactician\Middleware;
 
 // External command
-interface ExternalCommand extends Command
+interface ExternalCommand
 {
 }
 
@@ -32,7 +31,7 @@ final class ExternalCommandMiddleware implements Middleware
         $this->commandBus = $commandBus;
     }
 
-    public function execute(Command $command, callable $next)
+    public function execute($command, callable $next)
     {
         if ($command instanceof ExternalCommand) {
             return $this->commandBus->handle($command);
@@ -44,7 +43,7 @@ final class ExternalCommandMiddleware implements Middleware
 // and we'll create a custom command handler/middleware
 final class ExternalCommandHandler implements Middleware
 {
-    public function execute(Command $command, callable $next)
+    public function execute($command, callable $next)
     {
         echo sprintf("Dispatched %s!\n", get_class($command));
     }

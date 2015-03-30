@@ -2,7 +2,6 @@
 
 namespace League\Tactician\Tests\Plugins;
 
-use League\Tactician\Command;
 use Mockery;
 use League\Tactician\Plugins\LockingMiddleware;
 use League\Tactician\Tests\Fixtures\Command\AddTaskCommand;
@@ -25,7 +24,7 @@ class LockingMiddlewareTest extends \PHPUnit_Framework_TestCase
         $command = new AddTaskCommand();
 
         $nextClosure = function ($command) {
-            $this->assertInstanceOf(Command::class, $command);
+            $this->assertTrue(is_object($command));
             return 'foobar';
         };
 

@@ -4,7 +4,6 @@ require __DIR__ . '/repeated-sample-code.php';
 
 use League\Tactician\Middleware;
 use League\Tactician\CommandBus;
-use League\Tactician\Command;
 
 /**
  * Let's say we want something to happen every time we execute a command.
@@ -37,7 +36,7 @@ class LoggingMiddleware implements Middleware
         $this->logger = $logger;
     }
 
-    public function execute(Command $command, callable $next)
+    public function execute($command, callable $next)
     {
         $commandClass = get_class($command);
 

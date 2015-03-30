@@ -5,9 +5,8 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use League\Tactician\Handler\MethodNameInflector\HandleClassNameInflector;
 use League\Tactician\Handler\Locator\InMemoryLocator;
-use League\Tactician\Command;
 
-class RegisterUserCommand implements Command
+class RegisterUserCommand
 {
     public $emailAddress;
     public $password;

@@ -2,8 +2,6 @@
 
 namespace League\Tactician\Handler\Locator;
 
-use League\Tactician\Command;
-
 /**
  * Service locator for handler objects
  *
@@ -15,8 +13,8 @@ interface HandlerLocator
     /**
      * Retrieves the handler for a specified command
      *
-     * @param Command $command
+     * @param object $command
      * @return mixed
      */
-    public function getHandlerForCommand(Command $command);
+    public function getHandlerForCommand($command);
 }

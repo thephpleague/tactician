@@ -9,7 +9,6 @@ require __DIR__ . '/repeated-sample-code.php';
  *
  * We can create a custom HandlerLocator for that.
  */
-use League\Tactician\Command;
 use League\Tactician\CommandBus;
 use League\Tactician\Handler\CommandHandlerMiddleware;
 use League\Tactician\Handler\Locator\HandlerLocator;
@@ -24,7 +23,7 @@ class ContainerBasedHandlerLocator implements HandlerLocator
         $this->container = $container;
     }
 
-    public function getHandlerForCommand(Command $command)
+    public function getHandlerForCommand($command)
     {
         // This is a cheesy naming strategy but it's just an example
         $handlerId = 'app.handler.' . get_class($command);

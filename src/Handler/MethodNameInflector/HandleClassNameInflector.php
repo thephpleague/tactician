@@ -2,8 +2,6 @@
 
 namespace League\Tactician\Handler\MethodNameInflector;
 
-use League\Tactician\Command;
-
 /**
  * Assumes the method is handle + the last portion of the class name.
  *
@@ -16,7 +14,7 @@ class HandleClassNameInflector implements MethodNameInflector
     /**
      * {@inheritdoc}
      */
-    public function inflect(Command $command, $commandHandler)
+    public function inflect($command, $commandHandler)
     {
         $commandName = get_class($command);
 
