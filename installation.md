@@ -47,11 +47,20 @@ class AddTaskHandler
 
 That said, if you'd like to change the handler method called or any other options, take a look at the [Tweaking Tactician](/tweaking-tactician) page for more details. It's really easy. Promise.
 
-## Symfony2
-Sorry, a bundle is on our roadmap but we're short-handed. If you'd like to help out, [please get in touch](https://github.com/thephpleague/tactician/issues)!
+## Supported Framework Adapters
+These frameworks are currently on our targeted list.
 
-## Zend Framework 2
+### Symfony2
+A bundle is currently in active development, but isn't ready for production use yet. If you'd like to get involved and hurry this along, [contribute to the repo here](https://github.com/xtrasmal/TacticianBundle)!
+
+### Zend Framework 2
 Gary Hockin ([@GeeH](https://twitter.com/GeeH)) is already working on it! If you'd like to help out, [you can find the repo here](https://github.com/GeeH/TacticianModule)!
 
-## Laravel
+### Laravel
 Sorry, a provider is on our roadmap but we're short-handed. If you'd like to help out, [please get in touch](https://github.com/thephpleague/tactician/issues)!
+
+## Third-Party Framework Adapters
+These adapters are maintained by other devs outside of Tactician. That's doesn't mean they're of lesser quality, only that they're maintained by other talented devs at this time.
+
+### Silex
+[Prasetyo Wicaksono](https://github.com/Atriedes) is actively maintaining a [Silex service provider for Tactician](https://github.com/Atriedes/tactician-service-provider).

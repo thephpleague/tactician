@@ -41,7 +41,7 @@ class LoggingMiddleware implements Middleware
         $this->logger = $logger;
     }
 
-    public function execute(Command $command, callable $next)
+    public function execute($command, callable $next)
     {
         $commandClass = get_class($command);
 

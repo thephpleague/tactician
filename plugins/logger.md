@@ -46,12 +46,11 @@ It's worth noting the `ClassPropertiesFormatter` outputs a small JSON blob conta
 Creating your own Formatter is very simple, you only need to implement the `Formatter` interface and return the string you'd like logged. If you'd prefer to not log any message for a particular event (say, nothing when a command is received but only when it's completed) then you can just return null and the `LoggerMiddleware` will skip over that message.
 
 ~~~php
-use League\Tactician\Command;
 use League\Tactician\Logger\Formatter\Formatter;
 
 class CatFormatter implements Formatter
 {
-    public function commandReceived(Command $command)
+    public function commandReceived($command)
     {
         return 'Meow, command received! =^._.^=';
     }
