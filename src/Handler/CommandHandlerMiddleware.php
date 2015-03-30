@@ -3,7 +3,6 @@
 namespace League\Tactician\Handler;
 
 use League\Tactician\Middleware;
-use League\Tactician\Command;
 use League\Tactician\Exception\CanNotInvokeHandlerException;
 use League\Tactician\Handler\MethodNameInflector\MethodNameInflector;
 use League\Tactician\Handler\Locator\HandlerLocator;
@@ -37,11 +36,11 @@ class CommandHandlerMiddleware implements Middleware
      * Executes a command and optionally returns a value
      *
      * @throws CanNotInvokeHandlerException
-     * @param Command $command
+     * @param object $command
      * @param callable $next
      * @return mixed
      */
-    public function execute(Command $command, callable $next)
+    public function execute($command, callable $next)
     {
         $handler = $this->handlerLocator->getHandlerForCommand($command);
         $methodName = $this->methodNameInflector->inflect($command, $handler);

@@ -2,7 +2,6 @@
 
 namespace League\Tactician\Plugins;
 
-use League\Tactician\Command;
 use League\Tactician\Middleware;
 
 /**
@@ -24,11 +23,11 @@ class LockingMiddleware implements Middleware
     /**
      * Queues incoming commands until the first has completed
      *
-     * @param Command $command
+     * @param object $command
      * @param callable $next
      * @return mixed
      */
-    public function execute(Command $command, callable $next)
+    public function execute($command, callable $next)
     {
         $this->queue[] = $next;
         if ($this->isExecuting) {

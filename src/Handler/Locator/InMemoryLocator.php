@@ -2,7 +2,6 @@
 
 namespace League\Tactician\Handler\Locator;
 
-use League\Tactician\Command;
 use League\Tactician\Exception\MissingHandlerException;
 
 /**
@@ -65,11 +64,11 @@ class InMemoryLocator implements HandlerLocator
     /**
      * Retrieve handler for the given command
      *
-     * @param Command $command
+     * @param object $command
      * @return object
      * @throws MissingHandlerException
      */
-    public function getHandlerForCommand(Command $command)
+    public function getHandlerForCommand($command)
     {
         $className = get_class($command);
 

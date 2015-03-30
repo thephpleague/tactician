@@ -2,23 +2,21 @@
 
 namespace League\Tactician\Exception;
 
-use League\Tactician\Command;
-
 /**
  * No handler could be found for the given command.
  */
 class MissingHandlerException extends \OutOfBoundsException implements Exception
 {
     /**
-     * @var Command
+     * @var object
      */
     private $command;
 
     /**
-     * @param Command $command
+     * @param object $command
      * @return static
      */
-    public static function forCommand(Command $command)
+    public static function forCommand($command)
     {
         $exception = new static('Missing handler for command: ' . get_class($command));
         $exception->command = $command;
@@ -27,7 +25,7 @@ class MissingHandlerException extends \OutOfBoundsException implements Exception
     }
 
     /**
-     * @return Command
+     * @return object
      */
     public function getCommand()
     {

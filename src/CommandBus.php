@@ -3,6 +3,7 @@
 namespace League\Tactician;
 
 use Closure;
+use League\Tactician\Exception\InvalidCommandException;
 
 /**
  * Receives a command and sends it through a chain of middleware for processing.
@@ -25,11 +26,15 @@ use Closure;
     /**
      * Executes the given command and optionally returns a value
      *
-     * @param Command $command
+     * @param object $command
      * @return mixed
      */
-    public function handle(Command $command)
+    public function handle($command)
     {
+        if (!is_object($command)) {
+            throw InvalidCommandException::forUnknownValue($command);
+        }
+
         $middlewareChain = $this->middlewareChain;
         return $middlewareChain($command);
     }
@@ -40,12 +45,12 @@ use Closure;
      */
     private function createExecutionChain($middlewareList)
     {
-        $lastCallable = function (Command $command) {
+        $lastCallable = function ($command) {
             // the final callable is a no-op
         };
 
         while ($middleware = array_pop($middlewareList)) {
-            $lastCallable = function (Command $command) use ($middleware, $lastCallable) {
+            $lastCallable = function ($command) use ($middleware, $lastCallable) {
                 return $middleware->execute($command, $lastCallable);
             };
         }

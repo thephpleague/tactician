@@ -1,7 +1,6 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
 
-use League\Tactician\Command;
 use League\Tactician\Middleware;
 use League\Tactician\CommandBus;
 
@@ -12,7 +11,7 @@ use League\Tactician\CommandBus;
  *
  * Here's a Tactician version of the wikipedia Light Switch example.
  */
-interface SelfExecutingCommand extends Command
+interface SelfExecutingCommand
 {
     public function execute(Light $light);
 }
@@ -53,7 +52,7 @@ class SelfExecutionMiddleware implements Middleware
         $this->light = $light;
     }
 
-    public function execute(Command $command, callable $next)
+    public function execute($command, callable $next)
     {
         if (!$command instanceof SelfExecutingCommand) {
             throw new InvalidArgumentException("Can not execute command");

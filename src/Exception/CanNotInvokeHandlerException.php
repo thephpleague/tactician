@@ -2,10 +2,8 @@
 
 namespace League\Tactician\Exception;
 
-use League\Tactician\Command;
-
 /**
- * Thrown when a specific handler object can not used on a command object.
+ * Thrown when a specific handler object can not be used on a command object.
  *
  * The most common reason is the receiving method is missing or incorrectly
  * named.
@@ -13,16 +11,16 @@ use League\Tactician\Command;
 class CanNotInvokeHandlerException extends \BadMethodCallException implements Exception
 {
     /**
-     * @var Command
+     * @var object
      */
     private $command;
 
     /**
-     * @param Command $command
+     * @param object $command
      * @param string $reason
      * @return static
      */
-    public static function forCommand(Command $command, $reason)
+    public static function forCommand($command, $reason)
     {
         $exception = new static(
             'Could not invoke handler for command ' . get_class($command) .
@@ -36,7 +34,7 @@ class CanNotInvokeHandlerException extends \BadMethodCallException implements Ex
     /**
      * Returns the command that could not be invoked
      *
-     * @return Command
+     * @return object
      */
     public function getCommand()
     {
