@@ -59,4 +59,12 @@ class CommandBusTest extends \PHPUnit_Framework_TestCase
     {
         (new CommandBus([]))->handle(new AddTaskCommand());
     }
+
+    /**
+     * @expectedException \League\Tactician\Exception\InvalidCommandException
+     */
+    public function testHandleThrowExceptionForInvalidCommand()
+    {
+        (new CommandBus([]))->handle('must be an object');
+    }
 }
