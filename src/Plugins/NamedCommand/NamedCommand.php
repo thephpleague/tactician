@@ -1,6 +1,6 @@
 <?php
 
-namespace League\Tactician\Handler\CommandNameExtractor;
+namespace League\Tactician\Plugins\NamedCommand;
 
 /**
  * Exposes a name for a command

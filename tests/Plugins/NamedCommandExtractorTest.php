@@ -1,8 +1,8 @@
 <?php
 
-namespace League\Tactician\Tests\Handler\CommandNameExtractor;
+namespace League\Tactician\Tests\Plugins;
 
-use League\Tactician\Handler\CommandNameExtractor\NamedCommandExtractor;
+use League\Tactician\Plugins\NamedCommand\NamedCommandExtractor;
 use League\Tactician\Tests\Fixtures\Command\CommandWithAName;
 
 class NamedCommandExtractorTest extends \PHPUnit_Framework_TestCase

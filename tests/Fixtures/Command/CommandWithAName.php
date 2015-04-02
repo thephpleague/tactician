@@ -2,7 +2,7 @@
 
 namespace League\Tactician\Tests\Fixtures\Command;
 
-use League\Tactician\Handler\CommandNameExtractor\NamedCommand;
+use League\Tactician\Plugins\NamedCommand\NamedCommand;
 
 class CommandWithAName implements NamedCommand
 {
