@@ -20,7 +20,7 @@ class ClassNameExtractorTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             'stdClass',
-            $this->extractor->getNameForCommand(new \stdClass)
+            $this->extractor->extract(new \stdClass)
         );
     }
 }

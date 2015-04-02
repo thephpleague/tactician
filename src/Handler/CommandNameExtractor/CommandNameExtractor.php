@@ -15,5 +15,5 @@ interface CommandNameExtractor
      *
      * @return string
      */
-    public function getNameForCommand($command);
+    public function extract($command);
 }

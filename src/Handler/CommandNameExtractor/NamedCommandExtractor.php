@@ -10,7 +10,7 @@ class NamedCommandExtractor implements CommandNameExtractor
     /**
      * {@inheritdoc}
      */
-    public function getNameForCommand($command)
+    public function extract($command)
     {
         if ($command instanceof NamedCommand) {
             return $command->getName();

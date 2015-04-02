@@ -21,7 +21,7 @@ class NamedCommandExtractorTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             'commandName',
-            $this->extractor->getNameForCommand(new CommandWithAName)
+            $this->extractor->extract(new CommandWithAName)
         );
     }
 
@@ -29,7 +29,7 @@ class NamedCommandExtractorTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             'stdClass',
-            $this->extractor->getNameForCommand(new \stdClass)
+            $this->extractor->extract(new \stdClass)
         );
     }
 }
