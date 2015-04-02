@@ -6,7 +6,7 @@ use League\Tactician\Handler\CommandNameExtractor\NamedCommand;
 
 class CommandWithAName implements NamedCommand
 {
-    public function getName()
+    public function getCommandName()
     {
         return 'commandName';
     }

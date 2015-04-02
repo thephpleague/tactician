@@ -13,7 +13,7 @@ class NamedCommandExtractor implements CommandNameExtractor
     public function extract($command)
     {
         if ($command instanceof NamedCommand) {
-            return $command->getName();
+            return $command->getCommandName();
         }
 
         // fallback to class name
