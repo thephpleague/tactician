@@ -17,9 +17,12 @@ class InvalidCommandException extends \RuntimeException implements Exception
      */
     public static function forUnknownValue($invalidCommand)
     {
-        return new static(
-            "Commands must be an object but the value given was of type " . gettype($invalidCommand)
+        $exception = new static(
+            'Commands must be an object but the value given was of type: ' . gettype($invalidCommand)
         );
+        $exception->invalidCommand = $invalidCommand;
+
+        return $exception;
     }
 
     /**
