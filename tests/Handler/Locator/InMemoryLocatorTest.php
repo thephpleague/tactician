@@ -27,7 +27,7 @@ class InMemoryLocatorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(
             $handler,
-            $this->inMemoryLocator->getHandlerForCommand(new CompleteTaskCommand())
+            $this->inMemoryLocator->getHandlerForCommand(CompleteTaskCommand::class)
         );
     }
 
@@ -42,12 +42,12 @@ class InMemoryLocatorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(
             $commandToHandlerMap[AddTaskCommand::class],
-            $locator->getHandlerForCommand(new AddTaskCommand())
+            $locator->getHandlerForCommand(AddTaskCommand::class)
         );
 
         $this->assertSame(
             $commandToHandlerMap[CompleteTaskCommand::class],
-            $locator->getHandlerForCommand(new CompleteTaskCommand())
+            $locator->getHandlerForCommand(CompleteTaskCommand::class)
         );
     }
 
@@ -56,6 +56,6 @@ class InMemoryLocatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testHandlerMissing()
     {
-        $this->inMemoryLocator->getHandlerForCommand(new CompleteTaskCommand());
+        $this->inMemoryLocator->getHandlerForCommand(CompleteTaskCommand::class);
     }
 }

@@ -64,18 +64,16 @@ class InMemoryLocator implements HandlerLocator
     /**
      * Returns the handler bound to the command's class name.
      *
-     * @param object $command
+     * @param string $commandName
      *
      * @return object
      */
-    public function getHandlerForCommand($command)
+    public function getHandlerForCommand($commandName)
     {
-        $className = get_class($command);
-
-        if (!isset($this->handlers[$className])) {
-            throw MissingHandlerException::forCommand($command);
+        if (!isset($this->handlers[$commandName])) {
+            throw MissingHandlerException::forCommand($commandName);
         }
 
-        return $this->handlers[$className];
+        return $this->handlers[$commandName];
     }
 }
