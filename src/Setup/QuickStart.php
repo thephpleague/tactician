@@ -26,6 +26,7 @@ class QuickStart
      * Creates a default CommandBus that you can get started with.
      *
      * @param array $commandToHandlerMap
+     *
      * @return CommandBus
      */
     public static function create($commandToHandlerMap)

@@ -18,6 +18,7 @@ class CanNotInvokeHandlerException extends \BadMethodCallException implements Ex
     /**
      * @param object $command
      * @param string $reason
+     *
      * @return static
      */
     public static function forCommand($command, $reason)

@@ -15,8 +15,9 @@ namespace League\Tactician;
 interface Middleware
 {
     /**
-     * @param object $command
+     * @param object   $command
      * @param callable $next
+     *
      * @return mixed
      */
     public function execute($command, callable $next);
