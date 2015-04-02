@@ -2,6 +2,7 @@
 
 namespace League\Tactician\Plugins\NamedCommand;
 
+use League\Tactician\Exception\CanNotDetermineCommandNameException;
 use League\Tactician\Handler\CommandNameExtractor\CommandNameExtractor;
 
 /**
@@ -18,7 +19,6 @@ class NamedCommandExtractor implements CommandNameExtractor
             return $command->getCommandName();
         }
 
-        // fallback to class name
-        return get_class($command);
+        throw CanNotDetermineCommandNameException::forCommand($command);
     }
 }

@@ -25,11 +25,13 @@ class NamedCommandExtractorTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testExtractsNameFromACommand()
+    public function testThrowsExceptionForNonNamedCommand()
     {
-        $this->assertEquals(
-            'stdClass',
-            $this->extractor->extract(new \stdClass)
+        $this->setExpectedException(
+            'League\Tactician\Exception\CanNotDetermineCommandNameException',
+            'Could not determine command name of stdClass'
         );
+
+        $this->extractor->extract(new \stdClass);
     }
 }
