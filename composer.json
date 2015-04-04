@@ -22,6 +22,14 @@
             "League\\Tactician\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "League\\Tactician\\Tests\\": "tests"
+        },
+        "files": [
+            "tests/Fixtures/Command/CommandWithoutNamespace.php"
+        ]
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "0.4-dev"
