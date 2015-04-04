@@ -12,7 +12,7 @@ use League\Tactician\Exception\InvalidCommandException;
 class CommandBus
 {
     /**
-     * @var \Closure
+     * @var callable
      */
     private $middlewareChain;
 
@@ -44,7 +44,7 @@ class CommandBus
     /**
      * @param Middleware[] $middlewareList
      *
-     * @return \Closure
+     * @return callable
      */
     private function createExecutionChain($middlewareList)
     {
