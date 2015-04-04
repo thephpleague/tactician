@@ -3,6 +3,7 @@
 namespace League\Tactician\Setup;
 
 use League\Tactician\CommandBus;
+use League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor;
 use League\Tactician\Handler\Locator\InMemoryLocator;
 use League\Tactician\Handler\MethodNameInflector\HandleInflector;
 use League\Tactician\Handler\CommandHandlerMiddleware;
@@ -32,6 +33,7 @@ class QuickStart
     public static function create($commandToHandlerMap)
     {
         $handlerMiddleware = new CommandHandlerMiddleware(
+            new ClassNameExtractor(),
             new InMemoryLocator($commandToHandlerMap),
             new HandleInflector()
         );

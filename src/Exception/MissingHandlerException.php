@@ -8,28 +8,28 @@ namespace League\Tactician\Exception;
 class MissingHandlerException extends \OutOfBoundsException implements Exception
 {
     /**
-     * @var object
+     * @var string
      */
-    private $command;
+    private $commandName;
 
     /**
-     * @param object $command
+     * @param string $commandName
      *
      * @return static
      */
-    public static function forCommand($command)
+    public static function forCommand($commandName)
     {
-        $exception = new static('Missing handler for command: ' . get_class($command));
-        $exception->command = $command;
+        $exception = new static('Missing handler for command ' . $commandName);
+        $exception->commandName = $commandName;
 
         return $exception;
     }
 
     /**
-     * @return object
+     * @return string
      */
-    public function getCommand()
+    public function getCommandName()
     {
-        return $this->command;
+        return $this->commandName;
     }
 }

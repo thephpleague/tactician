@@ -3,8 +3,9 @@
 namespace League\Tactician\Tests\Handler;
 
 use League\Tactician\Handler\CommandHandlerMiddleware;
-use League\Tactician\Handler\MethodNameInflector\MethodNameInflector;
+use League\Tactician\Handler\CommandNameExtractor\CommandNameExtractor;
 use League\Tactician\Handler\Locator\HandlerLocator;
+use League\Tactician\Handler\MethodNameInflector\MethodNameInflector;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use League\Tactician\Tests\Fixtures\Handler\DynamicMethodsHandler;
 use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
@@ -19,6 +20,11 @@ class CommandHandlerMiddlewareTest extends \PHPUnit_Framework_TestCase
     private $middleware;
 
     /**
+     * @var CommandNameExtractor|Mockery\MockInterface
+     */
+    private $commandNameExtractor;
+
+    /**
      * @var HandlerLocator|Mockery\MockInterface
      */
     private $handlerLocator;
@@ -30,10 +36,12 @@ class CommandHandlerMiddlewareTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
+        $this->commandNameExtractor = Mockery::mock(CommandNameExtractor::class);
         $this->handlerLocator = Mockery::mock(HandlerLocator::class);
         $this->methodNameInflector = Mockery::mock(MethodNameInflector::class);
 
         $this->middleware = new CommandHandlerMiddleware(
+            $this->commandNameExtractor,
             $this->handlerLocator,
             $this->methodNameInflector
         );
@@ -57,8 +65,13 @@ class CommandHandlerMiddlewareTest extends \PHPUnit_Framework_TestCase
 
         $this->handlerLocator
             ->shouldReceive('getHandlerForCommand')
-            ->with($command)
+            ->with(CompleteTaskCommand::class)
             ->andReturn($handler);
+
+        $this->commandNameExtractor
+            ->shouldReceive('extract')
+            ->with($command)
+            ->andReturn(CompleteTaskCommand::class);
 
         $this->assertEquals('a-return-value', $this->middleware->execute($command, $this->mockNext()));
     }
@@ -78,6 +91,10 @@ class CommandHandlerMiddlewareTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('getHandlerForCommand')
             ->andReturn(new stdClass);
 
+        $this->commandNameExtractor
+            ->shouldReceive('extract')
+            ->with($command);
+
         $this->assertEquals('a-return-value', $this->middleware->execute($command, $this->mockNext()));
     }
 
@@ -93,6 +110,10 @@ class CommandHandlerMiddlewareTest extends \PHPUnit_Framework_TestCase
         $this->handlerLocator
             ->shouldReceive('getHandlerForCommand')
             ->andReturn($handler);
+
+        $this->commandNameExtractor
+            ->shouldReceive('extract')
+            ->with($command);
 
         $this->middleware->execute($command, $this->mockNext());
 
@@ -117,6 +138,10 @@ class CommandHandlerMiddlewareTest extends \PHPUnit_Framework_TestCase
         $this->handlerLocator
             ->shouldReceive('getHandlerForCommand')
             ->andReturn($handler);
+
+        $this->commandNameExtractor
+            ->shouldReceive('extract')
+            ->with($command);
 
         $this->middleware->execute($command, $this->mockNext());
 

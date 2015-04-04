@@ -4,14 +4,20 @@ namespace League\Tactician\Handler;
 
 use League\Tactician\Middleware;
 use League\Tactician\Exception\CanNotInvokeHandlerException;
-use League\Tactician\Handler\MethodNameInflector\MethodNameInflector;
+use League\Tactician\Handler\CommandNameExtractor\CommandNameExtractor;
 use League\Tactician\Handler\Locator\HandlerLocator;
+use League\Tactician\Handler\MethodNameInflector\MethodNameInflector;
 
 /**
  * The "core" CommandBus. Locates the appropriate handler and executes command.
  */
 class CommandHandlerMiddleware implements Middleware
 {
+    /**
+     * @var CommandNameExtractor
+     */
+    private $commandNameExtractor;
+
     /**
      * @var HandlerLocator
      */
@@ -23,12 +29,17 @@ class CommandHandlerMiddleware implements Middleware
     private $methodNameInflector;
 
     /**
-     * @param HandlerLocator      $handlerLoader
-     * @param MethodNameInflector $methodNameInflector
+     * @param CommandNameExtractor $commandNameExtractor
+     * @param HandlerLocator       $handlerLocator
+     * @param MethodNameInflector  $methodNameInflector
      */
-    public function __construct(HandlerLocator $handlerLoader, MethodNameInflector $methodNameInflector)
-    {
-        $this->handlerLocator = $handlerLoader;
+    public function __construct(
+        CommandNameExtractor $commandNameExtractor,
+        HandlerLocator $handlerLocator,
+        MethodNameInflector $methodNameInflector
+    ) {
+        $this->commandNameExtractor = $commandNameExtractor;
+        $this->handlerLocator = $handlerLocator;
         $this->methodNameInflector = $methodNameInflector;
     }
 
@@ -44,7 +55,8 @@ class CommandHandlerMiddleware implements Middleware
      */
     public function execute($command, callable $next)
     {
-        $handler = $this->handlerLocator->getHandlerForCommand($command);
+        $commandName = $this->commandNameExtractor->extract($command);
+        $handler = $this->handlerLocator->getHandlerForCommand($commandName);
         $methodName = $this->methodNameInflector->inflect($command, $handler);
 
         // is_callable is used here instead of method_exists, as method_exists

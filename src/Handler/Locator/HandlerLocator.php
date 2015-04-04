@@ -13,11 +13,11 @@ interface HandlerLocator
     /**
      * Retrieves the handler for a specified command
      *
-     * @param object $command
-     *
-     * @throws MissingHandlerException
+     * @param string $commandName
      *
      * @return mixed
+     *
+     * @throws MissingHandlerException
      */
-    public function getHandlerForCommand($command);
+    public function getHandlerForCommand($commandName);
 }
