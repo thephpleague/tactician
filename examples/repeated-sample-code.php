@@ -3,8 +3,9 @@ require __DIR__ . '/../vendor/autoload.php';
 
 // The basic code from example 1 that we reuse in future examples.
 
-use League\Tactician\Handler\MethodNameInflector\HandleClassNameInflector;
 use League\Tactician\Handler\Locator\InMemoryLocator;
+use League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor;
+use League\Tactician\Handler\MethodNameInflector\HandleClassNameInflector;
 
 class RegisterUserCommand
 {
@@ -25,6 +26,7 @@ $locator = new InMemoryLocator();
 $locator->addHandler(new RegisterUserHandler(), RegisterUserCommand::class);
 
 $handlerMiddleware = new League\Tactician\Handler\CommandHandlerMiddleware(
+    new ClassNameExtractor(),
     $locator,
     new HandleClassNameInflector()
 );

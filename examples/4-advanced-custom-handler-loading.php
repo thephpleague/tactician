@@ -12,6 +12,7 @@ require __DIR__ . '/repeated-sample-code.php';
 use League\Tactician\CommandBus;
 use League\Tactician\Handler\CommandHandlerMiddleware;
 use League\Tactician\Handler\Locator\HandlerLocator;
+use League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor;
 use League\Tactician\Handler\MethodNameInflector\HandleClassNameInflector;
 
 class ContainerBasedHandlerLocator implements HandlerLocator
@@ -23,10 +24,13 @@ class ContainerBasedHandlerLocator implements HandlerLocator
         $this->container = $container;
     }
 
-    public function getHandlerForCommand($command)
+    // The commandName is determined by the "CommandNameExtractor" we pass into
+    // the CommandHandlerMiddleware below. If you look below, you can see it's
+    // just the Class Name.
+    public function getHandlerForCommand($commandName)
     {
         // This is a cheesy naming strategy but it's just an example
-        $handlerId = 'app.handler.' . get_class($command);
+        $handlerId = 'app.handler.' . $commandName;
         return $this->container->get($handlerId);
     }
 }
@@ -40,6 +44,7 @@ $fakeContainer
 
 // Now, we create our command bus using our container based loader instead
 $handlerMiddleware = new CommandHandlerMiddleware(
+    new ClassNameExtractor(),
     new ContainerBasedHandlerLocator($fakeContainer),
     new HandleClassNameInflector()
 );
