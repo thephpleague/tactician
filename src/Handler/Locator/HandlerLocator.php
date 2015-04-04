@@ -14,6 +14,7 @@ interface HandlerLocator
      * Retrieves the handler for a specified command
      *
      * @param object $command
+     *
      * @return mixed
      */
     public function getHandlerForCommand($command);

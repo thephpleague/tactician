@@ -14,6 +14,7 @@ class MissingHandlerException extends \OutOfBoundsException implements Exception
 
     /**
      * @param object $command
+     *
      * @return static
      */
     public static function forCommand($command)

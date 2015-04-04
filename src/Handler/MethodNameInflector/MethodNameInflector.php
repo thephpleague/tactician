@@ -13,6 +13,7 @@ interface MethodNameInflector
      *
      * @param object $command
      * @param object $commandHandler
+     *
      * @return string
      */
     public function inflect($command, $commandHandler);

@@ -23,7 +23,7 @@ class CommandHandlerMiddleware implements Middleware
     private $methodNameInflector;
 
     /**
-     * @param HandlerLocator $handlerLoader
+     * @param HandlerLocator      $handlerLoader
      * @param MethodNameInflector $methodNameInflector
      */
     public function __construct(HandlerLocator $handlerLoader, MethodNameInflector $methodNameInflector)
@@ -35,10 +35,12 @@ class CommandHandlerMiddleware implements Middleware
     /**
      * Executes a command and optionally returns a value
      *
-     * @throws CanNotInvokeHandlerException
-     * @param object $command
+     * @param object   $command
      * @param callable $next
+     *
      * @return mixed
+     *
+     * @throws CanNotInvokeHandlerException
      */
     public function execute($command, callable $next)
     {

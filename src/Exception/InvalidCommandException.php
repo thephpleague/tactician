@@ -1,4 +1,5 @@
 <?php
+
 namespace League\Tactician\Exception;
 
 /**
@@ -13,6 +14,7 @@ class InvalidCommandException extends \RuntimeException implements Exception
 
     /**
      * @param mixed $invalidCommand
+     *
      * @return static
      */
     public static function forUnknownValue($invalidCommand)

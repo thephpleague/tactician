@@ -23,9 +23,7 @@ class LockingMiddleware implements Middleware
     /**
      * Queues incoming commands until the first has completed
      *
-     * @param object $command
-     * @param callable $next
-     * @return mixed
+     * {@inheritdoc}
      */
     public function execute($command, callable $next)
     {

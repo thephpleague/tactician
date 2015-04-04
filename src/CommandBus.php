@@ -2,16 +2,17 @@
 
 namespace League\Tactician;
 
-use Closure;
 use League\Tactician\Exception\InvalidCommandException;
 
 /**
  * Receives a command and sends it through a chain of middleware for processing.
+ *
+ * @final
  */
-/* final */class CommandBus
+class CommandBus
 {
     /**
-     * @var Closure
+     * @var \Closure
      */
     private $middlewareChain;
 
@@ -27,6 +28,7 @@ use League\Tactician\Exception\InvalidCommandException;
      * Executes the given command and optionally returns a value
      *
      * @param object $command
+     *
      * @return mixed
      */
     public function handle($command)
@@ -41,7 +43,8 @@ use League\Tactician\Exception\InvalidCommandException;
 
     /**
      * @param Middleware[] $middlewareList
-     * @return Closure
+     *
+     * @return \Closure
      */
     private function createExecutionChain($middlewareList)
     {
