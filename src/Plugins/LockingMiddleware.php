@@ -21,9 +21,12 @@ class LockingMiddleware implements Middleware
     private $queue = [];
 
     /**
-     * Queues incoming commands until the first has completed
+     * Execute the given command... after other running commands are complete.
      *
-     * {@inheritdoc}
+     * @param object   $command
+     * @param callable $next
+     *
+     * @return mixed|void
      */
     public function execute($command, callable $next)
     {

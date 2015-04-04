@@ -15,6 +15,8 @@ interface HandlerLocator
      *
      * @param object $command
      *
+     * @throws MissingHandlerException
+     *
      * @return mixed
      */
     public function getHandlerForCommand($command);

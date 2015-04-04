@@ -62,9 +62,11 @@ class InMemoryLocator implements HandlerLocator
     }
 
     /**
-     * {@inheritdoc}
+     * Returns the handler bound to the command's class name.
      *
-     * @throws MissingHandlerException
+     * @param object $command
+     *
+     * @return object
      */
     public function getHandlerForCommand($command)
     {
