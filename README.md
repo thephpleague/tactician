@@ -21,3 +21,10 @@ The core Tactician package is small but there are several plugin packages that e
 
 ## Framework Integration
 There is ongoing development for Zend, Symfony2 and Laravel integration packages. Check the github issues to see their status.
+
+## Testing
+To run all unit tests, use the locally installed PHPUnit:
+
+~~~
+$ ./vendor/bin/phpunit
+~~~
