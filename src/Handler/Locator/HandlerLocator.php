@@ -15,7 +15,7 @@ interface HandlerLocator
      *
      * @param string $commandName
      *
-     * @return mixed
+     * @return object
      *
      * @throws MissingHandlerException
      */
