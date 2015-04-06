@@ -2,6 +2,7 @@
 namespace League\Tactician\Tests;
 
 use League\Tactician\CommandBus;
+use League\Tactician\Exception\InvalidMiddlewareException;
 use League\Tactician\Middleware;
 use League\Tactician\Tests\Fixtures\Command\AddTaskCommand;
 use Mockery;
@@ -66,5 +67,25 @@ class CommandBusTest extends \PHPUnit_Framework_TestCase
     public function testHandleThrowExceptionForInvalidCommand()
     {
         (new CommandBus([]))->handle('must be an object');
+    }
+
+    public function testIfOneCanOnlyCreateWithValidMiddlewares()
+    {
+        $middlewareList = [$this->getMock('stdClass')];
+
+        try {
+            new CommandBus($middlewareList);
+            $this->fail('Should not be able to create a CommandBus without a valid list of middlewares!');
+        } catch (InvalidMiddlewareException $caught) {
+            $this->addToAssertionCount(1);
+        }
+    }
+
+    public function testIfValidMiddlewaresAreAccepted()
+    {
+        $middlewareList = [$this->getMock('\League\Tactician\Middleware')];
+
+        new CommandBus($middlewareList);
+        $this->addToAssertionCount(1);
     }
 }

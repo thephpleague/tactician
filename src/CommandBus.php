@@ -3,6 +3,7 @@
 namespace League\Tactician;
 
 use League\Tactician\Exception\InvalidCommandException;
+use League\Tactician\Exception\InvalidMiddlewareException;
 
 /**
  * Receives a command and sends it through a chain of middleware for processing.
@@ -53,6 +54,10 @@ class CommandBus
         };
 
         while ($middleware = array_pop($middlewareList)) {
+            if (! $middleware instanceof Middleware) {
+                throw InvalidMiddlewareException::forMiddleware($middleware);
+            }
+
             $lastCallable = function ($command) use ($middleware, $lastCallable) {
                 return $middleware->execute($command, $lastCallable);
             };
