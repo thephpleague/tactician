@@ -69,16 +69,14 @@ class CommandBusTest extends \PHPUnit_Framework_TestCase
         (new CommandBus([]))->handle('must be an object');
     }
 
+    /**
+     * @expectedException \League\Tactician\Exception\InvalidMiddlewareException
+     */
     public function testIfOneCanOnlyCreateWithValidMiddlewares()
     {
         $middlewareList = [$this->getMock('stdClass')];
 
-        try {
-            new CommandBus($middlewareList);
-            $this->fail('Should not be able to create a CommandBus without a valid list of middlewares!');
-        } catch (InvalidMiddlewareException $caught) {
-            $this->addToAssertionCount(1);
-        }
+        new CommandBus($middlewareList);
     }
 
     public function testIfValidMiddlewaresAreAccepted()

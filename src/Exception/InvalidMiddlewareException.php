@@ -2,7 +2,10 @@
 
 namespace League\Tactician\Exception;
 
-class InvalidMiddlewareException extends \LogicException implements Exception
+/**
+ * Thrown when the CommandBus was instantiated with an invalid middleware object
+ */
+class InvalidMiddlewareException extends \InvalidArgumentException implements Exception
 {
     public static function forMiddleware($middleware)
     {
