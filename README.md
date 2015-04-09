@@ -28,3 +28,7 @@ To run all unit tests, use the locally installed PHPUnit:
 ~~~
 $ ./vendor/bin/phpunit
 ~~~
+
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
