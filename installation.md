@@ -50,8 +50,8 @@ That said, if you'd like to change the handler method called or any other option
 ## Supported Framework Adapters
 These frameworks are currently on our targeted list.
 
-### Symfony2
-A bundle is currently in active development, but isn't ready for production use yet. If you'd like to get involved and hurry this along, [contribute to the repo here](https://github.com/xtrasmal/TacticianBundle)!
+### Symfony
+There's an [official Tactician bundle for Symfony](https://github.com/thephpleague/tactician-bundle). It's still in active development but it works well and you can use it in your projects.
 
 ### Zend Framework 2
 Gary Hockin ([@GeeH](https://twitter.com/GeeH)) is already working on it! If you'd like to help out, [you can find the repo here](https://github.com/GeeH/TacticianModule)!
