@@ -28,8 +28,11 @@ class Builder
      * @param CommandNameExtractor $extractor
      * @param MethodNameInflector  $inflector
      */
-    public function __construct(HandlerLocator $locator, CommandNameExtractor $extractor = null, MethodNameInflector $inflector = null)
-    {
+    public function __construct(
+        HandlerLocator $locator,
+        CommandNameExtractor $extractor = null,
+        MethodNameInflector $inflector = null
+    ) {
         $this->commandHandler = new CommandHandlerMiddleware(
             $extractor ?: new ClassNameExtractor(),
             $locator,
