@@ -47,8 +47,6 @@ class Builder
      */
     public function build()
     {
-        $middlewares = $this->middlewares;
-
-        return new CommandBus($middlewares);
+        return new CommandBus($this->middlewares);
     }
 }
