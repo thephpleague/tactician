@@ -37,7 +37,7 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
             }
         );
 
-        $bus = (new Builder($locator))->push($secondMiddleware)->prepend($firstMiddleware)->build();
+        $bus = (new Builder())->push($secondMiddleware)->prepend($firstMiddleware)->build();
         $this->assertEquals('result', $bus->handle($command));
         $this->assertEquals(['m1', 'm2'], $calls);
     }
