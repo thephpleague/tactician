@@ -30,7 +30,9 @@ class LockingMiddleware implements Middleware
      */
     public function execute($command, callable $next)
     {
-        $this->queue[] = $next;
+        $this->queue[] = function () use ($command, $next) {
+            return $next($command);
+        };
         if ($this->isExecuting) {
             return;
         }
@@ -38,8 +40,8 @@ class LockingMiddleware implements Middleware
         $this->isExecuting = true;
 
         $returnValues = [];
-        while ($pendingNext = array_shift($this->queue)) {
-            $returnValues[] = $pendingNext($command);
+        while ($resumeCommand = array_shift($this->queue)) {
+            $returnValues[] = $resumeCommand();
         }
 
         $this->isExecuting = false;

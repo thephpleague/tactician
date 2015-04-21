@@ -34,29 +34,56 @@ class LockingMiddlewareTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testCommandsAreQueuedIfAnotherCommandIsBeingExecuted()
+    public function testSecondsCommandIsNotDispatchedUntilFirstCommandIsComplete()
     {
         $secondCommandDispatched = false;
 
-        $next2 = function ($command) use (&$secondCommandDispatched) {
+        $next2 = function () use (&$secondCommandDispatched) {
             if (!$secondCommandDispatched) {
                 throw new \Exception('Second command was executed before the first completed!');
             }
+        };
+
+        $next1 = function () use (&$secondCommandDispatched, $next2) {
+            $this->lockingMiddleware->execute(null, $next2);
+            $secondCommandDispatched = true;
+        };
+
+        $this->lockingMiddleware->execute(null, $next1);
+    }
+
+    public function testTheReturnValueOfTheFirstCommandIsGivenBack()
+    {
+        $next2 = function () {
             return 'second-payload';
         };
 
-        $next1 = function ($command) use (&$secondCommandDispatched, $next2) {
-            // Technically, we'd pass the command back into the command bus, not the middleware
-            // again but this it would result in the same thing with an extra test dependency.
-            $this->lockingMiddleware->execute(new CompleteTaskCommand(), $next2);
-            $secondCommandDispatched = true;
+        $next1 = function () use ($next2) {
+            $this->lockingMiddleware->execute(null, $next2);
             return 'first-payload';
         };
 
         // Only the return value of the first command should be returned
         $this->assertEquals(
             'first-payload',
-            $this->lockingMiddleware->execute(new AddTaskCommand(), $next1)
+            $this->lockingMiddleware->execute(null, $next1)
         );
+    }
+
+    public function testTheCorrectSubCommandIsGivenToTheNextCallable()
+    {
+        $secondCommand = new CompleteTaskCommand();
+
+        $next2 = function ($command) use ($secondCommand) {
+            if ($command !== $secondCommand) {
+                throw new \Exception('Received incorrect command: ' . get_class($command));
+            }
+        };
+
+        $next1 = function () use ($next2, $secondCommand) {
+            $this->lockingMiddleware->execute($secondCommand, $next2);
+        };
+
+        $this->lockingMiddleware->execute(null, $next1);
     }
 }
