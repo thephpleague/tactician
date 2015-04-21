@@ -54,7 +54,7 @@ class LockingMiddlewareTest extends \PHPUnit_Framework_TestCase
 
     public function testTheReturnValueOfTheFirstCommandIsGivenBack()
     {
-        $next2 = function (){
+        $next2 = function () {
             return 'second-payload';
         };
 
@@ -76,7 +76,7 @@ class LockingMiddlewareTest extends \PHPUnit_Framework_TestCase
 
         $next2 = function ($command) use ($secondCommand) {
             if ($command !== $secondCommand) {
-                throw new \Exception('Received incorrect command: ' .get_class($command));
+                throw new \Exception('Received incorrect command: ' . get_class($command));
             }
         };
 
