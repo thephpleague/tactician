@@ -26,7 +26,7 @@ $commandToHandlerMap = [
 use League\Tactician\Container\ContainerLocator;
 $containerLocator = new ContainerLocator(
     $leagueContainer, 
-    $mapping
+    $commandToHandlerMap
 );
 
 // Finally, we pass the ContainerLocator into the CommandHandlerMiddleware that
