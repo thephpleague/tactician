@@ -74,7 +74,7 @@ $commandBus = new CommandBus(
 
 Likewise, it's important to put them in a specific order. If you put the LoggingMiddleware after the CommandHandlerMiddleware, the logging won't occur when you think it does. Also, the middlewares that actually execute Commands typically don't pass them onwards to `$next`, otherwise they run the risk of being executed twice (if there's another executing middleware further down the chain. 
 
-When you're setting up your command bus, always consider the order you place the middleware, otherwise you can get strange effects. However, this also gives you a lot of flexability. For an example of this, see the page about the [LockingMiddleware plugin](/locking-middleware).
+When you're setting up your command bus, always consider the order you place the middleware, otherwise you can get strange effects. However, this also gives you a lot of flexability. For an example of this, see the page about the [LockingMiddleware plugin](/plugins/locking-middleware).
 
 
 ## Conclusion
