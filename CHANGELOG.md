@@ -1,3 +1,17 @@
+## 0.6.0 (2015-05-08)
+
+BC Breaks:
+- None
+
+New features:
+
+- [Added CONTRIBUTING.md](https://github.com/thephpleague/tactician/pull/57)
+- [Middlewares are now checked for the correct interface](https://github.com/thephpleague/tactician/pull/56) 
+
+Bug fixes:
+
+- [LockingMiddleware now passes the correct command](https://github.com/thephpleague/tactician/pull/62)
+
 ## 0.5.0 (2015-03-30)
 
 tl;dr CommandHandlerMiddleware now requires an extra first parameter, you just need to pass an instance of `ClassNameExtractor` to it.  
