@@ -2,6 +2,8 @@
 
 namespace League\Tactician\Handler\Locator;
 
+use League\Tactician\Exception\MissingHandlerException;
+
 /**
  * Service locator for handler objects
  *
