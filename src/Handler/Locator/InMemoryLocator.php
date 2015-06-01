@@ -15,7 +15,7 @@ use League\Tactician\Exception\MissingHandlerException;
  *      $inMemoryLocator->addHandler($myHandler, 'My\TaskAddedCommand');
  *
  *      // Returns $myHandler
- *      $inMemoryLocator->getHandlerForCommand(new My\TaskAddedCommand());
+ *      $inMemoryLocator->getHandlerForCommand('My\TaskAddedCommand');
  */
 class InMemoryLocator implements HandlerLocator
 {
