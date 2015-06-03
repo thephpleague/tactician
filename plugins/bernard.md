@@ -16,7 +16,7 @@ This plugin provides you tools for both sending commands to and consuming from a
 
 ### Remote execution
 
-To setup queueing on the client side, simply pass the QueueMiddleware to the Command Bus. After that you queue commands by implementing the `League\Tactician\Bernard\QueueableCommand` interface. (Alternatively you can implement `Bernard\Message` AND `League\Tactician\Command`) Others will be passed to the next middleware in the chain.
+To setup queueing on the client side, simply pass the QueueMiddleware to the Command Bus. After that you queue commands by implementing the `League\Tactician\Bernard\QueueableCommand` interface (Alternatively you can implement `Bernard\Message`, see explanation later). Others will be passed to the next middleware in the chain.
 
 ~~~ php
 use Bernard\Producer;
@@ -51,7 +51,7 @@ $commandBus = new CommandBus([/* middlewares go here */]);
 // Wire the command bus into Bernard's routing system
 $receiver = new SingleBusReceiver($commandBus);
 $router = new SimpleRouter();
-$router->add('League\Tactician\Command', $receiver);
+$router->add('League\Tactician\Bernard\QueueableCommand', $receiver);
 
 // Finally, create the Bernard consumer that runs through the pending queue
 $consumer = new Consumer($router, new EventDispatcher());
@@ -60,9 +60,15 @@ $consumer->consume($queue);
 
 The plugin tries to follow Bernard's logic as close as possible. To leard more about how consuming and routers work, check the [official documentation](http://bernardphp.com) for details.
 
+
 #### Receivers
 
 Receiver is a term used in both command pattern and the message terminology. In this case a receiver is a callable passed to the Router. The Router routes all messages to a receiver (or returns with error if no receiver is registered for a messsage). There are two receivers implemented by this plugin:
 
 - `SingleBusReceiver`: This receiver should be used when the same command bus is used for the producer and the consumer side. It prevents a command from being requeued (causing an infinite loop).
 - `SeparateBusReceiver`: Use this receiver in any other cases.
+
+
+### `QueueableCommand` and `Message` interface
+
+Bernard provides an interface for messages to implement. If you implement only this interface, it is totally fine. The reason we have our own interface for queueable commands is to ease the separation of commands sent by Tactician and other messages received by the consumer (so you can register a separate receiver for commands sent by Tactician). In theory, you can use your consumer with not just Tactician, but with any custom logic.
