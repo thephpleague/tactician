@@ -54,7 +54,7 @@ These frameworks are currently on our targeted list.
 There's an [official Tactician bundle for Symfony](https://github.com/thephpleague/tactician-bundle). It's still in active development but it works well and you can use it in your projects.
 
 ### Zend Framework 2
-([Mike Zukowski](https://github.com/mikemix)) already authored a ZF2 module. You can grab it [at its Github page](https://github.com/mikemix/TacticianModule)!
+[Mike Zukowski](https://github.com/mikemix) already authored a ZF2 module. You can grab it [at its Github page](https://github.com/mikemix/TacticianModule)!
 
 ### Laravel
 Sorry, a provider is on our roadmap but we're short-handed. If you'd like to help out, [please get in touch](https://github.com/thephpleague/tactician/issues)!
