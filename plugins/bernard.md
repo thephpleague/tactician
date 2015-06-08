@@ -58,7 +58,7 @@ $consumer = new Consumer($router, new EventDispatcher());
 $consumer->consume($queue);
 ~~~
 
-The plugin tries to follow Bernard's logic as close as possible. To leard more about how consuming and routers work, check the [official documentation](http://bernardphp.com) for details.
+The plugin tries to follow Bernard's logic as close as possible. To learn more about how consuming and routers work, check the [official documentation](http://bernardphp.com) for details.
 
 #### Receivers
 
