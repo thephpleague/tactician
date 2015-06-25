@@ -6,9 +6,9 @@ title: Doctrine
 
 # Doctrine
 
-[![Author](http://img.shields.io/badge/author-@rosstuck-blue.svg?style=flat-square)](https://twitter.com/rosstuck)
-[![Source](http://img.shields.io/badge/source-league/tactician--doctrine-blue.svg?style=flat-square)](https://github.com/thephpleague/tactician-doctrine)
-[![Packagist](http://img.shields.io/packagist/v/league/tactician-doctrine.svg?style=flat-square)](https://packagist.org/packages/league/tactician-doctrine)
+[![Author](https://img.shields.io/badge/author-@rosstuck-blue.svg?style=flat-square)](https://twitter.com/rosstuck)
+[![Source](https://img.shields.io/badge/source-league/tactician--doctrine-blue.svg?style=flat-square)](https://github.com/thephpleague/tactician-doctrine)
+[![Packagist](https://img.shields.io/packagist/v/league/tactician-doctrine.svg?style=flat-square)](https://packagist.org/packages/league/tactician-doctrine)
 
 This package provides a `TransactionMiddleware` that executes each command in a separate Doctrine ORM transaction.
 

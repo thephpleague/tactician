@@ -6,9 +6,9 @@ title: Bernard
 
 # Bernard
 
-[![Author](http://img.shields.io/badge/author-@sagikazarmark-blue.svg?style=flat-square)](https://twitter.com/sagikazarmark)
-[![Source](http://img.shields.io/badge/source-league/tactician--bernard-blue.svg?style=flat-square)](https://github.com/thephpleague/tactician-bernard)
-[![Packagist](http://img.shields.io/packagist/v/league/tactician-bernard.svg?style=flat-square)](https://packagist.org/packages/league/tactician-bernard)
+[![Author](https://img.shields.io/badge/author-@sagikazarmark-blue.svg?style=flat-square)](https://twitter.com/sagikazarmark)
+[![Source](https://img.shields.io/badge/source-league/tactician--bernard-blue.svg?style=flat-square)](https://github.com/thephpleague/tactician-bernard)
+[![Packagist](https://img.shields.io/packagist/v/league/tactician-bernard.svg?style=flat-square)](https://packagist.org/packages/league/tactician-bernard)
 
 
 This plugin provides you tools for both sending commands to and consuming from a queue.

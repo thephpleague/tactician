@@ -6,9 +6,9 @@ title: Locking Middleware
 
 # Locking Middleware
 
-[![Author](http://img.shields.io/badge/author-@rosstuck-blue.svg?style=flat-square)](https://twitter.com/rosstuck)
-[![Source](http://img.shields.io/badge/source-league/tactician-blue.svg?style=flat-square)](https://github.com/thephpleague/tactician)
-[![Packagist](http://img.shields.io/packagist/v/league/tactician.svg?style=flat-square)](https://packagist.org/packages/league/tactician)
+[![Author](https://img.shields.io/badge/author-@rosstuck-blue.svg?style=flat-square)](https://twitter.com/rosstuck)
+[![Source](https://img.shields.io/badge/source-league/tactician-blue.svg?style=flat-square)](https://github.com/thephpleague/tactician)
+[![Packagist](https://img.shields.io/packagist/v/league/tactician.svg?style=flat-square)](https://packagist.org/packages/league/tactician)
 
 This plugin actually ships in the core Tactician "CommandBus" package, so it's available without installing any separate composer packages.
 

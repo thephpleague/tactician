@@ -6,9 +6,9 @@ title: Command Events
 
 # Command Events
 
-[![Author](http://img.shields.io/badge/author-@sagikazarmark-blue.svg?style=flat-square)](https://twitter.com/sagikazarmark)
-[![Source](http://img.shields.io/badge/source-league/tactician--command--events-blue.svg?style=flat-square)](https://github.com/thephpleague/tactician-command-events)
-[![Packagist](http://img.shields.io/packagist/v/league/tactician-command-events.svg?style=flat-square)](https://packagist.org/packages/league/tactician-command-events)
+[![Author](https://img.shields.io/badge/author-@sagikazarmark-blue.svg?style=flat-square)](https://twitter.com/sagikazarmark)
+[![Source](https://img.shields.io/badge/source-league/tactician--command--events-blue.svg?style=flat-square)](https://github.com/thephpleague/tactician-command-events)
+[![Packagist](https://img.shields.io/packagist/v/league/tactician-command-events.svg?style=flat-square)](https://packagist.org/packages/league/tactician-command-events)
 
 This plugin lets you listen to some events emitted during command execution:
 
