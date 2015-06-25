@@ -16,7 +16,12 @@ matrix:
 before_script:
     - travis_retry composer self-update
     - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction
+    - travis_retry wget https://scrutinizer-ci.com/ocular.phar
+    - mkdir -p build/logs
 
 script:
-    - vendor/bin/phpunit
+    - vendor/bin/phpunit --coverage-clover=build/logs/clover.xml
     - vendor/bin/phpcs --standard=PSR2 src tests
+
+after_script:
+    - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
