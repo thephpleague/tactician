@@ -5,8 +5,8 @@ title: Tactician
 ---
 
 # Introduction
-[![Author](http://img.shields.io/badge/author-@rosstuck-blue.svg?style=flat-square)](https://twitter.com/rosstuck)
-[![Source Code](http://img.shields.io/badge/source-league/tactician-blue.svg?style=flat-square)](https://github.com/thephpleague/tactician)
+[![Author](https://img.shields.io/badge/author-@rosstuck-blue.svg?style=flat-square)](https://twitter.com/rosstuck)
+[![Source Code](https://img.shields.io/badge/source-league/tactician-blue.svg?style=flat-square)](https://github.com/thephpleague/tactician)
 [![Travis CI](https://api.travis-ci.org/thephpleague/tactician.svg?branch=master)](https://travis-ci.org/thephpleague/tactician)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/thephpleague/tactician/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/thephpleague/tactician/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/thephpleague/tactician/badges/build.png?b=master)](https://scrutinizer-ci.com/g/thephpleague/tactician/build-status/master)
