@@ -32,6 +32,7 @@ $containerLocator = new ContainerLocator(
 // Finally, we pass the ContainerLocator into the CommandHandlerMiddleware that
 // we use in almost every CommandBus.
 $commandHandlerMiddleware = new CommandHandlerMiddleware(
+    new ClassNameExtractor(),
     $containerLocator,
     new HandleInflector()
 )
