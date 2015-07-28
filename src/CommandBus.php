@@ -20,7 +20,7 @@ class CommandBus
     /**
      * @param Middleware[] $middleware
      */
-    public function __construct(array $middleware)
+    public function __construct(array $middleware = array())
     {
         $this->middlewareChain = $this->createExecutionChain($middleware);
     }
@@ -41,6 +41,19 @@ class CommandBus
         $middlewareChain = $this->middlewareChain;
         return $middlewareChain($command);
     }
+    
+    /**
+     * Put some middleware on the front of the middleware chain
+     * 
+     * @param \League\Tactician\Middleware $middleware
+     */
+    public function prependMiddlewareChain(Middleware $middleware) {
+        $oldMiddlewareChain = $this->middlewareChain;
+        $this->middlewareChain = function($command) use ($middleware, $oldMiddlewareChain) {
+            return $middleware->execute($command, $oldMiddlewareChain);
+        };
+    }
+    
 
     /**
      * @param Middleware[] $middlewareList
