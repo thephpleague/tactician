@@ -45,7 +45,7 @@ class CommandBus
 
     /**
      * Put some middleware on the front of the middleware chain.
-     * 
+     *
      * @param \League\Tactician\Middleware $middleware
      */
     public function prependMiddlewareChain(Middleware $middleware)
