@@ -43,7 +43,7 @@ class CommandBus
         return $middlewareChain($command);
     }
 
-/**
+    /**
      * Put some middleware on the front of the middleware chain.
      * 
      * @param \League\Tactician\Middleware $middleware
@@ -56,7 +56,7 @@ class CommandBus
         };
     }
 
-/**
+    /**
      * @param Middleware[] $middlewareList
      *
      * @return callable
