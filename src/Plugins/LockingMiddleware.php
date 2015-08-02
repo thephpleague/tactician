@@ -26,6 +26,8 @@ class LockingMiddleware implements Middleware
      * @param object   $command
      * @param callable $next
      *
+     * @throws \Exception
+     *
      * @return mixed|void
      */
     public function execute($command, callable $next)
@@ -33,18 +35,37 @@ class LockingMiddleware implements Middleware
         $this->queue[] = function () use ($command, $next) {
             return $next($command);
         };
+
         if ($this->isExecuting) {
             return;
         }
-
         $this->isExecuting = true;
 
+        try {
+            $returnValue = $this->executeQueuedJobs();
+        } catch (\Exception $e) {
+            $this->isExecuting = false;
+            $this->queue = [];
+            throw $e;
+        }
+
+        $this->isExecuting = false;
+        return $returnValue;
+    }
+
+    /**
+     * Process any pending commands in the queue. If multiple, jobs are in the
+     * queue, only the first return value is given back.
+     *
+     * @return mixed
+     */
+    protected function executeQueuedJobs()
+    {
         $returnValues = [];
         while ($resumeCommand = array_shift($this->queue)) {
             $returnValues[] = $resumeCommand();
         }
 
-        $this->isExecuting = false;
         return array_shift($returnValues);
     }
 }
