@@ -49,7 +49,7 @@ class CommandBus
      */
     private function createExecutionChain($middlewareList)
     {
-        $lastCallable = function ($command) {
+        $lastCallable = function () {
             // the final callable is a no-op
         };
 
