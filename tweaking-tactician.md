@@ -43,12 +43,15 @@ The complete list of options are:
 Locator           | Notes
 ------------------|---------------------------------------------------
 [In Memory](https://github.com/thephpleague/tactician/blob/master/src/Handler/Locator/InMemoryLocator.php) | Maps Command Name to an existing Handler instance.
+[Callable](https://github.com/thephpleague/tactician/blob/master/src/Handler/Locator/CallableLocator.php) | Loads Commands from a callable (closure or ```[$object, 'method']```) 
 [League Container](https://github.com/thephpleague/tactician-container) | Maps Command Name to a League\Container instance.
 [Symfony Container](https://github.com/thephpleague/tactician-bundle) | Maps Command Name to Symfony service container tags
 
 Configuring the Locator will vary depending on which Locator you use. Some will work with DI containers, some just use plain PHP arrays, so check the class itself.
 
-Custom Locators only need to implement the [HandlerLocator interface](https://github.com/thephpleague/tactician/blob/master/src/Handler/Locator/HandlerLocator.php). This is just a single method that receives the Command Name as a string and returns the appropriate Handler.
+If you'd like to wrap a DI container and there isn't an existing adapter, the easiest solution is to use the CallableLocator and pass it a callable like ```[$container, 'get']```. 
+
+You can also implement a custom Locators by implementing the [HandlerLocator interface](https://github.com/thephpleague/tactician/blob/master/src/Handler/Locator/HandlerLocator.php). This is just a single method that receives the Command Name as a string and returns the appropriate Handler.
 
 ## 4. Creating the Command Bus
 Now that you've chosen a Locator, NameExtractor and MethodNameInflector, you need to pass them to the Command Bus for execution. In Tactician, there's one "core" command bus that you should always use: the CommandBus.
