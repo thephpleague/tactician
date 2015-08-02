@@ -86,4 +86,66 @@ class LockingMiddlewareTest extends \PHPUnit_Framework_TestCase
 
         $this->lockingMiddleware->execute(null, $next1);
     }
+
+    public function testExceptionsDoNotLeaveTheCommandBusLocked()
+    {
+        $next = function () {
+            throw new \Exception();
+        };
+
+        try {
+            $this->lockingMiddleware->execute(new AddTaskCommand(), $next);
+        } catch (\Exception $e) {
+        }
+
+        $next2 = function () use (&$executed) {
+            return true;
+        };
+        $this->assertTrue(
+            $this->lockingMiddleware->execute(new AddTaskCommand(), $next2),
+            'Second command was not executed'
+        );
+    }
+
+    public function testExceptionsDoNotLeaveQueuedCommandsInTheBus()
+    {
+        $next = function () {
+
+            $this->lockingMiddleware->execute(
+                new CompleteTaskCommand(),
+                function () {
+                    throw new \Exception('This $next gets queued but should never be triggered');
+                }
+            );
+
+            throw new \Exception('Exit out, thus dropping the queue');
+        };
+
+        // Now we create an error and suppress the exception...
+        try {
+            $this->lockingMiddleware->execute(new AddTaskCommand(), $next);
+        } catch (\Exception $e) {
+        }
+
+        // Then check the next command is executed but the queued one never is
+        $next2 = function () use (&$executed) {
+            return true;
+        };
+        $this->assertTrue(
+            $this->lockingMiddleware->execute(new AddTaskCommand(), $next2),
+            'Next pending command was not executed'
+        );
+    }
+
+    /**
+     * @expectedException \LogicException
+     */
+    public function testExceptionsAreAllowedToBubbleUp()
+    {
+        $next = function () {
+            throw new \LogicException('Exit out, thus dropping the queue');
+        };
+
+        $this->lockingMiddleware->execute(new AddTaskCommand(), $next);
+    }
 }
