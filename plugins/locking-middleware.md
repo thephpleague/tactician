@@ -50,3 +50,11 @@ By placing the TransactionMiddleware after the Locking, we've ensured that each 
 Likewise, by putting the Logging _before_ the Locking, we get the log entry at the initial point where the command is first added. This might be better for our debugging purposes then logging it at execution when several other commands have already run and presumably written to the log.
 
 However, the important point is that by making the Locking behavior a separate decorator, you can tweak this behavior in anyway you want.
+
+## On Error Handling
+
+Do note that if an exception occurs while executing a command that has queued other commands, the LockingMiddleware will drop the queued commands. This is intentional since the queued commands were likely dependent on the preceding command.
+
+In fact, we recommend not dispatching commands directly from other commands. Instead, refactor your code to access the shared functionality or use Domain Events to trigger the following commands (since these should only be dispatched on a successful command/transaction).     
+
+If this does not match your use case, you can simply implement your own LockingMiddleware based on the one included in Tactician. Doing so is a straightforward process but is not included out of the box.    
