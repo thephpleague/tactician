@@ -1,3 +1,15 @@
+## 0.6.1 (2015-08-02)
+
+BC Breaks:
+- None
+
+New features:
+- [A CallableLocator added, allowing you to retrieve a handler from a single callable](). Hopefully this can be used as an alternative to creating all the different Container plugins.
+- Officially support PHP7 now
+
+Bug fixes:
+- [LockingMiddleware no longer permanently locks the command bus on error](https://github.com/thephpleague/tactician/issues/75)
+
 ## 0.6.0 (2015-05-08)
 
 BC Breaks:
