@@ -10,4 +10,4 @@ Plugins:
     Bernard: '/plugins/bernard/'
     Logger: '/plugins/logger/'
     League\Container: '/plugins/league-container/'
-    Community Plugins: '/plugin/community-plugins/'
+    Community Plugins: '/plugins/community-plugins/'
