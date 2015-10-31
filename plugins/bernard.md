@@ -31,7 +31,7 @@ $commandBus = new CommandBus([$queueMiddleware]);
 $commandBus->handle($command);
 ~~~
 
-The `$producer` variable in the example is a `Bernard\Producer` instance. See the [official documentation](http://bernardphp.com) for details.
+The `$producer` variable in the example is a `Bernard\Producer` instance. See the [official documentation](https://bernard.readthedocs.org/) for details.
 
 
 ### Consuming commands
@@ -58,7 +58,7 @@ $consumer = new Consumer($router, new EventDispatcher());
 $consumer->consume($queue);
 ~~~
 
-The plugin tries to follow Bernard's logic as close as possible. To learn more about how consuming and routers work, check the [official documentation](http://bernardphp.com) for details.
+The plugin tries to follow Bernard's logic as close as possible. To learn more about how consuming and routers work, check the [official documentation](https://bernard.readthedocs.org/) for details.
 
 
 #### Receivers
