@@ -12,5 +12,5 @@ title: Community Plugins
 
 Composer        | Github           | Author  |
 --------------- | ---------------- | ------- |
-[connectholland/tactician-scheduler-plugin](https://packagist.org/packages/connectholland/tactician-scheduler-plugin) | [thephpleague/:package_name](https://github.com/ConnectHolland/tactician-scheduler-plugin) | [Ron Rademaker](https://github.com/RonRademaker) |
+[connectholland/tactician-scheduler-plugin](https://packagist.org/packages/connectholland/tactician-scheduler-plugin) | [ConnectHolland/tactician-scheduler-plugin](https://github.com/ConnectHolland/tactician-scheduler-plugin) | [Ron Rademaker](https://github.com/RonRademaker) |
 
