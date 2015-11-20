@@ -11,6 +11,12 @@ A small, pluggable command bus. Still in active development.
 
 See the [full docs](http://tactician.thephpleague.com) or the examples directory to get started.
 
+## Install
+
+Using Composer:
+
+`composer require league/tactician`
+
 ## Plugins
 The core Tactician package is small but there are several plugin packages that extend the usefulness of Tactician:
 
