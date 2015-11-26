@@ -44,7 +44,7 @@ Locator           | Notes
 ------------------|---------------------------------------------------
 [In Memory](https://github.com/thephpleague/tactician/blob/master/src/Handler/Locator/InMemoryLocator.php) | Maps Command Name to an existing Handler instance.
 [Callable](https://github.com/thephpleague/tactician/blob/master/src/Handler/Locator/CallableLocator.php) | Loads Commands from a callable (closure or ```[$object, 'method']```) 
-[League Container](https://github.com/thephpleague/tactician-container) | Maps Command Name to a League\Container instance.
+[Container](https://github.com/thephpleague/tactician-container) | Maps Command Name to a container-interop Container instance.
 [Symfony Container](https://github.com/thephpleague/tactician-bundle) | Maps Command Name to Symfony service container tags
 
 Configuring the Locator will vary depending on which Locator you use. Some will work with DI containers, some just use plain PHP arrays, so check the class itself.

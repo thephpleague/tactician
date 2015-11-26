@@ -1,17 +1,17 @@
 ---
 layout: default
-permalink: /plugins/league-container/
-title: League\Container
+permalink: /plugins/container/
+title: Container
 ---
 
-# League\Container
+# Container
 
 [![Author](https://img.shields.io/badge/author-@NigelGreenway-blue.svg?style=flat-square)](https://twitter.com/nigelgreenway)
 [![Source](https://img.shields.io/badge/source-league/tactician--container-blue.svg?style=flat-square)](https://github.com/thephpleague/tactician-container)
 [![Packagist](https://img.shields.io/packagist/v/league/tactician-container.svg?style=flat-square)](https://packagist.org/packages/league/tactician-container)
 
-This plugin adds support for lazy-loading Command Handlers from [League\Container](http://container.thephpleague.com/). If you're using Container in your project, this plugin will likely improve your memory usage and startup times compared to the InMemoryHandlerLocator that Tactician ships with by default.
-  
+This plugin adds support for lazy-loading Command Handlers from a container. If you're using a container (that is an implementation of the [`container-interop`](https://github.com/container-interop/container-interop) `ContainerInterface`) in your project, this plugin will likely improve your memory usage and startup times compared to the InMemoryHandlerLocator that Tactician ships with by default.
+
 Setup has a few steps but it isn't very complicated:
 
 ~~~php
@@ -21,11 +21,11 @@ $commandToHandlerMap = [
     RentMovieCommand::class => RentMovieHandler::class
 ];
 
-// Next we create a new Tactician ContainerLocator, passing in both the map and
-// a fully configured League\Container instance.
+// Next we create a new Tactician ContainerLocator, passing in both
+// a fully configured container instance and the map.
 use League\Tactician\Container\ContainerLocator;
 $containerLocator = new ContainerLocator(
-    $leagueContainer, 
+    $container,
     $commandToHandlerMap
 );
 
@@ -40,8 +40,8 @@ $commandHandlerMiddleware = new CommandHandlerMiddleware(
 // And that's it! Drop it in our command bus and away you go.
 $commandBus = new CommandBus(
     [
-        // your other middleware...
-        $commandHandlerMiddleware    
+        // your other middlewares...
+        $commandHandlerMiddleware,
     ]
 );
 ~~~
