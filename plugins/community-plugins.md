@@ -13,5 +13,6 @@ If you're interested in having your plugin listed here as well, just send a PR t
 Description     | Source           | Author  |
 --------------- | ---------------- |---------|
 Pimple Locator | [ihabunek/tactician-pimple](https://github.com/ihabunek/tactician-pimple) | [Ivan Habunek](https://github.com/ihabunek)
-Scheduler Plugin | [ConnectHolland/tactician-scheduler-plugin](https://github.com/ConnectHolland/tactician-scheduler-plugin) | [Ron Rademaker](https://github.com/RonRademaker)
+Command Scheduler | [ConnectHolland/tactician-scheduler-plugin](https://github.com/ConnectHolland/tactician-scheduler-plugin) | [Ron Rademaker](https://github.com/RonRademaker)
+Command Priority | [https://github.com/ConnectHolland/tactician-prioritycommand-plugin](https://github.com/ConnectHolland/tactician-prioritycommand-plugin) | [Ron Rademaker](https://github.com/RonRademaker)
 ZF2 Command Generator CLI tool | [Code-Mine-Development/CommandQueryGenerator](https://github.com/Code-Mine-Development/CommandQueryGenerator) | [Code Mine](http://code-mine.com)
