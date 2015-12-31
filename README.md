@@ -7,7 +7,7 @@
 [![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/thephpleague/tactician/blob/master/LICENSE)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/54275a78-bc70-4bb3-9ac4-4eee700c6a1c/small.png)](https://insight.sensiolabs.com/projects/54275a78-bc70-4bb3-9ac4-4eee700c6a1c)
 
-A small, pluggable command bus. Still in active development.
+A small, pluggable command bus.
 
 See the [full docs](http://tactician.thephpleague.com) or the examples directory to get started.
 
@@ -15,13 +15,15 @@ See the [full docs](http://tactician.thephpleague.com) or the examples directory
 The core Tactician package is small but there are several plugin packages that extend the usefulness of Tactician:
 
 - [Logger](https://github.com/thephpleague/tactician-logger): Adds PSR-3 logging support for receiving, completing or failing commands.
+- [Container](https://github.com/thephpleague/tactician-container): Load command handlers from any container-interop compatible container
 - [Doctrine](https://github.com/thephpleague/tactician-doctrine): Wraps commands in separate Doctrine ORM transactions.
 - [Bernard](https://github.com/thephpleague/tactician-bernard): Allows queuing your commands in the background, using [the Bernard Queuing library](https://github.com/bernardphp/bernard).
 - [Command Events](https://github.com/thephpleague/tactician-command-events): Fires events for all major moments in the command life-cycle.
 - [Locking](http://tactician.thephpleague.com/plugins/locking-middleware/): Only allows one command to be executed at a time.
+- [and many more](https://packagist.org/search/?q=tactician)
 
 ## Framework Integration
-There is ongoing development for Zend, Symfony2 and Laravel integration packages. Check the github issues to see their status.
+There are a number of framework integration packages for Tactician, [search for Tactician on Packagist](https://packagist.org/search/?q=tactician) for the most up-to-date listings.
 
 ## Testing
 To run all unit tests, use the locally installed PHPUnit:
