@@ -4,19 +4,14 @@ permalink: /plugins/community-plugins/
 title: Community Plugins
 ---
 
-# Community provided plugins
+# Community Plugins
 
-----------
+These plugins are provided and maintained by users of Tactician. If you're looking for framework integration/wiring, take a look at [the installation page](http://tactician.thephpleague.com/installation/) instead.
 
-## Scheduler Plugin by @RonRademaker
+If you're interested in having your plugin listed here as well, just send a PR to [gh-pages branch on the Tactician repo](https://github.com/thephpleague/tactician/tree/gh-pages).
 
-Composer        | Github           | Author  |
---------------- | ---------------- | ------- |
-[connectholland/tactician-scheduler-plugin](https://packagist.org/packages/connectholland/tactician-scheduler-plugin) | [ConnectHolland/tactician-scheduler-plugin](https://github.com/ConnectHolland/tactician-scheduler-plugin) | [Ron Rademaker](https://github.com/RonRademaker) |
-
-
-## Zf2 Command Generator CLI tool by @CodeMineDev
-Composer        | Github           | Author  |
---------------- | ---------------- | ------- |
-[code-mine/zf-tactician-comandquery-generator](https://packagist.org/packages/code-mine/zf-tactician-comandquery-generator) | [Code-Mine-Development/CommandQueryGenerator](https://github.com/Code-Mine-Development/CommandQueryGenerator) | [Code Mine](http://code-mine.com) |
-
+Description     | Source           | Author  |
+--------------- | ---------------- |---------|
+Pimple Locator | [ihabunek/tactician-pimple](https://github.com/ihabunek/tactician-pimple) | [Ivan Habunek](https://github.com/ihabunek)
+Scheduler Plugin | [ConnectHolland/tactician-scheduler-plugin](https://github.com/ConnectHolland/tactician-scheduler-plugin) | [Ron Rademaker](https://github.com/RonRademaker)
+ZF2 Command Generator CLI tool | [Code-Mine-Development/CommandQueryGenerator](https://github.com/Code-Mine-Development/CommandQueryGenerator) | [Code Mine](http://code-mine.com)

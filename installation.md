@@ -57,10 +57,10 @@ There's an [official Tactician bundle for Symfony](https://github.com/thephpleag
 [Mike Zukowski](https://github.com/mikemix) already authored a ZF2 module. You can grab it [at its Github page](https://github.com/mikemix/TacticianModule)!
 
 ### Laravel
-Sorry, a provider is on our roadmap but we're short-handed. If you'd like to help out, [please get in touch](https://github.com/thephpleague/tactician/issues)!
-
-## Third-Party Framework Adapters
-These adapters are maintained by other devs outside of Tactician. That doesn't mean they're of lesser quality, only that they're maintained by other talented devs at this time.
+There's a number of Laravel Tactician packages on Packagist. We don't have a formal recommendation yet but [there's some really good ones available](https://packagist.org/search/?q=laravel%20tactician).
 
 ### Silex
 [Prasetyo Wicaksono](https://github.com/Atriedes) is actively maintaining a [Silex service provider for Tactician](https://github.com/Atriedes/tactician-service-provider).
+
+### Yii
+[Pavel Mikushin](https://github.com/pavelmics) has built an [adapter for the Yii framework](https://github.com/pavelmics/YiiTactician).
