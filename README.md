@@ -38,6 +38,9 @@ To run all unit tests, use the locally installed PHPUnit:
 $ ./vendor/bin/phpunit
 ~~~
 
+## Security
+Tactician has no previous security disclosures and due to the nature of the project is unlikely to. However, if you're concerned you've found a security sensitive issue in Tactician or one of its related projects, please email disclosures [at] rosstuck dot com.
+
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
