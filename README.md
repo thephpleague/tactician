@@ -11,11 +11,17 @@ A small, pluggable command bus.
 
 See the [full docs](http://tactician.thephpleague.com) or the examples directory to get started.
 
+## Install
+
+Using Composer:
+
+`composer require league/tactician`
+
 ## Plugins
 The core Tactician package is small but there are several plugin packages that extend the usefulness of Tactician:
 
 - [Logger](https://github.com/thephpleague/tactician-logger): Adds PSR-3 logging support for receiving, completing or failing commands.
-- [Container](https://github.com/thephpleague/tactician-container): Load command handlers from any container-interop compatible container
+- [Container](http://github.com/thephpleague/tactician-container): Lazy load handlers from any container implementing container-interop.
 - [Doctrine](https://github.com/thephpleague/tactician-doctrine): Wraps commands in separate Doctrine ORM transactions.
 - [Bernard](https://github.com/thephpleague/tactician-bernard): Allows queuing your commands in the background, using [the Bernard Queuing library](https://github.com/bernardphp/bernard).
 - [Command Events](https://github.com/thephpleague/tactician-command-events): Fires events for all major moments in the command life-cycle.

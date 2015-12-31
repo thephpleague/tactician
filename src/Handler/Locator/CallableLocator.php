@@ -13,7 +13,7 @@ use League\Tactician\Exception\MissingHandlerException;
  * Let's say you have a Symfony container or similar that works via a 'get'
  * method. You can pass in an array style callable such as:
  *
- *     $locator = new CallableLocator([$container, 'get')
+ *     $locator = new CallableLocator([$container, 'get'])
  *
  * This is easy to set up and will now automatically pipe the command name
  * straight through to the $container->get() method without having to write
