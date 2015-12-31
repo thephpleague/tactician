@@ -1,3 +1,7 @@
+## 1.0.0 (2015-12-31)
+
+No changes. The current API has held up for quite sometime and is being used in production by a number of folks. Therefore, Tactician now has official 1.0 support. A huge thanks to everyone who's contributed over the last year!
+
 ## 0.6.1 (2015-08-02)
 
 BC Breaks:
