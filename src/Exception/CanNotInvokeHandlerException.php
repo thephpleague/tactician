@@ -11,20 +11,22 @@ namespace League\Tactician\Exception;
 class CanNotInvokeHandlerException extends \BadMethodCallException implements Exception
 {
     /**
-     * @var object
+     * @var mixed
      */
     private $command;
 
     /**
-     * @param object $command
+     * @param mixed $command
      * @param string $reason
      *
      * @return static
      */
     public static function forCommand($command, $reason)
     {
+        $type =  is_object($command) ? get_class($command) : gettype($command);
+
         $exception = new static(
-            'Could not invoke handler for command ' . get_class($command) .
+            'Could not invoke handler for command ' . $type .
             ' for reason: ' . $reason
         );
         $exception->command = $command;
@@ -35,7 +37,7 @@ class CanNotInvokeHandlerException extends \BadMethodCallException implements Ex
     /**
      * Returns the command that could not be invoked
      *
-     * @return object
+     * @return mixed
      */
     public function getCommand()
     {

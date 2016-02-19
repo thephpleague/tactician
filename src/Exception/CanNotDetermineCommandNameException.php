@@ -8,18 +8,20 @@ namespace League\Tactician\Exception;
 class CanNotDetermineCommandNameException extends \RuntimeException implements Exception
 {
     /**
-     * @var object
+     * @var mixed
      */
     private $command;
 
     /**
-     * @param object $command
+     * @param mixed $command
      *
      * @return static
      */
     public static function forCommand($command)
     {
-        $exception = new static('Could not determine command name of ' . get_class($command));
+        $type =  is_object($command) ? get_class($command) : gettype($command);
+
+        $exception = new static('Could not determine command name of ' . $type);
         $exception->command = $command;
 
         return $exception;
@@ -28,7 +30,7 @@ class CanNotDetermineCommandNameException extends \RuntimeException implements E
     /**
      * Returns the command that could not be invoked
      *
-     * @return object
+     * @return mixed
      */
     public function getCommand()
     {
