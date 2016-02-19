@@ -1,3 +1,11 @@
+## 1.0.1 (2016-02-19)
+
+BC Breaks:
+- None
+
+New features:
+- [#96](https://github.com/thephpleague/tactician/pull/96/files): More detailed error message when accidentally passing a non-object into the command bus (array, callable, string, etc).
+
 ## 1.0.0 (2015-12-31)
 
 No changes. The current API has held up for quite sometime and is being used in production by a number of folks. Therefore, Tactician now has official 1.0 support. A huge thanks to everyone who's contributed over the last year!
