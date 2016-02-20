@@ -1,3 +1,11 @@
+## 1.0.2 (2016-02-20)
+
+BC Breaks:
+- None
+
+New features:
+- [#95](https://github.com/thephpleague/tactician/pull/95): Added .gitattributes to speed up installation
+
 ## 1.0.1 (2016-02-19)
 
 BC Breaks:
