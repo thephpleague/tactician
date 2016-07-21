@@ -31,7 +31,7 @@ If you just want to get started and don't care about tweaking anything, you can 
 // your handler instances. Everything else is already setup.
 League\Tactician\Setup\QuickStart::create(
     [
-        AddTaskCommand::class      => $someHandler
+        AddTaskCommand::class      => $someHandler,
         CompleteTaskCommand::class => $someOtherHandler
     ]
 );
