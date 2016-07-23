@@ -1,6 +1,6 @@
 <?php
 
-namespace Tactician\CommandBus\Tests\Exception;
+namespace League\Tactician\Tests\Exception;
 
 use League\Tactician\Exception\MissingHandlerException;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
