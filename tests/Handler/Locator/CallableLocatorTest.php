@@ -5,8 +5,6 @@ namespace League\Tactician\Tests\Handler\Locator;
 use League\Tactician\Handler\Locator\CallableLocator;
 use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use League\Tactician\Tests\Fixtures\Handler\DynamicMethodsHandler;
-use Mockery;
-use Mockery\MockInterface;
 
 class CallableLocatorTest extends \PHPUnit_Framework_TestCase
 {
