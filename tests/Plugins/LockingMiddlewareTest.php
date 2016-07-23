@@ -2,7 +2,6 @@
 
 namespace League\Tactician\Tests\Plugins;
 
-use Mockery;
 use League\Tactician\Plugins\LockingMiddleware;
 use League\Tactician\Tests\Fixtures\Command\AddTaskCommand;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;

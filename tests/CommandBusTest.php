@@ -2,7 +2,6 @@
 namespace League\Tactician\Tests;
 
 use League\Tactician\CommandBus;
-use League\Tactician\Exception\InvalidMiddlewareException;
 use League\Tactician\Middleware;
 use League\Tactician\Tests\Fixtures\Command\AddTaskCommand;
 use Mockery;
