@@ -35,10 +35,10 @@ The middleware is only responsible for determining which "event" happened. A For
 
 This package ships with a couple of default Formatters. Assuming we dispatched a `RegisterUserCommand`, you can see their log messages and PSR-3 contexts below ([PSR-3 Contexts](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md#13-context) are arrays of extra, structured data you can send with the log message. Useful if you're using GELF, for example).
 
-Formatter                  | Message
----------------------------|---------------------------------------| Context
-`ClassNameFormatter`       | Command received: RegisterUserCommand | _none_
-`ClassPropertiesFormatter` | Command received: RegisterUserCommand | {"email": "alice@example.org", password:"s3krit" }
+Formatter                  | Message                               | Context |
+---------------------------|---------------------------------------|------- |
+`ClassNameFormatter`       | Command received: RegisterUserCommand | _none_ |
+`ClassPropertiesFormatter` | Command received: RegisterUserCommand | {"email": "alice@example.org", password:"s3krit" } |
 
 It's worth noting the `ClassPropertiesFormatter` extracts the command's properties, regardless of their visibility. However, it uses a very naive serializer and does not recurse into sub-objects or arrays, it merely shows their type. It also has no speed optimizations and is not recommended for production use. You can write an adapter for, say, [JMS Serializer](http://jmsyst.com/libs/serializer) to make it more performant but please consider the security implications of logging raw command data (i.e. user passwords) before doing this.
 
