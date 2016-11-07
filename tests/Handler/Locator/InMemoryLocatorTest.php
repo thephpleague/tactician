@@ -23,31 +23,31 @@ class InMemoryLocatorTest extends \PHPUnit_Framework_TestCase
     {
         $handler = new stdClass();
 
-        $this->inMemoryLocator->addHandler($handler, CompleteTaskCommand::class);
+        $this->inMemoryLocator->addHandler($handler, 'League\\Tactician\\Tests\\Fixtures\\Command\\CompleteTaskCommand');
 
         $this->assertSame(
             $handler,
-            $this->inMemoryLocator->getHandlerForCommand(CompleteTaskCommand::class)
+            $this->inMemoryLocator->getHandlerForCommand('League\\Tactician\\Tests\\Fixtures\\Command\\CompleteTaskCommand')
         );
     }
 
     public function testConstructorAcceptsMapOfCommandClassesToHandlers()
     {
         $commandToHandlerMap = [
-            AddTaskCommand::class => new stdClass(),
-            CompleteTaskCommand::class => new stdClass()
+            'League\\Tactician\\Tests\\Fixtures\\Command\\AddTaskCommand' => new stdClass(),
+            'League\\Tactician\\Tests\\Fixtures\\Command\\CompleteTaskCommand' => new stdClass()
         ];
 
         $locator = new InMemoryLocator($commandToHandlerMap);
 
         $this->assertSame(
-            $commandToHandlerMap[AddTaskCommand::class],
-            $locator->getHandlerForCommand(AddTaskCommand::class)
+            $commandToHandlerMap['League\\Tactician\\Tests\\Fixtures\\Command\\AddTaskCommand'],
+            $locator->getHandlerForCommand('League\\Tactician\\Tests\\Fixtures\\Command\\AddTaskCommand')
         );
 
         $this->assertSame(
-            $commandToHandlerMap[CompleteTaskCommand::class],
-            $locator->getHandlerForCommand(CompleteTaskCommand::class)
+            $commandToHandlerMap['League\\Tactician\\Tests\\Fixtures\\Command\\CompleteTaskCommand'],
+            $locator->getHandlerForCommand('League\\Tactician\\Tests\\Fixtures\\Command\\CompleteTaskCommand')
         );
     }
 
@@ -56,6 +56,6 @@ class InMemoryLocatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testHandlerMissing()
     {
-        $this->inMemoryLocator->getHandlerForCommand(CompleteTaskCommand::class);
+        $this->inMemoryLocator->getHandlerForCommand('League\\Tactician\\Tests\\Fixtures\\Command\\CompleteTaskCommand');
     }
 }
