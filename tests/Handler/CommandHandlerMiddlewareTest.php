@@ -34,9 +34,13 @@ class CommandHandlerMiddlewareTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->commandNameExtractor = Mockery::mock('League\\Tactician\\Handler\\CommandNameExtractor\\CommandNameExtractor');
+        $this->commandNameExtractor = Mockery::mock(
+            'League\\Tactician\\Handler\\CommandNameExtractor\\CommandNameExtractor'
+        );
         $this->handlerLocator = Mockery::mock('League\\Tactician\\Handler\\Locator\\HandlerLocator');
-        $this->methodNameInflector = Mockery::mock('League\\Tactician\\Handler\\MethodNameInflector\\MethodNameInflector');
+        $this->methodNameInflector = Mockery::mock(
+            'League\\Tactician\\Handler\\MethodNameInflector\\MethodNameInflector'
+        );
 
         $this->middleware = new CommandHandlerMiddleware(
             $this->commandNameExtractor,

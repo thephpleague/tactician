@@ -23,11 +23,16 @@ class InMemoryLocatorTest extends \PHPUnit_Framework_TestCase
     {
         $handler = new stdClass();
 
-        $this->inMemoryLocator->addHandler($handler, 'League\\Tactician\\Tests\\Fixtures\\Command\\CompleteTaskCommand');
+        $this->inMemoryLocator->addHandler(
+            $handler,
+            'League\\Tactician\\Tests\\Fixtures\\Command\\CompleteTaskCommand'
+        );
 
         $this->assertSame(
             $handler,
-            $this->inMemoryLocator->getHandlerForCommand('League\\Tactician\\Tests\\Fixtures\\Command\\CompleteTaskCommand')
+            $this->inMemoryLocator->getHandlerForCommand(
+                'League\\Tactician\\Tests\\Fixtures\\Command\\CompleteTaskCommand'
+            )
         );
     }
 
@@ -56,6 +61,8 @@ class InMemoryLocatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testHandlerMissing()
     {
-        $this->inMemoryLocator->getHandlerForCommand('League\\Tactician\\Tests\\Fixtures\\Command\\CompleteTaskCommand');
+        $this->inMemoryLocator->getHandlerForCommand(
+            'League\\Tactician\\Tests\\Fixtures\\Command\\CompleteTaskCommand'
+        );
     }
 }
