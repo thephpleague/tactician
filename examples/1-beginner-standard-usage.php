@@ -23,7 +23,7 @@ class RegisterUserHandler
 
 // Setup the bus, normally in your DI container ///////////////////////////////
 $locator = new InMemoryLocator();
-$locator->addHandler(new RegisterUserHandler(), RegisterUserCommand::class);
+$locator->addHandler(new RegisterUserHandler(), 'RegisterUserCommand');
 
 // Middleware is Tactician's plugin system. Even finding the handler and
 // executing it is a plugin that we're configuring here.

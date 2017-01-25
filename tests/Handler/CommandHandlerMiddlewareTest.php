@@ -3,12 +3,10 @@
 namespace League\Tactician\Tests\Handler;
 
 use League\Tactician\Handler\CommandHandlerMiddleware;
-use League\Tactician\Handler\CommandNameExtractor\CommandNameExtractor;
 use League\Tactician\Handler\Locator\HandlerLocator;
 use League\Tactician\Handler\MethodNameInflector\MethodNameInflector;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use League\Tactician\Tests\Fixtures\Handler\DynamicMethodsHandler;
-use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use stdClass;
 use Mockery;
 
@@ -36,9 +34,13 @@ class CommandHandlerMiddlewareTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->commandNameExtractor = Mockery::mock(CommandNameExtractor::class);
-        $this->handlerLocator = Mockery::mock(HandlerLocator::class);
-        $this->methodNameInflector = Mockery::mock(MethodNameInflector::class);
+        $this->commandNameExtractor = Mockery::mock(
+            'League\\Tactician\\Handler\\CommandNameExtractor\\CommandNameExtractor'
+        );
+        $this->handlerLocator = Mockery::mock('League\\Tactician\\Handler\\Locator\\HandlerLocator');
+        $this->methodNameInflector = Mockery::mock(
+            'League\\Tactician\\Handler\\MethodNameInflector\\MethodNameInflector'
+        );
 
         $this->middleware = new CommandHandlerMiddleware(
             $this->commandNameExtractor,
@@ -51,7 +53,7 @@ class CommandHandlerMiddlewareTest extends \PHPUnit_Framework_TestCase
     {
         $command = new CompleteTaskCommand();
 
-        $handler = Mockery::mock(ConcreteMethodsHandler::class);
+        $handler = Mockery::mock('League\\Tactician\\Tests\\Fixtures\\Handler\\ConcreteMethodsHandler');
         $handler
             ->shouldReceive('handleCompleteTaskCommand')
             ->with($command)
@@ -65,13 +67,13 @@ class CommandHandlerMiddlewareTest extends \PHPUnit_Framework_TestCase
 
         $this->handlerLocator
             ->shouldReceive('getHandlerForCommand')
-            ->with(CompleteTaskCommand::class)
+            ->with('League\\Tactician\\Tests\\Fixtures\\Command\\CompleteTaskCommand')
             ->andReturn($handler);
 
         $this->commandNameExtractor
             ->shouldReceive('extract')
             ->with($command)
-            ->andReturn(CompleteTaskCommand::class);
+            ->andReturn('League\\Tactician\\Tests\\Fixtures\\Command\\CompleteTaskCommand');
 
         $this->assertEquals('a-return-value', $this->middleware->execute($command, $this->mockNext()));
     }

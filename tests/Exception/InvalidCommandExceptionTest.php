@@ -3,7 +3,6 @@
 namespace League\Tactician\Tests\Exception;
 
 use League\Tactician\Exception\InvalidCommandException;
-use League\Tactician\Exception\Exception;
 
 class InvalidCommandExceptionTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,6 +14,6 @@ class InvalidCommandExceptionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertContains('type: string', $exception->getMessage());
         $this->assertSame($command, $exception->getInvalidCommand());
-        $this->assertInstanceOf(Exception::class, $exception);
+        $this->assertInstanceOf('League\\Tactician\\Exception\\Exception', $exception);
     }
 }
