@@ -10,7 +10,7 @@ title: Logger
 [![Source](https://img.shields.io/badge/source-league/tactician--logger-blue.svg?style=flat-square)](https://github.com/thephpleague/tactician-logger)
 [![Packagist](https://img.shields.io/packagist/v/league/tactician-logger.svg?style=flat-square)](https://packagist.org/packages/league/tactician-logger)
 
-During development, logging can help visualize the flow commands take in the system. The `league\tactician-logger` package provides out-of-the-box support for logging command data to any [PSR-3 compliant logger](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md) (so, basically all of them). 
+During development, logging can help visualize the flow commands take in the system. The `league/tactician-logger` package provides out-of-the-box support for logging command data to any [PSR-3 compliant logger](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md) (so, basically all of them). 
 
 To get started, create the LoggerMiddleware and pass it a Formatter and your PSR-3 logger. 
 
