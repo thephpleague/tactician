@@ -1,6 +1,6 @@
 ---
 layout: default
-permalink: /plugins/:package_name_without_tactician_prefix/
+permalink: /plugins/package_name_without_tactician_prefix/
 title: :package_title
 ---
 
