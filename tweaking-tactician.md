@@ -101,7 +101,7 @@ Building on our previous example:
 $commandBus = new CommandBus(
     [
         new LockingMiddleware(),
-        new CommandHandlerMiddleware($locator, $inflector)
+        new CommandHandlerMiddleware($nameExtractor, $locator, $inflector)
     ]
 );
 ~~~
