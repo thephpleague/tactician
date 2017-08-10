@@ -49,7 +49,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 $commandBus = new CommandBus([/* middlewares go here */]);
 
 // Wire the command bus into Bernard's routing system
-$receiver = new SingleBusReceiver($commandBus);
+$receiver = new SameBusReceiver($commandBus);
 $router = new SimpleRouter();
 $router->add('League\Tactician\Bernard\QueueableCommand', $receiver);
 
@@ -65,7 +65,7 @@ The plugin tries to follow Bernard's logic as close as possible. To learn more a
 
 Receiver is a term used in both command pattern and the message terminology. In this case a receiver is a callable passed to the Router. The Router routes all messages to a receiver (or returns with error if no receiver is registered for a messsage). There are two receivers implemented by this plugin:
 
-- `SingleBusReceiver`: This receiver should be used when the same command bus is used for the producer and the consumer side. It prevents a command from being requeued (causing an infinite loop).
+- `SameBusReceiver`: This receiver should be used when the same command bus is used for the producer and the consumer side. It prevents a command from being requeued (causing an infinite loop).
 - `SeparateBusReceiver`: Use this receiver in any other cases.
 
 
