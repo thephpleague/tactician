@@ -20,4 +20,7 @@ We accept contributions via Pull Requests on [Github](https://github.com/thephpl
 
 - **Be respectful** - Be excellent to other contributors.
 
+## Documentation Fixes
+Changes to the Tactician website can be done by opening a PR to the "gh-pages" branch of the main Tactician repo. Feel free to send even small corrections, like fixing typos or just improving the wording; everything helps. :)
+
 **Happy coding**!
