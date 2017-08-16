@@ -17,3 +17,4 @@ Command Scheduler | [ConnectHolland/tactician-scheduler-plugin](https://github.c
 Command Priority | [https://github.com/ConnectHolland/tactician-prioritycommand-plugin](https://github.com/ConnectHolland/tactician-prioritycommand-plugin) | [Ron Rademaker](https://github.com/RonRademaker)
 ZF2 Command Generator CLI tool | [Code-Mine-Development/CommandQueryGenerator](https://github.com/Code-Mine-Development/CommandQueryGenerator) | [Code Mine](http://code-mine.com)
 Domain Events | [borNfreee/tactician-domain-events](https://github.com/borNfreee/tactician-domain-events) | [Maks Rafalko](https://github.com/borNfreee)
+Queue Interop | [enqueue/tactician-queue-interop](https://github.com/php-enqueue/tactician-queue-interop) | [Alexander Kozienko](https://github.com/ASKozienko)
