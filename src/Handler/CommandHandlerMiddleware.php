@@ -16,17 +16,17 @@ class CommandHandlerMiddleware implements Middleware
     /**
      * @var CommandNameExtractor
      */
-    private $commandNameExtractor;
+    protected $commandNameExtractor;
 
     /**
      * @var HandlerLocator
      */
-    private $handlerLocator;
+    protected $handlerLocator;
 
     /**
      * @var MethodNameInflector
      */
-    private $methodNameInflector;
+    protected $methodNameInflector;
 
     /**
      * @param CommandNameExtractor $commandNameExtractor
