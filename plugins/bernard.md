@@ -41,7 +41,7 @@ On the other side of the message queue you must set up a consumer:
 ~~~ php
 use Bernard\Consumer;
 use Bernard\Router\SimpleRouter;
-use League\Tactician\Bernard\Receiver\SingleBusReceiver;
+use League\Tactician\Bernard\Receiver\SameBusReceiver;
 use League\Tactician\CommandBus;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
