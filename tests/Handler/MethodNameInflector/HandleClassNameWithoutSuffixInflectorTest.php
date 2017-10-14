@@ -6,8 +6,9 @@ use League\Tactician\Handler\MethodNameInflector\HandleClassNameWithoutSuffixInf
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use DateTime;
+use PHPUnit\Framework\TestCase;
 
-class HandleClassNameWithoutSuffixInflectorTest extends \PHPUnit_Framework_TestCase
+class HandleClassNameWithoutSuffixInflectorTest extends TestCase
 {
     /**
      * @var HandleClassNameWithoutSuffixInflector

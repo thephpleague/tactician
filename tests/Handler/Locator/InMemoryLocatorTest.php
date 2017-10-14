@@ -5,9 +5,10 @@ namespace League\Tactician\Tests\Handler\Locator;
 use League\Tactician\Handler\Locator\InMemoryLocator;
 use League\Tactician\Tests\Fixtures\Command\AddTaskCommand;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
+use PHPUnit\Framework\TestCase;
 use stdClass;
 
-class InMemoryLocatorTest extends \PHPUnit_Framework_TestCase
+class InMemoryLocatorTest extends TestCase
 {
     /**
      * @var InMemoryLocator

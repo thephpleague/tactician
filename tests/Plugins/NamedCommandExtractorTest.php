@@ -4,8 +4,9 @@ namespace League\Tactician\Tests\Plugins;
 
 use League\Tactician\Plugins\NamedCommand\NamedCommandExtractor;
 use League\Tactician\Tests\Fixtures\Command\CommandWithAName;
+use PHPUnit\Framework\TestCase;
 
-class NamedCommandExtractorTest extends \PHPUnit_Framework_TestCase
+class NamedCommandExtractorTest extends TestCase
 {
     /**
      * @var NamedCommandExtractor

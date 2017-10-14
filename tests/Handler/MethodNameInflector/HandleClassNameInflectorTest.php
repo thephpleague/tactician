@@ -6,8 +6,9 @@ use League\Tactician\Handler\MethodNameInflector\HandleClassNameInflector;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use CommandWithoutNamespace;
+use PHPUnit\Framework\TestCase;
 
-class HandleClassNameInflectorTest extends \PHPUnit_Framework_TestCase
+class HandleClassNameInflectorTest extends TestCase
 {
     /**
      * @var HandleClassNameInflector

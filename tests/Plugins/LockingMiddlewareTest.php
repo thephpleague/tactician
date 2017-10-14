@@ -5,8 +5,9 @@ namespace League\Tactician\Tests\Plugins;
 use League\Tactician\Plugins\LockingMiddleware;
 use League\Tactician\Tests\Fixtures\Command\AddTaskCommand;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
+use PHPUnit\Framework\TestCase;
 
-class LockingMiddlewareTest extends \PHPUnit_Framework_TestCase
+class LockingMiddlewareTest extends TestCase
 {
     /**
      * @var LockingMiddleware

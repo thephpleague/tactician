@@ -5,11 +5,12 @@ namespace League\Tactician\Tests\Handler\MethodNameInflector;
 use League\Tactician\Handler\MethodNameInflector\InvokeInflector;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Best. Test. Ever.
  */
-class InvokeInflectorTest extends \PHPUnit_Framework_TestCase
+class InvokeInflectorTest extends TestCase
 {
     public function testReturnsInvokeMagicMethod()
     {

@@ -5,8 +5,9 @@ namespace League\Tactician\Tests\Exception;
 use League\Tactician\Exception\MissingHandlerException;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use League\Tactician\Exception\Exception;
+use PHPUnit\Framework\TestCase;
 
-class MissingHandlerExceptionTest extends \PHPUnit_Framework_TestCase
+class MissingHandlerExceptionTest extends TestCase
 {
     public function testExceptionContainsDebuggingInfo()
     {

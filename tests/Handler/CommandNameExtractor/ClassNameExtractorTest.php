@@ -3,8 +3,9 @@
 namespace League\Tactician\Tests\Handler\CommandNameExtractor;
 
 use League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor;
+use PHPUnit\Framework\TestCase;
 
-class ClassNameExtractorTest extends \PHPUnit_Framework_TestCase
+class ClassNameExtractorTest extends TestCase
 {
     /**
      * @var ClassNameExtractor

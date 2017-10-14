@@ -7,8 +7,9 @@ use League\Tactician\Setup\QuickStart;
 use League\Tactician\Tests\Fixtures\Command\AddTaskCommand;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use Mockery;
+use PHPUnit\Framework\TestCase;
 
-class QuickStartTest extends \PHPUnit_Framework_TestCase
+class QuickStartTest extends TestCase
 {
     public function testReturnsACommandBus()
     {
