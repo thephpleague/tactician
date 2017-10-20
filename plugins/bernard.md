@@ -51,7 +51,12 @@ $commandBus = new CommandBus([/* middlewares go here */]);
 // Wire the command bus into Bernard's routing system
 $receiver = new SameBusReceiver($commandBus);
 $router = new SimpleRouter();
-$router->add('League\Tactician\Bernard\QueueableCommand', $receiver);
+
+foreach(get_declared_classes() as $class) {
+    if(is_a($class, 'League\Tactician\Bernard\QueueableCommand', true)) {
+        $router->add($class, $receiver);
+    }
+}
 
 // Finally, create the Bernard consumer that runs through the pending queue
 $consumer = new Consumer($router, new EventDispatcher());
