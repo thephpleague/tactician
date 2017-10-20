@@ -5,8 +5,9 @@ namespace League\Tactician\Tests\Exception;
 use League\Tactician\Exception\CanNotInvokeHandlerException;
 use League\Tactician\Exception\Exception;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
+use PHPUnit\Framework\TestCase;
 
-class CanNotInvokeHandlerExceptionTest extends \PHPUnit_Framework_TestCase
+class CanNotInvokeHandlerExceptionTest extends TestCase
 {
     public function testExceptionContainsDebuggingInfo()
     {

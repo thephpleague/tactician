@@ -3,8 +3,9 @@
 namespace League\Tactician\Tests\Exception;
 
 use League\Tactician\Exception\CanNotDetermineCommandNameException;
+use PHPUnit\Framework\TestCase;
 
-class CanNotDetermineCommandNameExceptionTest extends \PHPUnit_Framework_TestCase
+class CanNotDetermineCommandNameExceptionTest extends TestCase
 {
     /**
      * @dataProvider provideAnyTypeOfCommand

@@ -9,10 +9,11 @@ use League\Tactician\Handler\MethodNameInflector\MethodNameInflector;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use League\Tactician\Tests\Fixtures\Handler\DynamicMethodsHandler;
 use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
+use PHPUnit\Framework\TestCase;
 use stdClass;
 use Mockery;
 
-class CommandHandlerMiddlewareTest extends \PHPUnit_Framework_TestCase
+class CommandHandlerMiddlewareTest extends TestCase
 {
     /**
      * @var CommandHandlerMiddleware

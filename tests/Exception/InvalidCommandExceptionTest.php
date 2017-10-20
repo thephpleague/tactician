@@ -4,8 +4,9 @@ namespace League\Tactician\Tests\Exception;
 
 use League\Tactician\Exception\InvalidCommandException;
 use League\Tactician\Exception\Exception;
+use PHPUnit\Framework\TestCase;
 
-class InvalidCommandExceptionTest extends \PHPUnit_Framework_TestCase
+class InvalidCommandExceptionTest extends TestCase
 {
     public function testExceptionContainsDebuggingInfo()
     {

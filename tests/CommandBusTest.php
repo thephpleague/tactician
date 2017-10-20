@@ -5,8 +5,9 @@ use League\Tactician\CommandBus;
 use League\Tactician\Middleware;
 use League\Tactician\Tests\Fixtures\Command\AddTaskCommand;
 use Mockery;
+use PHPUnit\Framework\TestCase;
 
-class CommandBusTest extends \PHPUnit_Framework_TestCase
+class CommandBusTest extends TestCase
 {
     public function testAllMiddlewareAreExecutedAndReturnValuesAreRespected()
     {
