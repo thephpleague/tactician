@@ -19,6 +19,7 @@ Handler Method             | Class to use                                | Notes
 `handle()`                 | **`HandleInflector`**                       | Easy to read, easy to guess
 `handleRentMovieCommand()` | **`HandleClassNameInflector`**              | Lets you handle multiple commands on the same class
 `handleRentMovie()`        | **`HandleClassNameWithoutSuffixInflector`** | Same as HandleClassName but shaves any -Command suffix off your class
+`rentMovieCommand()`       | **`ClassNameInflector`**                    | Same as HandleClassName but without handle prefix
 `__invoke()`               | **`InvokeInflector`**                       | Good for invokable classes or closures.
 
 If you'd like to do something custom here, just implement the [`MethodNameInflector` interface](https://github.com/thephpleague/tactician/blob/master/src/Handler/MethodNameInflector/MethodNameInflector.php). All you need to do is return the string name of the method to call. This inflector will also receive the command and handler so you can use Reflection on them if you want.
