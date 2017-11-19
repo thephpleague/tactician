@@ -23,7 +23,7 @@ class ClassNameInflectorTest extends TestCase
     protected function setUp()
     {
         $this->inflector = new ClassNameInflector();
-        $this->handler = new ConcreteMethodsHandler();
+        $this->mockHandler = new ConcreteMethodsHandler();
     }
 
     public function testHandlesClassesWithoutNamespace()
