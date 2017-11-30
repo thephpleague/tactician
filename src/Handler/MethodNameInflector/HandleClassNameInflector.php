@@ -9,20 +9,15 @@ namespace League\Tactician\Handler\MethodNameInflector;
  *  - \MyGlobalCommand              => $handler->handleMyGlobalCommand()
  *  - \My\App\TaskCompletedCommand  => $handler->handleTaskCompletedCommand()
  */
-class HandleClassNameInflector implements MethodNameInflector
+class HandleClassNameInflector extends ClassNameInflector
 {
     /**
      * {@inheritdoc}
      */
     public function inflect($command, $commandHandler)
     {
-        $commandName = get_class($command);
+        $commandName = parent::inflect($command, $commandHandler);
 
-        // If class name has a namespace separator, only take last portion
-        if (strpos($commandName, '\\') !== false) {
-            $commandName = substr($commandName, strrpos($commandName, '\\') + 1);
-        }
-
-        return 'handle' . $commandName;
+        return 'handle' . ucfirst($commandName);
     }
 }
