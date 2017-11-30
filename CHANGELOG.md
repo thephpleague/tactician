@@ -1,3 +1,10 @@
+## 1.0.3 (2017-11-30)
+BC Breaks:
+- None
+
+New features:
+- [#118](https://github.com/thephpleague/tactician/pull/118) - Added class name inflector
+
 ## 1.0.2 (2016-02-20)
 
 BC Breaks:
