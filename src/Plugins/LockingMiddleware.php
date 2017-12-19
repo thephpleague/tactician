@@ -44,9 +44,9 @@ class LockingMiddleware implements Middleware
         try {
             $returnValue = $this->executeQueuedJobs();
         } catch (\Exception $e) {
-            $this->isExecuting = false;
-            $this->queue = [];
-            throw $e;
+            $this->unlockOnException($e);
+        } catch (\Throwable $e) {
+            $this->unlockOnException($e);
         }
 
         $this->isExecuting = false;
@@ -68,4 +68,12 @@ class LockingMiddleware implements Middleware
 
         return array_shift($returnValues);
     }
+    
+    private function unlockOnException($e): void
+    {
+        $this->isExecuting = false;
+        $this->queue = [];
+        throw $e;
+    }
+    
 }
