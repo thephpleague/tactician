@@ -10,11 +10,11 @@ title: Doctrine
 [![Source](https://img.shields.io/badge/source-league/tactician--doctrine-blue.svg?style=flat-square)](https://github.com/thephpleague/tactician-doctrine)
 [![Packagist](https://img.shields.io/packagist/v/league/tactician-doctrine.svg?style=flat-square)](https://packagist.org/packages/league/tactician-doctrine)
 
-This package provides a `TransactionMiddleware` and `RollbackOnlyTransactionMiddleware` that executes each command in a separate Doctrine ORM transaction.
+This package provides a `TransactionMiddleware` and a `RollbackOnlyTransactionMiddleware`. Both middleware execute each command in a separate Doctrine ORM transaction.
 
-The `TransactionMiddleware` will start a transaction before each command begins. If the command is successful, it will flush and commit the EntityManager (saving you keystrokes). If an exception is raised, `TransactionMiddleware` rolls back the transaction and rethrows the exception (saving you from corrupt data).
+The `TransactionMiddleware` will start a transaction before each command begins. If the command is successful, it will flush and commit the EntityManager (saving you keystrokes). If an exception is raised, `TransactionMiddleware` rolls back the transaction, closes the EntityManager and rethrows the exception (saving you from corrupt data).
 
-`RollbackOnlyTransactionMiddleware` does the same thing, but do not close entity manager.
+`RollbackOnlyTransactionMiddleware` does the same thing, but only rolls back the transaction: it does not close the entity manager.
 
 Setup is simple:
 
