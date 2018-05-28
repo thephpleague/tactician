@@ -18,7 +18,7 @@ Now we need to configure Tactician for your project.
 There are a few different ways to configure Tactician, depending on your Framework.
 
 - [No Framework](#no-framework)
-- [Symfony2](#symfony2)
+- [Symfony](#symfony)
 - [Zend Framework 2](#zend-framework-2)
 - [Laravel](#laravel)
 - [CakePHP](#cakephp)
