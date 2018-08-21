@@ -9,7 +9,7 @@ use League\Tactician\CommandBus;
  * dependencies, you could skip handlers altogether and implement a more
  * classic version of the command pattern where commands execute themselves.
  *
- * Here's a Tactician version of the wikipedia Light Switch example.
+ * Here's a Tactician version of the wikipedia (https://en.wikipedia.org/wiki/Command_pattern) Light Switch example.
  */
 interface SelfExecutingCommand
 {
