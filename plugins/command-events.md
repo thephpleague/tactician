@@ -14,7 +14,7 @@ This plugin lets you listen to some events emitted during command execution:
 
 - `command.received`: Emitted when a command is received by the command bus
 - `command.handled`: Emitted when a command is handled without errors
-- `command.failed`: Emitted when an error occured during command execution
+- `command.failed`: Emitted when an error occurred during command execution
 
 Setup is simple:
 
