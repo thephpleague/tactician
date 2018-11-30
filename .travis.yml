@@ -2,16 +2,18 @@ language: php
 dist: trusty
 
 php:
-    - 5.5
-    - 5.6
-    - 7.0
-    - 7.1
     - 7.2
+    - 7.3
+    - nightly
 
 matrix:
     include:
-        - php: 5.5
-          env: 'COMPOSER_FLAGS="--prefer-stable --prefer-lowest"'
+        -   php: 7.2
+            env: 'COMPOSER_FLAGS="--prefer-stable --prefer-lowest"'
+
+jobs:
+    allow_failures:
+        -   php: nightly
 
 before_script:
     - travis_retry composer self-update
