@@ -2,6 +2,7 @@
 
 namespace League\Tactician\Tests\Handler;
 
+use League\Tactician\Exception\CanNotInvokeHandlerException;
 use League\Tactician\Handler\CommandHandlerMiddleware;
 use League\Tactician\Handler\CommandNameExtractor\CommandNameExtractor;
 use League\Tactician\Handler\Locator\HandlerLocator;
@@ -35,7 +36,7 @@ class CommandHandlerMiddlewareTest extends TestCase
      */
     private $methodNameInflector;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->commandNameExtractor = Mockery::mock(CommandNameExtractor::class);
         $this->handlerLocator = Mockery::mock(HandlerLocator::class);
@@ -77,9 +78,6 @@ class CommandHandlerMiddlewareTest extends TestCase
         $this->assertEquals('a-return-value', $this->middleware->execute($command, $this->mockNext()));
     }
 
-    /**
-     * @expectedException \League\Tactician\Exception\CanNotInvokeHandlerException
-     */
     public function testMissingMethodOnHandlerObjectIsDetected()
     {
         $command = new CompleteTaskCommand();
@@ -96,7 +94,8 @@ class CommandHandlerMiddlewareTest extends TestCase
             ->shouldReceive('extract')
             ->with($command);
 
-        $this->assertEquals('a-return-value', $this->middleware->execute($command, $this->mockNext()));
+        $this->expectException(CanNotInvokeHandlerException::class);
+        $this->middleware->execute($command, $this->mockNext());
     }
 
     public function testDynamicMethodNamesAreSupported()
@@ -157,5 +156,10 @@ class CommandHandlerMiddlewareTest extends TestCase
         return function () {
             throw new \LogicException('Middleware fell through to next callable, this should not happen in the test.');
         };
+    }
+
+    public function tearDown(): void
+    {
+        Mockery::close();
     }
 }

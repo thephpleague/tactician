@@ -2,6 +2,8 @@
 namespace League\Tactician\Tests;
 
 use League\Tactician\CommandBus;
+use League\Tactician\Exception\InvalidCommandException;
+use League\Tactician\Exception\InvalidMiddlewareException;
 use League\Tactician\Middleware;
 use League\Tactician\Tests\Fixtures\Command\AddTaskCommand;
 use Mockery;
@@ -59,31 +61,33 @@ class CommandBusTest extends TestCase
     public function testNoMiddlewarePerformsASafeNoop()
     {
         (new CommandBus([]))->handle(new AddTaskCommand());
+        $this->assertTrue(true);
     }
 
-    /**
-     * @expectedException \League\Tactician\Exception\InvalidCommandException
-     */
     public function testHandleThrowExceptionForInvalidCommand()
     {
+        $this->expectException(InvalidCommandException::class);
         (new CommandBus([]))->handle('must be an object');
     }
 
-    /**
-     * @expectedException \League\Tactician\Exception\InvalidMiddlewareException
-     */
     public function testIfOneCanOnlyCreateWithValidMiddlewares()
     {
-        $middlewareList = [$this->getMock('stdClass')];
+        $middlewareList = [$this->createMock('stdClass')];
 
+        $this->expectException(InvalidMiddlewareException::class);
         new CommandBus($middlewareList);
     }
 
     public function testIfValidMiddlewaresAreAccepted()
     {
-        $middlewareList = [$this->getMock('\League\Tactician\Middleware')];
+        $middlewareList = [$this->createMock('\League\Tactician\Middleware')];
 
         new CommandBus($middlewareList);
         $this->addToAssertionCount(1);
+    }
+
+    public function tearDown(): void
+    {
+        Mockery::close();
     }
 }

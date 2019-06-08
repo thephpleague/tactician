@@ -1,6 +1,8 @@
 <?php
 namespace League\Tactician\Handler\MethodNameInflector;
 
+use Mockery;
+
 /**
  * Returns a method name that is handle + the last portion of the class name
  * but also without a given suffix, typically "Command". This allows you to
@@ -48,5 +50,10 @@ class HandleClassNameWithoutSuffixInflector extends HandleClassNameInflector
         }
 
         return substr($methodName, 0, strlen($methodName) - $this->suffixLength);
+    }
+
+    public function tearDown(): void
+    {
+        Mockery::close();
     }
 }

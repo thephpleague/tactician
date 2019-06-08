@@ -3,6 +3,7 @@
 namespace League\Tactician\Tests\Exception;
 
 use League\Tactician\Exception\CanNotDetermineCommandNameException;
+use Mockery;
 use PHPUnit\Framework\TestCase;
 
 class CanNotDetermineCommandNameExceptionTest extends TestCase
@@ -33,5 +34,10 @@ class CanNotDetermineCommandNameExceptionTest extends TestCase
                 }
             ],
         ];
+    }
+
+    public function tearDown(): void
+    {
+        Mockery::close();
     }
 }

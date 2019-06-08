@@ -4,6 +4,7 @@ namespace League\Tactician\Tests\Plugins;
 
 use League\Tactician\Plugins\NamedCommand\NamedCommandExtractor;
 use League\Tactician\Tests\Fixtures\Command\CommandWithAName;
+use Mockery;
 use PHPUnit\Framework\TestCase;
 
 class NamedCommandExtractorTest extends TestCase
@@ -13,7 +14,7 @@ class NamedCommandExtractorTest extends TestCase
      */
     private $extractor;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->extractor = new NamedCommandExtractor();
     }
@@ -28,11 +29,14 @@ class NamedCommandExtractorTest extends TestCase
 
     public function testThrowsExceptionForNonNamedCommand()
     {
-        $this->setExpectedException(
-            'League\Tactician\Exception\CanNotDetermineCommandNameException',
-            'Could not determine command name of stdClass'
-        );
+        $this->expectException('League\Tactician\Exception\CanNotDetermineCommandNameException');
+        $this->expectExceptionMessage('Could not determine command name of stdClass');
 
         $this->extractor->extract(new \stdClass);
+    }
+
+    public function tearDown(): void
+    {
+        Mockery::close();
     }
 }

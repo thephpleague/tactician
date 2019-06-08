@@ -5,6 +5,7 @@ namespace League\Tactician\Tests\Plugins;
 use League\Tactician\Plugins\LockingMiddleware;
 use League\Tactician\Tests\Fixtures\Command\AddTaskCommand;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
+use Mockery;
 use PHPUnit\Framework\TestCase;
 
 class LockingMiddlewareTest extends TestCase
@@ -14,7 +15,7 @@ class LockingMiddlewareTest extends TestCase
      */
     private $lockingMiddleware;
 
-    public function setup()
+    public function setUp(): void
     {
         $this->lockingMiddleware = new LockingMiddleware();
     }
@@ -50,6 +51,7 @@ class LockingMiddlewareTest extends TestCase
         };
 
         $this->lockingMiddleware->execute(null, $next1);
+        $this->assertTrue(true); // We made it through!
     }
 
     public function testTheReturnValueOfTheFirstCommandIsGivenBack()
@@ -85,6 +87,7 @@ class LockingMiddlewareTest extends TestCase
         };
 
         $this->lockingMiddleware->execute(null, $next1);
+        $this->assertTrue(true); // we made it through!
     }
 
     public function testExceptionsDoNotLeaveTheCommandBusLocked()
@@ -137,15 +140,18 @@ class LockingMiddlewareTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException \LogicException
-     */
     public function testExceptionsAreAllowedToBubbleUp()
     {
         $next = function () {
             throw new \LogicException('Exit out, thus dropping the queue');
         };
 
+        $this->expectException(\LogicException::class);
         $this->lockingMiddleware->execute(new AddTaskCommand(), $next);
+    }
+
+    public function tearDown(): void
+    {
+        Mockery::close();
     }
 }

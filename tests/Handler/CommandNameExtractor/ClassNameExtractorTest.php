@@ -3,6 +3,7 @@
 namespace League\Tactician\Tests\Handler\CommandNameExtractor;
 
 use League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor;
+use Mockery;
 use PHPUnit\Framework\TestCase;
 
 class ClassNameExtractorTest extends TestCase
@@ -12,7 +13,7 @@ class ClassNameExtractorTest extends TestCase
      */
     private $extractor;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->extractor = new ClassNameExtractor();
     }
@@ -23,5 +24,10 @@ class ClassNameExtractorTest extends TestCase
             'stdClass',
             $this->extractor->extract(new \stdClass)
         );
+    }
+
+    public function tearDown(): void
+    {
+        Mockery::close();
     }
 }

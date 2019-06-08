@@ -6,6 +6,7 @@ use League\Tactician\Handler\MethodNameInflector\HandleClassNameWithoutSuffixInf
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use DateTime;
+use Mockery;
 use PHPUnit\Framework\TestCase;
 
 class HandleClassNameWithoutSuffixInflectorTest extends TestCase
@@ -20,7 +21,7 @@ class HandleClassNameWithoutSuffixInflectorTest extends TestCase
      */
     private $mockHandler;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->inflector = new HandleClassNameWithoutSuffixInflector();
         $this->handler = new ConcreteMethodsHandler();
@@ -52,5 +53,10 @@ class HandleClassNameWithoutSuffixInflectorTest extends TestCase
             'handleDate',
             $inflector->inflect(new DateTime(), $this->mockHandler)
         );
+    }
+
+    public function tearDown(): void
+    {
+        Mockery::close();
     }
 }

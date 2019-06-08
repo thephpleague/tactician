@@ -5,6 +5,7 @@ namespace League\Tactician\Tests\Handler\MethodNameInflector;
 use League\Tactician\Handler\MethodNameInflector\HandleInflector;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
+use Mockery;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -20,5 +21,10 @@ class HandleInflectorTest extends TestCase
             'handle',
             $inflector->inflect(new CompleteTaskCommand(), new ConcreteMethodsHandler())
         );
+    }
+
+    public function tearDown(): void
+    {
+        Mockery::close();
     }
 }

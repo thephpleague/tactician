@@ -5,6 +5,7 @@ namespace League\Tactician\Tests\Exception;
 use League\Tactician\Exception\CanNotInvokeHandlerException;
 use League\Tactician\Exception\Exception;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
+use Mockery;
 use PHPUnit\Framework\TestCase;
 
 class CanNotInvokeHandlerExceptionTest extends TestCase
@@ -15,8 +16,8 @@ class CanNotInvokeHandlerExceptionTest extends TestCase
 
         $exception = CanNotInvokeHandlerException::forCommand($command, 'Because stuff');
 
-        $this->assertContains(CompleteTaskCommand::class, $exception->getMessage());
-        $this->assertContains('Because stuff', $exception->getMessage());
+        $this->assertStringContainsString(CompleteTaskCommand::class, $exception->getMessage());
+        $this->assertStringContainsString('Because stuff', $exception->getMessage());
         $this->assertSame($command, $exception->getCommand());
         $this->assertInstanceOf(Exception::class, $exception);
     }
@@ -47,5 +48,10 @@ class CanNotInvokeHandlerExceptionTest extends TestCase
                 }
             ],
         ];
+    }
+
+    public function tearDown(): void
+    {
+        Mockery::close();
     }
 }

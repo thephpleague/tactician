@@ -6,6 +6,7 @@ use League\Tactician\Handler\MethodNameInflector\ClassNameInflector;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use CommandWithoutNamespace;
+use Mockery;
 use PHPUnit\Framework\TestCase;
 
 class ClassNameInflectorTest extends TestCase
@@ -20,7 +21,7 @@ class ClassNameInflectorTest extends TestCase
      */
     private $mockHandler;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->inflector = new ClassNameInflector();
         $this->mockHandler = new ConcreteMethodsHandler();
@@ -44,5 +45,10 @@ class ClassNameInflectorTest extends TestCase
             'completeTaskCommand',
             $this->inflector->inflect($command, $this->mockHandler)
         );
+    }
+
+    public function tearDown(): void
+    {
+        Mockery::close();
     }
 }
