@@ -2,25 +2,17 @@
 
 namespace League\Tactician;
 
-use League\Tactician\Exception\InvalidCommandException;
-use League\Tactician\Exception\InvalidMiddlewareException;
-
 /**
  * Receives a command and sends it through a chain of middleware for processing.
- *
- * @final
  */
-class CommandBus
+final class CommandBus
 {
     /**
      * @var callable
      */
     private $middlewareChain;
 
-    /**
-     * @param Middleware[] $middleware
-     */
-    public function __construct(array $middleware)
+    public function __construct(Middleware ...$middleware)
     {
         $this->middlewareChain = $this->createExecutionChain($middleware);
     }
@@ -28,16 +20,10 @@ class CommandBus
     /**
      * Executes the given command and optionally returns a value
      *
-     * @param object $command
-     *
      * @return mixed
      */
-    public function handle($command)
+    public function handle(object $command)
     {
-        if (!is_object($command)) {
-            throw InvalidCommandException::forUnknownValue($command);
-        }
-
         $middlewareChain = $this->middlewareChain;
         return $middlewareChain($command);
     }
@@ -54,10 +40,6 @@ class CommandBus
         };
 
         while ($middleware = array_pop($middlewareList)) {
-            if (! $middleware instanceof Middleware) {
-                throw InvalidMiddlewareException::forMiddleware($middleware);
-            }
-
             $lastCallable = function ($command) use ($middleware, $lastCallable) {
                 return $middleware->execute($command, $lastCallable);
             };

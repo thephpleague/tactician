@@ -37,6 +37,6 @@ class QuickStart
             new HandleInflector()
         );
 
-        return new CommandBus([$handlerMiddleware]);
+        return new CommandBus($handlerMiddleware);
     }
 }

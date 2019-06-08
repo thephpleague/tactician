@@ -39,7 +39,7 @@ class CommandBusTest extends TestCase
             }
         );
 
-        $commandBus = new CommandBus([$middleware1, $middleware2, $middleware3]);
+        $commandBus = new CommandBus($middleware1, $middleware2, $middleware3);
 
         $this->assertEquals('foobar', $commandBus->handle(new AddTaskCommand()));
         $this->assertEquals([1, 2, 3], $executionOrder);
@@ -50,7 +50,7 @@ class CommandBusTest extends TestCase
         $middleware = Mockery::mock(Middleware::class);
         $middleware->shouldReceive('execute')->once()->andReturn('foobar');
 
-        $commandBus = new CommandBus([$middleware]);
+        $commandBus = new CommandBus($middleware);
 
         $this->assertEquals(
             'foobar',
@@ -60,30 +60,8 @@ class CommandBusTest extends TestCase
 
     public function testNoMiddlewarePerformsASafeNoop()
     {
-        (new CommandBus([]))->handle(new AddTaskCommand());
+        (new CommandBus())->handle(new AddTaskCommand());
         $this->assertTrue(true);
-    }
-
-    public function testHandleThrowExceptionForInvalidCommand()
-    {
-        $this->expectException(InvalidCommandException::class);
-        (new CommandBus([]))->handle('must be an object');
-    }
-
-    public function testIfOneCanOnlyCreateWithValidMiddlewares()
-    {
-        $middlewareList = [$this->createMock('stdClass')];
-
-        $this->expectException(InvalidMiddlewareException::class);
-        new CommandBus($middlewareList);
-    }
-
-    public function testIfValidMiddlewaresAreAccepted()
-    {
-        $middlewareList = [$this->createMock('\League\Tactician\Middleware')];
-
-        new CommandBus($middlewareList);
-        $this->addToAssertionCount(1);
     }
 
     public function tearDown(): void
