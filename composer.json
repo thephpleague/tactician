@@ -13,7 +13,6 @@
         "php":  ">=7.2"
     },
     "require-dev": {
-        "mockery/mockery": "~1.2",
         "phpunit/phpunit": "^8.2",
         "doctrine/coding-standard": "^6.0"
     },

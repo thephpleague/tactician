@@ -10,7 +10,8 @@ namespace League\Tactician\Tests\Fixtures\Handler;
  */
 class ConcreteMethodsHandler
 {
-    public function handleTaskCompletedCommand(object $command) : void
+    public function handleTaskCompletedCommand(object $command) : string
     {
+        return 'derp';
     }
 }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace League\Tactician\Tests\Handler\CommandNameExtractor;
 
 use League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor;
-use Mockery;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
@@ -25,10 +24,5 @@ class ClassNameExtractorTest extends TestCase
             'stdClass',
             $this->extractor->extract(new stdClass())
         );
-    }
-
-    public function tearDown() : void
-    {
-        Mockery::close();
     }
 }

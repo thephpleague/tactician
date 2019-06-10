@@ -7,7 +7,6 @@ namespace League\Tactician\Tests;
 use League\Tactician\CommandBus;
 use League\Tactician\Middleware;
 use League\Tactician\Tests\Fixtures\Command\AddTaskCommand;
-use Mockery;
 use PHPUnit\Framework\TestCase;
 
 class CommandBusTest extends TestCase
@@ -16,8 +15,8 @@ class CommandBusTest extends TestCase
     {
         $executionOrder = [];
 
-        $middleware1 = Mockery::mock(Middleware::class);
-        $middleware1->shouldReceive('execute')->andReturnUsing(
+        $middleware1 = $this->createMock(Middleware::class);
+        $middleware1->method('execute')->willReturnCallback(
             static function ($command, $next) use (&$executionOrder) {
                 $executionOrder[] = 1;
 
@@ -25,8 +24,8 @@ class CommandBusTest extends TestCase
             }
         );
 
-        $middleware2 = Mockery::mock(Middleware::class);
-        $middleware2->shouldReceive('execute')->andReturnUsing(
+        $middleware2 = $this->createMock(Middleware::class);
+        $middleware2->method('execute')->willReturnCallback(
             static function ($command, $next) use (&$executionOrder) {
                 $executionOrder[] = 2;
 
@@ -34,8 +33,8 @@ class CommandBusTest extends TestCase
             }
         );
 
-        $middleware3 = Mockery::mock(Middleware::class);
-        $middleware3->shouldReceive('execute')->andReturnUsing(
+        $middleware3 = $this->createMock(Middleware::class);
+        $middleware3->method('execute')->willReturnCallback(
             static function () use (&$executionOrder) {
                 $executionOrder[] = 3;
 
@@ -51,8 +50,8 @@ class CommandBusTest extends TestCase
 
     public function testSingleMiddlewareWorks() : void
     {
-        $middleware = Mockery::mock(Middleware::class);
-        $middleware->shouldReceive('execute')->once()->andReturn('foobar');
+        $middleware = $this->createMock(Middleware::class);
+        $middleware->expects(self::once())->method('execute')->willReturn('foobar');
 
         $commandBus = new CommandBus($middleware);
 
@@ -66,10 +65,5 @@ class CommandBusTest extends TestCase
     {
         (new CommandBus())->handle(new AddTaskCommand());
         self::assertTrue(true);
-    }
-
-    public function tearDown() : void
-    {
-        Mockery::close();
     }
 }
