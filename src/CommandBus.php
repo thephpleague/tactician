@@ -26,9 +26,7 @@ final class CommandBus
      */
     public function handle(object $command)
     {
-        $middlewareChain = $this->middlewareChain;
-
-        return $middlewareChain($command);
+        return ($this->middlewareChain)($command);
     }
 
     /**
