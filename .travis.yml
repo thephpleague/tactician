@@ -18,6 +18,7 @@ before_script:
     - mkdir -p build/logs
 
 script:
+    - vendor/bin/phpstan --level=max analyse src tests
     - vendor/bin/phpunit --coverage-clover=build/logs/clover.xml
     - vendor/bin/phpcs --standard=Doctrine src tests
 

@@ -22,13 +22,13 @@ class CommandHandlerMiddlewareTest extends TestCase
     /** @var CommandHandlerMiddleware */
     private $middleware;
 
-    /** @var CommandNameExtractor|MockObject */
+    /** @var CommandNameExtractor&MockObject */
     private $commandNameExtractor;
 
-    /** @var ContainerInterface|MockObject */
+    /** @var ContainerInterface&MockObject */
     private $container;
 
-    /** @var MethodNameInflector|MockObject */
+    /** @var MethodNameInflector&MockObject */
     private $methodNameInflector;
 
     protected function setUp() : void

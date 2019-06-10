@@ -47,9 +47,4 @@ class HandleClassNameWithoutSuffixInflector extends HandleClassNameInflector
 
         return substr($methodName, 0, strlen($methodName) - $this->suffixLength);
     }
-
-    public function tearDown() : void
-    {
-        Mockery::close();
-    }
 }
