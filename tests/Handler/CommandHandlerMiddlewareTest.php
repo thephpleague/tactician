@@ -5,12 +5,12 @@ namespace League\Tactician\Tests\Handler;
 use League\Tactician\Exception\CanNotInvokeHandlerException;
 use League\Tactician\Handler\CommandHandlerMiddleware;
 use League\Tactician\Handler\CommandNameExtractor\CommandNameExtractor;
-use League\Tactician\Handler\Locator\HandlerLocator;
 use League\Tactician\Handler\MethodNameInflector\MethodNameInflector;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use League\Tactician\Tests\Fixtures\Handler\DynamicMethodsHandler;
 use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 use stdClass;
 use Mockery;
 
@@ -27,9 +27,9 @@ class CommandHandlerMiddlewareTest extends TestCase
     private $commandNameExtractor;
 
     /**
-     * @var HandlerLocator|Mockery\MockInterface
+     * @var ContainerInterface|Mockery\MockInterface
      */
-    private $handlerLocator;
+    private $container;
 
     /**
      * @var MethodNameInflector|Mockery\MockInterface
@@ -39,12 +39,12 @@ class CommandHandlerMiddlewareTest extends TestCase
     protected function setUp(): void
     {
         $this->commandNameExtractor = Mockery::mock(CommandNameExtractor::class);
-        $this->handlerLocator = Mockery::mock(HandlerLocator::class);
+        $this->container = Mockery::mock(ContainerInterface::class);
         $this->methodNameInflector = Mockery::mock(MethodNameInflector::class);
 
         $this->middleware = new CommandHandlerMiddleware(
             $this->commandNameExtractor,
-            $this->handlerLocator,
+            $this->container,
             $this->methodNameInflector
         );
     }
@@ -65,8 +65,8 @@ class CommandHandlerMiddlewareTest extends TestCase
             ->withArgs([$command, $handler])
             ->andReturn('handleCompleteTaskCommand');
 
-        $this->handlerLocator
-            ->shouldReceive('getHandlerForCommand')
+        $this->container
+            ->shouldReceive('get')
             ->with(CompleteTaskCommand::class)
             ->andReturn($handler);
 
@@ -86,8 +86,8 @@ class CommandHandlerMiddlewareTest extends TestCase
             ->shouldReceive('inflect')
             ->andReturn('someMethodThatDoesNotExist');
 
-        $this->handlerLocator
-            ->shouldReceive('getHandlerForCommand')
+        $this->container
+            ->shouldReceive('get')
             ->andReturn(new stdClass);
 
         $this->commandNameExtractor
@@ -107,8 +107,8 @@ class CommandHandlerMiddlewareTest extends TestCase
             ->shouldReceive('inflect')
             ->andReturn('someHandlerMethod');
 
-        $this->handlerLocator
-            ->shouldReceive('getHandlerForCommand')
+        $this->container
+            ->shouldReceive('get')
             ->andReturn($handler);
 
         $this->commandNameExtractor
@@ -135,8 +135,8 @@ class CommandHandlerMiddlewareTest extends TestCase
             ->shouldReceive('inflect')
             ->andReturn('__invoke');
 
-        $this->handlerLocator
-            ->shouldReceive('getHandlerForCommand')
+        $this->container
+            ->shouldReceive('get')
             ->andReturn($handler);
 
         $this->commandNameExtractor

@@ -5,8 +5,8 @@ namespace League\Tactician\Handler;
 use League\Tactician\Middleware;
 use League\Tactician\Exception\CanNotInvokeHandlerException;
 use League\Tactician\Handler\CommandNameExtractor\CommandNameExtractor;
-use League\Tactician\Handler\Locator\HandlerLocator;
 use League\Tactician\Handler\MethodNameInflector\MethodNameInflector;
+use Psr\Container\ContainerInterface;
 
 /**
  * The "core" CommandBus. Locates the appropriate handler and executes command.
@@ -19,7 +19,7 @@ class CommandHandlerMiddleware implements Middleware
     private $commandNameExtractor;
 
     /**
-     * @var HandlerLocator
+     * @var ContainerInterface
      */
     private $handlerLocator;
 
@@ -28,14 +28,9 @@ class CommandHandlerMiddleware implements Middleware
      */
     private $methodNameInflector;
 
-    /**
-     * @param CommandNameExtractor $commandNameExtractor
-     * @param HandlerLocator       $handlerLocator
-     * @param MethodNameInflector  $methodNameInflector
-     */
     public function __construct(
         CommandNameExtractor $commandNameExtractor,
-        HandlerLocator $handlerLocator,
+        ContainerInterface $handlerLocator,
         MethodNameInflector $methodNameInflector
     ) {
         $this->commandNameExtractor = $commandNameExtractor;
@@ -56,7 +51,7 @@ class CommandHandlerMiddleware implements Middleware
     public function execute($command, callable $next)
     {
         $commandName = $this->commandNameExtractor->extract($command);
-        $handler = $this->handlerLocator->getHandlerForCommand($commandName);
+        $handler = $this->handlerLocator->get($commandName);
         $methodName = $this->methodNameInflector->inflect($command, $handler);
 
         // is_callable is used here instead of method_exists, as method_exists
