@@ -1,6 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace League\Tactician\Handler\MethodNameInflector;
+
+use function get_class;
+use function strpos;
+use function strrpos;
+use function strtolower;
+use function substr;
 
 /**
  * Assumes the method is only the last portion of the class name.
@@ -14,7 +22,7 @@ class ClassNameInflector implements MethodNameInflector
     /**
      * {@inheritdoc}
      */
-    public function inflect($command, $commandHandler)
+    public function inflect(object $command, object $commandHandler) : string
     {
         $commandName = get_class($command);
 

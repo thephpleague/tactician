@@ -1,15 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace League\Tactician;
+
+use function array_pop;
 
 /**
  * Receives a command and sends it through a chain of middleware for processing.
  */
 final class CommandBus
 {
-    /**
-     * @var callable
-     */
+    /** @var callable */
     private $middlewareChain;
 
     public function __construct(Middleware ...$middleware)
@@ -25,22 +27,21 @@ final class CommandBus
     public function handle(object $command)
     {
         $middlewareChain = $this->middlewareChain;
+
         return $middlewareChain($command);
     }
 
     /**
      * @param Middleware[] $middlewareList
-     *
-     * @return callable
      */
-    private function createExecutionChain($middlewareList)
+    private function createExecutionChain(array $middlewareList) : callable
     {
-        $lastCallable = function () {
+        $lastCallable = static function () : void {
             // the final callable is a no-op
         };
 
         while ($middleware = array_pop($middlewareList)) {
-            $lastCallable = function ($command) use ($middleware, $lastCallable) {
+            $lastCallable = static function ($command) use ($middleware, $lastCallable) {
                 return $middleware->execute($command, $lastCallable);
             };
         }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace League\Tactician\Handler\MethodNameInflector;
 
 /**
@@ -10,7 +12,7 @@ class HandleInflector implements MethodNameInflector
     /**
      * {@inheritdoc}
      */
-    public function inflect($command, $commandHandler)
+    public function inflect(object $command, object $commandHandler) : string
     {
         return 'handle';
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace League\Tactician\Tests\Fixtures\Handler;
 
 /**
@@ -8,7 +10,7 @@ namespace League\Tactician\Tests\Fixtures\Handler;
  */
 class ConcreteMethodsHandler
 {
-    public function handleTaskCompletedCommand($command)
+    public function handleTaskCompletedCommand(object $command) : void
     {
     }
 }

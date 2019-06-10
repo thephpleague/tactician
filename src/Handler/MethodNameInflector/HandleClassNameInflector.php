@@ -1,6 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace League\Tactician\Handler\MethodNameInflector;
+
+use function ucfirst;
 
 /**
  * Assumes the method is handle + the last portion of the class name.
@@ -14,7 +18,7 @@ class HandleClassNameInflector extends ClassNameInflector
     /**
      * {@inheritdoc}
      */
-    public function inflect($command, $commandHandler)
+    public function inflect(object $command, object $commandHandler) : string
     {
         $commandName = parent::inflect($command, $commandHandler);
 

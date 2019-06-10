@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace League\Tactician\Tests\Fixtures\Handler;
 
 /**
@@ -8,7 +10,7 @@ namespace League\Tactician\Tests\Fixtures\Handler;
  */
 class HandleMethodHandler
 {
-    public function handle($command)
+    public function handle(object $command) : void
     {
     }
 }

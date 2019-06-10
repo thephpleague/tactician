@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace League\Tactician\Handler\MethodNameInflector;
 
 /**
@@ -10,11 +12,6 @@ interface MethodNameInflector
 {
     /**
      * Return the method name to call on the command handler and return it.
-     *
-     * @param object $command
-     * @param object $commandHandler
-     *
-     * @return string
      */
-    public function inflect($command, $commandHandler);
+    public function inflect(object $command, object $commandHandler) : string;
 }

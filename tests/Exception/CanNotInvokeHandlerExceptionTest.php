@@ -1,56 +1,37 @@
 <?php
 
+declare(strict_types=1);
+
 namespace League\Tactician\Tests\Exception;
 
-use League\Tactician\Exception\CanNotInvokeHandlerException;
+use League\Tactician\Exception\CanNotInvokeHandler;
 use League\Tactician\Exception\Exception;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use Mockery;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
 class CanNotInvokeHandlerExceptionTest extends TestCase
 {
-    public function testExceptionContainsDebuggingInfo()
+    public function testExceptionContainsDebuggingInfo() : void
     {
         $command = new CompleteTaskCommand();
 
-        $exception = CanNotInvokeHandlerException::forCommand($command, 'Because stuff');
+        $exception = CanNotInvokeHandler::forCommand($command, 'Because stuff');
 
-        $this->assertStringContainsString(CompleteTaskCommand::class, $exception->getMessage());
-        $this->assertStringContainsString('Because stuff', $exception->getMessage());
-        $this->assertSame($command, $exception->getCommand());
-        $this->assertInstanceOf(Exception::class, $exception);
+        self::assertStringContainsString(CompleteTaskCommand::class, $exception->getMessage());
+        self::assertStringContainsString('Because stuff', $exception->getMessage());
+        self::assertSame($command, $exception->getCommand());
+        self::assertInstanceOf(Exception::class, $exception);
     }
 
-    /**
-     * @dataProvider provideAnyTypeOfCommand
-     */
-    public function testForAnyTypeOfCommand($command)
+    public function testForAnyTypeOfCommand() : void
     {
-        $exception = CanNotInvokeHandlerException::forCommand($command, 'happens');
-        $this->assertSame($command, $exception->getCommand());
+        $exception = CanNotInvokeHandler::forCommand($command = new stdClass(), 'happens');
+        self::assertSame($command, $exception->getCommand());
     }
 
-    public function provideAnyTypeOfCommand()
-    {
-        return [
-            [ 1 ],
-            [ new \stdClass() ],
-            [ null ],
-            [ 'a string' ],
-            [ new \SplFileInfo(__FILE__) ],
-            [ true ],
-            [ false ],
-            [ [] ],
-            [ [ [ 1 ] ] ],
-            [
-                function () {
-                }
-            ],
-        ];
-    }
-
-    public function tearDown(): void
+    public function tearDown() : void
     {
         Mockery::close();
     }

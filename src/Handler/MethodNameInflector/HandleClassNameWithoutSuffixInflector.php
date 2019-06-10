@@ -1,7 +1,12 @@
 <?php
+
+declare(strict_types=1);
+
 namespace League\Tactician\Handler\MethodNameInflector;
 
 use Mockery;
+use function strlen;
+use function substr;
 
 /**
  * Returns a method name that is handle + the last portion of the class name
@@ -17,31 +22,22 @@ use Mockery;
  */
 class HandleClassNameWithoutSuffixInflector extends HandleClassNameInflector
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $suffix;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $suffixLength;
 
     /**
      * @param string $suffix The string to remove from end of each class name
      */
-    public function __construct($suffix = 'Command')
+    public function __construct(string $suffix = 'Command')
     {
-        $this->suffix = $suffix;
+        $this->suffix       = $suffix;
         $this->suffixLength = strlen($suffix);
     }
 
-    /**
-     * @param object $command
-     * @param object $commandHandler
-     * @return string
-     */
-    public function inflect($command, $commandHandler)
+    public function inflect(object $command, object $commandHandler) : string
     {
         $methodName = parent::inflect($command, $commandHandler);
 
@@ -52,7 +48,7 @@ class HandleClassNameWithoutSuffixInflector extends HandleClassNameInflector
         return substr($methodName, 0, strlen($methodName) - $this->suffixLength);
     }
 
-    public function tearDown(): void
+    public function tearDown() : void
     {
         Mockery::close();
     }

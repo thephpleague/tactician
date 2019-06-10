@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace League\Tactician;
 
 /**
@@ -15,10 +17,7 @@ namespace League\Tactician;
 interface Middleware
 {
     /**
-     * @param object   $command
-     * @param callable $next
-     *
      * @return mixed
      */
-    public function execute($command, callable $next);
+    public function execute(object $command, callable $next);
 }

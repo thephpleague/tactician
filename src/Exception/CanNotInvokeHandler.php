@@ -1,6 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace League\Tactician\Exception;
+
+use BadMethodCallException;
+use function get_class;
+use function gettype;
+use function is_object;
 
 /**
  * Thrown when a specific handler object can not be used on a command object.
@@ -8,24 +15,21 @@ namespace League\Tactician\Exception;
  * The most common reason is the receiving method is missing or incorrectly
  * named.
  */
-class CanNotInvokeHandlerException extends \BadMethodCallException implements Exception
+class CanNotInvokeHandler extends BadMethodCallException implements Exception
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     private $command;
 
     /**
      * @param mixed $command
-     * @param string $reason
      *
      * @return static
      */
-    public static function forCommand($command, $reason)
+    public static function forCommand($command, string $reason)
     {
         $type =  is_object($command) ? get_class($command) : gettype($command);
 
-        $exception = new static(
+        $exception          = new static(
             'Could not invoke handler for command ' . $type .
             ' for reason: ' . $reason
         );

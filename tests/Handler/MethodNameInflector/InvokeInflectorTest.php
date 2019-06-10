@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace League\Tactician\Tests\Handler\MethodNameInflector;
 
 use League\Tactician\Handler\MethodNameInflector\InvokeInflector;
@@ -13,17 +15,17 @@ use PHPUnit\Framework\TestCase;
  */
 class InvokeInflectorTest extends TestCase
 {
-    public function testReturnsInvokeMagicMethod()
+    public function testReturnsInvokeMagicMethod() : void
     {
         $inflector = new InvokeInflector();
 
-        $this->assertEquals(
+        self::assertEquals(
             '__invoke',
             $inflector->inflect(new CompleteTaskCommand(), new ConcreteMethodsHandler())
         );
     }
 
-    public function tearDown(): void
+    public function tearDown() : void
     {
         Mockery::close();
     }

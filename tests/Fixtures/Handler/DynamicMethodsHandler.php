@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace League\Tactician\Tests\Fixtures\Handler;
 
 /**
@@ -9,24 +11,21 @@ namespace League\Tactician\Tests\Fixtures\Handler;
  */
 class DynamicMethodsHandler
 {
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     private $methods = [];
 
     /**
      * @return string[]
      */
-    public function getMethodsInvoked()
+    public function getMethodsInvoked() : array
     {
         return $this->methods;
     }
 
     /**
-     * @param string $methodName
-     * @param array $args
+     * @param mixed[] $args
      */
-    public function __call($methodName, $args)
+    public function __call(string $methodName, array $args) : void
     {
         $this->methods[] = $methodName;
     }

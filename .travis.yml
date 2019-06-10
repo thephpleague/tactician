@@ -2,17 +2,13 @@ language: php
 dist: trusty
 
 php:
-    - 5.5
-    - 5.6
-    - 7.0
-    - 7.1
-    - 7.2
-    - 7.3
+    - '7.2'
+    - '7.3'
     - nightly
 
 matrix:
     include:
-        - php: 5.5
+        - php: '7.2
           env: 'COMPOSER_FLAGS="--prefer-stable --prefer-lowest"'
 
 before_script:
@@ -23,7 +19,7 @@ before_script:
 
 script:
     - vendor/bin/phpunit --coverage-clover=build/logs/clover.xml
-    - vendor/bin/phpcs --standard=PSR2 src tests
+    - vendor/bin/phpcs --standard=Doctrine src tests
 
 after_script:
     - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml

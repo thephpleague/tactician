@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace League\Tactician\Handler\CommandNameExtractor;
 
-use League\Tactician\Exception\CanNotDetermineCommandNameException;
+use League\Tactician\Exception\CanNotDetermineCommandName;
 
 /**
  * Extract the name from a command so that the name can be determined
@@ -13,11 +15,7 @@ interface CommandNameExtractor
     /**
      * Extract the name from a command
      *
-     * @param object $command
-     *
-     * @return string
-     *
-     * @throws CannotDetermineCommandNameException
+     * @throws CanNotDetermineCommandName
      */
-    public function extract($command);
+    public function extract(object $command) : string;
 }

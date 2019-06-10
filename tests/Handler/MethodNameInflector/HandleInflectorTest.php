@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace League\Tactician\Tests\Handler\MethodNameInflector;
 
 use League\Tactician\Handler\MethodNameInflector\HandleInflector;
@@ -13,17 +15,17 @@ use PHPUnit\Framework\TestCase;
  */
 class HandleInflectorTest extends TestCase
 {
-    public function testReturnsHandleMethod()
+    public function testReturnsHandleMethod() : void
     {
-        $inflector = new HandleInflector;
+        $inflector = new HandleInflector();
 
-        $this->assertEquals(
+        self::assertEquals(
             'handle',
             $inflector->inflect(new CompleteTaskCommand(), new ConcreteMethodsHandler())
         );
     }
 
-    public function tearDown(): void
+    public function tearDown() : void
     {
         Mockery::close();
     }

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 // @codingStandardsIgnoreStart
 // We must exclude the coding standards from this file, otherwise it will fail
 // due to the lack of a namespace.
