@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace League\Tactician\Handler;
 
-use League\Tactician\Handler\CanNotInvokeHandler;
 use League\Tactician\Handler\HandlerNameInflector\HandlerNameInflector;
 use League\Tactician\Handler\MethodNameInflector\MethodNameInflector;
 use League\Tactician\Middleware;
@@ -45,10 +44,10 @@ class CommandHandlerMiddleware implements Middleware
      */
     public function execute(object $command, callable $next)
     {
-        $handler     = $this->handlerLocator->get(
+        $handler    = $this->handlerLocator->get(
             $this->handlerNameInflector->getHandlerClassName(get_class($command))
         );
-        $methodName  = $this->methodNameInflector->inflect($command, $handler);
+        $methodName = $this->methodNameInflector->inflect($command, $handler);
 
         // is_callable is used here instead of method_exists, as method_exists
         // will fail when given a handler that relies on __call.

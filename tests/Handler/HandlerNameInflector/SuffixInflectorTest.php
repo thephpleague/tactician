@@ -18,7 +18,8 @@ class SuffixInflectorTest extends TestCase
         );
     }
 
-    public function examples(): array
+    /** @return array<array<string>> */
+    public function examples() : array
     {
         return [
             ['Handler', 'SomeCommand', 'SomeCommandHandler'],

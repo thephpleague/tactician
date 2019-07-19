@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace League\Tactician\Handler\MethodNameInflector;
 
-use Mockery;
 use function strlen;
 use function substr;
 

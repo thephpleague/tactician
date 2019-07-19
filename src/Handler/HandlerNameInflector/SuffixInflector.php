@@ -14,7 +14,7 @@ class SuffixInflector implements HandlerNameInflector
         $this->suffix = $suffix;
     }
 
-    public function getHandlerClassName(string $commandClassName): string
+    public function getHandlerClassName(string $commandClassName) : string
     {
         return $commandClassName . $this->suffix;
     }
