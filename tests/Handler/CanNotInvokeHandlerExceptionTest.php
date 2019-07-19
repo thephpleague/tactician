@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace League\Tactician\Tests\Exception;
+namespace League\Tactician\Tests\Handler;
 
-use League\Tactician\Exception\CanNotInvokeHandler;
-use League\Tactician\Exception\Exception;
+use League\Tactician\Exception;
+use League\Tactician\Handler\CanNotInvokeHandler;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use PHPUnit\Framework\TestCase;
 use stdClass;

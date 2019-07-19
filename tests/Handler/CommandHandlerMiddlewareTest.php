@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace League\Tactician\Tests\Handler;
 
-use League\Tactician\Exception\CanNotInvokeHandler;
+use League\Tactician\Handler\CanNotInvokeHandler;
 use League\Tactician\Handler\CommandHandlerMiddleware;
 use League\Tactician\Handler\HandlerNameInflector\HandlerNameInflector;
 use League\Tactician\Handler\MethodNameInflector\MethodNameInflector;

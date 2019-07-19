@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace League\Tactician\Exception;
+namespace League\Tactician\Handler;
 
 use BadMethodCallException;
 use function get_class;
 use function gettype;
 use function is_object;
+use League\Tactician\Exception;
 
 /**
  * Thrown when a specific handler object can not be used on a command object.
