@@ -18,7 +18,7 @@ class HandleClassNameInflector extends ClassNameInflector
     /**
      * {@inheritdoc}
      */
-    public function inflect(object $command, object $commandHandler) : string
+    public function inflect(string $command, string $commandHandler) : string
     {
         $commandName = parent::inflect($command, $commandHandler);
 

@@ -6,12 +6,12 @@ namespace League\Tactician\Handler\MethodNameInflector;
 
 /**
  * Deduce the method name to call on the command handler based on the command
- * and handler instances.
+ * and handler classes.
  */
 interface MethodNameInflector
 {
     /**
-     * Return the method name to call on the command handler and return it.
+     * Return the method name to call on the command handler.
      */
-    public function inflect(object $command, object $commandHandler) : string;
+    public function inflect(string $commandClassName, string $handlerClassName) : string;
 }

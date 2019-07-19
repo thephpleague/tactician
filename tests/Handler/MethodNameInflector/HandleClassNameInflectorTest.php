@@ -15,13 +15,9 @@ class HandleClassNameInflectorTest extends TestCase
     /** @var HandleClassNameInflector */
     private $inflector;
 
-    /** @var object */
-    private $mockHandler;
-
     protected function setUp() : void
     {
         $this->inflector   = new HandleClassNameInflector();
-        $this->mockHandler = new ConcreteMethodsHandler();
     }
 
     public function testHandlesClassesWithoutNamespace() : void
@@ -30,7 +26,7 @@ class HandleClassNameInflectorTest extends TestCase
 
         self::assertEquals(
             'handleCommandWithoutNamespace',
-            $this->inflector->inflect($command, $this->mockHandler)
+            $this->inflector->inflect(CommandWithoutNamespace::class, ConcreteMethodsHandler::class)
         );
     }
 
@@ -40,7 +36,7 @@ class HandleClassNameInflectorTest extends TestCase
 
         self::assertEquals(
             'handleCompleteTaskCommand',
-            $this->inflector->inflect($command, $this->mockHandler)
+            $this->inflector->inflect(CompleteTaskCommand::class, ConcreteMethodsHandler::class)
         );
     }
 }

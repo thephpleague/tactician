@@ -44,10 +44,11 @@ class CommandHandlerMiddleware implements Middleware
      */
     public function execute(object $command, callable $next)
     {
-        $handler    = $this->handlerLocator->get(
-            $this->handlerNameInflector->getHandlerClassName(get_class($command))
-        );
-        $methodName = $this->methodNameInflector->inflect($command, $handler);
+        $commandClassName = get_class($command);
+        $handlerClassName = $this->handlerNameInflector->getHandlerClassName($commandClassName);
+
+        $handler    = $this->handlerLocator->get($handlerClassName);
+        $methodName = $this->methodNameInflector->inflect($commandClassName, $handlerClassName);
 
         // is_callable is used here instead of method_exists, as method_exists
         // will fail when given a handler that relies on __call.

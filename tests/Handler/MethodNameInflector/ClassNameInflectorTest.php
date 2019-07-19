@@ -15,32 +15,24 @@ class ClassNameInflectorTest extends TestCase
     /** @var ClassNameInflector */
     private $inflector;
 
-    /** @var object */
-    private $mockHandler;
-
-    protected function setUp() : void
+    protected function setUp(): void
     {
-        $this->inflector   = new ClassNameInflector();
-        $this->mockHandler = new ConcreteMethodsHandler();
+        $this->inflector = new ClassNameInflector();
     }
 
-    public function testHandlesClassesWithoutNamespace() : void
+    public function testHandlesClassesWithoutNamespace(): void
     {
-        $command = new CommandWithoutNamespace();
-
         self::assertEquals(
             'commandWithoutNamespace',
-            $this->inflector->inflect($command, $this->mockHandler)
+            $this->inflector->inflect(CommandWithoutNamespace::class, ConcreteMethodsHandler::class)
         );
     }
 
-    public function testHandlesNamespacedClasses() : void
+    public function testHandlesNamespacedClasses(): void
     {
-        $command = new CompleteTaskCommand();
-
         self::assertEquals(
             'completeTaskCommand',
-            $this->inflector->inflect($command, $this->mockHandler)
+            $this->inflector->inflect(CompleteTaskCommand::class, ConcreteMethodsHandler::class)
         );
     }
 }

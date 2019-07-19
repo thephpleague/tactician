@@ -22,10 +22,8 @@ class ClassNameInflector implements MethodNameInflector
     /**
      * {@inheritdoc}
      */
-    public function inflect(object $command, object $commandHandler) : string
+    public function inflect(string $commandName, string $commandHandler) : string
     {
-        $commandName = get_class($command);
-
         // If class name has a namespace separator, only take last portion
         if (strpos($commandName, '\\') !== false) {
             $commandName = substr($commandName, strrpos($commandName, '\\') + 1);

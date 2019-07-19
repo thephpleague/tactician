@@ -15,22 +15,16 @@ class HandleClassNameWithoutSuffixInflectorTest extends TestCase
     /** @var HandleClassNameWithoutSuffixInflector */
     private $inflector;
 
-    /** @var object */
-    private $mockHandler;
-
     protected function setUp() : void
     {
         $this->inflector   = new HandleClassNameWithoutSuffixInflector();
-        $this->mockHandler = new ConcreteMethodsHandler();
     }
 
     public function testRemovesCommandSuffixFromClasses() : void
     {
-        $command = new CompleteTaskCommand();
-
         self::assertEquals(
             'handleCompleteTask',
-            $this->inflector->inflect($command, $this->mockHandler)
+            $this->inflector->inflect(CompleteTaskCommand::class, ConcreteMethodsHandler::class)
         );
     }
 
@@ -38,7 +32,7 @@ class HandleClassNameWithoutSuffixInflectorTest extends TestCase
     {
         self::assertEquals(
             'handleDateTime',
-            $this->inflector->inflect(new DateTime(), $this->mockHandler)
+            $this->inflector->inflect(DateTime::class, ConcreteMethodsHandler::class)
         );
     }
 
@@ -48,7 +42,7 @@ class HandleClassNameWithoutSuffixInflectorTest extends TestCase
 
         self::assertEquals(
             'handleDate',
-            $inflector->inflect(new DateTime(), $this->mockHandler)
+            $inflector->inflect(DateTime::class, ConcreteMethodsHandler::class)
         );
     }
 }

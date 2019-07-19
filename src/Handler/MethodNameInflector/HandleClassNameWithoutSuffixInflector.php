@@ -36,7 +36,7 @@ class HandleClassNameWithoutSuffixInflector extends HandleClassNameInflector
         $this->suffixLength = strlen($suffix);
     }
 
-    public function inflect(object $command, object $commandHandler) : string
+    public function inflect(string $command, string $commandHandler) : string
     {
         $methodName = parent::inflect($command, $commandHandler);
 

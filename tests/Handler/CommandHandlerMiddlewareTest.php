@@ -57,7 +57,7 @@ class CommandHandlerMiddlewareTest extends TestCase
 
         $this->methodNameInflector
             ->method('inflect')
-            ->with($command, $handler)
+            ->with(CompleteTaskCommand::class, ConcreteMethodsHandler::class)
             ->willReturn('handleTaskCompletedCommand');
 
         $this->container
