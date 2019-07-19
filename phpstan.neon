@@ -1,0 +1,19 @@
+services:
+    -
+        class: League\Tactician\PHPStan\TacticianRuleSet
+        arguments:
+            - @League\Tactician\Handler\HandlerNameInflector\SuffixInflector
+            - @League\Tactician\Handler\MethodNameInflector\HandleInflector
+        tags:
+            - phpstan.rules.rule
+            - phpstan.broker.dynamicMethodReturnTypeExtension
+
+    -
+        class: League\Tactician\Handler\HandlerNameInflector\SuffixInflector
+        arguments:
+            - 'Handler'
+
+    -
+        class: League\Tactician\Handler\MethodNameInflector\HandleInflector
+
+
