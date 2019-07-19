@@ -6,7 +6,7 @@ namespace League\Tactician\Tests\Handler;
 
 use League\Tactician\Exception\CanNotInvokeHandler;
 use League\Tactician\Handler\CommandHandlerMiddleware;
-use League\Tactician\Handler\CommandNameExtractor\CommandNameExtractor;
+use League\Tactician\Handler\HandlerNameInflector\HandlerNameInflector;
 use League\Tactician\Handler\MethodNameInflector\MethodNameInflector;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
@@ -22,8 +22,8 @@ class CommandHandlerMiddlewareTest extends TestCase
     /** @var CommandHandlerMiddleware */
     private $middleware;
 
-    /** @var CommandNameExtractor&MockObject */
-    private $commandNameExtractor;
+    /** @var HandlerNameInflector&MockObject */
+    private $handlerNameInflector;
 
     /** @var ContainerInterface&MockObject */
     private $container;
@@ -33,12 +33,12 @@ class CommandHandlerMiddlewareTest extends TestCase
 
     protected function setUp() : void
     {
-        $this->commandNameExtractor = $this->createMock(CommandNameExtractor::class);
+        $this->handlerNameInflector = $this->createMock(HandlerNameInflector::class);
         $this->container            = $this->createMock(ContainerInterface::class);
         $this->methodNameInflector  = $this->createMock(MethodNameInflector::class);
 
         $this->middleware = new CommandHandlerMiddleware(
-            $this->commandNameExtractor,
+            $this->handlerNameInflector,
             $this->container,
             $this->methodNameInflector
         );
@@ -62,13 +62,13 @@ class CommandHandlerMiddlewareTest extends TestCase
 
         $this->container
             ->method('get')
-            ->with(CompleteTaskCommand::class)
+            ->with(ConcreteMethodsHandler::class)
             ->willReturn($handler);
 
-        $this->commandNameExtractor
-            ->method('extract')
-            ->with($command)
-            ->willReturn(CompleteTaskCommand::class);
+        $this->handlerNameInflector
+            ->method('getHandlerClassName')
+            ->with(CompleteTaskCommand::class)
+            ->willReturn(ConcreteMethodsHandler::class);
 
         self::assertEquals('a-return-value', $this->middleware->execute($command, $this->mockNext()));
     }
@@ -85,9 +85,9 @@ class CommandHandlerMiddlewareTest extends TestCase
             ->method('get')
             ->willReturn(new stdClass());
 
-        $this->commandNameExtractor
-            ->method('extract')
-            ->with($command);
+        $this->handlerNameInflector
+            ->method('getHandlerClassName')
+            ->with(CompleteTaskCommand::class);
 
         $this->expectException(CanNotInvokeHandler::class);
         $this->middleware->execute($command, $this->mockNext());
@@ -106,9 +106,9 @@ class CommandHandlerMiddlewareTest extends TestCase
             ->method('get')
             ->willReturn($handler);
 
-        $this->commandNameExtractor
-            ->method('extract')
-            ->with($command);
+        $this->handlerNameInflector
+            ->method('getHandlerClassName')
+            ->with(CompleteTaskCommand::class);
 
         $this->middleware->execute($command, $this->mockNext());
 
@@ -116,31 +116,6 @@ class CommandHandlerMiddlewareTest extends TestCase
             ['someHandlerMethod'],
             $handler->getMethodsInvoked()
         );
-    }
-
-    public function testClosuresCanBeInvoked() : void
-    {
-        $command            = new CompleteTaskCommand();
-        $closureWasExecuted = false;
-        $handler            = static function () use (&$closureWasExecuted) : void {
-            $closureWasExecuted = true;
-        };
-
-        $this->methodNameInflector
-            ->method('inflect')
-            ->willReturn('__invoke');
-
-        $this->container
-            ->method('get')
-            ->willReturn($handler);
-
-        $this->commandNameExtractor
-            ->method('extract')
-            ->with($command);
-
-        $this->middleware->execute($command, $this->mockNext());
-
-        self::assertTrue($closureWasExecuted);
     }
 
     protected function mockNext() : callable

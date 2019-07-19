@@ -2,7 +2,7 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 use League\Tactician\Handler\Locator\InMemoryLocator;
-use League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor;
+use League\Tactician\Handler\HandlerNameInflector\SuffixInflector;
 use League\Tactician\Handler\MethodNameInflector\HandleClassNameInflector;
 
 // Our example Command and Handler. ///////////////////////////////////////////
@@ -28,7 +28,7 @@ $locator->addHandler(new RegisterUserHandler(), RegisterUserCommand::class);
 // Middleware is Tactician's plugin system. Even finding the handler and
 // executing it is a plugin that we're configuring here.
 $handlerMiddleware = new League\Tactician\Handler\CommandHandlerMiddleware(
-    new ClassNameExtractor(),
+    new SuffixInflector(),
     $locator,
     new HandleClassNameInflector()
 );

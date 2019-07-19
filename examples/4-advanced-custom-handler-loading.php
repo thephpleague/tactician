@@ -12,7 +12,7 @@ require __DIR__ . '/repeated-sample-code.php';
 use League\Tactician\CommandBus;
 use League\Tactician\Handler\CommandHandlerMiddleware;
 use League\Tactician\Handler\Locator\HandlerLocator;
-use League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor;
+use League\Tactician\Handler\HandlerNameInflector\SuffixInflector;
 use League\Tactician\Handler\MethodNameInflector\HandleClassNameInflector;
 
 class ContainerBasedHandlerLocator implements HandlerLocator
@@ -44,7 +44,7 @@ $fakeContainer
 
 // Now, we create our command bus using our container based loader instead
 $handlerMiddleware = new CommandHandlerMiddleware(
-    new ClassNameExtractor(),
+    new SuffixInflector(),
     new ContainerBasedHandlerLocator($fakeContainer),
     new HandleClassNameInflector()
 );

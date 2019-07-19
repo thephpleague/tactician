@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace League\Tactician\Handler\CommandNameExtractor;
+namespace League\Tactician\Handler\HandlerNameInflector;
 
 use League\Tactician\Exception\CanNotDetermineCommandName;
 
@@ -10,12 +10,12 @@ use League\Tactician\Exception\CanNotDetermineCommandName;
  * Extract the name from a command so that the name can be determined
  * by the context better than simply the class name
  */
-interface CommandNameExtractor
+interface HandlerNameInflector
 {
     /**
-     * Extract the name from a command
+     * Deduce the FQCN of the Handler based on the command FQCN
      *
      * @throws CanNotDetermineCommandName
      */
-    public function extract(object $command) : string;
+    public function getHandlerClassName(string $commandClassName) : string;
 }

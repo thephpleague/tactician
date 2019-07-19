@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace League\Tactician\Handler;
 
 use League\Tactician\Exception\CanNotInvokeHandler;
-use League\Tactician\Handler\CommandNameExtractor\CommandNameExtractor;
+use League\Tactician\Handler\HandlerNameInflector\HandlerNameInflector;
 use League\Tactician\Handler\MethodNameInflector\MethodNameInflector;
 use League\Tactician\Middleware;
 use Psr\Container\ContainerInterface;
+use function get_class;
 use function is_callable;
 
 /**
@@ -16,8 +17,8 @@ use function is_callable;
  */
 class CommandHandlerMiddleware implements Middleware
 {
-    /** @var CommandNameExtractor */
-    private $commandNameExtractor;
+    /** @var HandlerNameInflector */
+    private $handlerNameInflector;
 
     /** @var ContainerInterface */
     private $handlerLocator;
@@ -26,11 +27,11 @@ class CommandHandlerMiddleware implements Middleware
     private $methodNameInflector;
 
     public function __construct(
-        CommandNameExtractor $commandNameExtractor,
+        HandlerNameInflector $handlerNameInflector,
         ContainerInterface $handlerLocator,
         MethodNameInflector $methodNameInflector
     ) {
-        $this->commandNameExtractor = $commandNameExtractor;
+        $this->handlerNameInflector = $handlerNameInflector;
         $this->handlerLocator       = $handlerLocator;
         $this->methodNameInflector  = $methodNameInflector;
     }
@@ -44,8 +45,9 @@ class CommandHandlerMiddleware implements Middleware
      */
     public function execute(object $command, callable $next)
     {
-        $commandName = $this->commandNameExtractor->extract($command);
-        $handler     = $this->handlerLocator->get($commandName);
+        $handler     = $this->handlerLocator->get(
+            $this->handlerNameInflector->getHandlerClassName(get_class($command))
+        );
         $methodName  = $this->methodNameInflector->inflect($command, $handler);
 
         // is_callable is used here instead of method_exists, as method_exists
