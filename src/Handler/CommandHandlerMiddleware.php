@@ -27,8 +27,8 @@ class CommandHandlerMiddleware implements Middleware
     private $methodNameInflector;
 
     public function __construct(
-        HandlerNameInflector $handlerNameInflector,
         ContainerInterface $handlerLocator,
+        HandlerNameInflector $handlerNameInflector,
         MethodNameInflector $methodNameInflector
     ) {
         $this->handlerNameInflector = $handlerNameInflector;

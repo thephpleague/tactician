@@ -38,8 +38,8 @@ class CommandHandlerMiddlewareTest extends TestCase
         $this->methodNameInflector  = $this->createMock(MethodNameInflector::class);
 
         $this->middleware = new CommandHandlerMiddleware(
-            $this->handlerNameInflector,
             $this->container,
+            $this->handlerNameInflector,
             $this->methodNameInflector
         );
     }
