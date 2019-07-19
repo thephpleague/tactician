@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace League\Tactician\Handler\MethodNameInflector;
+namespace League\Tactician\Handler\MethodName;
 
 /**
  * Handle command by calling the "handle" method.
  */
-class HandleInflector implements MethodNameInflector
+class Handle implements MethodNameInflector
 {
     /**
      * {@inheritdoc}

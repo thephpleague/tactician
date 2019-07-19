@@ -5,33 +5,37 @@ declare(strict_types=1);
 namespace League\Tactician\Tests\Handler\MethodNameInflector;
 
 use CommandWithoutNamespace;
-use League\Tactician\Handler\MethodNameInflector\ClassNameInflector;
+use League\Tactician\Handler\MethodName\HandleLastPartOfClassName;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use PHPUnit\Framework\TestCase;
 
-class ClassNameInflectorTest extends TestCase
+class HandleClassNameTest extends TestCase
 {
-    /** @var ClassNameInflector */
+    /** @var HandleLastPartOfClassName */
     private $inflector;
 
-    protected function setUp(): void
+    protected function setUp() : void
     {
-        $this->inflector = new ClassNameInflector();
+        $this->inflector   = new HandleLastPartOfClassName();
     }
 
-    public function testHandlesClassesWithoutNamespace(): void
+    public function testHandlesClassesWithoutNamespace() : void
     {
+        $command = new CommandWithoutNamespace();
+
         self::assertEquals(
-            'commandWithoutNamespace',
+            'handleCommandWithoutNamespace',
             $this->inflector->inflect(CommandWithoutNamespace::class, ConcreteMethodsHandler::class)
         );
     }
 
-    public function testHandlesNamespacedClasses(): void
+    public function testHandlesNamespacedClasses() : void
     {
+        $command = new CompleteTaskCommand();
+
         self::assertEquals(
-            'completeTaskCommand',
+            'handleCompleteTaskCommand',
             $this->inflector->inflect(CompleteTaskCommand::class, ConcreteMethodsHandler::class)
         );
     }

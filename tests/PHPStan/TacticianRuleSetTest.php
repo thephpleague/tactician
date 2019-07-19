@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace League\Tactician\Tests\PHPStan;
 
-use League\Tactician\Handler\HandlerNameInflector\SuffixInflector;
-use League\Tactician\Handler\MethodNameInflector\HandleInflector;
+use League\Tactician\Handler\ClassName\Suffix;
+use League\Tactician\Handler\MethodName\Handle;
 use League\Tactician\PHPStan\TacticianRuleSet;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
@@ -14,8 +14,8 @@ final class TacticianRuleSetTest extends RuleTestCase
     protected function getRule(): Rule
     {
         $rules = new TacticianRuleSet(
-            new SuffixInflector('Handler'),
-            new HandleInflector()
+            new Suffix('Handler'),
+            new Handle()
         );
         $rules->setBroker($this->createBroker());
 
@@ -24,7 +24,7 @@ final class TacticianRuleSetTest extends RuleTestCase
 
     public function getDynamicMethodReturnTypeExtensions(): array
     {
-        return [new TacticianRuleSet(new SuffixInflector('Handler'), new HandleInflector())];
+        return [new TacticianRuleSet(new Suffix('Handler'), new Handle())];
     }
 
     public function testCanNotFindMatchingHandlerClass(): void

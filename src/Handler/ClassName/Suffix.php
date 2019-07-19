@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace League\Tactician\Handler\HandlerNameInflector;
+namespace League\Tactician\Handler\ClassName;
 
-class SuffixInflector implements HandlerNameInflector
+class Suffix implements ClassNameInflector
 {
     /** @var string */
     private $suffix;

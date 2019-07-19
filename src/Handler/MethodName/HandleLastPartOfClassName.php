@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace League\Tactician\Handler\MethodNameInflector;
+namespace League\Tactician\Handler\MethodName;
 
 use function ucfirst;
 
@@ -13,7 +13,7 @@ use function ucfirst;
  *  - \MyGlobalCommand              => $handler->handleMyGlobalCommand()
  *  - \My\App\TaskCompletedCommand  => $handler->handleTaskCompletedCommand()
  */
-class HandleClassNameInflector extends ClassNameInflector
+class HandleLastPartOfClassName extends LastPartOfClassName
 {
     /**
      * {@inheritdoc}

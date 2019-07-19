@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace League\Tactician\Handler\MethodNameInflector;
+namespace League\Tactician\Handler\MethodName;
 
 /**
  * Deduce the method name to call on the command handler based on the command

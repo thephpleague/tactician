@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace League\Tactician\Handler\MethodNameInflector;
+namespace League\Tactician\Handler\MethodName;
 
 use function strlen;
 use function substr;
@@ -19,7 +19,7 @@ use function substr;
  *  - \CompleteTaskCommand     => $handler->handleCompleteTask()
  *  - \My\App\DoThingCommand   => $handler->handleDoThing()
  */
-class HandleClassNameWithoutSuffixInflector extends HandleClassNameInflector
+class HandleClassNameWithoutSuffix extends HandleLastPartOfClassName
 {
     /** @var string */
     private $suffix;

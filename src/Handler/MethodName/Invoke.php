@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace League\Tactician\Handler\MethodNameInflector;
+namespace League\Tactician\Handler\MethodName;
 
 /**
  * Handle command by calling the __invoke magic method. Handy for single
  * use classes or closures.
  */
-class InvokeInflector implements MethodNameInflector
+class Invoke implements MethodNameInflector
 {
     /**
      * {@inheritdoc}

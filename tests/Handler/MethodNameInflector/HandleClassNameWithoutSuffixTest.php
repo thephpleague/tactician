@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace League\Tactician\Tests\Handler\MethodNameInflector;
 
 use DateTime;
-use League\Tactician\Handler\MethodNameInflector\HandleClassNameWithoutSuffixInflector;
+use League\Tactician\Handler\MethodName\HandleClassNameWithoutSuffix;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use PHPUnit\Framework\TestCase;
 
-class HandleClassNameWithoutSuffixInflectorTest extends TestCase
+class HandleClassNameWithoutSuffixTest extends TestCase
 {
-    /** @var HandleClassNameWithoutSuffixInflector */
+    /** @var HandleClassNameWithoutSuffix */
     private $inflector;
 
     protected function setUp() : void
     {
-        $this->inflector   = new HandleClassNameWithoutSuffixInflector();
+        $this->inflector   = new HandleClassNameWithoutSuffix();
     }
 
     public function testRemovesCommandSuffixFromClasses() : void
@@ -38,7 +38,7 @@ class HandleClassNameWithoutSuffixInflectorTest extends TestCase
 
     public function testRemovesCustomSuffix() : void
     {
-        $inflector = new HandleClassNameWithoutSuffixInflector('Time');
+        $inflector = new HandleClassNameWithoutSuffix('Time');
 
         self::assertEquals(
             'handleDate',

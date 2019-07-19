@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace League\Tactician\Handler\MethodNameInflector;
+namespace League\Tactician\Handler\MethodName;
 
-use function get_class;
 use function strpos;
 use function strrpos;
 use function strtolower;
@@ -17,7 +16,7 @@ use function substr;
  *  - \MyGlobalCommand    => $handler->myGlobalCommand()
  *  - \My\App\CreateUser  => $handler->createUser()
  */
-class ClassNameInflector implements MethodNameInflector
+class LastPartOfClassName implements MethodNameInflector
 {
     /**
      * {@inheritdoc}

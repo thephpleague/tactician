@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace League\Tactician\PHPStan;
 
 use League\Tactician\CommandBus;
-use League\Tactician\Handler\HandlerNameInflector\HandlerNameInflector;
-use League\Tactician\Handler\MethodNameInflector\MethodNameInflector;
+use League\Tactician\Handler\ClassName\ClassNameInflector;
+use League\Tactician\Handler\MethodName\MethodNameInflector;
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
@@ -24,9 +24,9 @@ use PHPStan\Type\Type;
 final class TacticianRuleSet implements Rule, DynamicMethodReturnTypeExtension, BrokerAwareExtension
 {
     /**
-     * @var HandlerNameInflector
+     * @var ClassNameInflector
      */
-    private $handlerNameInflector;
+    private $classNameInflector;
 
     /**
      * @var MethodNameInflector
@@ -39,10 +39,10 @@ final class TacticianRuleSet implements Rule, DynamicMethodReturnTypeExtension, 
     private $broker;
 
     public function __construct(
-        HandlerNameInflector $handlerNameInflector,
+        ClassNameInflector $handlerNameInflector,
         MethodNameInflector $methodNameInflector
     ) {
-        $this->handlerNameInflector = $handlerNameInflector;
+        $this->classNameInflector = $handlerNameInflector;
         $this->methodNameInflector = $methodNameInflector;
     }
 
@@ -81,7 +81,7 @@ final class TacticianRuleSet implements Rule, DynamicMethodReturnTypeExtension, 
             return [];
         }
 
-        $handlerClassName = $this->handlerNameInflector->getHandlerClassName($commandType->getClassName());
+        $handlerClassName = $this->classNameInflector->getHandlerClassName($commandType->getClassName());
 
         try {
             $handlerClass = $this->broker->getClass($handlerClassName);
@@ -150,7 +150,7 @@ final class TacticianRuleSet implements Rule, DynamicMethodReturnTypeExtension, 
 
         try {
             $handlerClass = $this->broker->getClass(
-                $this->handlerNameInflector->getHandlerClassName($commandType->getClassName())
+                $this->classNameInflector->getHandlerClassName($commandType->getClassName())
             );
         } catch (ClassNotFoundException $e) {
             return new MixedType();

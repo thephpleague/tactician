@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace League\Tactician\Tests\Handler\HandlerNameInflector;
 
-use League\Tactician\Handler\HandlerNameInflector\SuffixInflector;
+use League\Tactician\Handler\ClassName\Suffix;
 use PHPUnit\Framework\TestCase;
 
-class SuffixInflectorTest extends TestCase
+class SuffixTest extends TestCase
 {
     /** @dataProvider examples */
     public function testCanAddSuffixToClassName(string $suffix, string $command, string $expectedResult) : void
     {
         self::assertEquals(
             $expectedResult,
-            (new SuffixInflector($suffix))->getHandlerClassName($command)
+            (new Suffix($suffix))->getHandlerClassName($command)
         );
     }
 

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace League\Tactician\Handler;
 
-use League\Tactician\Handler\HandlerNameInflector\HandlerNameInflector;
-use League\Tactician\Handler\MethodNameInflector\MethodNameInflector;
+use League\Tactician\Handler\ClassName\ClassNameInflector;
+use League\Tactician\Handler\MethodName\MethodNameInflector;
 use League\Tactician\Middleware;
 use Psr\Container\ContainerInterface;
 use function get_class;
@@ -16,23 +16,23 @@ use function is_callable;
  */
 class CommandHandlerMiddleware implements Middleware
 {
-    /** @var HandlerNameInflector */
-    private $handlerNameInflector;
-
     /** @var ContainerInterface */
-    private $handlerLocator;
+    private $container;
+
+    /** @var ClassNameInflector */
+    private $classNameInflector;
 
     /** @var MethodNameInflector */
     private $methodNameInflector;
 
     public function __construct(
         ContainerInterface $handlerLocator,
-        HandlerNameInflector $handlerNameInflector,
+        ClassNameInflector $handlerNameInflector,
         MethodNameInflector $methodNameInflector
     ) {
-        $this->handlerNameInflector = $handlerNameInflector;
-        $this->handlerLocator       = $handlerLocator;
-        $this->methodNameInflector  = $methodNameInflector;
+        $this->container = $handlerLocator;
+        $this->classNameInflector = $handlerNameInflector;
+        $this->methodNameInflector = $methodNameInflector;
     }
 
     /**
@@ -45,14 +45,14 @@ class CommandHandlerMiddleware implements Middleware
     public function execute(object $command, callable $next)
     {
         $commandClassName = get_class($command);
-        $handlerClassName = $this->handlerNameInflector->getHandlerClassName($commandClassName);
+        $handlerClassName = $this->classNameInflector->getHandlerClassName($commandClassName);
 
-        $handler    = $this->handlerLocator->get($handlerClassName);
+        $handler = $this->container->get($handlerClassName);
         $methodName = $this->methodNameInflector->inflect($commandClassName, $handlerClassName);
 
         // is_callable is used here instead of method_exists, as method_exists
         // will fail when given a handler that relies on __call.
-        if (! is_callable([$handler, $methodName])) {
+        if (!is_callable([$handler, $methodName])) {
             throw CanNotInvokeHandler::forCommand(
                 $command,
                 'Method ' . $methodName . ' does not exist on handler'

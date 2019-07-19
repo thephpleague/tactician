@@ -6,8 +6,8 @@ namespace League\Tactician\Tests\Handler;
 
 use League\Tactician\Handler\CanNotInvokeHandler;
 use League\Tactician\Handler\CommandHandlerMiddleware;
-use League\Tactician\Handler\HandlerNameInflector\HandlerNameInflector;
-use League\Tactician\Handler\MethodNameInflector\MethodNameInflector;
+use League\Tactician\Handler\ClassName\ClassNameInflector;
+use League\Tactician\Handler\MethodName\MethodNameInflector;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use League\Tactician\Tests\Fixtures\Handler\DynamicMethodsHandler;
@@ -22,8 +22,8 @@ class CommandHandlerMiddlewareTest extends TestCase
     /** @var CommandHandlerMiddleware */
     private $middleware;
 
-    /** @var HandlerNameInflector&MockObject */
-    private $handlerNameInflector;
+    /** @var ClassNameInflector&MockObject */
+    private $classNameInflector;
 
     /** @var ContainerInterface&MockObject */
     private $container;
@@ -31,20 +31,20 @@ class CommandHandlerMiddlewareTest extends TestCase
     /** @var MethodNameInflector&MockObject */
     private $methodNameInflector;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
-        $this->handlerNameInflector = $this->createMock(HandlerNameInflector::class);
-        $this->container            = $this->createMock(ContainerInterface::class);
-        $this->methodNameInflector  = $this->createMock(MethodNameInflector::class);
+        $this->container = $this->createMock(ContainerInterface::class);
+        $this->classNameInflector = $this->createMock(ClassNameInflector::class);
+        $this->methodNameInflector = $this->createMock(MethodNameInflector::class);
 
         $this->middleware = new CommandHandlerMiddleware(
             $this->container,
-            $this->handlerNameInflector,
+            $this->classNameInflector,
             $this->methodNameInflector
         );
     }
 
-    public function testHandlerIsExecuted() : void
+    public function testHandlerIsExecuted(): void
     {
         $command = new CompleteTaskCommand();
 
@@ -65,7 +65,7 @@ class CommandHandlerMiddlewareTest extends TestCase
             ->with(ConcreteMethodsHandler::class)
             ->willReturn($handler);
 
-        $this->handlerNameInflector
+        $this->classNameInflector
             ->method('getHandlerClassName')
             ->with(CompleteTaskCommand::class)
             ->willReturn(ConcreteMethodsHandler::class);
@@ -73,7 +73,7 @@ class CommandHandlerMiddlewareTest extends TestCase
         self::assertEquals('a-return-value', $this->middleware->execute($command, $this->mockNext()));
     }
 
-    public function testMissingMethodOnHandlerObjectIsDetected() : void
+    public function testMissingMethodOnHandlerObjectIsDetected(): void
     {
         $command = new CompleteTaskCommand();
 
@@ -85,7 +85,7 @@ class CommandHandlerMiddlewareTest extends TestCase
             ->method('get')
             ->willReturn(new stdClass());
 
-        $this->handlerNameInflector
+        $this->classNameInflector
             ->method('getHandlerClassName')
             ->with(CompleteTaskCommand::class);
 
@@ -93,7 +93,7 @@ class CommandHandlerMiddlewareTest extends TestCase
         $this->middleware->execute($command, $this->mockNext());
     }
 
-    public function testDynamicMethodNamesAreSupported() : void
+    public function testDynamicMethodNamesAreSupported(): void
     {
         $command = new CompleteTaskCommand();
         $handler = new DynamicMethodsHandler();
@@ -106,7 +106,7 @@ class CommandHandlerMiddlewareTest extends TestCase
             ->method('get')
             ->willReturn($handler);
 
-        $this->handlerNameInflector
+        $this->classNameInflector
             ->method('getHandlerClassName')
             ->with(CompleteTaskCommand::class);
 
@@ -118,9 +118,9 @@ class CommandHandlerMiddlewareTest extends TestCase
         );
     }
 
-    protected function mockNext() : callable
+    protected function mockNext(): callable
     {
-        return static function () : void {
+        return static function (): void {
             throw new LogicException('Middleware fell through to next callable, this should not happen in the test.');
         };
     }
