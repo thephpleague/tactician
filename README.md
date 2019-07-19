@@ -21,12 +21,34 @@ Using Composer:
 The core Tactician package is small but there are several plugin packages that extend the usefulness of Tactician:
 
 - [Logger](https://github.com/thephpleague/tactician-logger): Adds PSR-3 logging support for receiving, completing or failing commands.
-- [Container](http://github.com/thephpleague/tactician-container): Lazy load handlers from any container implementing container-interop.
 - [Doctrine](https://github.com/thephpleague/tactician-doctrine): Wraps commands in separate Doctrine ORM transactions.
-- [Bernard](https://github.com/thephpleague/tactician-bernard): Allows queuing your commands in the background, using [the Bernard Queuing library](https://github.com/bernardphp/bernard).
-- [Command Events](https://github.com/thephpleague/tactician-command-events): Fires events for all major moments in the command life-cycle.
-- [Locking](http://tactician.thephpleague.com/plugins/locking-middleware/): Only allows one command to be executed at a time.
 - [and many more](https://packagist.org/search/?q=tactician)
+
+## PHPStan Integration
+
+Traditionally, command buses can obscure static analysis. The Tactician PHPStan plugin helps bring stronger type checking by finding missing handler classes, validating handler return types and more.
+
+To set it up in your application, add the following to your `phpstan.neon` config. You'll need to configure the Class and Method inflectors to be the same as your application uses.
+
+~~~
+services:
+    -
+        class: League\Tactician\PHPStan\TacticianRuleSet
+        arguments:
+            - @League\Tactician\Handler\ClassName\Suffix
+            - @League\Tactician\Handler\MethodName\Handle
+        tags:
+            - phpstan.rules.rule
+            - phpstan.broker.dynamicMethodReturnTypeExtension
+
+    -
+        class: League\Tactician\Handler\ClassName\Suffix
+        arguments:
+            - 'Handler'
+
+    -
+        class: League\Tactician\Handler\MethodName\Handle
+~~~
 
 ## Framework Integration
 There are a number of framework integration packages for Tactician, [search for Tactician on Packagist](https://packagist.org/search/?q=tactician) for the most up-to-date listings.
