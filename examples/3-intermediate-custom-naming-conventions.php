@@ -14,21 +14,25 @@ require __DIR__ . '/repeated-sample-code.php';
  */
 use League\Tactician\CommandBus;
 use League\Tactician\Handler\CommandHandlerMiddleware;
-use League\Tactician\Handler\MethodNameInflector\MethodNameInflector;
-use League\Tactician\Handler\HandlerNameInflector\SuffixInflector;
+use League\Tactician\Handler\MethodName\MethodNameInflector;
+use League\Tactician\Handler\ClassName\Suffix;
 
-class MyCustomInflector implements MethodNameInflector
+class MyCustomMethodNameInflector implements MethodNameInflector
 {
     // You can use the command and commandHandler to generate any name you
     // prefer but here, we'll always return the same one.
-    public function inflect($command, $commandHandler)
+    public function inflect(string $command, string $commandHandler): string
     {
         return 'handle';
     }
 }
 
+class DeleteUser
+{
+}
+
 // And we'll create a new handler with the method name we prefer to invoke
-class NewRegisterUserHandler
+class DeleteUserHandler
 {
     public function handle($command)
     {
@@ -38,14 +42,10 @@ class NewRegisterUserHandler
 
 // Now  let's recreate our CommandHandlerMiddleware again but with the naming scheme
 // we prefer to use!
-$locator->addHandler(new NewRegisterUserHandler(), RegisterUserCommand::class);
-$handlerMiddleware = new CommandHandlerMiddleware(new SuffixInflector(), $locator, new MyCustomInflector());
+$container->add(DeleteUserHandler::class);
+$handlerMiddleware = new CommandHandlerMiddleware($container, new Suffix('Handler'), new MyCustomMethodNameInflector());
 
-$commandBus = new CommandBus([$handlerMiddleware]);
+$commandBus = new CommandBus($handlerMiddleware);
 
 // Controller Code time!
-$command = new RegisterUserCommand();
-$command->emailAddress = 'alice@example.com';
-$command->password = 'secret';
-
-$commandBus->handle($command);
+$commandBus->handle(new DeleteUser());

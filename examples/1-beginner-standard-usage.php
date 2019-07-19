@@ -1,12 +1,12 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
 
-use League\Tactician\Handler\Locator\InMemoryLocator;
-use League\Tactician\Handler\HandlerNameInflector\SuffixInflector;
-use League\Tactician\Handler\MethodNameInflector\HandleClassNameInflector;
+use League\Container\Container;
+use League\Tactician\Handler\ClassName\Suffix;
+use League\Tactician\Handler\MethodName\HandleLastPartOfClassName;
 
 // Our example Command and Handler. ///////////////////////////////////////////
-class RegisterUserCommand
+class RegisterUser
 {
     public $emailAddress;
     public $password;
@@ -14,29 +14,29 @@ class RegisterUserCommand
 
 class RegisterUserHandler
 {
-    public function handleRegisterUserCommand(RegisterUserCommand $command)
+    public function handleRegisterUser(RegisterUser $command)
     {
         // Do your core application logic here. Don't actually echo stuff. :)
         echo "User {$command->emailAddress} was registered!\n";
     }
 }
 
-// Setup the bus, normally in your DI container ///////////////////////////////
-$locator = new InMemoryLocator();
-$locator->addHandler(new RegisterUserHandler(), RegisterUserCommand::class);
+// Add your handlers to your Dependency Injector container of choice. /////////
+$container = new Container();
+$container->add(RegisterUserHandler::class);
 
 // Middleware is Tactician's plugin system. Even finding the handler and
 // executing it is a plugin that we're configuring here.
 $handlerMiddleware = new League\Tactician\Handler\CommandHandlerMiddleware(
-    new SuffixInflector(),
-    $locator,
-    new HandleClassNameInflector()
+    $container,
+    new Suffix('Handler'), // We expect our Handlers have the same class name except with this suffix
+    new HandleLastPartOfClassName() // We expect the method name to be handle + the last part of the command name
 );
 
-$commandBus = new \League\Tactician\CommandBus([$handlerMiddleware]);
+$commandBus = new \League\Tactician\CommandBus($handlerMiddleware);
 
 // Controller Code ////////////////////////////////////////////////////////////
-$command = new RegisterUserCommand();
+$command = new RegisterUser();
 $command->emailAddress = 'alice@example.com';
 $command->password = 'secret';
 

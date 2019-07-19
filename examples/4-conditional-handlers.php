@@ -3,7 +3,7 @@ require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/repeated-sample-code.php';
 
 /**
- * Tactician is meant to be very customizable, it makes no assumptions about
+ * Tactician is meant to be very customizable, it makes few assumptions about
  * your code.
  *
  * For example, let's say you like to handle command X in one way and
@@ -21,7 +21,7 @@ interface ExternalCommand
 }
 
 // We create some custom middleware that will forward any ExternalCommand to
-// a separate CommandBus (or HTTP endpoint or queue).
+// a separate CommandBus (or HTTP endpoint or service or whatever you want).
 final class ExternalCommandMiddleware implements Middleware
 {
     private $commandBus;
@@ -56,18 +56,18 @@ class MyExternalCommand implements ExternalCommand
 
 // Now  let's instantiate our ExternalCommandHandler, CommandBus and ExternalCommandMiddleware
 $externalCommandHandler = new ExternalCommandHandler();
-$externalCommandBus = new CommandBus([$externalCommandHandler]);
+$externalCommandBus = new CommandBus($externalCommandHandler);
 $externalMiddleware = new ExternalCommandMiddleware($externalCommandBus);
 
 // Time to create our main CommandBus
-$commandBus = new CommandBus([$externalMiddleware, $handlerMiddleware]);
+$commandBus = new CommandBus($externalMiddleware, $handlerMiddleware);
 
 // Controller Code time!
 $externalCommand = new MyExternalCommand();
 
 $commandBus->handle($externalCommand);
 
-$command = new RegisterUserCommand();
+$command = new RegisterUser();
 $command->emailAddress = 'alice@example.com';
 $command->password = 'secret';
 

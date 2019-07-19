@@ -61,14 +61,12 @@ class LoggingMiddleware implements Middleware
 // as a list of middleware. We'll also pass in the CommandHandlerMiddleware we demoed
 // in the previous example, otherwise our commands won't be executed!
 $commandBus = new CommandBus(
-    [
-        new LoggingMiddleware(new Logger()),
-        $handlerMiddleware
-    ]
+    new LoggingMiddleware(new Logger()),
+    $handlerMiddleware
 );
 
 // Controller Code
-$command = new RegisterUserCommand();
+$command = new RegisterUser();
 $command->emailAddress = 'alice@example.com';
 $command->password = 'secret';
 
@@ -80,7 +78,6 @@ $commandBus->handle($command);
  *      - database transactions
  *      - validation,
  *      - error handling
- *      - locking
  *      - user permissions (can they send this command at all?)
  *      - Anything you want!
  *
