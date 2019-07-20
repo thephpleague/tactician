@@ -14,6 +14,7 @@ use PHPStan\Broker\ClassNotFoundException;
 use PHPStan\Reflection\ParametersAcceptorSelector;
 use PHPStan\Rules\Rule;
 use PHPStan\Type\ObjectType;
+use PHPStan\Type\TypeWithClassName;
 
 final class TacticianRuleSet implements Rule
 {
@@ -55,7 +56,7 @@ final class TacticianRuleSet implements Rule
 
         $type = $scope->getType($methodCall->var);
 
-        if (!$type instanceof ObjectType || $type->getClassName() !== CommandBus::class) {
+        if (!(new ObjectType(CommandBus::class))->isSuperTypeOf($type)->yes()) {
             return [];
         }
 
@@ -68,7 +69,7 @@ final class TacticianRuleSet implements Rule
 
         // did user violate the object typehint by passing something else?
         // exit to delegate to other PHPStan rules
-        if (!$commandType instanceof ObjectType) {
+        if (!$commandType instanceof TypeWithClassName) {
             return [];
         }
 
