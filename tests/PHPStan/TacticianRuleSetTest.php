@@ -162,4 +162,21 @@ final class TacticianRuleSetTest extends RuleTestCase
             ]
         );
     }
+
+    public function testInspectsEachTypeInUnion(): void
+    {
+        $this->analyse(
+            [__DIR__ . '/data/InspectsEachTypeInUnion.php'],
+            [
+                [
+                    'Tactician tried to route the command InspectsEachTypeInUnion\OtherCommand but could not find the matching handler InspectsEachTypeInUnion\OtherCommandHandler.',
+                    26
+                ],
+                [
+                    'Tactician tried to route the command InspectsEachTypeInUnion\SomeCommand to InspectsEachTypeInUnion\SomeCommandHandler::handle but the method \'handle\' does not accept any parameters.',
+                    26
+                ]
+            ]
+        );
+    }
 }

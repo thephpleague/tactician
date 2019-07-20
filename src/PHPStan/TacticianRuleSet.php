@@ -11,10 +11,15 @@ use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Broker\Broker;
 use PHPStan\Broker\ClassNotFoundException;
+use PHPStan\Reflection\MissingMethodFromReflectionException;
 use PHPStan\Reflection\ParametersAcceptorSelector;
 use PHPStan\Rules\Rule;
 use PHPStan\Type\ObjectType;
+use PHPStan\Type\Type;
 use PHPStan\Type\TypeWithClassName;
+use PHPStan\Type\UnionType;
+use function array_filter;
+use function array_merge;
 
 final class TacticianRuleSet implements Rule
 {
@@ -67,12 +72,25 @@ final class TacticianRuleSet implements Rule
 
         $commandType = $scope->getType($methodCall->args[0]->value);
 
-        // did user violate the object typehint by passing something else?
-        // exit to delegate to other PHPStan rules
-        if (!$commandType instanceof TypeWithClassName) {
-            return [];
+        $errors = [];
+        foreach ($this->getInspectableCommandTypes($commandType) as $commandType) {
+            $errors = array_merge(
+                $errors,
+                $this->inspectCommandType($methodCall, $scope, $commandType)
+            );
         }
 
+        return $errors;
+    }
+
+    /**
+     * @return array<string>
+     */
+    private function inspectCommandType(
+        MethodCall $methodCallOnBus,
+        Scope $scope,
+        TypeWithClassName $commandType
+    ): array {
         $handlerClassName = $this->classNameInflector->getHandlerClassName($commandType->getClassName());
 
         try {
@@ -83,37 +101,58 @@ final class TacticianRuleSet implements Rule
             ];
         }
 
-        $methodName = $this->methodNameInflector->inflect($commandType->getClassName(), $handlerClass->getName());
+        $handlerMethodName = $this->methodNameInflector->inflect($commandType->getClassName(), $handlerClass->getName());
 
-        if (!$handlerClass->hasMethod($methodName)) {
+        try {
+            $handlerMethod = $handlerClass->getMethod($handlerMethodName, $scope);
+        } catch (MissingMethodFromReflectionException $e) {
             return [
-                "Tactician tried to route the command {$commandType->getClassName()} to {$handlerClass->getName()}::{$methodName} but while the class could be loaded, the method '{$methodName}' could not be found on the class."
+                "Tactician tried to route the command {$commandType->getClassName()} to {$handlerClass->getName()}::{$handlerMethodName} but while the class could be loaded, the method '{$handlerMethodName}' could not be found on the class."
             ];
         }
 
         /** @var \PHPStan\Reflection\ParameterReflection[] $parameters */
         $parameters = ParametersAcceptorSelector::selectFromArgs(
             $scope,
-            $methodCall->args,
-            $handlerClass->getMethod($methodName, $scope)->getVariants()
+            $methodCallOnBus->args,
+            $handlerMethod->getVariants()
         )->getParameters();
 
         if (count($parameters) === 0) {
             return [
-                "Tactician tried to route the command {$commandType->getClassName()} to {$handlerClass->getName()}::{$methodName} but the method '{$methodName}' does not accept any parameters."
+                "Tactician tried to route the command {$commandType->getClassName()} to {$handlerClass->getName()}::{$handlerMethodName} but the method '{$handlerMethodName}' does not accept any parameters."
             ];
         }
 
         if (count($parameters) > 1) {
             return [
-                "Tactician tried to route the command {$commandType->getClassName()} to {$handlerClass->getName()}::{$methodName} but the method '{$methodName}' accepts too many parameters."
+                "Tactician tried to route the command {$commandType->getClassName()} to {$handlerClass->getName()}::{$handlerMethodName} but the method '{$handlerMethodName}' accepts too many parameters."
             ];
         }
 
         if ($parameters[0]->getType()->accepts($commandType, true)->no()) {
             return [
-                "Tactician tried to route the command {$commandType->getClassName()} to {$handlerClass->getName()}::{$methodName} but the method '{$methodName}' has a typehint that does not allow this command."
+                "Tactician tried to route the command {$commandType->getClassName()} to {$handlerClass->getName()}::{$handlerMethodName} but the method '{$handlerMethodName}' has a typehint that does not allow this command."
             ];
+        }
+
+        return [];
+    }
+
+    /** @return TypeWithClassName[] */
+    private function getInspectableCommandTypes(Type $type): array
+    {
+        if ($type instanceof TypeWithClassName) {
+            return [$type];
+        }
+
+        if ($type instanceof UnionType) {
+            return array_filter(
+                $type->getTypes(),
+                function (Type $type) {
+                    return $type instanceof TypeWithClassName;
+                }
+            );
         }
 
         return [];
