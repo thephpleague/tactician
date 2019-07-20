@@ -13,18 +13,11 @@ final class TacticianRuleSetTest extends RuleTestCase
 {
     protected function getRule(): Rule
     {
-        $rules = new TacticianRuleSet(
+        return new TacticianRuleSet(
             new Suffix('Handler'),
-            new Handle()
+            new Handle(),
+            $this->createBroker()
         );
-        $rules->setBroker($this->createBroker());
-
-        return $rules;
-    }
-
-    public function getDynamicMethodReturnTypeExtensions(): array
-    {
-        return [new TacticianRuleSet(new Suffix('Handler'), new Handle())];
     }
 
     public function testCanNotFindMatchingHandlerClass(): void

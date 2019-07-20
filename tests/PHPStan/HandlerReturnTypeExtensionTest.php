@@ -5,7 +5,7 @@ namespace League\Tactician\Tests\PHPStan;
 
 use PHPStan\Testing\LevelsTestCase;
 
-final class ReturnTypeTest extends LevelsTestCase
+final class HandlerReturnTypeExtensionTest extends LevelsTestCase
 {
     public function dataTopics(): array
     {
@@ -31,5 +31,4 @@ final class ReturnTypeTest extends LevelsTestCase
     {
         return __DIR__ . '/../../phpstan.neon';
     }
-
 }
