@@ -1,3 +1,12 @@
+## 2.0 (????)
+BC Breaks
+- Lots.
+- Much stricter object types (final, object typehint, etc).
+- HandlerLocators are removed in favor of just using PSR-11 directly.
+- Class Name and Method inflectors now use class strings instead of object instances.
+- Almost all namespaces have been moved around.
+- Several old not-so-useful plugins have been dropped: NamedCommands, LockingMiddleware, QuickStart
+
 ## 1.0.3 (2017-11-30)
 BC Breaks:
 - None
