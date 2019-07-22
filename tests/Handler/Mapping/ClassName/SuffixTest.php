@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace League\Tactician\Tests\Handler\HandlerNameInflector;
+namespace League\Tactician\Tests\Handler\Mapping\ClassName;
 
-use League\Tactician\Handler\ClassName\Suffix;
+use League\Tactician\Handler\Mapping\ClassName\Suffix;
 use PHPUnit\Framework\TestCase;
 
 class SuffixTest extends TestCase

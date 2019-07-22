@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace League\Tactician\Tests\Handler\MethodNameInflector;
+namespace League\Tactician\Tests\Handler\Mapping\MethodName;
 
-use League\Tactician\Handler\MethodName\Handle;
+use League\Tactician\Handler\Mapping\MethodName\Handle;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use PHPUnit\Framework\TestCase;

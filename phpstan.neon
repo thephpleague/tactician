@@ -1,26 +1,18 @@
+parameters:
+    tactician:
+        bootstrap: handler-mapping-loader.php
+
 services:
     -
         class: League\Tactician\PHPStan\TacticianRuleSet
-        arguments:
-            - @League\Tactician\Handler\ClassName\Suffix
-            - @League\Tactician\Handler\MethodName\Handle
         tags:
             - phpstan.rules.rule
 
     -
         class: League\Tactician\PHPStan\HandlerReturnTypeExtension
-        arguments:
-            - @League\Tactician\Handler\ClassName\Suffix
-            - @League\Tactician\Handler\MethodName\Handle
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
 
     -
-        class: League\Tactician\Handler\ClassName\Suffix
-        arguments:
-            - 'Handler'
-
-    -
-        class: League\Tactician\Handler\MethodName\Handle
-
-
+        class: League\Tactician\Handler\Mapping\CommandToHandlerMapping
+        factory: League\Tactician\PHPStan\MappingLoader::loadBootstrapFile(%tactician.bootstrap%)

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace League\Tactician\Handler\MethodName;
+namespace League\Tactician\Handler\Mapping\MethodName;
 
 /**
  * Handle command by calling the "handle" method.

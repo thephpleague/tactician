@@ -6,8 +6,9 @@ namespace League\Tactician\Tests\Handler;
 
 use League\Tactician\Handler\CanNotInvokeHandler;
 use League\Tactician\Handler\CommandHandlerMiddleware;
-use League\Tactician\Handler\ClassName\ClassNameInflector;
-use League\Tactician\Handler\MethodName\MethodNameInflector;
+use League\Tactician\Handler\Mapping\ClassName\ClassNameInflector;
+use League\Tactician\Handler\Mapping\CommandToHandlerMapping;
+use League\Tactician\Handler\Mapping\MethodName\MethodNameInflector;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use League\Tactician\Tests\Fixtures\Handler\DynamicMethodsHandler;
@@ -21,26 +22,16 @@ class CommandHandlerMiddlewareTest extends TestCase
 {
     /** @var CommandHandlerMiddleware */
     private $middleware;
-
-    /** @var ClassNameInflector&MockObject */
-    private $classNameInflector;
-
     /** @var ContainerInterface&MockObject */
     private $container;
-
-    /** @var MethodNameInflector&MockObject */
-    private $methodNameInflector;
+    /** @var CommandToHandlerMapping&MockObject */
+    private $mapping;
 
     protected function setUp(): void
     {
-        $this->container = $this->createMock(ContainerInterface::class);
-        $this->classNameInflector = $this->createMock(ClassNameInflector::class);
-        $this->methodNameInflector = $this->createMock(MethodNameInflector::class);
-
         $this->middleware = new CommandHandlerMiddleware(
-            $this->container,
-            $this->classNameInflector,
-            $this->methodNameInflector
+            $this->container = $this->createMock(ContainerInterface::class),
+            $this->mapping = $this->createMock(CommandToHandlerMapping::class)
         );
     }
 
@@ -55,18 +46,18 @@ class CommandHandlerMiddlewareTest extends TestCase
             ->with($command)
             ->willReturn('a-return-value');
 
-        $this->methodNameInflector
-            ->method('inflect')
-            ->with(CompleteTaskCommand::class, ConcreteMethodsHandler::class)
-            ->willReturn('handleTaskCompletedCommand');
-
         $this->container
             ->method('get')
             ->with(ConcreteMethodsHandler::class)
             ->willReturn($handler);
 
-        $this->classNameInflector
-            ->method('getHandlerClassName')
+        $this->mapping
+            ->method('getMethodName')
+            ->with(CompleteTaskCommand::class, ConcreteMethodsHandler::class)
+            ->willReturn('handleTaskCompletedCommand');
+
+        $this->mapping
+            ->method('getClassName')
             ->with(CompleteTaskCommand::class)
             ->willReturn(ConcreteMethodsHandler::class);
 
@@ -77,17 +68,17 @@ class CommandHandlerMiddlewareTest extends TestCase
     {
         $command = new CompleteTaskCommand();
 
-        $this->methodNameInflector
-            ->method('inflect')
-            ->willReturn('someMethodThatDoesNotExist');
-
         $this->container
             ->method('get')
             ->willReturn(new stdClass());
 
-        $this->classNameInflector
-            ->method('getHandlerClassName')
+        $this->mapping
+            ->method('getClassName')
             ->with(CompleteTaskCommand::class);
+
+        $this->mapping
+            ->method('getMethodName')
+            ->willReturn('someMethodThatDoesNotExist');
 
         $this->expectException(CanNotInvokeHandler::class);
         $this->middleware->execute($command, $this->mockNext());
@@ -98,17 +89,17 @@ class CommandHandlerMiddlewareTest extends TestCase
         $command = new CompleteTaskCommand();
         $handler = new DynamicMethodsHandler();
 
-        $this->methodNameInflector
-            ->method('inflect')
-            ->willReturn('someHandlerMethod');
-
         $this->container
             ->method('get')
             ->willReturn($handler);
 
-        $this->classNameInflector
-            ->method('getHandlerClassName')
+        $this->mapping
+            ->method('getClassName')
             ->with(CompleteTaskCommand::class);
+
+        $this->mapping
+            ->method('getMethodName')
+            ->willReturn('someHandlerMethod');
 
         $this->middleware->execute($command, $this->mockNext());
 

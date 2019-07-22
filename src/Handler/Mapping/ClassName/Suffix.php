@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace League\Tactician\Handler\ClassName;
+namespace League\Tactician\Handler\Mapping\ClassName;
 
 class Suffix implements ClassNameInflector
 {

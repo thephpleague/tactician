@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace League\Tactician\Handler\MethodName;
+namespace League\Tactician\Handler\Mapping\MethodName;
 
 use function strpos;
 use function strrpos;

@@ -2,8 +2,9 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 use League\Container\Container;
-use League\Tactician\Handler\ClassName\Suffix;
-use League\Tactician\Handler\MethodName\HandleLastPartOfClassName;
+use League\Tactician\Handler\Mapping\ClassName\Suffix;
+use League\Tactician\Handler\Mapping\MappingByNamingConvention;
+use League\Tactician\Handler\Mapping\MethodName\HandleLastPartOfClassName;
 
 // Our example Command and Handler. ///////////////////////////////////////////
 class RegisterUser
@@ -29,8 +30,10 @@ $container->add(RegisterUserHandler::class);
 // executing it is a plugin that we're configuring here.
 $handlerMiddleware = new League\Tactician\Handler\CommandHandlerMiddleware(
     $container,
-    new Suffix('Handler'), // We expect our Handlers have the same class name except with this suffix
-    new HandleLastPartOfClassName() // We expect the method name to be handle + the last part of the command name
+    new MappingByNamingConvention(
+        new Suffix('Handler'), // We expect our Handlers have the same class name except with this suffix
+        new HandleLastPartOfClassName() // We expect the method name to be handle + the last part of the command name
+    )
 );
 
 $commandBus = new \League\Tactician\CommandBus($handlerMiddleware);

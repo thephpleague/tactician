@@ -4,8 +4,9 @@ declare(strict_types=1);
 namespace League\Tactician\PHPStan;
 
 use League\Tactician\CommandBus;
-use League\Tactician\Handler\ClassName\ClassNameInflector;
-use League\Tactician\Handler\MethodName\MethodNameInflector;
+use League\Tactician\Handler\Mapping\ClassName\ClassNameInflector;
+use League\Tactician\Handler\Mapping\CommandToHandlerMapping;
+use League\Tactician\Handler\Mapping\MethodName\MethodNameInflector;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Broker\Broker;
@@ -25,23 +26,14 @@ final class HandlerReturnTypeExtension implements DynamicMethodReturnTypeExtensi
      * @var Broker
      */
     private $broker;
-
     /**
-     * @var ClassNameInflector
+     * @var CommandToHandlerMapping
      */
-    private $classNameInflector;
+    private $mapping;
 
-    /**
-     * @var MethodNameInflector
-     */
-    private $methodNameInflector;
-
-    public function __construct(
-        ClassNameInflector $handlerNameInflector,
-        MethodNameInflector $methodNameInflector
-    ) {
-        $this->classNameInflector = $handlerNameInflector;
-        $this->methodNameInflector = $methodNameInflector;
+    public function __construct(CommandToHandlerMapping $mapping)
+    {
+        $this->mapping = $mapping;
     }
 
     public function setBroker(Broker $broker): void
@@ -66,19 +58,19 @@ final class HandlerReturnTypeExtension implements DynamicMethodReturnTypeExtensi
     ): Type {
         $commandType = $scope->getType($methodCall->args[0]->value);
 
-        if (!$commandType instanceof ObjectType) {
+        if (! $commandType instanceof ObjectType) {
             return new MixedType();
         }
 
         try {
             $handlerClass = $this->broker->getClass(
-                $this->classNameInflector->getHandlerClassName($commandType->getClassName())
+                $this->mapping->getClassName($commandType->getClassName())
             );
         } catch (ClassNotFoundException $e) {
             return new MixedType();
         }
 
-        $methodName = $this->methodNameInflector->inflect($commandType->getClassName(), $handlerClass->getName());
+        $methodName = $this->mapping->getMethodName($commandType->getClassName(), $handlerClass->getName());
 
         try {
             $method = $handlerClass->getMethod($methodName, $scope)->getVariants();
