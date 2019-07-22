@@ -20,7 +20,7 @@ class InvokeTest extends TestCase
 
         self::assertEquals(
             '__invoke',
-            $inflector->inflect(CompleteTaskCommand::class, ConcreteMethodsHandler::class)
+            $inflector->getMethodName(CompleteTaskCommand::class, ConcreteMethodsHandler::class)
         );
     }
 }

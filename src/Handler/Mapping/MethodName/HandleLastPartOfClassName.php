@@ -18,9 +18,9 @@ class HandleLastPartOfClassName extends LastPartOfClassName
     /**
      * {@inheritdoc}
      */
-    public function inflect(string $command, string $commandHandler) : string
+    public function getMethodName(string $command, string $commandHandler) : string
     {
-        $commandName = parent::inflect($command, $commandHandler);
+        $commandName = parent::getMethodName($command, $commandHandler);
 
         return 'handle' . ucfirst($commandName);
     }

@@ -14,7 +14,7 @@ class SuffixTest extends TestCase
     {
         self::assertEquals(
             $expectedResult,
-            (new Suffix($suffix))->getHandlerClassName($command)
+            (new Suffix($suffix))->getClassName($command)
         );
     }
 

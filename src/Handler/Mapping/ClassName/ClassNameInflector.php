@@ -13,5 +13,5 @@ interface ClassNameInflector
     /**
      * Deduce the FQCN of the Handler based on the command FQCN
      */
-    public function getHandlerClassName(string $commandClassName): string;
+    public function getClassName(string $commandClassName): string;
 }

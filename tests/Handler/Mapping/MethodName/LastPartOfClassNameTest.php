@@ -24,7 +24,7 @@ class LastPartOfClassNameTest extends TestCase
     {
         self::assertEquals(
             'commandWithoutNamespace',
-            $this->inflector->inflect(CommandWithoutNamespace::class, ConcreteMethodsHandler::class)
+            $this->inflector->getMethodName(CommandWithoutNamespace::class, ConcreteMethodsHandler::class)
         );
     }
 
@@ -32,7 +32,7 @@ class LastPartOfClassNameTest extends TestCase
     {
         self::assertEquals(
             'completeTaskCommand',
-            $this->inflector->inflect(CompleteTaskCommand::class, ConcreteMethodsHandler::class)
+            $this->inflector->getMethodName(CompleteTaskCommand::class, ConcreteMethodsHandler::class)
         );
     }
 }

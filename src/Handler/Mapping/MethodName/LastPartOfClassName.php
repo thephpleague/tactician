@@ -21,7 +21,7 @@ class LastPartOfClassName implements MethodNameInflector
     /**
      * {@inheritdoc}
      */
-    public function inflect(string $commandName, string $commandHandler) : string
+    public function getMethodName(string $commandName, string $commandHandler) : string
     {
         // If class name has a namespace separator, only take last portion
         if (strpos($commandName, '\\') !== false) {

@@ -24,13 +24,13 @@ final class MappingByNamingConventionTest extends TestCase
 
         $className
             ->expects(self::once())
-            ->method('getHandlerClassName')
+            ->method('getClassName')
             ->with(AddTaskCommand::class)
             ->willReturn(ConcreteMethodsHandler::class);
 
         $methodName
             ->expects(self::once())
-            ->method('inflect')
+            ->method('getMethodName')
             ->with(AddTaskCommand::class, ConcreteMethodsHandler::class)
             ->willReturn('handle');
 

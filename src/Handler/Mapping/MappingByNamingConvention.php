@@ -6,6 +6,10 @@ namespace League\Tactician\Handler\Mapping;
 use League\Tactician\Handler\Mapping\ClassName\ClassNameInflector;
 use League\Tactician\Handler\Mapping\MethodName\MethodNameInflector;
 
+/**
+ * The most common mapping you'll see. Pass a pair of inflectors through and
+ * automatically map your commands to the similarly named class.
+ */
 final class MappingByNamingConvention implements CommandToHandlerMapping
 {
     /** @var ClassNameInflector */
@@ -22,11 +26,11 @@ final class MappingByNamingConvention implements CommandToHandlerMapping
 
     public function getClassName(string $commandClassName): string
     {
-        return $this->classNameInflector->getHandlerClassName($commandClassName);
+        return $this->classNameInflector->getClassName($commandClassName);
     }
 
     public function getMethodName(string $commandClassName, string $handlerClassName): string
     {
-        return $this->methodNameInflector->inflect($commandClassName, $handlerClassName);
+        return $this->methodNameInflector->getMethodName($commandClassName, $handlerClassName);
     }
 }

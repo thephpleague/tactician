@@ -26,7 +26,7 @@ class HandleClassNameTest extends TestCase
 
         self::assertEquals(
             'handleCommandWithoutNamespace',
-            $this->inflector->inflect(CommandWithoutNamespace::class, ConcreteMethodsHandler::class)
+            $this->inflector->getMethodName(CommandWithoutNamespace::class, ConcreteMethodsHandler::class)
         );
     }
 
@@ -36,7 +36,7 @@ class HandleClassNameTest extends TestCase
 
         self::assertEquals(
             'handleCompleteTaskCommand',
-            $this->inflector->inflect(CompleteTaskCommand::class, ConcreteMethodsHandler::class)
+            $this->inflector->getMethodName(CompleteTaskCommand::class, ConcreteMethodsHandler::class)
         );
     }
 }

@@ -36,9 +36,9 @@ class HandleClassNameWithoutSuffix extends HandleLastPartOfClassName
         $this->suffixLength = strlen($suffix);
     }
 
-    public function inflect(string $command, string $commandHandler) : string
+    public function getMethodName(string $command, string $commandHandler) : string
     {
-        $methodName = parent::inflect($command, $commandHandler);
+        $methodName = parent::getMethodName($command, $commandHandler);
 
         if (substr($methodName, $this->suffixLength * -1) !== $this->suffix) {
             return $methodName;

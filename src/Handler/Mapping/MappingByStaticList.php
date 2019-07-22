@@ -5,6 +5,18 @@ namespace League\Tactician\Handler\Mapping;
 
 use function array_key_exists;
 
+/**
+ * This mapping is useful when you're working with a compiled list or a legacy
+ * app without a consistent naming convention.
+ *
+ * The mapping array should be in the following format:
+ *
+ *      [
+ *          SomeCommand::class => [SomeHandler::class, 'handle'],
+ *          OtherCommand::class => [WhateverHandler::class, 'handleOtherCommand'],
+ *          ...
+ *      ]
+ */
 final class MappingByStaticList implements CommandToHandlerMapping
 {
     /** @var array<string, array<string>> */

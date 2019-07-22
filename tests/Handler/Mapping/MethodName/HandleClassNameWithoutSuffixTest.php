@@ -24,7 +24,7 @@ class HandleClassNameWithoutSuffixTest extends TestCase
     {
         self::assertEquals(
             'handleCompleteTask',
-            $this->inflector->inflect(CompleteTaskCommand::class, ConcreteMethodsHandler::class)
+            $this->inflector->getMethodName(CompleteTaskCommand::class, ConcreteMethodsHandler::class)
         );
     }
 
@@ -32,7 +32,7 @@ class HandleClassNameWithoutSuffixTest extends TestCase
     {
         self::assertEquals(
             'handleDateTime',
-            $this->inflector->inflect(DateTime::class, ConcreteMethodsHandler::class)
+            $this->inflector->getMethodName(DateTime::class, ConcreteMethodsHandler::class)
         );
     }
 
@@ -42,7 +42,7 @@ class HandleClassNameWithoutSuffixTest extends TestCase
 
         self::assertEquals(
             'handleDate',
-            $inflector->inflect(DateTime::class, ConcreteMethodsHandler::class)
+            $inflector->getMethodName(DateTime::class, ConcreteMethodsHandler::class)
         );
     }
 }

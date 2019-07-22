@@ -20,7 +20,7 @@ class HandleTest extends TestCase
 
         self::assertEquals(
             'handle',
-            $inflector->inflect(CompleteTaskCommand::class, ConcreteMethodsHandler::class)
+            $inflector->getMethodName(CompleteTaskCommand::class, ConcreteMethodsHandler::class)
         );
     }
 }
