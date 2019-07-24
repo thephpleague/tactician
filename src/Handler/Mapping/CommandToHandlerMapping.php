@@ -13,5 +13,5 @@ interface CommandToHandlerMapping
     /**
      * @throws FailedToMapCommand
      */
-    public function getMethodName(string $commandClassName, string $handlerClassName): string;
+    public function getMethodName(string $commandClassName): string;
 }

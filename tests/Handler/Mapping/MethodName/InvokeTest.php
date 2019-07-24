@@ -6,7 +6,6 @@ namespace League\Tactician\Tests\Handler\Mapping\MethodName;
 
 use League\Tactician\Handler\Mapping\MethodName\Invoke;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
-use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -20,7 +19,7 @@ class InvokeTest extends TestCase
 
         self::assertEquals(
             '__invoke',
-            $inflector->getMethodName(CompleteTaskCommand::class, ConcreteMethodsHandler::class)
+            $inflector->getMethodName(CompleteTaskCommand::class)
         );
     }
 }

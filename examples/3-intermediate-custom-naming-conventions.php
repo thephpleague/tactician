@@ -20,9 +20,9 @@ use League\Tactician\Handler\Mapping\ClassName\Suffix;
 
 class MyCustomMethodNameInflector implements MethodNameInflector
 {
-    // You can use the command and commandHandler to generate any name you
+    // You can use the command to generate any name you
     // prefer but here, we'll always return the same one.
-    public function getMethodName(string $command, string $commandHandler): string
+    public function getMethodName(string $commandClassName): string
     {
         return 'handle';
     }

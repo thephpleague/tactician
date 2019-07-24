@@ -36,7 +36,7 @@ final class MappingByStaticList implements CommandToHandlerMapping
         return $this->mapping[$commandClassName][0];
     }
 
-    public function getMethodName(string $commandClassName, string $handlerClassName): string
+    public function getMethodName(string $commandClassName): string
     {
         if (! array_key_exists($commandClassName, $this->mapping)) {
             throw FailedToMapCommand::methodName($commandClassName);

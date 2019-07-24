@@ -21,13 +21,13 @@ class LastPartOfClassName implements MethodNameInflector
     /**
      * {@inheritdoc}
      */
-    public function getMethodName(string $commandName, string $commandHandler) : string
+    public function getMethodName(string $commandClassNameName) : string
     {
         // If class name has a namespace separator, only take last portion
-        if (strpos($commandName, '\\') !== false) {
-            $commandName = substr($commandName, strrpos($commandName, '\\') + 1);
+        if (strpos($commandClassNameName, '\\') !== false) {
+            $commandClassNameName = substr($commandClassNameName, strrpos($commandClassNameName, '\\') + 1);
         }
 
-        return strtolower($commandName[0]) . substr($commandName, 1);
+        return strtolower($commandClassNameName[0]) . substr($commandClassNameName, 1);
     }
 }

@@ -53,7 +53,7 @@ class CommandHandlerMiddlewareTest extends TestCase
 
         $this->mapping
             ->method('getMethodName')
-            ->with(CompleteTaskCommand::class, ConcreteMethodsHandler::class)
+            ->with(CompleteTaskCommand::class)
             ->willReturn('handleTaskCompletedCommand');
 
         $this->mapping

@@ -13,7 +13,7 @@ class Invoke implements MethodNameInflector
     /**
      * {@inheritdoc}
      */
-    public function getMethodName(string $command, string $commandHandler) : string
+    public function getMethodName(string $commandClassName) : string
     {
         return '__invoke';
     }

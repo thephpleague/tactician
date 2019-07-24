@@ -16,7 +16,7 @@ class MappingByStaticListTest extends TestCase
     {
         $mapping = new MappingByStaticList(
             [
-                AddTaskCommand::class => [ConcreteMethodsHandler::class, 'handle']
+                AddTaskCommand::class => [ConcreteMethodsHandler::class, 'handle'],
             ]
         );
 
@@ -24,14 +24,14 @@ class MappingByStaticListTest extends TestCase
             ConcreteMethodsHandler::class,
             $mapping->getClassName(AddTaskCommand::class)
         );
-        static::assertEquals('handle', $mapping->getMethodName(AddTaskCommand::class, ConcreteMethodsHandler::class));
+        static::assertEquals('handle', $mapping->getMethodName(AddTaskCommand::class));
     }
 
     public function testFailedClassNameMapping(): void
     {
         $mapping = new MappingByStaticList(
             [
-                AddTaskCommand::class => [ConcreteMethodsHandler::class, 'handle']
+                AddTaskCommand::class => [ConcreteMethodsHandler::class, 'handle'],
             ]
         );
 
@@ -43,11 +43,11 @@ class MappingByStaticListTest extends TestCase
     {
         $mapping = new MappingByStaticList(
             [
-                AddTaskCommand::class => [ConcreteMethodsHandler::class, 'handle']
+                AddTaskCommand::class => [ConcreteMethodsHandler::class, 'handle'],
             ]
         );
 
         $this->expectExceptionObject(FailedToMapCommand::methodName(CompleteTaskCommand::class));
-        $mapping->getMethodName(CompleteTaskCommand::class, ConcreteMethodsHandler::class);
+        $mapping->getMethodName(CompleteTaskCommand::class);
     }
 }

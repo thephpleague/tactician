@@ -7,7 +7,6 @@ namespace League\Tactician\Tests\Handler\Mapping\MethodName;
 use DateTime;
 use League\Tactician\Handler\Mapping\MethodName\HandleClassNameWithoutSuffix;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
-use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use PHPUnit\Framework\TestCase;
 
 class HandleClassNameWithoutSuffixTest extends TestCase
@@ -24,7 +23,7 @@ class HandleClassNameWithoutSuffixTest extends TestCase
     {
         self::assertEquals(
             'handleCompleteTask',
-            $this->inflector->getMethodName(CompleteTaskCommand::class, ConcreteMethodsHandler::class)
+            $this->inflector->getMethodName(CompleteTaskCommand::class)
         );
     }
 
@@ -32,7 +31,7 @@ class HandleClassNameWithoutSuffixTest extends TestCase
     {
         self::assertEquals(
             'handleDateTime',
-            $this->inflector->getMethodName(DateTime::class, ConcreteMethodsHandler::class)
+            $this->inflector->getMethodName(DateTime::class)
         );
     }
 
@@ -42,7 +41,7 @@ class HandleClassNameWithoutSuffixTest extends TestCase
 
         self::assertEquals(
             'handleDate',
-            $inflector->getMethodName(DateTime::class, ConcreteMethodsHandler::class)
+            $inflector->getMethodName(DateTime::class)
         );
     }
 }

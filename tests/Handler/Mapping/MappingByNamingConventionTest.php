@@ -31,10 +31,10 @@ final class MappingByNamingConventionTest extends TestCase
         $methodName
             ->expects(self::once())
             ->method('getMethodName')
-            ->with(AddTaskCommand::class, ConcreteMethodsHandler::class)
+            ->with(AddTaskCommand::class)
             ->willReturn('handle');
 
         self::assertEquals(ConcreteMethodsHandler::class, $mapping->getClassName(AddTaskCommand::class));
-        self::assertEquals('handle', $mapping->getMethodName(AddTaskCommand::class, ConcreteMethodsHandler::class));
+        self::assertEquals('handle', $mapping->getMethodName(AddTaskCommand::class));
     }
 }

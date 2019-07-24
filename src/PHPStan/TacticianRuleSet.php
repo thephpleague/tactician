@@ -90,7 +90,7 @@ final class TacticianRuleSet implements Rule
             ];
         }
 
-        $handlerMethodName = $this->mapping->getMethodName($commandType->getClassName(), $handlerClass->getName());
+        $handlerMethodName = $this->mapping->getMethodName($commandType->getClassName());
 
         try {
             $handlerMethod = $handlerClass->getMethod($handlerMethodName, $scope);

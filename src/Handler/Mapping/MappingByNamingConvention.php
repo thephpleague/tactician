@@ -29,8 +29,8 @@ final class MappingByNamingConvention implements CommandToHandlerMapping
         return $this->classNameInflector->getClassName($commandClassName);
     }
 
-    public function getMethodName(string $commandClassName, string $handlerClassName): string
+    public function getMethodName(string $commandClassName): string
     {
-        return $this->methodNameInflector->getMethodName($commandClassName, $handlerClassName);
+        return $this->methodNameInflector->getMethodName($commandClassName);
     }
 }

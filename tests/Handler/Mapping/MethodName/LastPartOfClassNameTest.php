@@ -7,7 +7,6 @@ namespace League\Tactician\Tests\Handler\Mapping\MethodName;
 use CommandWithoutNamespace;
 use League\Tactician\Handler\Mapping\MethodName\LastPartOfClassName;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
-use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use PHPUnit\Framework\TestCase;
 
 class LastPartOfClassNameTest extends TestCase
@@ -24,7 +23,7 @@ class LastPartOfClassNameTest extends TestCase
     {
         self::assertEquals(
             'commandWithoutNamespace',
-            $this->inflector->getMethodName(CommandWithoutNamespace::class, ConcreteMethodsHandler::class)
+            $this->inflector->getMethodName(CommandWithoutNamespace::class)
         );
     }
 
@@ -32,7 +31,7 @@ class LastPartOfClassNameTest extends TestCase
     {
         self::assertEquals(
             'completeTaskCommand',
-            $this->inflector->getMethodName(CompleteTaskCommand::class, ConcreteMethodsHandler::class)
+            $this->inflector->getMethodName(CompleteTaskCommand::class)
         );
     }
 }

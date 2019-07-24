@@ -70,7 +70,7 @@ final class HandlerReturnTypeExtension implements DynamicMethodReturnTypeExtensi
             return new MixedType();
         }
 
-        $methodName = $this->mapping->getMethodName($commandType->getClassName(), $handlerClass->getName());
+        $methodName = $this->mapping->getMethodName($commandType->getClassName());
 
         try {
             $method = $handlerClass->getMethod($methodName, $scope)->getVariants();
