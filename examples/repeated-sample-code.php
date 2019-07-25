@@ -5,7 +5,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use League\Container\Container;
 use League\Tactician\Handler\Mapping\ClassName\Suffix;
-use League\Tactician\Handler\Mapping\MappingByNamingConvention;
+use League\Tactician\Handler\Mapping\MapByNamingConvention;
 use League\Tactician\Handler\Mapping\MethodName\HandleLastPartOfClassName;
 
 class RegisterUser
@@ -28,7 +28,7 @@ $container->add(RegisterUserHandler::class);
 
 $handlerMiddleware = new League\Tactician\Handler\CommandHandlerMiddleware(
     $container,
-    new MappingByNamingConvention(
+    new MapByNamingConvention(
         new Suffix('Handler'),
         new HandleLastPartOfClassName()
     )

@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace League\Tactician\Tests\PHPStan;
 
 use League\Tactician\Handler\Mapping\ClassName\Suffix;
-use League\Tactician\Handler\Mapping\MappingByNamingConvention;
+use League\Tactician\Handler\Mapping\MapByNamingConvention;
 use League\Tactician\Handler\Mapping\MethodName\Handle;
 use League\Tactician\PHPStan\TacticianRuleSet;
 use PHPStan\Rules\Rule;
@@ -15,7 +15,7 @@ final class TacticianRuleSetTest extends RuleTestCase
     protected function getRule(): Rule
     {
         return new TacticianRuleSet(
-            new MappingByNamingConvention(
+            new MapByNamingConvention(
                 new Suffix('Handler'),
                 new Handle()
             ),

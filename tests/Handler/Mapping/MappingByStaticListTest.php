@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace League\Tactician\Tests\Handler\Mapping;
 
 use League\Tactician\Handler\Mapping\FailedToMapCommand;
-use League\Tactician\Handler\Mapping\MappingByStaticList;
+use League\Tactician\Handler\Mapping\MapByStaticList;
 use League\Tactician\Tests\Fixtures\Command\AddTaskCommand;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
@@ -14,7 +14,7 @@ class MappingByStaticListTest extends TestCase
 {
     public function testSuccessfulMapping(): void
     {
-        $mapping = new MappingByStaticList(
+        $mapping = new MapByStaticList(
             [
                 AddTaskCommand::class => [ConcreteMethodsHandler::class, 'handle'],
             ]
@@ -29,7 +29,7 @@ class MappingByStaticListTest extends TestCase
 
     public function testFailedClassNameMapping(): void
     {
-        $mapping = new MappingByStaticList(
+        $mapping = new MapByStaticList(
             [
                 AddTaskCommand::class => [ConcreteMethodsHandler::class, 'handle'],
             ]
@@ -41,7 +41,7 @@ class MappingByStaticListTest extends TestCase
 
     public function testFailedMethodNameMapping(): void
     {
-        $mapping = new MappingByStaticList(
+        $mapping = new MapByStaticList(
             [
                 AddTaskCommand::class => [ConcreteMethodsHandler::class, 'handle'],
             ]

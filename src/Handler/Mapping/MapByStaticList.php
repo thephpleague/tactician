@@ -17,7 +17,7 @@ use function array_key_exists;
  *          ...
  *      ]
  */
-final class MappingByStaticList implements CommandToHandlerMapping
+final class MapByStaticList implements CommandToHandlerMapping
 {
     /** @var array<string, array<string>> */
     private $mapping;

@@ -14,7 +14,7 @@ require __DIR__ . '/repeated-sample-code.php';
  */
 use League\Tactician\CommandBus;
 use League\Tactician\Handler\CommandHandlerMiddleware;
-use League\Tactician\Handler\Mapping\MappingByNamingConvention;
+use League\Tactician\Handler\Mapping\MapByNamingConvention;
 use League\Tactician\Handler\Mapping\MethodName\MethodNameInflector;
 use League\Tactician\Handler\Mapping\ClassName\Suffix;
 
@@ -46,7 +46,7 @@ class DeleteUserHandler
 $container->add(DeleteUserHandler::class);
 $handlerMiddleware = new CommandHandlerMiddleware(
     $container,
-    new MappingByNamingConvention(
+    new MapByNamingConvention(
         new Suffix('Handler'),
         new MyCustomMethodNameInflector()
     )

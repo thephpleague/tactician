@@ -10,7 +10,7 @@ use League\Tactician\Handler\Mapping\MethodName\MethodNameInflector;
  * The most common mapping you'll see. Pass a pair of inflectors through and
  * automatically map your commands to the similarly named class.
  */
-final class MappingByNamingConvention implements CommandToHandlerMapping
+final class MapByNamingConvention implements CommandToHandlerMapping
 {
     /** @var ClassNameInflector */
     private $classNameInflector;
