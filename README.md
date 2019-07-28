@@ -9,6 +9,8 @@
 
 A small, pluggable command bus.
 
+*IMPORTANT: You're looking at the unreleased Tactician 2.0 code. See the [original docs](http://tactician.thephpleague.com) for info about 1.x versions.*
+
 See the [full docs](http://tactician.thephpleague.com) or the examples directory to get started.
 
 ## Install
