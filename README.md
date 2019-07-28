@@ -7,7 +7,7 @@
 [![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/thephpleague/tactician/blob/master/LICENSE)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/54275a78-bc70-4bb3-9ac4-4eee700c6a1c/small.png)](https://insight.sensiolabs.com/projects/54275a78-bc70-4bb3-9ac4-4eee700c6a1c)
 
-A small, pluggable command bus.
+A small, flexible command bus.
 
 *IMPORTANT: You're looking at the unreleased Tactician 2.0 code. See the [original docs](http://tactician.thephpleague.com) for info about 1.x versions.*
 
