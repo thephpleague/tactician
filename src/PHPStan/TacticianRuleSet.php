@@ -86,7 +86,8 @@ final class TacticianRuleSet implements Rule
             $handlerClass = $this->broker->getClass($handlerClassName);
         } catch (ClassNotFoundException $e) {
             return [
-                "Tactician tried to route the command {$commandType->getClassName()} but could not find the matching handler {$handlerClassName}.",
+                "Tactician tried to route the command {$commandType->getClassName()} but could not find the matching " .
+                "handler {$handlerClassName}.",
             ];
         }
 
@@ -96,7 +97,9 @@ final class TacticianRuleSet implements Rule
             $handlerMethod = $handlerClass->getMethod($handlerMethodName, $scope);
         } catch (MissingMethodFromReflectionException $e) {
             return [
-                "Tactician tried to route the command {$commandType->getClassName()} to {$handlerClass->getName()}::{$handlerMethodName} but while the class could be loaded, the method '{$handlerMethodName}' could not be found on the class.",
+                "Tactician tried to route the command {$commandType->getClassName()} to " .
+                "{$handlerClass->getName()}::{$handlerMethodName} but while the class could be loaded, the method " .
+                "'{$handlerMethodName}' could not be found on the class.",
             ];
         }
 
@@ -109,19 +112,25 @@ final class TacticianRuleSet implements Rule
 
         if (count($parameters) === 0) {
             return [
-                "Tactician tried to route the command {$commandType->getClassName()} to {$handlerClass->getName()}::{$handlerMethodName} but the method '{$handlerMethodName}' does not accept any parameters.",
+                "Tactician tried to route the command {$commandType->getClassName()} to " .
+                "{$handlerClass->getName()}::{$handlerMethodName} but the method '{$handlerMethodName}' does not " .
+                "accept any parameters.",
             ];
         }
 
         if (count($parameters) > 1) {
             return [
-                "Tactician tried to route the command {$commandType->getClassName()} to {$handlerClass->getName()}::{$handlerMethodName} but the method '{$handlerMethodName}' accepts too many parameters.",
+                "Tactician tried to route the command {$commandType->getClassName()} to " .
+                "{$handlerClass->getName()}::{$handlerMethodName} but the method '{$handlerMethodName}' accepts " .
+                "too many parameters.",
             ];
         }
 
         if ($parameters[0]->getType()->accepts($commandType, true)->no()) {
             return [
-                "Tactician tried to route the command {$commandType->getClassName()} to {$handlerClass->getName()}::{$handlerMethodName} but the method '{$handlerMethodName}' has a typehint that does not allow this command.",
+                "Tactician tried to route the command {$commandType->getClassName()} to " .
+                "{$handlerClass->getName()}::{$handlerMethodName} but the method '{$handlerMethodName}' has a " .
+                "typehint that does not allow this command.",
             ];
         }
 
