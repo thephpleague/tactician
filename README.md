@@ -20,44 +20,10 @@ Using Composer:
 ## Plugins
 The core Tactician package is small but there are several plugin packages that extend the usefulness of Tactician:
 
+- [PHPStan](https://github.com/thephpleague/tactician-phpstan): Add static analysis support to Tactician. Highly recommended.
 - [Logger](https://github.com/thephpleague/tactician-logger): Adds PSR-3 logging support for receiving, completing or failing commands.
 - [Doctrine](https://github.com/thephpleague/tactician-doctrine): Wraps commands in separate Doctrine ORM transactions.
 - [and many more](https://packagist.org/search/?q=tactician)
-
-## PHPStan Integration
-
-Traditionally, command buses can obscure static analysis. The Tactician PHPStan plugin helps bring stronger type checking by finding missing handler classes, validating handler return types and more.
-
-You'll need to make your `CommandToHandlerMapping` available to PHPStan. The easiest way to do this is to create a small bootstrap file that returns the same Handler configuration you use in your app. 
-
-A simple version of this might look like:
-
-~~~
-# handler-mapper-loader.php
-<?php
-
-use League\Tactician\Handler\Mapping\ClassName\Suffix;
-use League\Tactician\Handler\Mapping\MappingByNamingConvention;
-use League\Tactician\Handler\Mapping\MethodName\Handle;
-
-return new MappingByNamingConvention(
-    new Suffix('Handler'),
-    new Handle()
-);
-~~~
-
-You can also your bootstrap container or anything else you like, you just need to return a `CommandToHandlerMapping`.
-
-Now expose the bootstrap file in your `phpstan.neon` config. 
-
-~~~
-# phpstan.neon
-parameters:
-    tactician:
-        bootstrap: handler-mapping-loader.php
-~~~
-
-And you're good to go!
 
 ## Framework Integration
 There are a number of framework integration packages for Tactician, [search for Tactician on Packagist](https://packagist.org/search/?q=tactician) for the most up-to-date listings.

@@ -1,7 +1,0 @@
-[
-    {
-        "message": "Tactician tried to route the command MissingHandlerClass\\SomeCommand but could not find the matching handler MissingHandlerClass\\SomeCommandHandler.",
-        "line": 14,
-        "ignorable": true
-    }
-]

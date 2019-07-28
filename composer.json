@@ -26,9 +26,6 @@
         }
     },
     "autoload-dev": {
-        "classmap": [
-            "tests/PHPStan/data"
-        ],
         "psr-4": {
             "League\\Tactician\\Tests\\": "tests/"
         },
