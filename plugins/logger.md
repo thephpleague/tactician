@@ -58,7 +58,7 @@ class CatFormatter implements Formatter
 
     public function logCommandSucceeded(LoggerInterface $logger, Command $command, $returnValue)
     {
-        $logger->debug('Meow, command done! (=^･^=)');
+        $logger->debug('Meow, command done! (=^･ ͜･^=)');
     }
 
     public function logCommandFailed(LoggerInterface $logger, Command $command, Exception $e)
