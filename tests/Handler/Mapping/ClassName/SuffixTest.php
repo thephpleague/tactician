@@ -18,13 +18,6 @@ class SuffixTest extends TestCase
         );
     }
 
-    public function testBuildHandlerSuffix(): void
-    {
-        $result = Suffix::handler()->getClassName('MyCommand');
-
-        self::assertSame('MyCommandHandler', $result);
-    }
-
     /** @return array<array<string>> */
     public function examples() : array
     {
