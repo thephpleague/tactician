@@ -22,14 +22,11 @@ final class CanNotInvokeHandler extends BadMethodCallException implements Except
     /** @var object */
     private $command;
 
-    /**
-     * @return static
-     */
-    public static function forCommand(object $command, string $reason)
+    public static function forCommand(object $command, string $reason): self
     {
         $type = get_class($command);
 
-        $exception          = new static(
+        $exception = new self(
             'Could not invoke handler for command ' . $type .
             ' for reason: ' . $reason
         );
