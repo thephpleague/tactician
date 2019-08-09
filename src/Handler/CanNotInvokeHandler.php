@@ -6,6 +6,7 @@ namespace League\Tactician\Handler;
 
 use BadMethodCallException;
 use League\Tactician\Exception;
+use Throwable;
 use function get_class;
 use function gettype;
 use function is_object;
@@ -16,21 +17,16 @@ use function is_object;
  * The most common reason is the receiving method is missing or incorrectly
  * named.
  */
-class CanNotInvokeHandler extends BadMethodCallException implements Exception
+final class CanNotInvokeHandler extends BadMethodCallException implements Exception
 {
-    /** @var mixed */
+    /** @var object */
     private $command;
 
-    /**
-     * @param mixed $command
-     *
-     * @return static
-     */
-    public static function forCommand($command, string $reason)
+    public static function forCommand(object $command, string $reason): self
     {
-        $type =  is_object($command) ? get_class($command) : gettype($command);
+        $type = get_class($command);
 
-        $exception          = new static(
+        $exception = new self(
             'Could not invoke handler for command ' . $type .
             ' for reason: ' . $reason
         );
@@ -39,12 +35,15 @@ class CanNotInvokeHandler extends BadMethodCallException implements Exception
         return $exception;
     }
 
+    private function __construct(string $message = '', $code = 0, Throwable $previous = null)
+    {
+        parent::__construct($message, $code, $previous);
+    }
+
     /**
      * Returns the command that could not be invoked
-     *
-     * @return mixed
      */
-    public function getCommand()
+    public function getCommand(): object
     {
         return $this->command;
     }

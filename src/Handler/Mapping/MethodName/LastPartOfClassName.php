@@ -16,7 +16,7 @@ use function substr;
  *  - \MyGlobalCommand    => $handler->myGlobalCommand()
  *  - \My\App\CreateUser  => $handler->createUser()
  */
-class LastPartOfClassName implements MethodNameInflector
+final class LastPartOfClassName implements MethodNameInflector
 {
     /**
      * {@inheritdoc}

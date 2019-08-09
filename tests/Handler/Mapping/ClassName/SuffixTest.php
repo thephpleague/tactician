@@ -12,7 +12,7 @@ class SuffixTest extends TestCase
     /** @dataProvider examples */
     public function testCanAddSuffixToClassName(string $suffix, string $command, string $expectedResult) : void
     {
-        self::assertEquals(
+        self::assertSame(
             $expectedResult,
             (new Suffix($suffix))->getClassName($command)
         );
