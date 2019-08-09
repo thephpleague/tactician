@@ -19,13 +19,15 @@ use function substr;
  *  - \CompleteTaskCommand     => $handler->handleCompleteTask()
  *  - \My\App\DoThingCommand   => $handler->handleDoThing()
  */
-class HandleClassNameWithoutSuffix extends HandleLastPartOfClassName
+final class HandleClassNameWithoutSuffix implements MethodNameInflector
 {
     /** @var string */
     private $suffix;
 
     /** @var int */
     private $suffixLength;
+    /** @var HandleLastPartOfClassName */
+    private $handleLastPartOfClassName;
 
     /**
      * @param string $suffix The string to remove from end of each class name
@@ -34,11 +36,12 @@ class HandleClassNameWithoutSuffix extends HandleLastPartOfClassName
     {
         $this->suffix       = $suffix;
         $this->suffixLength = strlen($suffix);
+        $this->handleLastPartOfClassName = new HandleLastPartOfClassName();
     }
 
     public function getMethodName(string $commandClassName) : string
     {
-        $methodName = parent::getMethodName($commandClassName);
+        $methodName = $this->handleLastPartOfClassName->getMethodName($commandClassName);
 
         if (substr($methodName, $this->suffixLength * -1) !== $this->suffix) {
             return $methodName;

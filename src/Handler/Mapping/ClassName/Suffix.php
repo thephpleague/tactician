@@ -4,10 +4,17 @@ declare(strict_types=1);
 
 namespace League\Tactician\Handler\Mapping\ClassName;
 
-class Suffix implements ClassNameInflector
+final class Suffix implements ClassNameInflector
 {
+    private const DEFAULT = 'Handler';
+
     /** @var string */
     private $suffix;
+
+    public static function handler(): self
+    {
+        return new self(self::DEFAULT);
+    }
 
     public function __construct(string $suffix)
     {

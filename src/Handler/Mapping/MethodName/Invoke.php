@@ -8,7 +8,7 @@ namespace League\Tactician\Handler\Mapping\MethodName;
  * Handle command by calling the __invoke magic method. Handy for single
  * use classes or closures.
  */
-class Invoke implements MethodNameInflector
+final class Invoke implements MethodNameInflector
 {
     /**
      * {@inheritdoc}

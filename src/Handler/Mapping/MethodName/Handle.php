@@ -7,7 +7,7 @@ namespace League\Tactician\Handler\Mapping\MethodName;
 /**
  * Handle command by calling the "handle" method.
  */
-class Handle implements MethodNameInflector
+final class Handle implements MethodNameInflector
 {
     /**
      * {@inheritdoc}

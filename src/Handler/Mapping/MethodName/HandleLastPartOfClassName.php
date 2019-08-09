@@ -13,14 +13,22 @@ use function ucfirst;
  *  - \MyGlobalCommand              => $handler->handleMyGlobalCommand()
  *  - \My\App\TaskCompletedCommand  => $handler->handleTaskCompletedCommand()
  */
-class HandleLastPartOfClassName extends LastPartOfClassName
+final class HandleLastPartOfClassName implements MethodNameInflector
 {
+    /** @var LastPartOfClassName */
+    private $lastPartOfClassName;
+
+    public function __construct()
+    {
+        $this->lastPartOfClassName = new LastPartOfClassName();
+    }
+
     /**
      * {@inheritdoc}
      */
     public function getMethodName(string $commandClassName) : string
     {
-        $commandName = parent::getMethodName($commandClassName);
+        $commandName = $this->lastPartOfClassName->getMethodName($commandClassName);
 
         return 'handle' . ucfirst($commandName);
     }

@@ -12,10 +12,17 @@ class SuffixTest extends TestCase
     /** @dataProvider examples */
     public function testCanAddSuffixToClassName(string $suffix, string $command, string $expectedResult) : void
     {
-        self::assertEquals(
+        self::assertSame(
             $expectedResult,
             (new Suffix($suffix))->getClassName($command)
         );
+    }
+
+    public function testBuildHandlerSuffix(): void
+    {
+        $result = Suffix::handler()->getClassName('MyCommand');
+
+        self::assertSame('MyCommandHandler', $result);
     }
 
     /** @return array<array<string>> */

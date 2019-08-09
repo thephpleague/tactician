@@ -13,7 +13,7 @@ use function is_callable;
 /**
  * The "core" CommandBus. Locates the appropriate handler and executes command.
  */
-class CommandHandlerMiddleware implements Middleware
+final class CommandHandlerMiddleware implements Middleware
 {
     /** @var ContainerInterface */
     private $container;
