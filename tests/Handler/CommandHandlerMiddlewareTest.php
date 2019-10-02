@@ -6,9 +6,7 @@ namespace League\Tactician\Tests\Handler;
 
 use League\Tactician\Handler\CanNotInvokeHandler;
 use League\Tactician\Handler\CommandHandlerMiddleware;
-use League\Tactician\Handler\Mapping\ClassName\ClassNameInflector;
 use League\Tactician\Handler\Mapping\CommandToHandlerMapping;
-use League\Tactician\Handler\Mapping\MethodName\MethodNameInflector;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use League\Tactician\Tests\Fixtures\Handler\DynamicMethodsHandler;

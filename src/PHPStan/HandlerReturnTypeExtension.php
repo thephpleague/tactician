@@ -4,9 +4,7 @@ declare(strict_types=1);
 namespace League\Tactician\PHPStan;
 
 use League\Tactician\CommandBus;
-use League\Tactician\Handler\Mapping\ClassName\ClassNameInflector;
 use League\Tactician\Handler\Mapping\CommandToHandlerMapping;
-use League\Tactician\Handler\Mapping\MethodName\MethodNameInflector;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Broker\Broker;
