@@ -38,7 +38,7 @@ class LoggingMiddleware implements Middleware
 
     public function execute($command, callable $next)
     {
-        $commandClass = get_class($command);
+        $commandClass = \get_class($command);
 
         $this->logger->log("Starting $commandClass");
         $returnValue = $next($command);

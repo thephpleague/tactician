@@ -35,7 +35,7 @@ final class HandleClassNameWithoutSuffix implements MethodNameInflector
     public function __construct(string $suffix = 'Command')
     {
         $this->suffix       = $suffix;
-        $this->suffixLength = strlen($suffix);
+        $this->suffixLength = \strlen($suffix);
         $this->handleLastPartOfClassName = new HandleLastPartOfClassName();
     }
 
@@ -43,10 +43,10 @@ final class HandleClassNameWithoutSuffix implements MethodNameInflector
     {
         $methodName = $this->handleLastPartOfClassName->getMethodName($commandClassName);
 
-        if (substr($methodName, $this->suffixLength * -1) !== $this->suffix) {
+        if (\substr($methodName, $this->suffixLength * -1) !== $this->suffix) {
             return $methodName;
         }
 
-        return substr($methodName, 0, strlen($methodName) - $this->suffixLength);
+        return \substr($methodName, 0, \strlen($methodName) - $this->suffixLength);
     }
 }

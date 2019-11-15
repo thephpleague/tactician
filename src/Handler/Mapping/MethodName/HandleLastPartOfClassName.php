@@ -30,6 +30,6 @@ final class HandleLastPartOfClassName implements MethodNameInflector
     {
         $commandName = $this->lastPartOfClassName->getMethodName($commandClassName);
 
-        return 'handle' . ucfirst($commandName);
+        return 'handle' . \ucfirst($commandName);
     }
 }
