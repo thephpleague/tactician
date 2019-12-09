@@ -38,7 +38,7 @@ final class CommandBus
             // the final callable is a no-op
         };
 
-        while ($middleware = array_pop($middlewareList)) {
+        while ($middleware = \array_pop($middlewareList)) {
             $lastCallable = static function ($command) use ($middleware, $lastCallable) {
                 return $middleware->execute($command, $lastCallable);
             };
