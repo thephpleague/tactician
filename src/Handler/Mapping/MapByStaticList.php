@@ -22,6 +22,7 @@ final class MapByStaticList implements CommandToHandlerMapping
     /** @var array<string, array<string>> */
     private $mapping;
 
+    /** @param array<string, array<string>> $mapping */
     public function __construct(array $mapping)
     {
         $this->mapping = $mapping;
