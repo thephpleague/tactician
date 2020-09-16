@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace League\Tactician\Handler;
 
 use League\Tactician\Handler\Mapping\CommandToHandlerMapping;
-use League\Tactician\Handler\Mapping\MethodDoesNotExist;
 use League\Tactician\Middleware;
 use Psr\Container\ContainerInterface;
 use function get_class;
-use function is_callable;
 
 /**
- * The "core" CommandBus. Locates the appropriate handler and executes command.
+ * Our basic middleware for executing commands.
+ *
+ * Feel free to use this as a starting point for your own middleware! :)
  */
 final class CommandHandlerMiddleware implements Middleware
 {
@@ -31,15 +31,18 @@ final class CommandHandlerMiddleware implements Middleware
      * Executes a command and optionally returns a value
      *
      * @return mixed
-     * @throws MethodDoesNotExist
      */
     public function execute(object $command, callable $next)
     {
-        $handlerMethod = $this->mapping->mapCommandToHandler(get_class($command));
+        // 1. Based on the command we received, get the Handler method to call.
+        $methodToCall = $this->mapping->mapCommandToHandler(get_class($command));
 
-        $handler = $this->container->get($handlerMethod->getClassName());
-        $methodName = $handlerMethod->getMethodName();
+        // 2.  Retrieve an instance of the Handler from our PSR-11 container
+        //     This assumes the container id is the same as the class name but
+        //     you can write your own middleware to change this assumption! :)
+        $handler = $this->container->get($methodToCall->getClassName());
 
-        return $handler->{$methodName}($command);
+        // 3. Invoke the correct method on the handler and pass the command
+        return $handler->{$methodToCall->getMethodName()}($command);
     }
 }
