@@ -22,4 +22,12 @@ class MethodDoesNotExistTest extends TestCase
         self::assertStringContainsString(ConcreteMethodsHandler::class, $exception->getMessage());
         self::assertStringContainsString('handleTaskCompletedCommand', $exception->getMessage());
     }
+
+    public function testExceptionContainsTheIncorrectMethodInfo(): void
+    {
+        $exception = MethodDoesNotExist::on(ConcreteMethodsHandler::class, 'handleTaskCompletedCommand');
+
+        self::assertEquals(ConcreteMethodsHandler::class, $exception->getClassName());
+        self::assertEquals('handleTaskCompletedCommand', $exception->getMethodName());
+    }
 }
