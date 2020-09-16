@@ -6,9 +6,8 @@ namespace League\Tactician\Tests\Handler;
 
 use League\Tactician\Handler\CanNotInvokeHandler;
 use League\Tactician\Handler\CommandHandlerMiddleware;
-use League\Tactician\Handler\Mapping\ClassName\ClassNameInflector;
 use League\Tactician\Handler\Mapping\CommandToHandlerMapping;
-use League\Tactician\Handler\Mapping\MethodName\MethodNameInflector;
+use League\Tactician\Handler\Mapping\MethodToCall;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use League\Tactician\Tests\Fixtures\Handler\DynamicMethodsHandler;
@@ -52,14 +51,9 @@ class CommandHandlerMiddlewareTest extends TestCase
             ->willReturn($handler);
 
         $this->mapping
-            ->method('getMethodName')
+            ->method('mapCommandToHandler')
             ->with(CompleteTaskCommand::class)
-            ->willReturn('handleTaskCompletedCommand');
-
-        $this->mapping
-            ->method('getClassName')
-            ->with(CompleteTaskCommand::class)
-            ->willReturn(ConcreteMethodsHandler::class);
+            ->willReturn(new MethodToCall(ConcreteMethodsHandler::class, 'handleTaskCompletedCommand'));
 
         self::assertEquals('a-return-value', $this->middleware->execute($command, $this->mockNext()));
     }
@@ -73,12 +67,9 @@ class CommandHandlerMiddlewareTest extends TestCase
             ->willReturn(new stdClass());
 
         $this->mapping
-            ->method('getClassName')
-            ->with(CompleteTaskCommand::class);
-
-        $this->mapping
-            ->method('getMethodName')
-            ->willReturn('someMethodThatDoesNotExist');
+            ->method('mapCommandToHandler')
+            ->with(CompleteTaskCommand::class)
+            ->willReturn(new MethodToCall(CompleteTaskCommand::class, 'someMethodThatDoesNotExist'));
 
         $this->expectException(CanNotInvokeHandler::class);
         $this->middleware->execute($command, $this->mockNext());
@@ -94,19 +85,13 @@ class CommandHandlerMiddlewareTest extends TestCase
             ->willReturn($handler);
 
         $this->mapping
-            ->method('getClassName')
-            ->with(CompleteTaskCommand::class);
-
-        $this->mapping
-            ->method('getMethodName')
-            ->willReturn('someHandlerMethod');
+            ->method('mapCommandToHandler')
+            ->with(CompleteTaskCommand::class)
+            ->willReturn(new MethodToCall(CompleteTaskCommand::class, 'someHandlerMethod'));
 
         $this->middleware->execute($command, $this->mockNext());
 
-        self::assertEquals(
-            ['someHandlerMethod'],
-            $handler->getMethodsInvoked()
-        );
+        self::assertEquals(['someHandlerMethod'], $handler->getMethodsInvoked());
     }
 
     protected function mockNext(): callable

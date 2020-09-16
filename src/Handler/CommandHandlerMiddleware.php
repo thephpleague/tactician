@@ -34,10 +34,10 @@ final class CommandHandlerMiddleware implements Middleware
      */
     public function execute(object $command, callable $next)
     {
-        $commandClassName = \get_class($command);
+        $handlerMethod = $this->mapping->mapCommandToHandler(get_class($command));
 
-        $handler = $this->container->get($this->mapping->getClassName($commandClassName));
-        $methodName = $this->mapping->getMethodName($commandClassName);
+        $handler = $this->container->get($handlerMethod->getClassName());
+        $methodName = $handlerMethod->getMethodName();
 
         // is_callable is used here instead of method_exists, as method_exists
         // will fail when given a handler that relies on __call.

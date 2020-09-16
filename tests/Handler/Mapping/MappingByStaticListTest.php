@@ -10,6 +10,9 @@ use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \League\Tactician\Handler\Mapping\MapByStaticList
+ */
 class MappingByStaticListTest extends TestCase
 {
     public function testSuccessfulMapping(): void
@@ -20,14 +23,12 @@ class MappingByStaticListTest extends TestCase
             ]
         );
 
-        static::assertEquals(
-            ConcreteMethodsHandler::class,
-            $mapping->getClassName(AddTaskCommand::class)
-        );
-        static::assertEquals('handle', $mapping->getMethodName(AddTaskCommand::class));
+        $handler = $mapping->mapCommandToHandler(AddTaskCommand::class);
+        static::assertEquals(ConcreteMethodsHandler::class, $handler->getClassName());
+        static::assertEquals('handle', $handler->getMethodName());
     }
 
-    public function testFailedClassNameMapping(): void
+    public function testFailedMappingCommandToMethod(): void
     {
         $mapping = new MapByStaticList(
             [
@@ -36,18 +37,6 @@ class MappingByStaticListTest extends TestCase
         );
 
         $this->expectExceptionObject(FailedToMapCommand::className(CompleteTaskCommand::class));
-        $mapping->getClassName(CompleteTaskCommand::class);
-    }
-
-    public function testFailedMethodNameMapping(): void
-    {
-        $mapping = new MapByStaticList(
-            [
-                AddTaskCommand::class => [ConcreteMethodsHandler::class, 'handle'],
-            ]
-        );
-
-        $this->expectExceptionObject(FailedToMapCommand::methodName(CompleteTaskCommand::class));
-        $mapping->getMethodName(CompleteTaskCommand::class);
+        $mapping->mapCommandToHandler(CompleteTaskCommand::class);
     }
 }

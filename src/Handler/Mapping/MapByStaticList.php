@@ -28,21 +28,15 @@ final class MapByStaticList implements CommandToHandlerMapping
         $this->mapping = $mapping;
     }
 
-    public function getClassName(string $commandClassName): string
+    public function mapCommandToHandler(string $commandFQCN): MethodToCall
     {
-        if (! \array_key_exists($commandClassName, $this->mapping)) {
-            throw FailedToMapCommand::className($commandClassName);
+        if (! \array_key_exists($commandFQCN, $this->mapping)) {
+            throw FailedToMapCommand::className($commandFQCN);
         }
 
-        return $this->mapping[$commandClassName][0];
-    }
-
-    public function getMethodName(string $commandClassName): string
-    {
-        if (! \array_key_exists($commandClassName, $this->mapping)) {
-            throw FailedToMapCommand::methodName($commandClassName);
-        }
-
-        return $this->mapping[$commandClassName][1];
+        return new MethodToCall(
+            $this->mapping[$commandFQCN][0],
+            $this->mapping[$commandFQCN][1]
+        );
     }
 }
