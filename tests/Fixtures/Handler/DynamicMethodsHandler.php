@@ -11,22 +11,10 @@ namespace League\Tactician\Tests\Fixtures\Handler;
  */
 class DynamicMethodsHandler
 {
-    /** @var string[] */
-    private $methods = [];
-
-    /**
-     * @return string[]
-     */
-    public function getMethodsInvoked() : array
-    {
-        return $this->methods;
-    }
-
     /**
      * @param mixed[] $args
      */
     public function __call(string $methodName, array $args) : void
     {
-        $this->methods[] = $methodName;
     }
 }

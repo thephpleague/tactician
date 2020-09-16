@@ -19,13 +19,13 @@ class MappingByStaticListTest extends TestCase
     {
         $mapping = new MapByStaticList(
             [
-                AddTaskCommand::class => [ConcreteMethodsHandler::class, 'handle'],
+                AddTaskCommand::class => [ConcreteMethodsHandler::class, 'handleTaskCompletedCommand'],
             ]
         );
 
         $handler = $mapping->mapCommandToHandler(AddTaskCommand::class);
         static::assertEquals(ConcreteMethodsHandler::class, $handler->getClassName());
-        static::assertEquals('handle', $handler->getMethodName());
+        static::assertEquals('handleTaskCompletedCommand', $handler->getMethodName());
     }
 
     public function testFailedMappingCommandToMethod(): void

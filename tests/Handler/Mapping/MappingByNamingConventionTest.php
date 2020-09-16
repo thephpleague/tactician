@@ -7,7 +7,7 @@ use League\Tactician\Handler\Mapping\ClassName\ClassNameInflector;
 use League\Tactician\Handler\Mapping\MapByNamingConvention;
 use League\Tactician\Handler\Mapping\MethodName\MethodNameInflector;
 use League\Tactician\Tests\Fixtures\Command\AddTaskCommand;
-use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
+use League\Tactician\Tests\Fixtures\Handler\HandleMethodHandler;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -26,7 +26,7 @@ final class MappingByNamingConventionTest extends TestCase
             ->expects(self::once())
             ->method('getClassName')
             ->with(AddTaskCommand::class)
-            ->willReturn(ConcreteMethodsHandler::class);
+            ->willReturn(HandleMethodHandler::class);
 
         $methodName
             ->expects(self::once())
@@ -36,7 +36,7 @@ final class MappingByNamingConventionTest extends TestCase
 
         $handler = $mapping->mapCommandToHandler(AddTaskCommand::class);
 
-        self::assertEquals(ConcreteMethodsHandler::class, $handler->getClassName());
+        self::assertEquals(HandleMethodHandler::class, $handler->getClassName());
         self::assertEquals('handle', $handler->getMethodName());
     }
 }

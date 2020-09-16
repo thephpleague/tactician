@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace League\Tactician\Handler;
 
 use League\Tactician\Handler\Mapping\CommandToHandlerMapping;
+use League\Tactician\Handler\Mapping\MethodDoesNotExist;
 use League\Tactician\Middleware;
 use Psr\Container\ContainerInterface;
 use function get_class;
@@ -30,7 +31,7 @@ final class CommandHandlerMiddleware implements Middleware
      * Executes a command and optionally returns a value
      *
      * @return mixed
-     * @throws CanNotInvokeHandler
+     * @throws MethodDoesNotExist
      */
     public function execute(object $command, callable $next)
     {
@@ -38,15 +39,6 @@ final class CommandHandlerMiddleware implements Middleware
 
         $handler = $this->container->get($handlerMethod->getClassName());
         $methodName = $handlerMethod->getMethodName();
-
-        // is_callable is used here instead of method_exists, as method_exists
-        // will fail when given a handler that relies on __call.
-        if (! \is_callable([$handler, $methodName])) {
-            throw CanNotInvokeHandler::forCommand(
-                $command,
-                'Method ' . $methodName . ' does not exist on handler'
-            );
-        }
 
         return $handler->{$methodName}($command);
     }

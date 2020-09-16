@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace League\Tactician\Tests\Handler;
 
-use League\Tactician\Handler\CanNotInvokeHandler;
+use League\Tactician\Handler\Mapping\MethodDoesNotExist;
 use League\Tactician\Handler\CommandHandlerMiddleware;
 use League\Tactician\Handler\Mapping\CommandToHandlerMapping;
 use League\Tactician\Handler\Mapping\MethodToCall;
@@ -56,42 +56,6 @@ class CommandHandlerMiddlewareTest extends TestCase
             ->willReturn(new MethodToCall(ConcreteMethodsHandler::class, 'handleTaskCompletedCommand'));
 
         self::assertEquals('a-return-value', $this->middleware->execute($command, $this->mockNext()));
-    }
-
-    public function testMissingMethodOnHandlerObjectIsDetected(): void
-    {
-        $command = new CompleteTaskCommand();
-
-        $this->container
-            ->method('get')
-            ->willReturn(new stdClass());
-
-        $this->mapping
-            ->method('mapCommandToHandler')
-            ->with(CompleteTaskCommand::class)
-            ->willReturn(new MethodToCall(CompleteTaskCommand::class, 'someMethodThatDoesNotExist'));
-
-        $this->expectException(CanNotInvokeHandler::class);
-        $this->middleware->execute($command, $this->mockNext());
-    }
-
-    public function testDynamicMethodNamesAreSupported(): void
-    {
-        $command = new CompleteTaskCommand();
-        $handler = new DynamicMethodsHandler();
-
-        $this->container
-            ->method('get')
-            ->willReturn($handler);
-
-        $this->mapping
-            ->method('mapCommandToHandler')
-            ->with(CompleteTaskCommand::class)
-            ->willReturn(new MethodToCall(CompleteTaskCommand::class, 'someHandlerMethod'));
-
-        $this->middleware->execute($command, $this->mockNext());
-
-        self::assertEquals(['someHandlerMethod'], $handler->getMethodsInvoked());
     }
 
     protected function mockNext(): callable
