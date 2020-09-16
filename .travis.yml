@@ -2,13 +2,11 @@ language: php
 dist: trusty
 
 php:
-    - '7.2'
-    - '7.3'
     - '7.4'
 
 matrix:
     include:
-        - php: '7.2'
+        - php: '7.4'
           env: 'COMPOSER_FLAGS="--prefer-stable --prefer-lowest"'
 
 before_script:
