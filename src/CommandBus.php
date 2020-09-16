@@ -32,13 +32,13 @@ final class CommandBus
     /**
      * @param Middleware[] $middlewareList
      */
-    private function createExecutionChain(array $middlewareList) : callable
+    private function createExecutionChain(array $middlewareList): callable
     {
-        $lastCallable = static function () : void {
+        $lastCallable = static function (): void {
             // the final callable is a no-op
         };
 
-        while ($middleware = \array_pop($middlewareList)) {
+        while ($middleware = array_pop($middlewareList)) {
             $lastCallable = static function ($command) use ($middleware, $lastCallable) {
                 return $middleware->execute($command, $lastCallable);
             };

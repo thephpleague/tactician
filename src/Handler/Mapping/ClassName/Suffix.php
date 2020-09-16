@@ -6,15 +6,14 @@ namespace League\Tactician\Handler\Mapping\ClassName;
 
 final class Suffix implements ClassNameInflector
 {
-    /** @var string */
-    private $suffix;
+    private string $suffix;
 
     public function __construct(string $suffix)
     {
         $this->suffix = $suffix;
     }
 
-    public function getClassName(string $commandClassName) : string
+    public function getClassName(string $commandClassName): string
     {
         return $commandClassName . $this->suffix;
     }

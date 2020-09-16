@@ -18,16 +18,13 @@ use function substr;
  */
 final class LastPartOfClassName implements MethodNameInflector
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getMethodName(string $commandClassNameName) : string
+    public function getMethodName(string $commandClassNameName): string
     {
         // If class name has a namespace separator, only take last portion
-        if (\strpos($commandClassNameName, '\\') !== false) {
-            $commandClassNameName = \substr($commandClassNameName, \strrpos($commandClassNameName, '\\') + 1);
+        if (strpos($commandClassNameName, '\\') !== false) {
+            $commandClassNameName = substr($commandClassNameName, strrpos($commandClassNameName, '\\') + 1);
         }
 
-        return \strtolower($commandClassNameName[0]) . \substr($commandClassNameName, 1);
+        return strtolower($commandClassNameName[0]) . substr($commandClassNameName, 1);
     }
 }

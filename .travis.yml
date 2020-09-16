@@ -18,7 +18,7 @@ before_script:
 script:
     - vendor/bin/phpstan --level=max analyse src tests
     - vendor/bin/phpunit --coverage-clover=build/logs/clover.xml
-    - vendor/bin/phpcs --standard=PSR2 src
+    - vendor/bin/phpcs --standard=Doctrine src
 
 after_script:
     - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml

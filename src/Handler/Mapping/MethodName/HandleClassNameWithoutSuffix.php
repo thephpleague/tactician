@@ -21,32 +21,29 @@ use function substr;
  */
 final class HandleClassNameWithoutSuffix implements MethodNameInflector
 {
-    /** @var string */
-    private $suffix;
+    private string $suffix;
 
-    /** @var int */
-    private $suffixLength;
-    /** @var HandleLastPartOfClassName */
-    private $handleLastPartOfClassName;
+    private int $suffixLength;
+    private HandleLastPartOfClassName $handleLastPartOfClassName;
 
     /**
      * @param string $suffix The string to remove from end of each class name
      */
     public function __construct(string $suffix = 'Command')
     {
-        $this->suffix       = $suffix;
-        $this->suffixLength = \strlen($suffix);
+        $this->suffix                    = $suffix;
+        $this->suffixLength              = strlen($suffix);
         $this->handleLastPartOfClassName = new HandleLastPartOfClassName();
     }
 
-    public function getMethodName(string $commandClassName) : string
+    public function getMethodName(string $commandClassName): string
     {
         $methodName = $this->handleLastPartOfClassName->getMethodName($commandClassName);
 
-        if (\substr($methodName, $this->suffixLength * -1) !== $this->suffix) {
+        if (substr($methodName, $this->suffixLength * -1) !== $this->suffix) {
             return $methodName;
         }
 
-        return \substr($methodName, 0, \strlen($methodName) - $this->suffixLength);
+        return substr($methodName, 0, strlen($methodName) - $this->suffixLength);
     }
 }

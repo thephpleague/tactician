@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace League\Tactician\Handler\Mapping;
@@ -20,7 +21,7 @@ use function array_key_exists;
 final class MapByStaticList implements CommandToHandlerMapping
 {
     /** @var array<string, array<string>> */
-    private $mapping;
+    private array $mapping;
 
     /** @param array<string, array<string>> $mapping */
     public function __construct(array $mapping)
@@ -30,7 +31,7 @@ final class MapByStaticList implements CommandToHandlerMapping
 
     public function mapCommandToHandler(string $commandFQCN): MethodToCall
     {
-        if (! \array_key_exists($commandFQCN, $this->mapping)) {
+        if (! array_key_exists($commandFQCN, $this->mapping)) {
             throw FailedToMapCommand::className($commandFQCN);
         }
 

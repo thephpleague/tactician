@@ -13,5 +13,5 @@ interface MethodNameInflector
     /**
      * Return the method name to call on the command handler.
      */
-    public function getMethodName(string $commandClassName) : string;
+    public function getMethodName(string $commandClassName): string;
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace League\Tactician\Handler\Mapping;
@@ -12,15 +13,13 @@ use League\Tactician\Handler\Mapping\MethodName\MethodNameInflector;
  */
 final class MapByNamingConvention implements CommandToHandlerMapping
 {
-    /** @var ClassNameInflector */
-    private $classNameInflector;
+    private ClassNameInflector $classNameInflector;
 
-    /** @var MethodNameInflector */
-    private $methodNameInflector;
+    private MethodNameInflector $methodNameInflector;
 
     public function __construct(ClassNameInflector $classNameInflector, MethodNameInflector $methodNameInflector)
     {
-        $this->classNameInflector = $classNameInflector;
+        $this->classNameInflector  = $classNameInflector;
         $this->methodNameInflector = $methodNameInflector;
     }
 

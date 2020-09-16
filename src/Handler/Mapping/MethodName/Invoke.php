@@ -10,10 +10,7 @@ namespace League\Tactician\Handler\Mapping\MethodName;
  */
 final class Invoke implements MethodNameInflector
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getMethodName(string $commandClassName) : string
+    public function getMethodName(string $commandClassName): string
     {
         return '__invoke';
     }

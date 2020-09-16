@@ -7,6 +7,7 @@ namespace League\Tactician\Handler;
 use League\Tactician\Handler\Mapping\CommandToHandlerMapping;
 use League\Tactician\Middleware;
 use Psr\Container\ContainerInterface;
+
 use function get_class;
 
 /**
@@ -16,15 +17,13 @@ use function get_class;
  */
 final class CommandHandlerMiddleware implements Middleware
 {
-    /** @var ContainerInterface */
-    private $container;
-    /** @var CommandToHandlerMapping */
-    private $mapping;
+    private ContainerInterface $container;
+    private CommandToHandlerMapping $mapping;
 
     public function __construct(ContainerInterface $container, CommandToHandlerMapping $mapping)
     {
         $this->container = $container;
-        $this->mapping = $mapping;
+        $this->mapping   = $mapping;
     }
 
     /**

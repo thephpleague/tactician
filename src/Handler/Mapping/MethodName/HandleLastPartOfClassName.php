@@ -15,21 +15,17 @@ use function ucfirst;
  */
 final class HandleLastPartOfClassName implements MethodNameInflector
 {
-    /** @var LastPartOfClassName */
-    private $lastPartOfClassName;
+    private LastPartOfClassName $lastPartOfClassName;
 
     public function __construct()
     {
         $this->lastPartOfClassName = new LastPartOfClassName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getMethodName(string $commandClassName) : string
+    public function getMethodName(string $commandClassName): string
     {
         $commandName = $this->lastPartOfClassName->getMethodName($commandClassName);
 
-        return 'handle' . \ucfirst($commandName);
+        return 'handle' . ucfirst($commandName);
     }
 }
