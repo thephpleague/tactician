@@ -19,7 +19,8 @@
         "phpstan/phpstan-phpunit": "^0.12",
         "phpstan/extension-installer": "^1.0",
         "squizlabs/php_codesniffer": "^3.5",
-        "doctrine/coding-standard": "^8.1"
+        "doctrine/coding-standard": "^8.1",
+        "roave/security-advisories": "dev-latest"
     },
     "autoload": {
         "psr-4": {
