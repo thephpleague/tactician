@@ -34,14 +34,10 @@ final class CommandBus
      */
     private function createExecutionChain(array $middlewareList): callable
     {
-        $lastCallable = static function (): void {
-            // the final callable is a no-op
-        };
+        $lastCallable = static fn () => null;
 
         while ($middleware = array_pop($middlewareList)) {
-            $lastCallable = static function ($command) use ($middleware, $lastCallable) {
-                return $middleware->execute($command, $lastCallable);
-            };
+            $lastCallable = static fn (object $command) => $middleware->execute($command, $lastCallable);
         }
 
         return $lastCallable;
