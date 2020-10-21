@@ -8,9 +8,9 @@ use PHPUnit\Framework\TestCase;
 
 class ExamplesTest extends TestCase
 {
-
     /**
      * @dataProvider exampleFiles
+     * @param string[] $expect
      */
     public function testExample(string $file, array $expect) : void
     {
@@ -29,10 +29,13 @@ class ExamplesTest extends TestCase
             $exitCode
         );
 
-        $this->assertSame(0, $exitCode);
-        $this->assertSame($expect, $output);
+        self::assertSame(0, $exitCode);
+        self::assertSame($expect, $output);
     }
 
+    /**
+     * @return array<int, array<int, array<int, string>|string>>
+     */
     public function exampleFiles() : array
     {
         return [
