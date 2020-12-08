@@ -31,7 +31,7 @@ jobs:
                     restore-keys: ${{ runner.os }}-composer-
 
             -   name: Check Composer configuration
-                run: composer run-script test:composer
+                run: composer validate --strict
 
             -   name: Install dependencies
                 run: composer install --no-progress --prefer-dist --optimize-autoloader
