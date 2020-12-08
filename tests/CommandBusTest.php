@@ -78,12 +78,4 @@ class CommandBusTest extends TestCase
 
         new CommandBus($middlewareList);
     }
-
-    public function testIfValidMiddlewaresAreAccepted()
-    {
-        $middlewareList = [$this->getMock('\League\Tactician\Middleware')];
-
-        new CommandBus($middlewareList);
-        $this->addToAssertionCount(1);
-    }
 }
