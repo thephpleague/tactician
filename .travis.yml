@@ -1,5 +1,5 @@
 language: php
-dist: trusty
+dist: focal
 
 php:
     - '7.4'
@@ -12,8 +12,6 @@ matrix:
         - php: nightly
           env: 'COMPOSER_FLAGS="--prefer-stable --prefer-lowest"'
     fast_finish: true
-    allow_failures:
-        - php: nightly
 
 before_script:
     - travis_retry composer self-update

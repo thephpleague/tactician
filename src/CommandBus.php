@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace League\Tactician;
 
+use Closure;
+
 use function array_pop;
 
 /**
@@ -11,8 +13,8 @@ use function array_pop;
  */
 final class CommandBus
 {
-    /** @var callable */
-    private $middlewareChain;
+    /** @var Closure(object $command):mixed */
+    private Closure $middlewareChain;
 
     public function __construct(Middleware ...$middleware)
     {
@@ -32,7 +34,7 @@ final class CommandBus
     /**
      * @param Middleware[] $middlewareList
      */
-    private function createExecutionChain(array $middlewareList): callable
+    private function createExecutionChain(array $middlewareList): Closure
     {
         $lastCallable = static fn () => null;
 
