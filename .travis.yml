@@ -9,7 +9,7 @@ matrix:
     include:
         - php: '7.4'
           env: 'COMPOSER_FLAGS="--prefer-stable --prefer-lowest"'
-        - php: nightly
+        - php: '8.0'
           env: 'COMPOSER_FLAGS="--prefer-stable --prefer-lowest"'
     fast_finish: true
 
