@@ -2,7 +2,9 @@
 
 namespace League\Tactician\Tests\Handler\Locator;
 
+use League\Tactician\Exception\MissingHandlerException;
 use League\Tactician\Handler\Locator\InMemoryLocator;
+use League\Tactician\Tests\Exception\MissingHandlerExceptionTest;
 use League\Tactician\Tests\Fixtures\Command\AddTaskCommand;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use PHPUnit\Framework\TestCase;
@@ -15,7 +17,7 @@ class InMemoryLocatorTest extends TestCase
      */
     private $inMemoryLocator;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->inMemoryLocator = new InMemoryLocator();
     }
@@ -52,11 +54,10 @@ class InMemoryLocatorTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException \League\Tactician\Exception\MissingHandlerException
-     */
     public function testHandlerMissing()
     {
+        $this->expectException(MissingHandlerException::class);
+
         $this->inMemoryLocator->getHandlerForCommand(CompleteTaskCommand::class);
     }
 }

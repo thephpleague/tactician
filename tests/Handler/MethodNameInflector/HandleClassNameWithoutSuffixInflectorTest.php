@@ -20,7 +20,7 @@ class HandleClassNameWithoutSuffixInflectorTest extends TestCase
      */
     private $mockHandler;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->inflector = new HandleClassNameWithoutSuffixInflector();
         $this->handler = new ConcreteMethodsHandler();

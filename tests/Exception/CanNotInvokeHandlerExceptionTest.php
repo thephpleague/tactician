@@ -15,8 +15,8 @@ class CanNotInvokeHandlerExceptionTest extends TestCase
 
         $exception = CanNotInvokeHandlerException::forCommand($command, 'Because stuff');
 
-        $this->assertContains(CompleteTaskCommand::class, $exception->getMessage());
-        $this->assertContains('Because stuff', $exception->getMessage());
+        $this->assertStringContainsString(CompleteTaskCommand::class, $exception->getMessage());
+        $this->assertStringContainsString('Because stuff', $exception->getMessage());
         $this->assertSame($command, $exception->getCommand());
         $this->assertInstanceOf(Exception::class, $exception);
     }

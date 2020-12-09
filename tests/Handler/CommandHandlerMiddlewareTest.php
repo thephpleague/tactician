@@ -2,6 +2,7 @@
 
 namespace League\Tactician\Tests\Handler;
 
+use League\Tactician\Exception\CanNotInvokeHandlerException;
 use League\Tactician\Handler\CommandHandlerMiddleware;
 use League\Tactician\Handler\CommandNameExtractor\CommandNameExtractor;
 use League\Tactician\Handler\Locator\HandlerLocator;
@@ -10,6 +11,7 @@ use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use League\Tactician\Tests\Fixtures\Handler\DynamicMethodsHandler;
 use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
+use phpDocumentor\Reflection\Types\Void_;
 use stdClass;
 use Mockery;
 
@@ -35,7 +37,7 @@ class CommandHandlerMiddlewareTest extends MockeryTestCase
      */
     private $methodNameInflector;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->commandNameExtractor = Mockery::mock(CommandNameExtractor::class);
         $this->handlerLocator = Mockery::mock(HandlerLocator::class);
@@ -77,9 +79,6 @@ class CommandHandlerMiddlewareTest extends MockeryTestCase
         $this->assertEquals('a-return-value', $this->middleware->execute($command, $this->mockNext()));
     }
 
-    /**
-     * @expectedException \League\Tactician\Exception\CanNotInvokeHandlerException
-     */
     public function testMissingMethodOnHandlerObjectIsDetected()
     {
         $command = new CompleteTaskCommand();
@@ -96,7 +95,9 @@ class CommandHandlerMiddlewareTest extends MockeryTestCase
             ->shouldReceive('extract')
             ->with($command);
 
-        $this->assertEquals('a-return-value', $this->middleware->execute($command, $this->mockNext()));
+        $this->expectException(CanNotInvokeHandlerException::class);
+
+        $this->middleware->execute($command, $this->mockNext());
     }
 
     public function testDynamicMethodNamesAreSupported()

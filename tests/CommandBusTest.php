@@ -2,6 +2,8 @@
 namespace League\Tactician\Tests;
 
 use League\Tactician\CommandBus;
+use League\Tactician\Exception\InvalidCommandException;
+use League\Tactician\Exception\InvalidMiddlewareException;
 use League\Tactician\Middleware;
 use League\Tactician\Tests\Fixtures\Command\AddTaskCommand;
 use Mockery;
@@ -58,23 +60,23 @@ class CommandBusTest extends TestCase
 
     public function testNoMiddlewarePerformsASafeNoop()
     {
+        $this->expectNotToPerformAssertions();
+
         (new CommandBus([]))->handle(new AddTaskCommand());
     }
 
-    /**
-     * @expectedException \League\Tactician\Exception\InvalidCommandException
-     */
     public function testHandleThrowExceptionForInvalidCommand()
     {
+        $this->expectException(InvalidCommandException::class);
+
         (new CommandBus([]))->handle('must be an object');
     }
 
-    /**
-     * @expectedException \League\Tactician\Exception\InvalidMiddlewareException
-     */
     public function testIfOneCanOnlyCreateWithValidMiddlewares()
     {
-        $middlewareList = [$this->getMock('stdClass')];
+        $middlewareList = [$this->createMock(\stdClass::class)];
+
+        $this->expectException(InvalidMiddlewareException::class);
 
         new CommandBus($middlewareList);
     }

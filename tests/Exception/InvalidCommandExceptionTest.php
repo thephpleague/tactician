@@ -14,7 +14,7 @@ class InvalidCommandExceptionTest extends TestCase
 
         $exception = InvalidCommandException::forUnknownValue($command);
 
-        $this->assertContains('type: string', $exception->getMessage());
+        $this->assertStringContainsString('type: string', $exception->getMessage());
         $this->assertSame($command, $exception->getInvalidCommand());
         $this->assertInstanceOf(Exception::class, $exception);
     }

@@ -14,7 +14,7 @@ class LockingMiddlewareTest extends TestCase
      */
     private $lockingMiddleware;
 
-    public function setup()
+    public function setUp(): void
     {
         $this->lockingMiddleware = new LockingMiddleware();
     }
@@ -36,6 +36,8 @@ class LockingMiddlewareTest extends TestCase
 
     public function testSecondsCommandIsNotDispatchedUntilFirstCommandIsComplete()
     {
+        $this->expectNotToPerformAssertions();
+
         $secondCommandDispatched = false;
 
         $next2 = function () use (&$secondCommandDispatched) {
@@ -72,6 +74,8 @@ class LockingMiddlewareTest extends TestCase
 
     public function testTheCorrectSubCommandIsGivenToTheNextCallable()
     {
+        $this->expectNotToPerformAssertions();
+
         $secondCommand = new CompleteTaskCommand();
 
         $next2 = function ($command) use ($secondCommand) {
@@ -137,14 +141,13 @@ class LockingMiddlewareTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException \LogicException
-     */
     public function testExceptionsAreAllowedToBubbleUp()
     {
         $next = function () {
             throw new \LogicException('Exit out, thus dropping the queue');
         };
+
+        $this->expectException(\LogicException::class);
 
         $this->lockingMiddleware->execute(new AddTaskCommand(), $next);
     }

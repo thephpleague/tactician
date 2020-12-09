@@ -13,7 +13,7 @@ class MissingHandlerExceptionTest extends TestCase
     {
         $exception = MissingHandlerException::forCommand(CompleteTaskCommand::class);
 
-        $this->assertContains(CompleteTaskCommand::class, $exception->getMessage());
+        $this->assertStringContainsString(CompleteTaskCommand::class, $exception->getMessage());
         $this->assertSame(CompleteTaskCommand::class, $exception->getCommandName());
         $this->assertInstanceOf(Exception::class, $exception);
     }

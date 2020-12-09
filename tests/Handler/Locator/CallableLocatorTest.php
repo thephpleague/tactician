@@ -2,6 +2,7 @@
 
 namespace League\Tactician\Tests\Handler\Locator;
 
+use League\Tactician\Exception\MissingHandlerException;
 use League\Tactician\Handler\Locator\CallableLocator;
 use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use League\Tactician\Tests\Fixtures\Handler\DynamicMethodsHandler;
@@ -19,7 +20,7 @@ class CallableLocatorTest extends TestCase
      */
     private $callableLocator;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->handlers = [
             'add.task' => new DynamicMethodsHandler(),
@@ -43,22 +44,20 @@ class CallableLocatorTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException \League\Tactician\Exception\MissingHandlerException
-     */
     public function testMissingHandlerCausesException()
     {
+        $this->expectException(MissingHandlerException::class);
+
         $this->callableLocator->getHandlerForCommand('missing.command');
     }
 
-    /**
-     * @expectedException \RunTimeException
-     */
     public function testExceptionsFromCallableBubbleUp()
     {
         $callable = function () {
             throw new \RuntimeException();
         };
+
+        $this->expectException(\RuntimeException::class);
 
         (new CallableLocator($callable))->getHandlerForCommand('foo');
     }
