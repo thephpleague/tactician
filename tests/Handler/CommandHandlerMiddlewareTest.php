@@ -11,7 +11,6 @@ use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use League\Tactician\Tests\Fixtures\Handler\DynamicMethodsHandler;
 use League\Tactician\Tests\Fixtures\Handler\ConcreteMethodsHandler;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
-use phpDocumentor\Reflection\Types\Void_;
 use stdClass;
 use Mockery;
 
