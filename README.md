@@ -1,6 +1,5 @@
 # Tactician
 
-[![Travis CI](https://api.travis-ci.org/thephpleague/tactician.svg?branch=master)](https://travis-ci.org/thephpleague/tactician)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/thephpleague/tactician/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/thephpleague/tactician/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/thephpleague/tactician/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/thephpleague/tactician/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/thephpleague/tactician/badges/build.png?b=master)](https://scrutinizer-ci.com/g/thephpleague/tactician/build-status/master)
