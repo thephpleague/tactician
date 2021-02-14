@@ -7,6 +7,13 @@ BC Breaks
 - Almost all namespaces have been moved around.
 - Several old not-so-useful plugins have been dropped: NamedCommands, LockingMiddleware, QuickStart
 
+## 1.1.0
+BC Breaks:
+- [#150](https://github.com/thephpleague/tactician/pull/150) Drop PHP 7.0 support
+
+New features
+- [#150](https://github.com/thephpleague/tactician/pull/150) Add PHP 8.0 support
+
 ## 1.0.3 (2017-11-30)
 BC Breaks:
 - None
