@@ -21,6 +21,8 @@ There are a few different ways to configure Tactician, depending on your Framewo
 - [Symfony](#symfony)
 - [Zend Framework 2](#zend-framework-2)
 - [Laravel](#laravel)
+- [Yii Framework 1](#yii-framework-1)
+- [Yii Framework 2](#yii-framework-2)
 - [CakePHP](#cakephp)
 
 ## No Framework
@@ -63,8 +65,11 @@ There's a number of Laravel Tactician packages on Packagist. We don't have a for
 ### Silex
 [Prasetyo Wicaksono](https://github.com/Atriedes) is actively maintaining a [Silex service provider for Tactician](https://github.com/Atriedes/tactician-service-provider).
 
-### Yii
-[Pavel Mikushin](https://github.com/pavelmics) has built an [adapter for the Yii framework](https://github.com/pavelmics/YiiTactician).
+### Yii Framework 1
+[Pavel Mikushin](https://github.com/pavelmics) has built an [adapter for the Yii framework 1](https://github.com/pavelmics/YiiTactician).
+
+### Yii Framework 2
+[Kilderson Sena](https://github.com/dersonsena) has built an [adapter for the Yii framework 2](https://github.com/dersonsena/yii2-tactician).
 
 ### CakePHP
 For CakePHP integration a [Tactician plugin](https://github.com/robotusers/cakephp-tactician) has been implemented.
