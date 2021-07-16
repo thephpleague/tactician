@@ -11,7 +11,7 @@ use function array_pop;
 /**
  * Receives a command and sends it through a chain of middleware for processing.
  */
-final class CommandBus
+final class CommandBus implements CommandBusInterface
 {
     /** @var Closure(object $command):mixed */
     private Closure $middlewareChain;
@@ -22,9 +22,7 @@ final class CommandBus
     }
 
     /**
-     * Executes the given command and optionally returns a value
-     *
-     * @return mixed
+     * @inheritDoc
      */
     public function handle(object $command)
     {
