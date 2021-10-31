@@ -23,7 +23,7 @@ class MappingByStaticListTest extends TestCase
             ]
         );
 
-        $handler = $mapping->mapCommandToHandler(AddTaskCommand::class);
+        $handler = $mapping->findHandlerForCommand(AddTaskCommand::class);
         static::assertEquals(ConcreteMethodsHandler::class, $handler->getClassName());
         static::assertEquals('handleTaskCompletedCommand', $handler->getMethodName());
     }
@@ -37,6 +37,6 @@ class MappingByStaticListTest extends TestCase
         );
 
         $this->expectExceptionObject(FailedToMapCommand::className(CompleteTaskCommand::class));
-        $mapping->mapCommandToHandler(CompleteTaskCommand::class);
+        $mapping->findHandlerForCommand(CompleteTaskCommand::class);
     }
 }

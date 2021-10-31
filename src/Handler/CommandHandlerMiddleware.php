@@ -34,7 +34,7 @@ final class CommandHandlerMiddleware implements Middleware
     public function execute(object $command, callable $next)
     {
         // 1. Based on the command we received, get the Handler method to call.
-        $methodToCall = $this->mapping->mapCommandToHandler(get_class($command));
+        $methodToCall = $this->mapping->findHandlerForCommand(get_class($command));
 
         // 2.  Retrieve an instance of the Handler from our PSR-11 container
         //     This assumes the container id is the same as the class name but
