@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace League\Tactician\Handler\Mapping\MapByNamingConvention;
 
-use League\Tactician\Handler\Mapping\MapByNamingConvention\ClassName\ClassNameInflector;
 use League\Tactician\Handler\Mapping\CommandToHandlerMapping;
+use League\Tactician\Handler\Mapping\MapByNamingConvention\ClassName\ClassNameInflector;
 use League\Tactician\Handler\Mapping\MapByNamingConvention\MethodName\MethodNameInflector;
 use League\Tactician\Handler\Mapping\MethodToCall;
 

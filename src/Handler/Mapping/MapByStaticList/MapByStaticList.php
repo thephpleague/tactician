@@ -7,6 +7,7 @@ namespace League\Tactician\Handler\Mapping\MapByStaticList;
 use League\Tactician\Handler\Mapping\CommandToHandlerMapping;
 use League\Tactician\Handler\Mapping\FailedToMapCommand;
 use League\Tactician\Handler\Mapping\MethodToCall;
+
 use function array_key_exists;
 
 /**
