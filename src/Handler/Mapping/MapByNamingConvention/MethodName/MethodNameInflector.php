@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace League\Tactician\Handler\Mapping\MethodName;
+namespace League\Tactician\Handler\Mapping\MapByNamingConvention\MethodName;
 
 /**
  * Deduce the method name to call on the command handler based on the command

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace League\Tactician\Tests\Handler\Mapping\MethodName;
+namespace League\Tactician\Tests\Handler\Mapping\MappingByNamingConvention\MethodName;
 
 use CommandWithoutNamespace;
-use League\Tactician\Handler\Mapping\MethodName\HandleLastPartOfClassName;
+use League\Tactician\Handler\Mapping\MapByNamingConvention\MethodName\HandleLastPartOfClassName;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
 use PHPUnit\Framework\TestCase;
 

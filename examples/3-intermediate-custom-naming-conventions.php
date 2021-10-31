@@ -14,9 +14,9 @@ require __DIR__ . '/repeated-sample-code.php';
  */
 use League\Tactician\CommandBus;
 use League\Tactician\Handler\CommandHandlerMiddleware;
-use League\Tactician\Handler\Mapping\MapByNamingConvention;
-use League\Tactician\Handler\Mapping\MethodName\MethodNameInflector;
-use League\Tactician\Handler\Mapping\ClassName\Suffix;
+use League\Tactician\Handler\Mapping\MapByNamingConvention\MapByNamingConvention;
+use League\Tactician\Handler\Mapping\MapByNamingConvention\MethodName\MethodNameInflector;
+use League\Tactician\Handler\Mapping\MapByNamingConvention\ClassName\Suffix;
 
 class MyCustomMethodNameInflector implements MethodNameInflector
 {

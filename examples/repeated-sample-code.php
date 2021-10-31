@@ -4,9 +4,9 @@ require __DIR__ . '/../vendor/autoload.php';
 // The basic code from example 1 that we reuse in future examples.
 
 use League\Container\Container;
-use League\Tactician\Handler\Mapping\ClassName\Suffix;
-use League\Tactician\Handler\Mapping\MapByNamingConvention;
-use League\Tactician\Handler\Mapping\MethodName\HandleLastPartOfClassName;
+use League\Tactician\Handler\Mapping\MapByNamingConvention\ClassName\Suffix;
+use League\Tactician\Handler\Mapping\MapByNamingConvention\MapByNamingConvention;
+use League\Tactician\Handler\Mapping\MapByNamingConvention\MethodName\HandleLastPartOfClassName;
 
 class RegisterUser
 {

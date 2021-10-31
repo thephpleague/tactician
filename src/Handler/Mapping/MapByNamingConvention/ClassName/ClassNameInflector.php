@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace League\Tactician\Handler\Mapping\ClassName;
+namespace League\Tactician\Handler\Mapping\MapByNamingConvention\ClassName;
 
 /**
  * Extract the name from a command so that the name can be determined

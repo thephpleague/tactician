@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
-namespace League\Tactician\Handler\Mapping;
+namespace League\Tactician\Handler\Mapping\MapByNamingConvention;
 
-use League\Tactician\Handler\Mapping\ClassName\ClassNameInflector;
-use League\Tactician\Handler\Mapping\MethodName\MethodNameInflector;
+use League\Tactician\Handler\Mapping\MapByNamingConvention\ClassName\ClassNameInflector;
+use League\Tactician\Handler\Mapping\CommandToHandlerMapping;
+use League\Tactician\Handler\Mapping\MapByNamingConvention\MethodName\MethodNameInflector;
+use League\Tactician\Handler\Mapping\MethodToCall;
 
 /**
  * The most common mapping you'll see. Pass a pair of inflectors through and

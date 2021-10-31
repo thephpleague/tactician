@@ -1,17 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace League\Tactician\Tests\Handler\Mapping;
+namespace League\Tactician\Tests\Handler\Mapping\MappingByNamingConvention;
 
-use League\Tactician\Handler\Mapping\ClassName\ClassNameInflector;
-use League\Tactician\Handler\Mapping\MapByNamingConvention;
-use League\Tactician\Handler\Mapping\MethodName\MethodNameInflector;
+use League\Tactician\Handler\Mapping\MapByNamingConvention\ClassName\ClassNameInflector;
+use League\Tactician\Handler\Mapping\MapByNamingConvention\MapByNamingConvention;
+use League\Tactician\Handler\Mapping\MapByNamingConvention\MethodName\MethodNameInflector;
 use League\Tactician\Tests\Fixtures\Command\AddTaskCommand;
 use League\Tactician\Tests\Fixtures\Handler\HandleMethodHandler;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \League\Tactician\Handler\Mapping\MapByNamingConvention
+ * @covers \League\Tactician\Handler\Mapping\MapByNamingConvention\MapByNamingConvention
  */
 final class MappingByNamingConventionTest extends TestCase
 {

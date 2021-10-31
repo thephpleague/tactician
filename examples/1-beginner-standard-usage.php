@@ -2,9 +2,9 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 use League\Container\Container;
-use League\Tactician\Handler\Mapping\ClassName\Suffix;
-use League\Tactician\Handler\Mapping\MapByNamingConvention;
-use League\Tactician\Handler\Mapping\MethodName\HandleLastPartOfClassName;
+use League\Tactician\Handler\Mapping\MapByNamingConvention\ClassName\Suffix;
+use League\Tactician\Handler\Mapping\MapByNamingConvention\MapByNamingConvention;
+use League\Tactician\Handler\Mapping\MapByNamingConvention\MethodName\HandleLastPartOfClassName;
 
 // Our example Command and Handler. ///////////////////////////////////////////
 class RegisterUser
