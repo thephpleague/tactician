@@ -51,7 +51,7 @@ class CommandHandlerMiddlewareTest extends TestCase
             ->willReturn($handler);
 
         $this->mapping
-            ->method('mapCommandToHandler')
+            ->method('findHandlerForCommand')
             ->with(CompleteTaskCommand::class)
             ->willReturn(new MethodToCall(ConcreteMethodsHandler::class, 'handleTaskCompletedCommand'));
 
