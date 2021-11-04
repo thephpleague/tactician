@@ -8,11 +8,7 @@ use function method_exists;
 
 final class MethodToCall
 {
-    private string $className;
-
-    private string $methodName;
-
-    public function __construct(string $className, string $methodName)
+    public function __construct(private string $className, private string $methodName)
     {
         // If the method does not actually exist, we'll also check if __call exists (mainly for
         // legacy purposes). That said, we won't rewrite the method name to __call because our
@@ -20,9 +16,6 @@ final class MethodToCall
         if (! method_exists($className, $methodName) && ! method_exists($className, '__call')) {
             throw MethodDoesNotExist::on($className, $methodName);
         }
-
-        $this->className  = $className;
-        $this->methodName = $methodName;
     }
 
     public function getClassName(): string

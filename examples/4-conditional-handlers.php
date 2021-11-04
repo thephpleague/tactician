@@ -31,7 +31,7 @@ final class ExternalCommandMiddleware implements Middleware
         $this->commandBus = $commandBus;
     }
 
-    public function execute($command, callable $next)
+    public function execute(object $command, callable $next): mixed
     {
         if ($command instanceof ExternalCommand) {
             return $this->commandBus->handle($command);
@@ -43,7 +43,7 @@ final class ExternalCommandMiddleware implements Middleware
 // and we'll create a custom command handler/middleware
 final class ExternalCommandHandler implements Middleware
 {
-    public function execute($command, callable $next)
+    public function execute(object $command, callable $next): mixed
     {
         echo \sprintf("Dispatched %s!\n", \get_class($command));
     }

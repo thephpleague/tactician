@@ -15,14 +15,10 @@ use League\Tactician\Handler\Mapping\MethodToCall;
  */
 final class MapByNamingConvention implements CommandToHandlerMapping
 {
-    private ClassNameInflector $classNameInflector;
-
-    private MethodNameInflector $methodNameInflector;
-
-    public function __construct(ClassNameInflector $classNameInflector, MethodNameInflector $methodNameInflector)
-    {
-        $this->classNameInflector  = $classNameInflector;
-        $this->methodNameInflector = $methodNameInflector;
+    public function __construct(
+        private ClassNameInflector  $classNameInflector,
+        private MethodNameInflector $methodNameInflector,
+    ) {
     }
 
     public function findHandlerForCommand(string $commandFQCN): MethodToCall
