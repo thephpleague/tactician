@@ -29,14 +29,14 @@ class Logger {
 // use it later.
 class LoggingMiddleware implements Middleware
 {
-    protected $logger;
+    protected Logger $logger;
 
     public function __construct(Logger $logger)
     {
         $this->logger = $logger;
     }
 
-    public function execute($command, callable $next)
+    public function execute(object $command, callable $next): mixed
     {
         $commandClass = \get_class($command);
 
@@ -62,7 +62,7 @@ class LoggingMiddleware implements Middleware
 // in the previous example, otherwise our commands won't be executed!
 $commandBus = new CommandBus(
     new LoggingMiddleware(new Logger()),
-    $handlerMiddleware
+    $handlerMiddleware,
 );
 
 // Controller Code

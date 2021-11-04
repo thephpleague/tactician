@@ -23,10 +23,8 @@ final class CommandBus
 
     /**
      * Executes the given command and optionally returns a value
-     *
-     * @return mixed
      */
-    public function handle(object $command)
+    public function handle(object $command): mixed
     {
         return ($this->middlewareChain)($command);
     }
@@ -39,7 +37,7 @@ final class CommandBus
         $lastCallable = static fn () => null;
 
         while ($middleware = array_pop($middlewareList)) {
-            $lastCallable = static fn (object $command) => $middleware->execute($command, $lastCallable);
+            $lastCallable = static fn (object $command): mixed => $middleware->execute($command, $lastCallable);
         }
 
         return $lastCallable;

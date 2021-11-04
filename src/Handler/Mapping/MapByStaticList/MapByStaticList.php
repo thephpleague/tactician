@@ -24,13 +24,9 @@ use function array_key_exists;
  */
 final class MapByStaticList implements CommandToHandlerMapping
 {
-    /** @var array<string, array<string>> */
-    private array $mapping;
-
     /** @param array<string, array<string>> $mapping */
-    public function __construct(array $mapping)
+    public function __construct(private array $mapping)
     {
-        $this->mapping = $mapping;
     }
 
     public function findHandlerForCommand(string $commandFQCN): MethodToCall

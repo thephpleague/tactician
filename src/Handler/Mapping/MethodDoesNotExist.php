@@ -15,10 +15,6 @@ use League\Tactician\Exception;
  */
 final class MethodDoesNotExist extends BadMethodCallException implements Exception
 {
-    private string $className;
-
-    private string $methodName;
-
     public static function on(string $className, string $methodName): self
     {
         return new self(
@@ -39,10 +35,8 @@ final class MethodDoesNotExist extends BadMethodCallException implements Excepti
         return $this->methodName;
     }
 
-    private function __construct(string $message, string $className, string $methodName)
+    private function __construct(string $message, private string $className, private string $methodName)
     {
         parent::__construct($message);
-        $this->className  = $className;
-        $this->methodName = $methodName;
     }
 }

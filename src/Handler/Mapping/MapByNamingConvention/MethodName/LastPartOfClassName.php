@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace League\Tactician\Handler\Mapping\MapByNamingConvention\MethodName;
 
-use function strpos;
+use function str_contains;
 use function strrpos;
 use function strtolower;
 use function substr;
@@ -21,7 +21,7 @@ final class LastPartOfClassName implements MethodNameInflector
     public function getMethodName(string $commandClassNameName): string
     {
         // If class name has a namespace separator, only take last portion
-        if (strpos($commandClassNameName, '\\') !== false) {
+        if (str_contains($commandClassNameName, '\\')) {
             $commandClassNameName = substr($commandClassNameName, strrpos($commandClassNameName, '\\') + 1);
         }
 
