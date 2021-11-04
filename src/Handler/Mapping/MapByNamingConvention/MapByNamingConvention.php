@@ -16,7 +16,7 @@ use League\Tactician\Handler\Mapping\MethodToCall;
 final class MapByNamingConvention implements CommandToHandlerMapping
 {
     public function __construct(
-        private ClassNameInflector  $classNameInflector,
+        private ClassNameInflector $classNameInflector,
         private MethodNameInflector $methodNameInflector,
     ) {
     }

@@ -18,8 +18,8 @@
         "phpstan/phpstan": "^1.0.2",
         "phpstan/phpstan-phpunit": "^1.0.0",
         "phpstan/extension-installer": "^1.0.5",
-        "squizlabs/php_codesniffer": "^3.5.8",
-        "doctrine/coding-standard": "^8.2",
+        "squizlabs/php_codesniffer": "^3.6.1",
+        "doctrine/coding-standard": "^9.0",
         "roave/security-advisories": "dev-latest",
         "league/container": "^4.1.2"
     },

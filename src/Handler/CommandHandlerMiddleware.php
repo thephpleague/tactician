@@ -8,8 +8,6 @@ use League\Tactician\Handler\Mapping\CommandToHandlerMapping;
 use League\Tactician\Middleware;
 use Psr\Container\ContainerInterface;
 
-use function get_class;
-
 /**
  * Our basic middleware for executing commands.
  *
@@ -27,7 +25,7 @@ final class CommandHandlerMiddleware implements Middleware
     public function execute(object $command, callable $next): mixed
     {
         // 1. Based on the command we received, get the Handler method to call.
-        $methodToCall = $this->mapping->findHandlerForCommand(get_class($command));
+        $methodToCall = $this->mapping->findHandlerForCommand($command::class);
 
         // 2.  Retrieve an instance of the Handler from our PSR-11 container
         //     This assumes the container id is the same as the class name but
