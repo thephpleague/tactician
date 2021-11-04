@@ -45,7 +45,7 @@ final class ExternalCommandHandler implements Middleware
 {
     public function execute(object $command, callable $next): mixed
     {
-        echo \sprintf("Dispatched %s!\n", \get_class($command));
+        return \sprintf("Dispatched %s!\n", \get_class($command));
     }
 }
 
