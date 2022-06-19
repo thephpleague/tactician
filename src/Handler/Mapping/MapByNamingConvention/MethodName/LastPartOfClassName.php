@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace League\Tactician\Handler\Mapping\MapByNamingConvention\MethodName;
 
-use function strpos;
 use function strrpos;
 use function strtolower;
 use function substr;
