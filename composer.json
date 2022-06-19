@@ -40,5 +40,11 @@
         "branch-alias": {
             "dev-master": "2.0-dev"
         }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true
+        }
     }
 }
