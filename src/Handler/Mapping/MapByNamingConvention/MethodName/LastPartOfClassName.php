@@ -20,9 +20,11 @@ final class LastPartOfClassName implements MethodNameInflector
 {
     public function getMethodName(string $commandClassNameName): string
     {
+        $lastNamespaceSeparatorPosition = strrpos($commandClassNameName, '\\');
+
         // If class name has a namespace separator, only take last portion
-        if (strpos($commandClassNameName, '\\') !== false) {
-            $commandClassNameName = substr($commandClassNameName, strrpos($commandClassNameName, '\\') + 1);
+        if ($lastNamespaceSeparatorPosition !== false) {
+            $commandClassNameName = substr($commandClassNameName, $lastNamespaceSeparatorPosition + 1);
         }
 
         return strtolower($commandClassNameName[0]) . substr($commandClassNameName, 1);
